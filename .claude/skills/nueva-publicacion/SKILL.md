@@ -32,7 +32,7 @@ Cada publicación es un fichero Markdown en `redes/instagram/publicaciones/` lla
 - `Referencia/...` (o página del dossier). Resultado de `revision-marca`: APTA / APTA CON RECORTE (encuadre).
 
 ## Guion o diapositivas
-(Para un reel: escena, duración, texto en pantalla y audio. Para un carrusel: el texto de cada diapositiva.)
+(Para un reel: usa la skill `guion-reel`, que rellena esta sección escena a escena y produce el vídeo. Para un carrusel: el texto de cada diapositiva.)
 
 ## Copy
 <Gancho en la primera línea, que se lea antes del "más">
@@ -41,6 +41,9 @@ Cada publicación es un fichero Markdown en `redes/instagram/publicaciones/` lla
 
 ## Hashtags
 (Entre 5 y 15. Mezcla locales (#bodasevilla, #bodacadiz, #haciendasevilla…), de nicho (#cochedeboda, #cochesclasicos…) y de marca (#[hashtag_marca_por_definir]).)
+
+## Decisiones
+(Solo reels: una línea por cada decisión creativa: música, orden de escenas, dirección elegida.)
 
 ## Checklist
 - [ ] Un objetivo y una llamada a la acción claros
