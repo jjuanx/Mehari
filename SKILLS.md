@@ -12,6 +12,14 @@ Se invocan pidiéndolo con naturalidad ("prepara una publicación sobre…") o p
 | [`nueva-publicacion`](.claude/skills/nueva-publicacion/SKILL.md) | Ficha completa de una publicación de Instagram: objetivo, material, guion, copy con CTA y hashtags | Siempre que se prepare contenido para Instagram |
 | [`revision-marca`](.claude/skills/revision-marca/SKILL.md) | Comprueba que no hay rastro de la marca antigua, ni datos inventados, y que todo es coherente con el brief | Antes de cerrar cualquier pieza y al elegir fotos |
 
+## Skills de terceros: estrategia y contenido de redes
+
+| Skill | Origen | Commit | Licencia | Para qué |
+|---|---|---|---|---|
+| [`social`](.claude/skills/social/SKILL.md) | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) | `5e721d7` | MIT | Estrategia de redes, pilares, ganchos, guiones de reel, marcos de carrusel (`references/carousel-frameworks.md`), rutina de interacción y métricas. Es la skill de redes más instalada del ecosistema (skills.sh) |
+
+Está en inglés y es genérica: nuestras reglas (brief, marca antigua, marcadores, máximo de 5 hashtags) mandan sobre ella. Se usa junto a `nueva-publicacion`, no en su lugar. No se edita a mano; para actualizarla: `npx skills add coreyhaines31/marketingskills@social -y`, sustituir el *symlink* que crea por una copia real en `.claude/skills/social`, borrar `.agents/` y cambiar el commit de esta tabla.
+
 ## Skills de terceros: motion graphics y vídeo
 
 Están copiadas tal cual del repositorio oficial de cada una, para que los tres tengamos la misma versión. **No se editan a mano**: si hace falta cambiar algo, se escribe una skill nuestra que las use.

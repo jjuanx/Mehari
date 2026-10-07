@@ -10,7 +10,8 @@ Cada publicación es un fichero Markdown en `redes/instagram/publicaciones/` lla
 ## Antes de escribir
 
 1. Lee `docs/cliente/brief.md`. Los datos salen de ahí y de ningún otro sitio.
-2. Si existe una estrategia o un calendario en `docs/planes/` o `redes/`, respeta sus pilares, tono y frecuencia.
+2. Respeta la estrategia de `docs/planes/estrategia-instagram.md` (pilares, tono, formatos y frecuencia) y el calendario de `redes/` si existe.
+   Para ganchos, guiones de reel y marcos de carrusel, apóyate en la skill `social`.
 3. Define **un solo objetivo** para la pieza: alcance (que se comparta), confianza (prueba social), conversión (que pidan presupuesto) o comunidad (que comenten o guarden).
 
 ## Plantilla
@@ -40,7 +41,7 @@ Cada publicación es un fichero Markdown en `redes/instagram/publicaciones/` lla
 <Llamada a la acción: "Escríbenos por WhatsApp", "Pide disponibilidad para tu fecha", "Enlace en la bio"…>
 
 ## Hashtags
-(Entre 5 y 15. Mezcla locales (#bodasevilla, #bodacadiz, #haciendasevilla…), de nicho (#cochedeboda, #cochesclasicos…) y de marca (#[hashtag_marca_por_definir]).)
+(Entre 3 y 5: Instagram no admite más de 5 desde diciembre de 2025, sumando texto y comentarios. Uno local (#bodasevilla, #bodacadiz, #haciendasevilla…), uno de nicho (#cochedeboda, #cochesclasicos…) y el de marca (#[hashtag_marca_por_definir]).)
 
 ## Checklist
 - [ ] Un objetivo y una llamada a la acción claros
