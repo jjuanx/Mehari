@@ -1,0 +1,16 @@
+# Material pesado del cliente: se comparte fuera del repo (ver CLAUDE.md §5)
+Referencia/**/*.pdf
+Referencia/**/*.mp4
+Referencia/**/*.mov
+
+# Exportaciones de vídeo
+*.mp4
+*.mov
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Configuración local de Claude Code (la compartida es .claude/skills/)
+.claude/settings.local.json
