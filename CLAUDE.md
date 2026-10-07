@@ -117,6 +117,7 @@ Las decisiones también van, con fecha y motivo, a `docs/decisiones.md`.
 - [ ] Canal para compartir los ficheros pesados (Drive, Git LFS…).
 - [ ] Objetivos numéricos: bodas al año actuales y objetivo, seguidores, solicitudes al mes.
 - [ ] TikTok u otras redes: ¿entran en el alcance?
+- [ ] Herramienta de publicación: Meta Business Suite a mano, herramienta con API y conector para Claude, o app propia de Meta. Se decide en la semana 5 tras el piloto (ver `docs/planes/automatizacion-contenido.md`).
 - [ ] Validar con el cliente la estrategia de Instagram (v1).
 - [ ] Quién responde los mensajes y solicitudes de presupuesto (cliente o equipo) y en qué plazo.
 - [ ] Flujo de aprobación del contenido por parte del cliente.

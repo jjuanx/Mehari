@@ -63,4 +63,7 @@ Están copiadas tal cual del repositorio oficial de cada una, para que los tres 
 
 - `calendario-editorial`: planificar un mes de publicaciones con los pilares de contenido.
 - `informe-mensual`: métricas de Instagram y Meta Ads frente a los objetivos.
+- `ingesta-material`: inventario técnico y visual de una carpeta de boda, con pre-revisión de marca (ver `docs/planes/automatizacion-contenido.md` §5).
+- `lote-semanal`: rellenar las plantillas de HyperFrames con el material de la semana, renderizar por lotes y crear las fichas.
+- `publicar`: pasar las piezas aprobadas a la cola y programarlas con la herramienta elegida.
 - `respuesta-dm`: plantillas para responder solicitudes de presupuesto por mensaje directo o WhatsApp.
