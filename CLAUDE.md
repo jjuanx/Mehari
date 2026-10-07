@@ -92,6 +92,8 @@ Viven en `.claude/skills/` y están catalogadas en [SKILLS.md](SKILLS.md). Al ha
 - **Si una tarea se repite dos veces, conviértela en skill.**
 - **Si una skill se queda corta, mejórala en una rama propia.** Que nadie se quede con versiones locales distintas.
 - Toda skill nueva o modificada se registra en `SKILLS.md` en el mismo PR.
+- **Motion graphics y vídeo**: tenemos las skills oficiales de **HyperFrames** (por defecto para piezas de Instagram; se entra por `hyperframes`) y de **Remotion** (`remotion-best-practices`). Son de terceros: no se editan, se actualizan copiando de nuevo desde su repositorio. Hacen falta Node.js y FFmpeg.
+- Toda pieza animada pasa también por `revision-marca` antes de publicarse.
 
 ## 8. Mantener este fichero vivo
 
