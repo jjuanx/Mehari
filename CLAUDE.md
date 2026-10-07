@@ -59,7 +59,7 @@ Mehari/
 │  ├─ cliente/brief.md       ← fuente de verdad de los datos del negocio
 │  ├─ decisiones.md          ← registro de decisiones (fecha, decisión, motivo)
 │  └─ planes/                ← plan de proyecto, estrategia de redes, etc.
-├─ redes/instagram/          ← publicaciones y calendario editorial
+├─ redes/instagram/          ← publicaciones, calendario editorial y reels/<fecha>_<tema>/ (fuente HyperFrames)
 ├─ marca/                    ← identidad nueva (cuando exista)
 ├─ web/                      ← landing (más adelante)
 └─ Referencia/               ← material del cliente: dossiers, logos antiguos, fotos, prensa
@@ -93,6 +93,7 @@ Viven en `.claude/skills/` y están catalogadas en [SKILLS.md](SKILLS.md). Al ha
 - **Si una skill se queda corta, mejórala en una rama propia.** Que nadie se quede con versiones locales distintas.
 - Toda skill nueva o modificada se registra en `SKILLS.md` en el mismo PR.
 - **Motion graphics y vídeo**: tenemos las skills oficiales de **HyperFrames** (por defecto para piezas de Instagram; se entra por `hyperframes`) y de **Remotion** (`remotion-best-practices`). Son de terceros: no se editan, se actualizan copiando de nuevo desde su repositorio. Hacen falta Node.js y FFmpeg.
+- **Reels**: se guionizan y producen con la skill `guion-reel` (estructura, ficha por escena y verificación), que delega el render en HyperFrames.
 - Toda pieza animada pasa también por `revision-marca` antes de publicarse.
 - **Estrategia y contenido de redes**: la estrategia vigente está en [docs/planes/estrategia-instagram.md](docs/planes/estrategia-instagram.md). Para ganchos, guiones y carruseles se usa la skill de terceros `social` (en inglés); nuestras reglas mandan sobre ella. **Máximo 5 hashtags** por publicación.
 

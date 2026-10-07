@@ -11,6 +11,7 @@ Se invocan pidiéndolo con naturalidad ("prepara una publicación sobre…") o p
 | [`gitflow`](.claude/skills/gitflow/SKILL.md) | Flujo de ramas, commits y PR del equipo, más la checklist para mantener vivo el contexto | Al empezar cualquier tarea y antes de abrir un PR |
 | [`nueva-publicacion`](.claude/skills/nueva-publicacion/SKILL.md) | Ficha completa de una publicación de Instagram: objetivo, material, guion, copy con CTA y hashtags | Siempre que se prepare contenido para Instagram |
 | [`revision-marca`](.claude/skills/revision-marca/SKILL.md) | Comprueba que no hay rastro de la marca antigua, ni datos inventados, y que todo es coherente con el brief | Antes de cerrar cualquier pieza y al elegir fotos |
+| [`guion-reel`](.claude/skills/guion-reel/SKILL.md) | De la idea al reel terminado (9:16, 15–30 s): estructura gancho, detalle, prueba, momento y cierre; ficha por escena; reglas de texto, sonido y accesibilidad; producción con HyperFrames y verificación ejecutada | Siempre que se guionice, monte o anime un reel. Completa la ficha de `nueva-publicacion` |
 
 ## Skills de terceros: estrategia y contenido de redes
 
