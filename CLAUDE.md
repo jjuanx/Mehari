@@ -60,7 +60,7 @@ Mehari/
 │  ├─ decisiones.md          ← registro de decisiones (fecha, decisión, motivo)
 │  └─ planes/                ← plan de proyecto, estrategia de redes, etc.
 ├─ redes/instagram/          ← publicaciones y calendario editorial
-├─ marca/                    ← identidad nueva (cuando exista)
+├─ marca/                    ← identidad: README (colores, tipos, logo), tokens.css y propuestas/
 ├─ web/                      ← landing (más adelante)
 └─ Referencia/               ← material del cliente: dossiers, logos antiguos, fotos, prensa
 ```
@@ -106,8 +106,8 @@ Las decisiones también van, con fecha y motivo, a `docs/decisiones.md`.
 
 ## 9. Pendiente de definir
 
-- [ ] Nombre de la marca nueva y usuario de Instagram.
-- [ ] Logo e identidad visual nuevos (paleta, tipografías). No deben parecerse al logo antiguo.
+- [ ] Nombre de la marca nueva y usuario de Instagram. En estudio: «Mehari Azahar» y «Mehari Getaway» (ver `marca/README.md`).
+- [ ] Logo e identidad visual nuevos. No deben parecerse al logo antiguo. Paleta casi cerrada (naranja y beige de los coches); logos y tipografía en propuesta en `marca/`.
 - [ ] Email, WhatsApp y teléfono de la marca nueva.
 - [ ] Precios y packs (de momento, "consultar presupuesto").
 - [ ] Presupuesto para publicidad en Meta.
