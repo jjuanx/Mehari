@@ -11,6 +11,15 @@ Se invocan pidiéndolo con naturalidad ("prepara una publicación sobre…") o p
 | [`gitflow`](.claude/skills/gitflow/SKILL.md) | Flujo de ramas, commits y PR del equipo, más la checklist para mantener vivo el contexto | Al empezar cualquier tarea y antes de abrir un PR |
 | [`nueva-publicacion`](.claude/skills/nueva-publicacion/SKILL.md) | Ficha completa de una publicación de Instagram: objetivo, material, guion, copy con CTA y hashtags | Siempre que se prepare contenido para Instagram |
 | [`revision-marca`](.claude/skills/revision-marca/SKILL.md) | Comprueba que no hay rastro de la marca antigua, ni datos inventados, y que todo es coherente con el brief | Antes de cerrar cualquier pieza y al elegir fotos |
+| [`guion-reel`](.claude/skills/guion-reel/SKILL.md) | De la idea al reel terminado (9:16, 15–30 s): estructura gancho, detalle, prueba, momento y cierre; ficha por escena; reglas de texto, sonido y accesibilidad; producción con HyperFrames y verificación ejecutada | Siempre que se guionice, monte o anime un reel. Completa la ficha de `nueva-publicacion` |
+
+## Skills de terceros: estrategia y contenido de redes
+
+| Skill | Origen | Commit | Licencia | Para qué |
+|---|---|---|---|---|
+| [`social`](.claude/skills/social/SKILL.md) | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) | `5e721d7` | MIT | Estrategia de redes, pilares, ganchos, guiones de reel, marcos de carrusel (`references/carousel-frameworks.md`), rutina de interacción y métricas. Es la skill de redes más instalada del ecosistema (skills.sh) |
+
+Está en inglés y es genérica: nuestras reglas (brief, marca antigua, marcadores, máximo de 5 hashtags) mandan sobre ella. Se usa junto a `nueva-publicacion`, no en su lugar. No se edita a mano; para actualizarla: `npx skills add coreyhaines31/marketingskills@social -y`, sustituir el *symlink* que crea por una copia real en `.claude/skills/social`, borrar `.agents/` y cambiar el commit de esta tabla.
 
 ## Skills de terceros: motion graphics y vídeo
 

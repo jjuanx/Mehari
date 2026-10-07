@@ -121,6 +121,12 @@
       "skillPath": "skills/slideshow/SKILL.md",
       "computedHash": "fa178947b4cfe834d416c4d826d50cdd1f92dfb22395569032a40aa5d26819cc"
     },
+    "social": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/social/SKILL.md",
+      "computedHash": "7eeedd17a4d59d75281ecd7ff6cb6e2992b1095459550e8d97ef1cae522ea389"
+    },
     "talking-head-recut": {
       "source": "heygen-com/hyperframes",
       "sourceType": "github",
