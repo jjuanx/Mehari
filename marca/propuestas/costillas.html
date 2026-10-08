@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Propuesta C · El detalle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,100;1,9..144,300..700,100&family=Jost:wght@300..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--cal);color:var(--tinta);font-family:var(--font-texto);line-height:1.5;-webkit-font-smoothing:antialiased}
+  main{max-width:1072px;margin:0 auto;padding:56px 24px 96px}
+  .estado{display:inline-block;font:500 12px/1 var(--font-texto);letter-spacing:.12em;text-transform:uppercase;background:var(--tinta);color:var(--cal);padding:8px 12px;border-radius:2px}
+  h1{font:400 clamp(40px,6vw,72px)/1 var(--font-titular);margin:24px 0 12px;letter-spacing:-.01em}
+  h2{font:400 clamp(30px,4vw,44px)/1.05 var(--font-titular);margin:72px 0 8px}
+  h3{font:600 13px/1 var(--font-texto);letter-spacing:.14em;text-transform:uppercase;margin:40px 0 16px;color:var(--tinta)}
+  p.lead{max-width:62ch;font-size:18px;opacity:.85}
+  .nota{max-width:70ch;font-size:15px;opacity:.85;margin-top:8px}
+  .rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+  .lienzo{aspect-ratio:4/3;display:grid;place-items:center;border-radius:4px;border:1px solid rgba(43,33,26,.08)}
+  .lienzo svg{width:86%;height:auto}
+  .sobre-blanco{background:var(--azahar)} .sobre-naranja{background:var(--naranja)} .sobre-beige{background:var(--beige)} .sobre-tinta{background:var(--tinta)}
+  .avatares{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+  .avatar{border-radius:50%;display:grid;place-items:center;overflow:hidden}
+  .avatar svg{width:70%;height:auto}
+  .pie{font-size:15px;opacity:.8;max-width:34ch}
+  .dos{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:16px}
+  .dos ul{padding-left:18px;font-size:15px}
+  .dos li{margin-bottom:6px}
+  .aviso{background:var(--azahar);border-left:4px solid var(--naranja);padding:16px 20px;max-width:70ch;margin-top:12px;font-size:15px}
+  .aviso b{color:var(--tinta)}
+  @media (max-width:720px){.dos{grid-template-columns:1fr}}
+
+  /* Demostración de animación: las costillas entran de una en una y forman el coche */
+  .demo{background:var(--tinta);border-radius:4px;aspect-ratio:16/7;display:grid;place-items:center;overflow:hidden}
+  .demo svg{width:64%;height:auto}
+  .demo .franja{transform:translateX(-110%);animation:entra 3.2s cubic-bezier(.2,.8,.2,1) infinite}
+  .demo .franja:nth-child(2){animation-delay:.08s}
+  .demo .franja:nth-child(3){animation-delay:.16s}
+  .demo .franja:nth-child(4){animation-delay:.24s}
+  .demo .franja:nth-child(5){animation-delay:.32s}
+  .demo .ruedas{opacity:0;animation:aparece 3.2s ease-out infinite}
+  @keyframes entra{0%{transform:translateX(-110%)}28%,88%{transform:translateX(0)}100%{transform:translateX(110%)}}
+  @keyframes aparece{0%,24%{opacity:0}36%,88%{opacity:1}100%{opacity:0}}
+  @media (prefers-reduced-motion:reduce){.demo .franja{animation:none;transform:none}.demo .ruedas{animation:none;opacity:1}}
+</style>
+</head>
+<body>
+
+<!-- ───────────── Dibujos reutilizables ───────────── -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+
+    <!-- C2 · El detalle: recorte del lateral con una rueda -->
+    <mask id="m-detalle" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+      <rect width="200" height="200" fill="#fff"/>
+      <rect x="0" y="66" width="200" height="11" fill="#000"/>
+      <rect x="0" y="92" width="200" height="11" fill="#000"/>
+      <rect x="0" y="118" width="200" height="11" fill="#000"/>
+    </mask>
+    <symbol id="c2-detalle" viewBox="0 0 200 200">
+      <path mask="url(#m-detalle)" fill="var(--c-coche)" d="M24 58 Q24 40 42 40 L176 40 L176 150 L156 150 A42 42 0 0 0 72 150 L24 150 Z"/>
+      <circle cx="114" cy="156" r="34" fill="var(--c-rueda)"/>
+      <circle cx="114" cy="156" r="11" fill="var(--c-tapa)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main>
+  <span class="estado">Propuesta C · pendiente de aprobación del cliente</span>
+  <h1>El detalle</h1>
+  <p class="lead">Los paneles acanalados del lateral son lo que hace que un Méhari se reconozca al instante. Esta propuesta convierte ese recurso gráfico (las costillas de la paleta) en el propio símbolo: un primer plano del lateral. Usa la misma paleta y las mismas tipografías que las propuestas A y B, y funciona con cualquier nombre.</p>
+
+  <!-- ───────────── C2 ───────────── -->
+  <h2>Símbolo</h2>
+  <div class="dos">
+    <p>Un primer plano del lateral: tres costillas y la rueda asomando bajo el paso de rueda. Es abstracto, pero sigue diciendo «Méhari» a quien lo conoce, y llena bien un formato cuadrado o redondo.</p>
+    <ul>
+      <li>Pensado como avatar, icono de la web y marca de agua en los reels.</li>
+      <li>Combina con el nombre en horizontal (símbolo a la izquierda).</li>
+      <li>Al no dibujar el coche entero, se aleja del diseño protegido de Citroën.</li>
+    </ul>
+  </div>
+  <h3>Logotipo horizontal</h3>
+  <div class="rejilla">
+    <div class="lienzo sobre-blanco"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo C2 sobre blanco">
+      <use href="#c2-detalle" x="34" y="92" width="116" height="116" style="--c-coche:var(--naranja);--c-rueda:var(--tinta);--c-tapa:var(--azahar)"/>
+      <text x="160" y="160" style="font:500 50px var(--font-titular);fill:var(--tinta)">Azahar</text>
+      <text x="163" y="190" style="font:600 12px var(--font-texto);letter-spacing:.38em;fill:var(--naranja-oscuro)">SEVILLA · CÁDIZ</text>
+    </svg></div>
+    <div class="lienzo sobre-naranja"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo C2 sobre naranja">
+      <use href="#c2-detalle" x="34" y="92" width="116" height="116" style="--c-coche:var(--azahar);--c-rueda:var(--tinta);--c-tapa:var(--naranja)"/>
+      <text x="160" y="160" style="font:500 50px var(--font-titular);fill:var(--tinta)">Azahar</text>
+      <text x="163" y="190" style="font:600 12px var(--font-texto);letter-spacing:.38em;fill:var(--tinta)">SEVILLA · CÁDIZ</text>
+    </svg></div>
+    <div class="lienzo sobre-tinta"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo C2 sobre tinta">
+      <use href="#c2-detalle" x="34" y="92" width="116" height="116" style="--c-coche:var(--naranja);--c-rueda:var(--beige);--c-tapa:var(--tinta)"/>
+      <text x="160" y="160" style="font:500 50px var(--font-titular);fill:var(--azahar)">Azahar</text>
+      <text x="163" y="190" style="font:600 12px var(--font-texto);letter-spacing:.38em;fill:var(--beige)">SEVILLA · CÁDIZ</text>
+    </svg></div>
+  </div>
+  <h3>Avatar de Instagram</h3>
+  <div class="avatares">
+    <div class="avatar sobre-naranja" style="width:160px;height:160px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar C2 sobre naranja"><use href="#c2-detalle" style="--c-coche:var(--azahar);--c-rueda:var(--tinta);--c-tapa:var(--naranja)"/></svg></div>
+    <div class="avatar sobre-beige" style="width:160px;height:160px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar C2 sobre beige"><use href="#c2-detalle" style="--c-coche:var(--naranja);--c-rueda:var(--tinta);--c-tapa:var(--beige)"/></svg></div>
+    <div class="avatar sobre-naranja" style="width:56px;height:56px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar C2 a 56 píxeles"><use href="#c2-detalle" style="--c-coche:var(--azahar);--c-rueda:var(--tinta);--c-tapa:var(--naranja)"/></svg></div>
+    <p class="pie">A 56 px las tres costillas y la rueda se siguen leyendo: aguanta el tamaño pequeño mejor que un coche entero.</p>
+  </div>
+
+  <!-- ───────────── Animación ───────────── -->
+  <h2>Cómo se mueve</h2>
+  <p class="nota">Recurso para vídeo, no forma parte del logotipo: las costillas entran de una en una y forman el coche. Sirve como entrada o cierre de cada reel (2–3 s) y como transición entre escenas. Se hace con HyperFrames usando los mismos dibujos.</p>
+  <div class="demo" style="margin-top:16px">
+    <svg viewBox="0 0 330 170" role="img" aria-label="Animación: las costillas entran y forman el coche">
+      <defs>
+        <clipPath id="clip-demo"><path d="M30 122 L30 62 Q30 50 42 50 L118 50 C130 50 132 84 150 84 L186 84 C204 84 206 50 218 50 L262 50 L292 60 Q300 63 300 72 L300 122 L262 122 A32 32 0 0 0 198 122 L104 122 A32 32 0 0 0 40 122 L30 122 Z"/></clipPath>
+      </defs>
+      <g clip-path="url(#clip-demo)" fill="var(--naranja)">
+        <rect class="franja" x="0" y="0" width="330" height="64"/>
+        <rect class="franja" x="0" y="69" width="330" height="7"/>
+        <rect class="franja" x="0" y="81" width="330" height="7"/>
+        <rect class="franja" x="0" y="93" width="330" height="7"/>
+        <rect class="franja" x="0" y="105" width="330" height="20"/>
+      </g>
+      <g class="ruedas">
+        <path d="M222 50 L234 12" stroke="var(--naranja)" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <circle cx="72" cy="126" r="26" fill="var(--beige)"/><circle cx="230" cy="126" r="26" fill="var(--beige)"/>
+        <circle cx="72" cy="126" r="9" fill="var(--tinta)"/><circle cx="230" cy="126" r="9" fill="var(--tinta)"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- ───────────── Notas ───────────── -->
+  <h2>Para comentar</h2>
+  <div class="aviso"><b>Sin «Mehari» en el logo.</b> El subtítulo dice «Sevilla · Cádiz» en lugar de «Mehari · Sevilla»: la marca no depende de la palabra de Citroën ni de la primera palabra de la marca antigua. El coche ya lo cuenta el dibujo.</div>
+  <div class="aviso"><b>Distancia con el logo antiguo.</b> Ni monograma «M», ni caligrafía, ni sello circular. El avatar redondo es solo el recorte que impone Instagram.</div>
+  <div class="aviso"><b>Diseño de Citroën.</b> El símbolo no dibuja el coche entero, solo un detalle del lateral. La animación sí muestra la silueta: si el cliente o un abogado ven riesgo, se queda solo en las costillas.</div>
+  <div class="aviso"><b>Contraste.</b> El texto sobre naranja va en tinta (5,7:1). El blanco sobre naranja solo se usa en el dibujo, nunca en texto (2,7:1).</div>
+  <div class="aviso"><b>Usos.</b> Avatar de Instagram, icono de la web, marca de agua en los reels y logotipo horizontal con el nombre.</div>
+</main>
+</body>
+</html>
