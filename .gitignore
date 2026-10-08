@@ -16,3 +16,7 @@ desktop.ini
 
 # Configuración local de Claude Code (la compartida es .claude/skills/)
 .claude/settings.local.json
+
+# Credenciales (tokens de Instagram, Meta y herramientas de publicación)
+.env
+.env.*

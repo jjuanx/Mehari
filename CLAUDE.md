@@ -95,6 +95,7 @@ Viven en `.claude/skills/` y están catalogadas en [SKILLS.md](SKILLS.md). Al ha
 - **Motion graphics y vídeo**: tenemos las skills oficiales de **HyperFrames** (por defecto para piezas de Instagram; se entra por `hyperframes`) y de **Remotion** (`remotion-best-practices`). Son de terceros: no se editan, se actualizan copiando de nuevo desde su repositorio. Hacen falta Node.js y FFmpeg.
 - **Reels**: se guionizan y producen con la skill `guion-reel` (estructura, ficha por escena y verificación), que delega el render en HyperFrames.
 - Toda pieza animada pasa también por `revision-marca` antes de publicarse.
+- **Diseño estático y publicidad**: `canvas-design` (oficial de Anthropic) para ilustraciones y piezas en PNG o PDF; `ad-creative` y `ads` (marketingskills) para anuncios y campañas de Meta. Son de terceros y en inglés: nuestras reglas mandan y no se generan con IA fotos de los coches ni de bodas.
 - **Animaciones de marca** (entrada, transición y cierre de los reels): proyecto HyperFrames en `marca/animaciones/`, con sus renders ligeros versionados. Propuesta pendiente de aprobación.
 - **Estrategia y contenido de redes**: la estrategia vigente está en [docs/planes/estrategia-instagram.md](docs/planes/estrategia-instagram.md). Para ganchos, guiones y carruseles se usa la skill de terceros `social` (en inglés); nuestras reglas mandan sobre ella. **Máximo 5 hashtags** por publicación.
 
@@ -118,6 +119,7 @@ Las decisiones también van, con fecha y motivo, a `docs/decisiones.md`.
 - [ ] Canal para compartir los ficheros pesados (Drive, Git LFS…).
 - [ ] Objetivos numéricos: bodas al año actuales y objetivo, seguidores, solicitudes al mes.
 - [ ] TikTok u otras redes: ¿entran en el alcance?
+- [ ] Herramienta de publicación: Meta Business Suite a mano, herramienta con API y conector para Claude, o app propia de Meta. Se decide en la semana 5 tras el piloto (ver `docs/planes/automatizacion-contenido.md`).
 - [ ] Validar con el cliente la estrategia de Instagram (v1).
 - [ ] Quién responde los mensajes y solicitudes de presupuesto (cliente o equipo) y en qué plazo.
 - [ ] Flujo de aprobación del contenido por parte del cliente.
