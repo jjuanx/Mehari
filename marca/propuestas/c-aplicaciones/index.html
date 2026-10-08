@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Propuesta C · Aplicaciones de marca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Jost:wght@300..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../tokens.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#e9e2d6;font-family:var(--font-texto);color:var(--tinta);-webkit-font-smoothing:antialiased}
+  /* Cada lámina mide 1600 × 1200 para exportarla como imagen */
+  .lamina{position:relative;width:1600px;height:1200px;overflow:hidden;background:var(--cal)}
+  .cab{position:absolute;left:72px;top:56px;right:72px;display:flex;justify-content:space-between;align-items:baseline}
+  .cab h2{font:400 46px/1 var(--font-titular);letter-spacing:-.01em}
+  .cab span{font:600 15px/1 var(--font-texto);letter-spacing:.22em;text-transform:uppercase;color:var(--naranja-oscuro)}
+  .pie{position:absolute;left:72px;right:72px;bottom:44px;display:flex;justify-content:space-between;font:500 15px/1.3 var(--font-texto);color:#6b5a4c}
+  .rotulo{font:600 14px/1 var(--font-texto);letter-spacing:.2em;text-transform:uppercase;color:#6b5a4c;margin-top:20px;text-align:center}
+  .linea-marca{font:600 15px/1 var(--font-texto);letter-spacing:.42em;text-transform:uppercase}
+
+  /* Lámina 1 · Logotipo */
+  .logos{position:absolute;left:72px;right:72px;top:150px;bottom:110px;display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:1fr 1fr;gap:20px}
+  .logos .celda{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;border-radius:6px}
+  .logos .grande{grid-row:span 2;background:var(--azahar);border:1px solid rgba(43,33,26,.08)}
+  .logos .grande svg{width:360px}
+  .logos .peq svg{width:200px}
+
+  /* Lámina 2 · Camisetas */
+  .camisetas{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:16px;padding:16px;background:#ddd5c8}
+  .cam{position:relative;overflow:hidden;background:linear-gradient(90deg,var(--beige) 50%,#ece7df 50%)}
+  .cam svg{position:absolute;left:50%;top:50%;width:420px;transform:translate(-50%,-48%);filter:drop-shadow(0 22px 26px rgba(43,33,26,.28))}
+  .cam .etq{position:absolute;left:24px;bottom:20px;font:600 13px/1 var(--font-texto);letter-spacing:.2em;text-transform:uppercase;color:var(--tinta);background:rgba(247,241,230,.85);padding:8px 12px;border-radius:2px}
+
+  /* Lámina 3 · Aplicaciones */
+  .apl{position:absolute;left:72px;right:72px;top:150px;bottom:110px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .bloque{background:var(--azahar);border:1px solid rgba(43,33,26,.08);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+  .dcha{display:grid;grid-template-rows:1fr 1fr;gap:20px}
+  .pegatinas{display:flex;gap:56px;align-items:center}
+  .pegatina{width:200px;height:200px;border-radius:44px;display:grid;place-items:center;box-shadow:0 0 0 9px #fff,0 18px 30px rgba(43,33,26,.25)}
+  .pegatina svg{width:150px}
+  .redonda{border-radius:50%}
+  .tarjetas{display:flex;gap:28px}
+  .tarjeta{width:300px;height:180px;border-radius:10px;box-shadow:0 16px 28px rgba(43,33,26,.22);padding:24px;display:flex;flex-direction:column;justify-content:space-between}
+  .tarjeta.frente{background:var(--tinta);align-items:center;justify-content:center;gap:14px}
+  .tarjeta.frente svg{width:92px}
+  .tarjeta.dorso{background:var(--cal);border:1px solid rgba(43,33,26,.08)}
+  .tarjeta.dorso p{font:500 15px/1.5 var(--font-texto)}
+  .tarjeta.dorso b{font:600 13px/1 var(--font-texto);letter-spacing:.2em;text-transform:uppercase;color:var(--naranja-oscuro)}
+
+  /* Lámina 4 · Instagram */
+  .ig{position:absolute;left:72px;right:72px;top:140px;bottom:96px;display:flex;justify-content:center;gap:72px;align-items:center}
+  .movil{width:400px;height:860px;border-radius:52px;background:var(--tinta);padding:14px;box-shadow:0 30px 60px rgba(43,33,26,.35)}
+  .pantalla{width:100%;height:100%;border-radius:40px;background:#fffdf8;overflow:hidden;position:relative}
+  .perfil{padding:58px 20px 0}
+  .perfil .fila{display:flex;align-items:center;gap:18px}
+  .avatar{width:86px;height:86px;border-radius:50%;background:var(--naranja);display:grid;place-items:center;flex:none}
+  .avatar svg{width:62px}
+  .usuario{font:600 17px/1.2 var(--font-texto)}
+  .bio{font:400 14px/1.45 var(--font-texto);margin-top:14px;color:#3d3027}
+  .boton-ig{margin-top:14px;display:flex;gap:8px}
+  .boton-ig span{flex:1;text-align:center;font:600 13px/1 var(--font-texto);padding:10px 0;border-radius:8px;background:#efe9df}
+  .boton-ig span.prim{background:var(--naranja);color:var(--tinta)}
+  .destacadas{display:flex;gap:14px;margin:18px 0 14px}
+  .dest{display:flex;flex-direction:column;align-items:center;gap:6px;font:500 11px/1 var(--font-texto)}
+  .dest i{width:56px;height:56px;border-radius:50%;border:2px solid #d9cfbf;display:grid;place-items:center;background:var(--cal)}
+  .dest i svg{width:34px}
+  .rejilla{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+  .rejilla div{aspect-ratio:4/5;background-size:cover;background-position:center;position:relative}
+  .rejilla .marca-agua{position:absolute;right:6px;bottom:6px;width:20px}
+  .post-cab{display:flex;align-items:center;gap:10px;padding:56px 14px 10px}
+  .post-cab .mini{width:34px;height:34px;border-radius:50%;background:var(--naranja);display:grid;place-items:center}
+  .post-cab .mini svg{width:24px}
+  .post-img{width:100%;aspect-ratio:4/5;background:url(fotos/beige-perfil.jpg) center 60%/cover;position:relative}
+  .post-img .sello{position:absolute;right:14px;bottom:14px;width:46px;opacity:.95}
+  .post-txt{padding:12px 14px;font:400 13.5px/1.5 var(--font-texto);color:#3d3027}
+  .post-txt b{font-weight:600}
+  .costillas-banda{position:absolute;left:0;right:0;top:0;height:16px;background:repeating-linear-gradient(180deg,var(--naranja) 0 4px,transparent 4px 7px)}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <mask id="huecos" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+      <rect width="200" height="200" fill="#fff"/>
+      <rect x="0" y="66" width="200" height="11" fill="#000"/>
+      <rect x="0" y="92" width="200" height="11" fill="#000"/>
+      <rect x="0" y="118" width="200" height="11" fill="#000"/>
+    </mask>
+    <!-- Símbolo C2 · El detalle (recortado a su contenido) -->
+    <symbol id="c2" viewBox="18 34 164 164">
+      <path mask="url(#huecos)" fill="var(--c-coche)" d="M24 58 Q24 40 42 40 L176 40 L176 150 L156 150 A42 42 0 0 0 72 150 L24 150 Z"/>
+      <circle cx="114" cy="156" r="34" fill="var(--c-rueda)"/>
+      <circle cx="114" cy="156" r="11" fill="var(--c-tapa)"/>
+    </symbol>
+    <!-- Camiseta -->
+    <linearGradient id="luz" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity=".10"/>
+      <stop offset=".35" stop-color="#fff" stop-opacity=".10"/>
+      <stop offset=".7" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".14"/>
+    </linearGradient>
+    <symbol id="camiseta" viewBox="0 0 400 440">
+      <path fill="var(--c-tela)" d="M140 38 C160 62 240 62 260 38 L330 64 L384 132 L330 170 L306 146 L308 412 Q308 422 298 422 L102 422 Q92 422 92 412 L94 146 L70 170 L16 132 L70 64 Z"/>
+      <path fill="url(#luz)" d="M140 38 C160 62 240 62 260 38 L330 64 L384 132 L330 170 L306 146 L308 412 Q308 422 298 422 L102 422 Q92 422 92 412 L94 146 L70 170 L16 132 L70 64 Z"/>
+      <path d="M140 38 C160 62 240 62 260 38" fill="none" stroke="#000" stroke-opacity=".18" stroke-width="7"/>
+      <path d="M94 146 C102 112 100 82 82 66 M306 146 C298 112 300 82 318 66" fill="none" stroke="#000" stroke-opacity=".10" stroke-width="2"/>
+      <path d="M120 330 C150 342 170 340 190 352 M230 380 C250 372 270 376 290 366" fill="none" stroke="#000" stroke-opacity=".06" stroke-width="3"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ───────── Lámina 1 · Logotipo ───────── -->
+<section class="lamina" id="l1">
+  <div class="cab"><h2>Logotipo</h2><span>Propuesta C · El detalle</span></div>
+  <div class="logos">
+    <div class="celda grande">
+      <svg viewBox="0 0 164 164" role="img" aria-label="Símbolo en color"><use href="#c2" style="--c-coche:var(--naranja);--c-rueda:var(--tinta);--c-tapa:var(--azahar)"/></svg>
+      <p class="linea-marca" style="color:var(--tinta)">Sevilla · Cádiz</p>
+      <p class="rotulo">Color · versión principal</p>
+    </div>
+    <div class="celda peq" style="background:var(--azahar);border:1px solid rgba(43,33,26,.08)">
+      <svg viewBox="0 0 164 164" role="img" aria-label="Símbolo en una tinta"><use href="#c2" style="--c-coche:var(--tinta);--c-rueda:var(--tinta);--c-tapa:var(--azahar)"/></svg>
+      <p class="linea-marca" style="color:var(--tinta)">Sevilla · Cádiz</p>
+    </div>
+    <div class="celda peq" style="background:var(--tinta)">
+      <svg viewBox="0 0 164 164" role="img" aria-label="Símbolo en negativo"><use href="#c2" style="--c-coche:var(--naranja);--c-rueda:var(--beige);--c-tapa:var(--tinta)"/></svg>
+      <p class="linea-marca" style="color:var(--beige)">Sevilla · Cádiz</p>
+    </div>
+  </div>
+  <div class="pie"><span>Una tinta para bordado, vinilo y sello · negativo para fondos oscuros</span><span>El nombre se añadirá bajo el símbolo cuando se decida</span></div>
+</section>
+
+<!-- ───────── Lámina 2 · Camisetas ───────── -->
+<section class="lamina" id="l2">
+  <div class="camisetas">
+    <div class="cam">
+      <svg viewBox="0 0 400 440" role="img" aria-label="Camiseta naranja con el símbolo en blanco"><use href="#camiseta" style="--c-tela:var(--naranja)"/><use href="#c2" x="152" y="128" width="96" height="96" style="--c-coche:var(--azahar);--c-rueda:var(--tinta);--c-tapa:var(--naranja)"/></svg>
+      <span class="etq">Naranja Méhari</span>
+    </div>
+    <div class="cam">
+      <svg viewBox="0 0 400 440" role="img" aria-label="Camiseta blanca con el símbolo en color"><use href="#camiseta" style="--c-tela:#fbf9f4"/><use href="#c2" x="152" y="124" width="96" height="96" style="--c-coche:var(--naranja);--c-rueda:var(--tinta);--c-tapa:#fbf9f4"/><text x="200" y="244" text-anchor="middle" style="font:600 9px var(--font-texto);letter-spacing:.42em;fill:var(--tinta)">SEVILLA · CÁDIZ</text></svg>
+      <span class="etq">Blanco azahar</span>
+    </div>
+    <div class="cam">
+      <svg viewBox="0 0 400 440" role="img" aria-label="Camiseta beige con el símbolo en una tinta"><use href="#camiseta" style="--c-tela:var(--beige)"/><use href="#c2" x="152" y="128" width="96" height="96" style="--c-coche:var(--tinta);--c-rueda:var(--tinta);--c-tapa:var(--beige)"/></svg>
+      <span class="etq">Beige arena</span>
+    </div>
+    <div class="cam">
+      <svg viewBox="0 0 400 440" role="img" aria-label="Camiseta oscura con el símbolo naranja"><use href="#camiseta" style="--c-tela:var(--tinta)"/><use href="#c2" x="152" y="128" width="96" height="96" style="--c-coche:var(--naranja);--c-rueda:var(--beige);--c-tapa:var(--tinta)"/></svg>
+      <span class="etq">Tinta capota</span>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Lámina 3 · Aplicaciones ───────── -->
+<section class="lamina" id="l3">
+  <div class="cab"><h2>Aplicaciones</h2><span>Propuesta C · El detalle</span></div>
+  <div class="apl">
+    <div class="bloque">
+      <svg viewBox="0 0 520 520" width="500" role="img" aria-label="Funda de la rueda de repuesto">
+        <defs>
+          <radialGradient id="lona" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#3a2d24"/><stop offset="1" stop-color="#1f1712"/></radialGradient>
+          <clipPath id="disco"><circle cx="260" cy="260" r="200"/></clipPath>
+        </defs>
+        <circle cx="260" cy="268" r="236" fill="#000" opacity=".18"/>
+        <circle cx="260" cy="260" r="236" fill="url(#lona)"/>
+        <circle cx="260" cy="260" r="222" fill="none" stroke="var(--beige)" stroke-opacity=".55" stroke-width="2.5" stroke-dasharray="7 7"/>
+        <g clip-path="url(#disco)" fill="var(--naranja)" opacity=".16">
+          <rect x="40" y="96" width="440" height="14"/><rect x="40" y="120" width="440" height="14"/>
+          <rect x="40" y="386" width="440" height="14"/><rect x="40" y="410" width="440" height="14"/>
+        </g>
+        <use href="#c2" x="160" y="160" width="200" height="200" style="--c-coche:var(--naranja);--c-rueda:var(--beige);--c-tapa:#2a201a"/>
+      </svg>
+      <p class="rotulo">Funda de la rueda de repuesto · sustituye a la antigua</p>
+    </div>
+    <div class="dcha">
+      <div class="bloque">
+        <div class="pegatinas">
+          <div class="pegatina" style="background:var(--naranja);transform:rotate(-6deg)"><svg viewBox="0 0 164 164" aria-hidden="true"><use href="#c2" style="--c-coche:var(--azahar);--c-rueda:var(--tinta);--c-tapa:var(--naranja)"/></svg></div>
+          <div class="pegatina redonda" style="background:var(--cal);transform:rotate(5deg)"><svg viewBox="0 0 164 164" aria-hidden="true"><use href="#c2" style="--c-coche:var(--naranja);--c-rueda:var(--tinta);--c-tapa:var(--cal)"/></svg></div>
+        </div>
+        <p class="rotulo">Pegatinas · para los coches, cajas de regalo e invitaciones</p>
+      </div>
+      <div class="bloque">
+        <div class="tarjetas">
+          <div class="tarjeta frente"><svg viewBox="0 0 164 164" aria-hidden="true"><use href="#c2" style="--c-coche:var(--naranja);--c-rueda:var(--beige);--c-tapa:var(--tinta)"/></svg><span class="linea-marca" style="color:var(--beige);font-size:11px">Sevilla · Cádiz</span></div>
+          <div class="tarjeta dorso"><b>Bodas · Sevilla Experience</b><p>[EMAIL POR DEFINIR]<br>[WHATSAPP POR DEFINIR]<br>@[usuario_por_definir]</p></div>
+        </div>
+        <p class="rotulo">Tarjeta de visita</p>
+      </div>
+    </div>
+  </div>
+  <div class="pie"><span>Sin sello circular ni texto en círculo: el redondo de la funda lo pone la rueda, no la marca</span><span>Datos de contacto: pendientes</span></div>
+</section>
+
+<!-- ───────── Lámina 4 · Instagram ───────── -->
+<section class="lamina" id="l4">
+  <div class="cab"><h2>En Instagram</h2><span>Propuesta C · El detalle</span></div>
+  <div class="ig">
+    <div class="movil"><div class="pantalla">
+      <div class="perfil">
+        <div class="fila">
+          <div class="avatar"><svg viewBox="0 0 164 164" aria-hidden="true"><use href="#c2" style="--c-coche:var(--azahar);--c-rueda:var(--tinta);--c-tapa:var(--naranja)"/></svg></div>
+          <div><p class="usuario">@[usuario_por_definir]</p><p class="bio" style="margin-top:4px">Coches clásicos para bodas</p></div>
+        </div>
+        <p class="bio">Citroën Méhari naranja y beige para vuestra salida de la iglesia. Con chófer o lo conducís vosotros. Sevilla y Cádiz.<br><b>Pide disponibilidad para tu fecha ↓</b></p>
+        <div class="boton-ig"><span class="prim">WhatsApp</span><span>Mensaje</span></div>
+        <div class="destacadas">
+          <div class="dest"><i><svg viewBox="0 0 164 164"><use href="#c2" style="--c-coche:var(--naranja);--c-rueda:var(--tinta);--c-tapa:var(--cal)"/></svg></i>Bodas</div>
+          <div class="dest"><i style="background:var(--naranja)"><svg viewBox="0 0 164 164"><use href="#c2" style="--c-coche:var(--azahar);--c-rueda:var(--tinta);--c-tapa:var(--naranja)"/></svg></i>Sevilla</div>
+          <div class="dest"><i style="background:var(--beige)"><svg viewBox="0 0 164 164"><use href="#c2" style="--c-coche:var(--tinta);--c-rueda:var(--tinta);--c-tapa:var(--beige)"/></svg></i>Techos</div>
+          <div class="dest"><i style="background:var(--tinta)"><svg viewBox="0 0 164 164"><use href="#c2" style="--c-coche:var(--naranja);--c-rueda:var(--beige);--c-tapa:var(--tinta)"/></svg></i>Prensa</div>
+        </div>
+      </div>
+      <div class="rejilla">
+        <div style="background-image:url(fotos/e1-salida-flores.jpg)"></div>
+        <div style="background-image:url(fotos/beige-perfil.jpg);background-position:center 62%"></div>
+        <div style="background:var(--naranja);display:grid;place-items:center"><svg viewBox="0 0 164 164" style="width:56%"><use href="#c2" style="--c-coche:var(--azahar);--c-rueda:var(--tinta);--c-tapa:var(--naranja)"/></svg></div>
+        <div style="background-image:url(fotos/e2-volante.jpg)"></div>
+        <div style="background-image:url(fotos/e3-cesta-flores.jpg)"></div>
+        <div style="background-image:url(fotos/e5-iglesia.jpg)"></div>
+        <div style="background-image:url(fotos/e4-naranja.jpg)"></div>
+        <div style="background-image:url(fotos/e6-hacienda.jpg)"></div>
+        <div style="background-image:url(fotos/e7-noche.jpg)"></div>
+      </div>
+    </div></div>
+
+    <div class="movil"><div class="pantalla">
+      <div class="post-cab">
+        <div class="mini"><svg viewBox="0 0 164 164" aria-hidden="true"><use href="#c2" style="--c-coche:var(--azahar);--c-rueda:var(--tinta);--c-tapa:var(--naranja)"/></svg></div>
+        <p class="usuario" style="font-size:14px">@[usuario_por_definir]<br><span style="font-weight:400;font-size:12px;color:#6b5a4c">Sevilla</span></p>
+      </div>
+      <div class="post-img">
+        <div class="costillas-banda"></div>
+        <svg class="sello" viewBox="0 0 164 164" aria-hidden="true"><use href="#c2" style="--c-coche:var(--azahar);--c-rueda:var(--tinta);--c-tapa:var(--azahar)"/></svg>
+      </div>
+      <div class="post-txt">
+        <p><b>@[usuario_por_definir]</b> El beige, listo para la salida de la iglesia. Tres formas de llevar el techo: abierto, semiabierto o cerrado con techo solar.</p>
+        <p style="margin-top:8px">Pide disponibilidad para tu fecha 👉 enlace en la bio</p>
+        <p style="margin-top:8px;color:#8a6f58">#bodasevilla #cochedeboda #citroenmehari</p>
+      </div>
+    </div></div>
+  </div>
+  <div class="pie"><span>Avatar, destacadas, marca de agua y la banda de costillas como firma de las publicaciones</span><span>Textos de ejemplo · usuario pendiente</span></div>
+</section>
+
+</body>
+</html>
