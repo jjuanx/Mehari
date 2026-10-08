@@ -96,6 +96,7 @@ Viven en `.claude/skills/` y están catalogadas en [SKILLS.md](SKILLS.md). Al ha
 - **Reels**: se guionizan y producen con la skill `guion-reel` (estructura, ficha por escena y verificación), que delega el render en HyperFrames.
 - Toda pieza animada pasa también por `revision-marca` antes de publicarse.
 - **Diseño estático y publicidad**: `canvas-design` (oficial de Anthropic) para ilustraciones y piezas en PNG o PDF; `ad-creative` y `ads` (marketingskills) para anuncios y campañas de Meta. Son de terceros y en inglés: nuestras reglas mandan y no se generan con IA fotos de los coches ni de bodas.
+- **Animaciones de marca** (entrada, transición y cierre de los reels): proyecto HyperFrames en `marca/animaciones/`, con sus renders ligeros versionados. Propuesta pendiente de aprobación.
 - **Estrategia y contenido de redes**: la estrategia vigente está en [docs/planes/estrategia-instagram.md](docs/planes/estrategia-instagram.md). Para ganchos, guiones y carruseles se usa la skill de terceros `social` (en inglés); nuestras reglas mandan sobre ella. **Máximo 5 hashtags** por publicación.
 
 ## 8. Mantener este fichero vivo

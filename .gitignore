@@ -6,6 +6,8 @@ Referencia/**/*.mov
 # Exportaciones de vídeo
 *.mp4
 *.mov
+# Excepción: recursos animados de marca, ligeros (ver marca/animaciones/README.md)
+!marca/animaciones/renders/*.mp4
 
 # Sistema
 .DS_Store

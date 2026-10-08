@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es" data-composition-variables='[{"id":"altura","type":"number","label":"Altura del coche (px desde arriba)","default":1150}]'>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <title>Entrada de reel · costillas (con transparencia)</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root { --naranja: #EE7D1F; --naranja-oscuro: #C2560E; --cal: #F7F1E6; --tinta: #2B211A; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      /* Fondo transparente: se coloca encima del primer plano del reel */
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: transparent; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      #escena { position: absolute; inset: 0; }
+      #coche { position: absolute; left: 260px; top: calc(var(--altura, 1150) * 1px); width: 560px; height: 288px; }
+      #coche svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 10px 18px rgba(20, 12, 8, 0.45)); }
+      .estela { position: absolute; height: 6px; border-radius: 3px; background: var(--cal); transform-origin: 100% 50%; }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-m7cy" id="root" data-composition-id="entrada" data-start="0" data-duration="2.6" data-width="1080" data-height="1920">
+      <section data-hf-id="hf-yj21" id="escena" class="clip" data-start="0" data-duration="2.6" data-track-index="0">
+        <div data-hf-id="hf-4fyb" id="estela-1" class="estela" style="left: 120px; top: calc(var(--altura, 1150) * 1px + 100px); width: 150px"></div>
+        <div data-hf-id="hf-rh38" id="estela-2" class="estela" style="left: 60px; top: calc(var(--altura, 1150) * 1px + 150px); width: 210px"></div>
+        <div data-hf-id="hf-cflk" id="estela-3" class="estela" style="left: 140px; top: calc(var(--altura, 1150) * 1px + 200px); width: 130px"></div>
+
+        <div data-hf-id="hf-g41s" id="coche" data-layout-allow-overflow="true">
+          <svg data-hf-id="hf-8c36" viewBox="0 0 330 170" aria-hidden="true">
+            <defs data-hf-id="hf-mh0t">
+              <clippath data-hf-id="hf-ovxo" id="carroceria">
+                <path data-hf-id="hf-le1w" d="M30 122 L30 62 Q30 50 42 50 L118 50 C130 50 132 84 150 84 L186 84 C204 84 206 50 218 50 L262 50 L292 60 Q300 63 300 72 L300 122 L262 122 A32 32 0 0 0 198 122 L104 122 A32 32 0 0 0 40 122 L30 122 Z" />
+              </clippath>
+            </defs>
+            <g data-hf-id="hf-tfb1" id="cuerpo">
+              <g data-hf-id="hf-a9np" clip-path="url(#carroceria)" fill="var(--naranja)">
+                <rect data-hf-id="hf-e30e" id="banda-1" x="0" y="40" width="330" height="24" />
+                <rect data-hf-id="hf-p5m9" id="banda-2" x="0" y="69" width="330" height="7" />
+                <rect data-hf-id="hf-fyjg" id="banda-3" x="0" y="81" width="330" height="7" />
+                <rect data-hf-id="hf-mff0" id="banda-4" x="0" y="93" width="330" height="7" />
+                <rect data-hf-id="hf-23pe" id="banda-5" x="0" y="105" width="330" height="20" />
+              </g>
+              <path data-hf-id="hf-q4rk" id="parabrisas" pathLength="1" d="M222 50 L234 12" stroke="var(--naranja)" stroke-width="7" stroke-linecap="round" fill="none" />
+            </g>
+            <g data-hf-id="hf-mwm4" id="caer-1"><g data-hf-id="hf-tmwm" id="rueda-1">
+              <circle data-hf-id="hf-qz10" cx="72" cy="126" r="26" fill="var(--tinta)" />
+              <circle data-hf-id="hf-0v11" cx="72" cy="126" r="9" fill="var(--cal)" />
+              <circle data-hf-id="hf-jxhn" cx="72" cy="108" r="3" fill="var(--cal)" />
+            </g></g>
+            <g data-hf-id="hf-vkhz" id="caer-2"><g data-hf-id="hf-posl" id="rueda-2">
+              <circle data-hf-id="hf-nw6k" cx="230" cy="126" r="26" fill="var(--tinta)" />
+              <circle data-hf-id="hf-xagt" cx="230" cy="126" r="9" fill="var(--cal)" />
+              <circle data-hf-id="hf-bq2b" cx="230" cy="108" r="3" fill="var(--cal)" />
+            </g></g>
+          </svg>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Build: las costillas entran desde lados alternos y forman la carrocería
+      ["#banda-1", "#banda-2", "#banda-3", "#banda-4", "#banda-5"].forEach((id, i) => {
+        tl.fromTo(id, { attr: { x: i % 2 ? 340 : -340 } }, { attr: { x: 0 }, duration: 0.5, ease: "expo.out" }, 0.12 + i * 0.06);
+      });
+      tl.fromTo("#parabrisas", { strokeDasharray: 1, strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.25, ease: "power2.out" }, 0.62);
+      tl.fromTo("#caer-1", { y: -46, opacity: 0 }, { y: 0, opacity: 1, duration: 0.42, ease: "back.out(2.2)" }, 0.52);
+      tl.fromTo("#caer-2", { y: -46, opacity: 0 }, { y: 0, opacity: 1, duration: 0.42, ease: "back.out(2.2)" }, 0.58);
+
+      // Breathe: el coche al ralentí, un leve balanceo
+      tl.fromTo("#cuerpo", { y: 0 }, { y: -3, duration: 0.15, ease: "sine.inOut", yoyo: true, repeat: 3 }, 0.95);
+
+      // Resolve: arranca y sale por la derecha, con estela
+      tl.fromTo("#coche", { x: 0 }, { x: 900, duration: 0.85, ease: "power3.in" }, 1.55);
+      tl.fromTo(["#rueda-1", "#rueda-2"], { rotation: 0, transformOrigin: "50% 50%" }, { rotation: 540, transformOrigin: "50% 50%", duration: 0.85, ease: "power3.in" }, 1.55);
+      ["#estela-1", "#estela-2", "#estela-3"].forEach((id, i) => {
+        tl.fromTo(id, { scaleX: 0, opacity: 0.9 }, { scaleX: 1, opacity: 0.9, duration: 0.18, ease: "power2.out" }, 1.78 + i * 0.04);
+        tl.fromTo(id, { x: 0, opacity: 0.9 }, { x: 760, opacity: 0, duration: 0.45, ease: "power2.in", immediateRender: false }, 1.98 + i * 0.04);
+      });
+
+      window.__timelines["entrada"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
