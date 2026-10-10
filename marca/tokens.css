@@ -1,0 +1,23 @@
+/*
+  Tokens de marca: colores y tipografías.
+  Fuente única para web, composiciones de HyperFrames y Remotion.
+  Estado: PROPUESTA. La paleta está casi cerrada; la tipografía está pendiente de elegir
+  (ver marca/README.md). Si cambia algo, se cambia aquí y en el README.
+*/
+:root {
+  /* Principales */
+  --naranja: #EE7D1F;         /* Naranja Méhari, el coche naranja */
+  --beige: #DCC6A0;           /* Beige arena, el coche beige */
+  --cal: #F7F1E6;             /* Cal de hacienda, fondo claro */
+  --tinta: #2B211A;           /* Tinta capota, texto y fondo oscuro */
+
+  /* Apoyo */
+  --naranja-oscuro: #C2560E;  /* Naranja tostado, texto naranja sobre fondo claro */
+  --verde-naranjo: #55703F;   /* Verde de la hoja del naranjo, solo acentos */
+  --azahar: #FFFCF5;          /* Blanco roto, la flor */
+
+  /* Tipografía: pareja 1 (provisional hasta que se elija) */
+  --font-titular: 'Fraunces', Georgia, serif;
+  --font-texto: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+  --font-acento: 'Instrument Serif', Georgia, serif;
+}

@@ -11,6 +11,29 @@ Se invocan pidiéndolo con naturalidad ("prepara una publicación sobre…") o p
 | [`gitflow`](.claude/skills/gitflow/SKILL.md) | Flujo de ramas, commits y PR del equipo, más la checklist para mantener vivo el contexto | Al empezar cualquier tarea y antes de abrir un PR |
 | [`nueva-publicacion`](.claude/skills/nueva-publicacion/SKILL.md) | Ficha completa de una publicación de Instagram: objetivo, material, guion, copy con CTA y hashtags | Siempre que se prepare contenido para Instagram |
 | [`revision-marca`](.claude/skills/revision-marca/SKILL.md) | Comprueba que no hay rastro de la marca antigua, ni datos inventados, y que todo es coherente con el brief | Antes de cerrar cualquier pieza y al elegir fotos |
+| [`guion-reel`](.claude/skills/guion-reel/SKILL.md) | De la idea al reel terminado (9:16, 15–30 s): estructura gancho, detalle, prueba, momento y cierre; ficha por escena; reglas de texto, sonido y accesibilidad; producción con HyperFrames y verificación ejecutada | Siempre que se guionice, monte o anime un reel. Completa la ficha de `nueva-publicacion` |
+
+## Skills de terceros: estrategia y contenido de redes
+
+| Skill | Origen | Commit | Licencia | Para qué |
+|---|---|---|---|---|
+| [`social`](.claude/skills/social/SKILL.md) | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) | `5e721d7` | MIT | Estrategia de redes, pilares, ganchos, guiones de reel, marcos de carrusel (`references/carousel-frameworks.md`), rutina de interacción y métricas. Es la skill de redes más instalada del ecosistema (skills.sh) |
+
+Está en inglés y es genérica: nuestras reglas (brief, marca antigua, marcadores, máximo de 5 hashtags) mandan sobre ella. Se usa junto a `nueva-publicacion`, no en su lugar. No se edita a mano; para actualizarla: `npx skills add coreyhaines31/marketingskills@social -y`, sustituir el *symlink* que crea por una copia real en `.claude/skills/social`, borrar `.agents/` y cambiar el commit de esta tabla.
+
+## Skills de terceros: diseño estático y publicidad
+
+| Skill | Origen | Commit | Licencia | Para qué |
+|---|---|---|---|---|
+| [`canvas-design`](.claude/skills/canvas-design/SKILL.md) | [anthropics/skills](https://github.com/anthropics/skills) (oficial de Anthropic) | `683bc88` | Apache 2.0 (fuentes OFL) | Ilustraciones y piezas estáticas en PNG o PDF: carteles, portadas, gráficos para carruseles. Para vídeo seguimos con HyperFrames |
+| [`ad-creative`](.claude/skills/ad-creative/SKILL.md) | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) | `5e721d7` | MIT | Textos y variantes de anuncios de Meta, ganchos y página de revisión de creatividades |
+| [`ads`](.claude/skills/ads/SKILL.md) | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) | `5e721d7` | MIT | Estrategia de campañas de Meta Ads: públicos, pujas, cuándo cortar un anuncio. Se usará cuando haya presupuesto (`CLAUDE.md` §9) |
+
+Mismas reglas que `social`: están en inglés, nuestras reglas mandan sobre ellas y no se editan a mano.
+- **`canvas-design`** usa sus propias fuentes. Mientras no haya identidad de marca, las piezas son provisionales. Cuando exista `marca/`, mandan su paleta y sus tipografías. Toda ilustración pasa por `revision-marca`.
+- **`ad-creative`** puede proponer imágenes generadas con IA. Para la marca **no se generan fotos de los coches ni de bodas que no han ocurrido** (regla 3 de `CLAUDE.md` §4): se trabaja con material real.
+
+Se instalaron con `npx skills add <repo> --skill <nombre> -a claude-code --copy -y`, que las copia en `.claude/skills/` y las registra en `skills-lock.json`. Para actualizarlas, se repite el comando en una rama propia y se cambia el commit de esta tabla.
 
 ## Skills de terceros: motion graphics y vídeo
 
@@ -54,4 +77,7 @@ Están copiadas tal cual del repositorio oficial de cada una, para que los tres 
 
 - `calendario-editorial`: planificar un mes de publicaciones con los pilares de contenido.
 - `informe-mensual`: métricas de Instagram y Meta Ads frente a los objetivos.
+- `ingesta-material`: inventario técnico y visual de una carpeta de boda, con pre-revisión de marca (ver `docs/planes/automatizacion-contenido.md` §5).
+- `lote-semanal`: rellenar las plantillas de HyperFrames con el material de la semana, renderizar por lotes y crear las fichas.
+- `publicar`: pasar las piezas aprobadas a la cola y programarlas con la herramienta elegida.
 - `respuesta-dm`: plantillas para responder solicitudes de presupuesto por mensaje directo o WhatsApp.

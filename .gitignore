@@ -6,6 +6,8 @@ Referencia/**/*.mov
 # Exportaciones de vídeo
 *.mp4
 *.mov
+# Excepción: recursos animados de marca, ligeros (ver marca/animaciones/README.md)
+!marca/animaciones/renders/*.mp4
 
 # Sistema
 .DS_Store
@@ -14,3 +16,7 @@ desktop.ini
 
 # Configuración local de Claude Code (la compartida es .claude/skills/)
 .claude/settings.local.json
+
+# Credenciales (tokens de Instagram, Meta y herramientas de publicación)
+.env
+.env.*
