@@ -52,14 +52,14 @@ Todo dato sale del brief. Lo que falta lleva marcador `[ASÍ]`.
 | 9–15 s | Detalle de las cestas de mimbre con flores | **2/4** «Para que el coche vaya con vuestra boda:» / «dejad de conformaros con un lazo» / «empezad a llenar las cestas con vuestras flores» |
 | 15–21 s | Manos al volante o novios conduciendo | **3/4** «Para que la salida sea vuestra de verdad:» / «dejad de ir de copiloto» / «empezad a conducirlo vosotros, con clase previa» |
 | 21–28 s | Los dos Méhari juntos, naranja y beige | **4/4** «Y para tenerlo libre ese día:» / «dejad de esperar a última hora» / «empezad por escribirnos vuestra fecha» |
-| 28–30 s | Cierre | `[MARCA POR DEFINIR]` · Sevilla y Cádiz · `@[usuario_por_definir]` |
+| 28–30 s | Cierre | `[MARCA POR DEFINIR]` · `@[usuario_por_definir]` |
 
 **Audio**: música con licencia y cortes en el pulso. Si existe, sonido real del motor al final.
 
 **Copy**:
 > Cuatro cambios para que la salida de la iglesia sea la foto que más enseñéis. El último es el más fácil: escribidnos vuestra fecha y os decimos si hay un Méhari libre. `[WHATSAPP POR DEFINIR]`
 
-**Hashtags**: #bodasevilla #bodacadiz #cochedeboda #citroenmehari #`[hashtag_marca_por_definir]`
+**Hashtags**: #bodasevilla #bodacadiz #cochedeboda #cocheclasico #`[hashtag_marca_por_definir]`
 
 **Falta para producirlo**: comprobar que en el dossier hay fotos del techo cerrado y de los novios al volante. Si no las hay, van a la lista de la sesión de grabación.
 
@@ -86,7 +86,7 @@ Arriba, fijo durante todo el reel: «Dónde luce más el coche en vuestra boda»
 | 12–18 s | Atardecer en el campo con el coche | **Fotos al atardecer, nº 2** / «La mejor luz del día, pero ya sin invitados» |
 | 18–24 s | Méhari aparcado y decorado en la puerta de la iglesia | **Esperando en la puerta, nº 4** / «Primeras fotos de los invitados, pero aún sin novios» |
 | 24–31 s | Salida de la iglesia con los invitados alrededor | **La salida de la iglesia, nº 1** / «El único momento en que toda la boda os mira» |
-| 31–36 s | Cierre con los dos coches | «`[MARCA POR DEFINIR]` · Citroën Méhari para bodas en Sevilla y Cádiz» / «¿Queréis el nº 1 en vuestra boda? Escribidnos vuestra fecha» |
+| 31–36 s | Cierre con los dos coches | «`[MARCA POR DEFINIR]` · Méhari clásicos para vuestra boda» / «¿Queréis el nº 1 en vuestra boda? Escribidnos vuestra fecha» |
 
 **Audio**: música con licencia y un golpe en cada número.
 

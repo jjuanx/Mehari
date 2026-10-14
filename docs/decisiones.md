@@ -25,3 +25,4 @@ Una fila por cada decisión. Las más recientes van abajo.
 | 2026-10-14 | No puede leerse la matrícula de ningún coche en el contenido | Privacidad y seguridad de los vehículos | Equipo |
 | 2026-10-14 | "Citroën" no aparece en ningún contenido de la marca; el coche se llama "Méhari" o "Méhari clásico" | No atar la marca a otra marca registrada | Equipo |
 | 2026-10-14 | La marca no se presenta como "de Sevilla" ni "de Sevilla y Cádiz": es la zona de trabajo actual, no su identidad | La marca está pensada para abrirse a cualquier lugar | Equipo |
+| 2026-10-14 | El subtítulo de los logos y del cierre animado pasa de «Sevilla · Cádiz» a «Bodas · Rutas» (propuestas A y B: «Mehari · Bodas»), y se quita «Citroën» de bios, hashtags y textos de muestra | Aplicar las normas de no atar la marca a una ciudad ni a Citroën. Propuesta pendiente de validar con el cliente | Equipo |
