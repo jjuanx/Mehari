@@ -25,27 +25,31 @@ Todo lo que hagamos se juzga por una pregunta: *¿esto acerca a una pareja (o a 
 - El servicio, los coches, la información y el material fotográfico **son los mismos**, y tenemos derecho a usarlos.
 - **La marca nueva no debe ligarse a la antigua.** Nunca usamos el nombre "Mehari Tour Sur", su logo, su sello circular ni sus usuarios en el contenido de la marca nueva. Tampoco presentamos la marca como "antes Mehari Tour Sur".
 - **Nombre y logo nuevos: pendientes** (hay que hablarlo con el cliente). Hasta entonces se usa el marcador visible `[MARCA POR DEFINIR]` y `@[usuario_por_definir]`. Nunca te inventes un nombre como si fuera definitivo.
-- "Citroën Méhari" se puede usar **como descripción del vehículo**. Es un modelo de Citroën, así que no conviene que sea el nombre de la marca.
+- **"Citroën" no aparece en ningún sitio** del contenido de la marca (textos, hashtags, logo, vídeos, web) para no atarnos a otra marca. El coche se describe como "Méhari", "Méhari clásico" o "nuestros Méhari"; "Méhari" no conviene como nombre de la marca.
+- **La marca no se presenta como "de Sevilla" ni "de Sevilla y Cádiz".** Hoy se trabaja allí, pero la marca está pensada para abrirse a cualquier sitio. Ni el nombre, ni el logo, ni la bio, ni los eslóganes se atan a una ciudad. Nombrar el lugar concreto de una boda o la ruta de la Sevilla Experience sí está bien.
 
 ## 3. El negocio (datos verificados en `Referencia/`)
 
 Detalle completo en [docs/cliente/brief.md](docs/cliente/brief.md). En resumen:
 
-- **Flota**: dos **Citroën Méhari** clásicos (1968–1988), uno **naranja** y otro **beige**.
+- **Flota**: dos **Méhari** clásicos (1968–1988), uno **naranja** y otro **beige**.
 - **Línea Bodas**: salida de la iglesia y llegada a la hacienda o lugar de celebración. Puede ir **con chófer** o lo pueden **conducir los novios** (o alguien cercano), con una **clase de conducción previa** a la boda. El techo admite **3 configuraciones**: abierto, semiabierto y cerrado con techo solar. Lleva **dos cestas de mimbre** traseras para decorar con flores.
 - **Línea Turismo** ("Sevilla Experience"): ruta por Sevilla con chófer y recogida en el hotel, de 2 h a 2 h 30. Hasta 3 personas por coche (de 1 a 6 en total) y el mismo precio de 1 a 3 personas. Hay dos tours: **Monumental** y **Romántico/Iluminado**, con paradas en Plaza de América y Plaza de España. **Entra en nuestro alcance.**
-- **Zona**: Sevilla y provincia de Cádiz (Sanlúcar, San Fernando…), sobre todo haciendas e iglesias.
+- **Zona actual**: Sevilla y provincia de Cádiz (Sanlúcar, San Fernando…), sobre todo haciendas e iglesias. Es donde se trabaja hoy, no la identidad de la marca (ver §2).
 - **Prensa**: el *Diario de Sevilla* (19-10-2025, sección Pasarela) publicó la boda de Alberto Herrera y Blanca Llandres en Sanlúcar, con los novios saliendo "en un informal Mehari". Hay además fotos de **Carlos Herrera** con el Méhari naranja. **Tenemos consentimiento** de los Herrera y de las parejas para usar su imagen. Es el material con más gancho.
 - **Precios y packs**: no hay. Nos ceñimos a lo que dicen los dossiers ("consultar disponibilidad y presupuesto").
 - **Contacto**: el de los dossiers pertenece a la marca antigua. **El contacto de la marca nueva está pendiente.** Usa `[EMAIL POR DEFINIR]` y `[WHATSAPP POR DEFINIR]`.
 
 ## 4. Reglas de contenido
 
-1. **Nada de la marca antigua a la vista.** Antes de usar una foto, revisa fundas de rueda ("@MEHARI_TOURSUR"), pegatinas, logos y marcas de agua. Si aparece, descarta la foto o márcala para retoque. Usa la skill `revision-marca`.
+1. **Nada de la marca antigua a la vista.** Antes de usar una foto, revisa fundas de rueda ("@MEHARI_TOURSUR"), pegatinas, logos, marcas de agua, matrículas y caras de menores. Si aparece, descarta la foto o márcala para retoque. Usa la skill `revision-marca`.
 2. **Cada publicación tiene un objetivo y una llamada a la acción** (pedir presupuesto, escribir por WhatsApp, guardar, compartir).
 3. **No inventes datos**: ni precios, ni número de bodas, ni testimonios, ni nombres. Si falta algo, pon un marcador `[ASÍ]`.
 4. **Famosos y prensa**: hay consentimiento, pero se usa con elegancia y como prueba social, no como reclamo sensacionalista.
-5. **Coherencia**: el nombre de la marca, los nombres de los servicios y los datos de contacto deben ser idénticos en todos los ficheros. Salen de `docs/cliente/brief.md`.
+5. **Menores, sin cara.** Se evita que aparezcan caras de niños o de menores de edad. Si una foto o un vídeo los muestra, se descarta, se recorta o se difumina la cara antes de publicar, aunque los padres hayan dado consentimiento a la boda.
+6. **Matrículas, nunca.** La matrícula de ningún coche (los nuestros ni los de terceros) puede ser legible: se recorta, se tapa o se difumina.
+7. **Sin "Citroën" y sin atarnos a Sevilla**: ver §2.
+8. **Coherencia**: el nombre de la marca, los nombres de los servicios y los datos de contacto deben ser idénticos en todos los ficheros. Salen de `docs/cliente/brief.md`.
 
 ## 5. Mapa del repositorio
 

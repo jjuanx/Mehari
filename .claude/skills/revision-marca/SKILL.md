@@ -1,6 +1,6 @@
 ---
 name: revision-marca
-description: Revisa que un texto, una foto o una pieza de la marca nueva no contenga rastros de la marca antigua (Mehari Tour Sur), no tenga datos inventados y sea coherente con docs/cliente/brief.md. Úsala antes de dar por buena cualquier publicación, documento o pieza gráfica, y al elegir fotos de Referencia/.
+description: Revisa que un texto, una foto o una pieza de la marca nueva no contenga rastros de la marca antigua (Mehari Tour Sur), ni "Citroën", ni matrículas legibles, ni caras de menores, no tenga datos inventados y sea coherente con docs/cliente/brief.md. Úsala antes de dar por buena cualquier publicación, documento o pieza gráfica, y al elegir fotos de Referencia/.
 ---
 
 # Revisión de marca
@@ -11,7 +11,9 @@ La marca nueva **no debe ligarse a la antigua** (ver `CLAUDE.md` §2). Esta revi
 
 Busca y elimina:
 - "Mehari Tour Sur", "Tour Sur", "Méhari Tour", "@mehari_toursur", "@mehari_experiences", "meharitoursur@gmail.com", "680 75 88 79".
-- "Méhari" o "Mehari" **como nombre de marca**. Sí es válido como modelo: "Citroën Méhari", "nuestros Méhari".
+- "Méhari" o "Mehari" **como nombre de marca**. Sí es válido como modelo: "Méhari clásico", "nuestros Méhari".
+- **"Citroën" o "Citroen"** en cualquier forma, también en hashtags (#citroenmehari).
+- Frases que presenten la marca como **"de Sevilla"** o **"de Sevilla y Cádiz"** (bio, eslogan, cierre de reel, logo). Nombrar el lugar de una boda o la ruta de la Sevilla Experience sí vale.
 - Frases como "antes conocidos como", "nueva etapa de…" o cualquier referencia a la separación de los socios.
 
 Comprueba además:
@@ -21,7 +23,7 @@ Comprueba además:
 
 Para buscar en el repo:
 ```bash
-grep -rniE "tour ?sur|mehari_|meharitoursur|680 ?75 ?88 ?79" --include="*.md" . | grep -v "^./Referencia" | grep -v "^./docs/cliente/brief.md" | grep -v "^./CLAUDE.md" | grep -v "skills/revision-marca"
+grep -rniE "tour ?sur|mehari_|meharitoursur|680 ?75 ?88 ?79|citro[eë]n" --include="*.md" . | grep -v "^./Referencia" | grep -v "^./docs/cliente/brief.md" | grep -v "^./CLAUDE.md" | grep -v "skills/revision-marca"
 ```
 
 ## Fotos y vídeos
@@ -31,6 +33,9 @@ Abre la imagen y revisa:
 - Pegatinas, camisetas o merchandising con el sello circular (Giralda, Torre del Oro y palmeras) o con la "M" tricolor.
 - Marcas de agua o logos en las esquinas (las páginas de los dossiers llevan la "M" arriba a la derecha).
 - Portadas y páginas de texto de los dossiers: no se usan tal cual.
+- **Matrículas** de cualquier coche, también de fondo: no pueden leerse. Se recorta, se tapa o se difumina.
+- **Caras de niños o menores**, también entre los invitados de fondo: se evita que aparezcan. Si salen, se recorta o se difumina la cara; si no se puede sin estropear la foto, NO APTA.
+- Logos o el nombre **"Citroën"** en el coche (chevrones en el capó, rótulos, llaveros) o en el entorno.
 
 Resultado por cada imagen: **APTA**, **APTA CON RECORTE** (indica el encuadre) o **NO APTA** (indica el motivo).
 

@@ -9,14 +9,14 @@ Origen: `Referencia/Dossier Mehari.pdf`, `Referencia/Dossier Mehari (1).pdf`, `R
 | Instagram | `@[usuario_por_definir]` (cuenta nueva, desde cero) |
 | Email | `[EMAIL POR DEFINIR]` |
 | WhatsApp | `[WHATSAPP POR DEFINIR]` |
-| Zona | Sevilla y provincia de Cádiz |
+| Zona actual | Sevilla y provincia de Cádiz (la marca no se ata a ellas: ver `CLAUDE.md` §2) |
 | Última actualización | 2026-10-07 |
 
 ---
 
 ## Flota
 
-- **Dos Citroën Méhari** originales, uno **naranja** y otro **beige**.
+- **Dos Méhari** originales (en el contenido no se nombra al fabricante), uno **naranja** y otro **beige**.
 - Producidos entre 1968 y 1988. Es un vehículo icónico por su diseño, su originalidad y su producción limitada.
 - Puntos fuertes según el cliente: **originalidad y exclusividad**.
 
