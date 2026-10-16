@@ -1,4 +1,4 @@
-# Workflow de contenido y captación — [MARCA POR DEFINIR]
+# Workflow de contenido y captación — Mehari We
 
 | Campo | Valor |
 |---|---|
@@ -79,7 +79,7 @@ Cada boda rinde, como mínimo, un lote de 3 piezas:
 
 ### 9 · Captación: la pareja escribe
 
-- **Enlaces de WhatsApp que pasan por la web**: en la bio, las historias y cada publicación, el enlace es de nuestra web (`[dominio]/w/<código>`). La web registra el clic con su origen y redirige a `wa.me/[WHATSAPP POR DEFINIR]` con el mensaje ya escrito ("Hola, quiero disponibilidad para mi boda").
+- **Enlaces de WhatsApp que pasan por la web**: en la bio, las historias y cada publicación, el enlace es de nuestra web (`[dominio]/w/<código>`). La web registra el clic con su origen y redirige a `wa.me/34625064293` con el mensaje ya escrito ("Hola, quiero disponibilidad para mi boda").
 - **Código de pieza**: cada publicación con llamada a la acción tiene su código (`NARANJA`, `FLORES`…), que va en el enlace y en la palabra clave ("escríbenos *NARANJA*"). Así sabemos qué pieza ha traído cada conversación sin preguntar nada.
 - **Respuestas rápidas** de WhatsApp Business preparadas (disponibilidad, zonas, qué incluye, siguiente paso). Futura skill `respuesta-dm`.
 - La **web** (landing que prepara el equipo) recibe el tráfico del enlace de la bio y lleva también a WhatsApp o a un formulario.

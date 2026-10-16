@@ -50,6 +50,7 @@ Cada publicación es un fichero Markdown en `redes/instagram/publicaciones/` lla
 - [ ] Un objetivo y una llamada a la acción claros
 - [ ] Datos sacados del brief, sin nada inventado
 - [ ] `revision-marca` superada (texto y material)
+- [ ] Sin caras de menores, sin matrículas legibles y sin "Citroën"
 - [ ] Texto alternativo para accesibilidad
 - [ ] Etiquetas a los fotógrafos, parejas o lugares, si procede
 ```
@@ -58,6 +59,6 @@ Cada publicación es un fichero Markdown en `redes/instagram/publicaciones/` lla
 
 - **El gancho decide**: la primera línea y el primer segundo del reel tienen que parar el scroll.
 - **Habla a la pareja, no al coche**: el protagonista es su día; el Méhari es cómo lo recordarán.
-- **Diferenciales que hay que repetir**: los novios pueden conducirlo (con clase previa), las 3 configuraciones de techo, las cestas de flores, encanta a los invitados, dos colores a elegir, Sevilla y Cádiz.
+- **Diferenciales que hay que repetir**: los novios pueden conducirlo (con clase previa), las 3 configuraciones de techo, las cestas de flores, encanta a los invitados, dos colores a elegir. El lugar se nombra cuando aporta (la hacienda, la iglesia), pero la marca no se presenta como "de Sevilla".
 - Tono cálido, cercano y con clase. Emojis con moderación.
 - Para turismo, plantéate el copy en **español e inglés**.

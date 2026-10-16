@@ -1,4 +1,4 @@
-# Estrategia de Instagram — [MARCA POR DEFINIR]
+# Estrategia de Instagram — Mehari We
 
 | Campo | Valor |
 |---|---|
@@ -65,7 +65,7 @@ Diferenciales que repetimos en todo el contenido (todos salen del brief):
 3. **Cestas de mimbre** traseras para decorar con las flores de la boda.
 4. **Dos colores para elegir**: naranja y beige.
 5. **Gusta a todos**: novios, invitados, pequeños y mayores.
-6. **Sevilla y Cádiz**: haciendas, iglesias y basílicas.
+6. **Lugares con encanto**: haciendas, iglesias y basílicas. Hoy en Sevilla y Cádiz, pero la marca no se presenta como "de Sevilla".
 7. **Ha salido en prensa** (Diario de Sevilla). Se usa con discreción.
 
 **Idea central (propuesta, para validar):** *"El coche que todos tus invitados van a querer fotografiar."* Es el hilo de la cuenta: el protagonista es el día de la pareja y el Méhari es cómo lo van a recordar.
@@ -149,7 +149,7 @@ La cuenta no se abre al público hasta tener:
 - [ ] **Nombre, usuario y logo** de la marca nueva.
 - [ ] **WhatsApp y email** de la marca nueva.
 - [ ] **Bio**: qué hacemos, dónde y cómo pedir disponibilidad. Propuesta de estructura:
-  `Citroën Méhari clásicos para bodas y paseos por Sevilla 🌿` / `Sevilla · Cádiz · Con chófer o lo conducís vosotros` / `👇 Pide disponibilidad para tu fecha` + enlace a WhatsApp.
+  `Méhari clásicos para bodas y rutas 🌿` / `Con chófer o lo conducís vosotros` / `👇 Pide disponibilidad para tu fecha` + enlace a WhatsApp.
 - [ ] **Destacadas**: Bodas · Los techos · Conduce tú · Sevilla Experience (EN) · Prensa · Reservar.
 - [ ] **Cuenta profesional** (categoría "Servicio de alquiler de vehículos" o similar), con botón de contacto a WhatsApp.
 - [ ] **Respuestas guardadas** para el DM: disponibilidad, zona, cómo funciona la clase de conducción.

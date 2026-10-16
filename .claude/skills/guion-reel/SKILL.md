@@ -34,7 +34,7 @@ Haces de estudio completo: dirección creativa, guion, motion design, sonido y r
 | Objetivo | Alcance · Confianza · Conversión · Comunidad |
 | Público y lo que ya cree | Pareja que se casa y piensa que el coche de boda siempre lleva chófer |
 | Después de verlo podrá… | Decir "podemos conducirlo nosotros" y pedir disponibilidad |
-| Llamada a la acción | "Pide disponibilidad para tu fecha" · `[WHATSAPP POR DEFINIR]` |
+| Llamada a la acción | "Pide disponibilidad para tu fecha" · 625 06 42 93 |
 | Duración | 15–30 s |
 | Formato | Original **9:16 (1080×1920)**. Portada que funcione recortada en la rejilla del perfil |
 | Material | Rutas de `Referencia/` con su resultado de `revision-marca` |
@@ -94,7 +94,7 @@ Para cada escena escribe:
 
 - Como mucho **dos líneas en pantalla a la vez**, con palabras llanas.
 - El texto en pantalla son **anclas**, no el *copy* completo. El *copy* va en la ficha de `nueva-publicacion`.
-- **Un nombre para cada cosa** y siempre el mismo, sacado de `docs/cliente/brief.md`: "Citroën Méhari", "Sevilla Experience", "tour Monumental"…
+- **Un nombre para cada cosa** y siempre el mismo, sacado de `docs/cliente/brief.md`: "Méhari" (nunca "Citroën"), "Sevilla Experience", "tour Monumental"…
 - **Cada dato tiene su fuente en el brief**; si no la tiene, se quita o se sustituye por un marcador (`[ASÍ]`). Nada de precios, número de bodas ni testimonios inventados.
 - Tono de `docs/planes/estrategia-instagram.md` §4: cálido, concreto y sin muletillas de texto generado ("no es X, es Y", "experiencia única", rayas largas).
 
@@ -142,7 +142,7 @@ Hay que ejecutar estas comprobaciones, no basta con darlas por hechas:
 - **Un fotograma por escena**, leyendo cada línea a **390 px de ancho** (pantalla de móvil).
 - **El primer segundo por separado**: ¿para el scroll y se entiende qué es?
 - Verlo **sin sonido** y después **solo escucharlo**.
-- **`revision-marca`** sobre cada fotograma y cada texto: fundas de rueda, pegatinas, la "M", el nombre antiguo.
+- **`revision-marca`** sobre cada fotograma y cada texto: fundas de rueda, pegatinas, la "M", el nombre antiguo, matrículas, caras de menores y "Citroën".
 - Una revisión de diseño hecha por otra persona del equipo o por un subagente revisor, con las tres preguntas de los principios. Después, el pase de accesibilidad.
 - Cada corrección se entrega con su **par de fotogramas antes y después**.
 
