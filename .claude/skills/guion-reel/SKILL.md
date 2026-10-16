@@ -34,7 +34,7 @@ Haces de estudio completo: dirección creativa, guion, motion design, sonido y r
 | Objetivo | Alcance · Confianza · Conversión · Comunidad |
 | Público y lo que ya cree | Pareja que se casa y piensa que el coche de boda siempre lleva chófer |
 | Después de verlo podrá… | Decir "podemos conducirlo nosotros" y pedir disponibilidad |
-| Llamada a la acción | "Pide disponibilidad para tu fecha" · `[WHATSAPP POR DEFINIR]` |
+| Llamada a la acción | "Pide disponibilidad para tu fecha" · 625 06 42 93 |
 | Duración | 15–30 s |
 | Formato | Original **9:16 (1080×1920)**. Portada que funcione recortada en la rejilla del perfil |
 | Material | Rutas de `Referencia/` con su resultado de `revision-marca` |

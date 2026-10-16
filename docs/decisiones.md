@@ -26,3 +26,6 @@ Una fila por cada decisión. Las más recientes van abajo.
 | 2026-10-14 | "Citroën" no aparece en ningún contenido de la marca; el coche se llama "Méhari" o "Méhari clásico" | No atar la marca a otra marca registrada | Equipo |
 | 2026-10-14 | La marca no se presenta como "de Sevilla" ni "de Sevilla y Cádiz": es la zona de trabajo actual, no su identidad | La marca está pensada para abrirse a cualquier lugar | Equipo |
 | 2026-10-14 | El subtítulo de los logos y del cierre animado pasa de «Sevilla · Cádiz» a «Bodas · Rutas» (propuestas A y B: «Mehari · Bodas»), y se quita «Citroën» de bios, hashtags y textos de muestra | Aplicar las normas de no atar la marca a una ciudad ni a Citroën. Propuesta pendiente de validar con el cliente | Equipo |
+| 2026-10-16 | La marca se llama **Mehari We**, con el subtítulo «Weddings & Events». Se descartan «Mehari Azahar» y «Mehari Getaway» | Elección del cliente | Cliente |
+| 2026-10-16 | Teléfono y WhatsApp de la marca: 625 06 42 93 | Dato del cliente (falta confirmar que el número tiene WhatsApp) | Cliente |
+| 2026-10-16 | Se mantienen las costillas y la pantalla de carga de la web. Se descarta el símbolo de la propuesta C (parte trasera con rueda: parece un carro) y se presentan cinco propuestas con piezas delanteras del coche en `marca/propuestas/mehari-we.html` | Valoración del cliente | Cliente y equipo |

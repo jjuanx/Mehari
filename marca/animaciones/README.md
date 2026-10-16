@@ -18,7 +18,7 @@ Recursos animados de marca para los reels y la cuenta de Instagram, hechos con H
 
 - **Transparencia**: `entrada.webm` y `transicion.webm` llevan canal alfa (VP9). Para editores que no lean WebM con alfa, se renderiza en MOV (ProRes 4444): `npx hyperframes render . -c compositions/entrada.html --format mov -o renders/entrada.mov`. El MOV no se sube a Git (pesa unos 16 MB).
 - **Altura del coche en la entrada**: si el plano de debajo tiene algo importante en esa zona (por ejemplo, el coche naranja real), se cambia la variable `altura` (píxeles desde arriba; por defecto 1150): `npx hyperframes render . -c compositions/entrada.html --variables '{"altura":420}' --format webm -o renders/entrada-arriba.webm`.
-- **Nombre y WhatsApp del cierre**: variables `marca` y `whatsapp`. Cuando se decidan: `npx hyperframes render . --variables '{"marca":"Azahar","whatsapp":"600 00 00 00"}' -o renders/cierre.mp4` (el número es un ejemplo).
+- **Nombre y WhatsApp del cierre**: variables `marca` y `whatsapp`. Por defecto ya son «Mehari We» y «625 06 42 93»; el render `renders/cierre.mp4` aún es el antiguo y se rehará cuando el cliente elija el logo: `npx hyperframes render . -o renders/cierre.mp4`.
 - **Previsualizar y editar**: `npx hyperframes preview` desde esta carpeta abre Studio.
 
 ## Detalles técnicos

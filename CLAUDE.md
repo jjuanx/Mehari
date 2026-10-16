@@ -1,4 +1,4 @@
-# CLAUDE.md — Proyecto [MARCA POR DEFINIR] (antes conocido internamente como "Mehari")
+# CLAUDE.md — Proyecto Mehari We
 
 Contexto compartido por las sesiones de Claude Code de **Alejandro, Juan y Nico**.
 Léelo entero antes de tocar nada. Todo el contenido del proyecto se redacta en **español**.
@@ -24,8 +24,9 @@ Todo lo que hagamos se juzga por una pregunta: *¿esto acerca a una pareja (o a 
 - El negocio de origen es **Mehari Tour Sur** (@mehari_toursur, @mehari_experiences). Lo llevaban **dos socios que se separan**. Nuestro cliente arranca una **marca nueva, con nombre y logo nuevos**.
 - El servicio, los coches, la información y el material fotográfico **son los mismos**, y tenemos derecho a usarlos.
 - **La marca nueva no debe ligarse a la antigua.** Nunca usamos el nombre "Mehari Tour Sur", su logo, su sello circular ni sus usuarios en el contenido de la marca nueva. Tampoco presentamos la marca como "antes Mehari Tour Sur".
-- **Nombre y logo nuevos: pendientes** (hay que hablarlo con el cliente). Hasta entonces se usa el marcador visible `[MARCA POR DEFINIR]` y `@[usuario_por_definir]`. Nunca te inventes un nombre como si fuera definitivo.
-- **"Citroën" no aparece en ningún sitio** del contenido de la marca (textos, hashtags, logo, vídeos, web) para no atarnos a otra marca. El coche se describe como "Méhari", "Méhari clásico" o "nuestros Méhari"; "Méhari" no conviene como nombre de la marca.
+- **Nombre: Mehari We**, con el subtítulo **«Weddings & Events»** (aceptado por el cliente el 2026-10-16). Se escribe siempre así: «Mehari» sin tilde y «We» con mayúscula. El usuario de Instagram sigue pendiente: `@[usuario_por_definir]`.
+- **Logo: pendiente.** Al cliente le gustan las costillas y la pantalla de carga de la web, pero no el símbolo de la propuesta C (la parte de atrás con la rueda parecía un carro). Hay cinco propuestas nuevas en `marca/propuestas/mehari-we.html`.
+- **"Citroën" no aparece en ningún sitio** del contenido de la marca (textos, hashtags, logo, vídeos, web) para no atarnos a otra marca. El coche se describe como "Méhari", "Méhari clásico" o "nuestros Méhari". El cliente ha elegido un nombre con «Mehari» sabiendo que es una marca registrada del fabricante y la primera palabra de la marca antigua: por eso el logo no imita ningún logotipo del fabricante ni el de la marca antigua.
 - **La marca no se presenta como "de Sevilla" ni "de Sevilla y Cádiz".** Hoy se trabaja allí, pero la marca está pensada para abrirse a cualquier sitio. Ni el nombre, ni el logo, ni la bio, ni los eslóganes se atan a una ciudad. Nombrar el lugar concreto de una boda o la ruta de la Sevilla Experience sí está bien.
 
 ## 3. El negocio (datos verificados en `Referencia/`)
@@ -38,7 +39,7 @@ Detalle completo en [docs/cliente/brief.md](docs/cliente/brief.md). En resumen:
 - **Zona actual**: Sevilla y provincia de Cádiz (Sanlúcar, San Fernando…), sobre todo haciendas e iglesias. Es donde se trabaja hoy, no la identidad de la marca (ver §2).
 - **Prensa**: el *Diario de Sevilla* (19-10-2025, sección Pasarela) publicó la boda de Alberto Herrera y Blanca Llandres en Sanlúcar, con los novios saliendo "en un informal Mehari". Hay además fotos de **Carlos Herrera** con el Méhari naranja. **Tenemos consentimiento** de los Herrera y de las parejas para usar su imagen. Es el material con más gancho.
 - **Precios y packs**: no hay. Nos ceñimos a lo que dicen los dossiers ("consultar disponibilidad y presupuesto").
-- **Contacto**: el de los dossiers pertenece a la marca antigua. **El contacto de la marca nueva está pendiente.** Usa `[EMAIL POR DEFINIR]` y `[WHATSAPP POR DEFINIR]`.
+- **Contacto**: el de los dossiers pertenece a la marca antigua y no se usa. **Teléfono y WhatsApp de la marca nueva: 625 06 42 93.** El email sigue pendiente: `[EMAIL POR DEFINIR]`.
 
 ## 4. Reglas de contenido
 
@@ -114,9 +115,9 @@ Las decisiones también van, con fecha y motivo, a `docs/decisiones.md`.
 
 ## 9. Pendiente de definir
 
-- [ ] Nombre de la marca nueva y usuario de Instagram. En estudio: «Mehari Azahar» y «Mehari Getaway» (ver `marca/README.md`).
-- [ ] Logo e identidad visual nuevos. No deben parecerse al logo antiguo. Paleta casi cerrada (naranja y beige de los coches); logos y tipografía en propuesta en `marca/`.
-- [ ] Email, WhatsApp y teléfono de la marca nueva.
+- [ ] Usuario de Instagram de Mehari We.
+- [ ] Logo: elegir entre las cinco propuestas de `marca/propuestas/mehari-we.html`. No debe parecerse al logo antiguo. Paleta casi cerrada (naranja y beige de los coches); tipografía en propuesta.
+- [ ] Email de la marca nueva. Confirmar que el 625 06 42 93 tiene WhatsApp.
 - [ ] Precios y packs (de momento, "consultar presupuesto").
 - [ ] Presupuesto para publicidad en Meta.
 - [ ] Reparto de tareas en el equipo (de momento, todos en todo).
