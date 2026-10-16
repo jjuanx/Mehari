@@ -20,3 +20,6 @@ desktop.ini
 # Credenciales (tokens de Instagram, Meta y herramientas de publicación)
 .env
 .env.*
+
+# Python
+__pycache__/

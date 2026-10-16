@@ -1,4 +1,4 @@
-# CLAUDE.md — Proyecto [MARCA POR DEFINIR] (antes conocido internamente como "Mehari")
+# CLAUDE.md — Proyecto Mehari We
 
 Contexto compartido por las sesiones de Claude Code de **Alejandro, Juan y Nico**.
 Léelo entero antes de tocar nada. Todo el contenido del proyecto se redacta en **español**.
@@ -24,28 +24,33 @@ Todo lo que hagamos se juzga por una pregunta: *¿esto acerca a una pareja (o a 
 - El negocio de origen es **Mehari Tour Sur** (@mehari_toursur, @mehari_experiences). Lo llevaban **dos socios que se separan**. Nuestro cliente arranca una **marca nueva, con nombre y logo nuevos**.
 - El servicio, los coches, la información y el material fotográfico **son los mismos**, y tenemos derecho a usarlos.
 - **La marca nueva no debe ligarse a la antigua.** Nunca usamos el nombre "Mehari Tour Sur", su logo, su sello circular ni sus usuarios en el contenido de la marca nueva. Tampoco presentamos la marca como "antes Mehari Tour Sur".
-- **Nombre y logo nuevos: pendientes** (hay que hablarlo con el cliente). Hasta entonces se usa el marcador visible `[MARCA POR DEFINIR]` y `@[usuario_por_definir]`. Nunca te inventes un nombre como si fuera definitivo.
-- "Citroën Méhari" se puede usar **como descripción del vehículo**. Es un modelo de Citroën, así que no conviene que sea el nombre de la marca.
+- **Nombre: Mehari We**, con el subtítulo **«Weddings & Events»** (aceptado por el cliente el 2026-10-16). Se escribe siempre así: «Mehari» sin tilde y «We» con mayúscula. El usuario de Instagram sigue pendiente: `@[usuario_por_definir]`.
+- **Logo: pendiente.** Al cliente le gustan las costillas y la pantalla de carga de la web, pero no el símbolo de la propuesta C (la parte de atrás con la rueda parecía un carro). Hay ocho propuestas nuevas en `marca/propuestas/mehari-we.html`: cinco con una pieza delantera del coche y tres solo con letras (monograma MWE, el coche formado con letras y el monograma con costillas).
+- **"Citroën" no aparece en ningún sitio** del contenido de la marca (textos, hashtags, logo, vídeos, web) para no atarnos a otra marca. El coche se describe como "Méhari", "Méhari clásico" o "nuestros Méhari". El cliente ha elegido un nombre con «Mehari» sabiendo que es una marca registrada del fabricante y la primera palabra de la marca antigua: por eso el logo no imita ningún logotipo del fabricante ni el de la marca antigua.
+- **La marca no se presenta como "de Sevilla" ni "de Sevilla y Cádiz".** Hoy se trabaja allí, pero la marca está pensada para abrirse a cualquier sitio. Ni el nombre, ni el logo, ni la bio, ni los eslóganes se atan a una ciudad. Nombrar el lugar concreto de una boda o la ruta de la Sevilla Experience sí está bien.
 
 ## 3. El negocio (datos verificados en `Referencia/`)
 
 Detalle completo en [docs/cliente/brief.md](docs/cliente/brief.md). En resumen:
 
-- **Flota**: dos **Citroën Méhari** clásicos (1968–1988), uno **naranja** y otro **beige**.
+- **Flota**: dos **Méhari** clásicos (1968–1988), uno **naranja** y otro **beige**.
 - **Línea Bodas**: salida de la iglesia y llegada a la hacienda o lugar de celebración. Puede ir **con chófer** o lo pueden **conducir los novios** (o alguien cercano), con una **clase de conducción previa** a la boda. El techo admite **3 configuraciones**: abierto, semiabierto y cerrado con techo solar. Lleva **dos cestas de mimbre** traseras para decorar con flores.
 - **Línea Turismo** ("Sevilla Experience"): ruta por Sevilla con chófer y recogida en el hotel, de 2 h a 2 h 30. Hasta 3 personas por coche (de 1 a 6 en total) y el mismo precio de 1 a 3 personas. Hay dos tours: **Monumental** y **Romántico/Iluminado**, con paradas en Plaza de América y Plaza de España. **Entra en nuestro alcance.**
-- **Zona**: Sevilla y provincia de Cádiz (Sanlúcar, San Fernando…), sobre todo haciendas e iglesias.
+- **Zona actual**: Sevilla y provincia de Cádiz (Sanlúcar, San Fernando…), sobre todo haciendas e iglesias. Es donde se trabaja hoy, no la identidad de la marca (ver §2).
 - **Prensa**: el *Diario de Sevilla* (19-10-2025, sección Pasarela) publicó la boda de Alberto Herrera y Blanca Llandres en Sanlúcar, con los novios saliendo "en un informal Mehari". Hay además fotos de **Carlos Herrera** con el Méhari naranja. **Tenemos consentimiento** de los Herrera y de las parejas para usar su imagen. Es el material con más gancho.
 - **Precios y packs**: no hay. Nos ceñimos a lo que dicen los dossiers ("consultar disponibilidad y presupuesto").
-- **Contacto**: el de los dossiers pertenece a la marca antigua. **El contacto de la marca nueva está pendiente.** Usa `[EMAIL POR DEFINIR]` y `[WHATSAPP POR DEFINIR]`.
+- **Contacto**: el de los dossiers pertenece a la marca antigua y no se usa. **Teléfono y WhatsApp de la marca nueva: 625 06 42 93.** El email sigue pendiente: `[EMAIL POR DEFINIR]`.
 
 ## 4. Reglas de contenido
 
-1. **Nada de la marca antigua a la vista.** Antes de usar una foto, revisa fundas de rueda ("@MEHARI_TOURSUR"), pegatinas, logos y marcas de agua. Si aparece, descarta la foto o márcala para retoque. Usa la skill `revision-marca`.
+1. **Nada de la marca antigua a la vista.** Antes de usar una foto, revisa fundas de rueda ("@MEHARI_TOURSUR"), pegatinas, logos, marcas de agua, matrículas y caras de menores. Si aparece, descarta la foto o márcala para retoque. Usa la skill `revision-marca`.
 2. **Cada publicación tiene un objetivo y una llamada a la acción** (pedir presupuesto, escribir por WhatsApp, guardar, compartir).
 3. **No inventes datos**: ni precios, ni número de bodas, ni testimonios, ni nombres. Si falta algo, pon un marcador `[ASÍ]`.
 4. **Famosos y prensa**: hay consentimiento, pero se usa con elegancia y como prueba social, no como reclamo sensacionalista.
-5. **Coherencia**: el nombre de la marca, los nombres de los servicios y los datos de contacto deben ser idénticos en todos los ficheros. Salen de `docs/cliente/brief.md`.
+5. **Menores, sin cara.** Se evita que aparezcan caras de niños o de menores de edad. Si una foto o un vídeo los muestra, se descarta, se recorta o se difumina la cara antes de publicar, aunque los padres hayan dado consentimiento a la boda.
+6. **Matrículas, nunca.** La matrícula de ningún coche (los nuestros ni los de terceros) puede ser legible: se recorta, se tapa o se difumina.
+7. **Sin "Citroën" y sin atarnos a Sevilla**: ver §2.
+8. **Coherencia**: el nombre de la marca, los nombres de los servicios y los datos de contacto deben ser idénticos en todos los ficheros. Salen de `docs/cliente/brief.md`.
 
 ## 5. Mapa del repositorio
 
@@ -58,14 +63,18 @@ Mehari/
 ├─ docs/
 │  ├─ cliente/brief.md       ← fuente de verdad de los datos del negocio
 │  ├─ decisiones.md          ← registro de decisiones (fecha, decisión, motivo)
+│  ├─ material/              ← clasificación de las fotos y vídeos del cliente (clasificacion.csv) y dónde está cada cosa
 │  └─ planes/                ← plan de proyecto, estrategia de redes, etc.
 ├─ redes/instagram/          ← publicaciones, calendario editorial y reels/<fecha>_<tema>/ (fuente HyperFrames)
 ├─ marca/                    ← identidad: README (colores, tipos, logo), tokens.css y propuestas/
 ├─ web/                      ← landing (más adelante)
+├─ herramientas/material/    ← scripts para analizar, descartar, clasificar y seleccionar lotes de fotos y vídeos
 └─ Referencia/               ← material del cliente: dossiers, logos antiguos, fotos, prensa
 ```
 
-**Ficheros pesados**: los PDF y vídeos de `Referencia/` (unos 100 MB) **no se suben a Git** (ver `.gitignore`). Se comparten por fuera del repo; el canal está pendiente de acordar. Las imágenes ligeras sí se versionan.
+**Ficheros pesados**: las fotos y vídeos del cliente y los PDF y vídeos de `Referencia/` **no se suben a Git** (ver `.gitignore`). Se comparten en la carpeta de Google Drive **`Mehari We`**: `01_Material/` (selección de fotos y vídeos y galería), `02_Produccion/`, `03_Marca/` y `04_Cliente/`. Detalle en [docs/material/README.md](docs/material/README.md). Las imágenes ligeras sí se versionan.
+
+**Material del cliente**: antes de buscar una foto o un vídeo, filtra [docs/material/clasificacion.csv](docs/material/clasificacion.csv) (línea, coche, marca antigua, calidad y nota de cada fichero) o abre la galería de Drive. Así no hace falta abrir los originales. La selección de Drive **no está filtrada por matrículas ni por menores**: aplica §4 en cada pieza.
 
 ## 6. Forma de trabajar: GitFlow
 
@@ -110,13 +119,12 @@ Las decisiones también van, con fecha y motivo, a `docs/decisiones.md`.
 
 ## 9. Pendiente de definir
 
-- [ ] Nombre de la marca nueva y usuario de Instagram. En estudio: «Mehari Azahar» y «Mehari Getaway» (ver `marca/README.md`).
-- [ ] Logo e identidad visual nuevos. No deben parecerse al logo antiguo. Paleta casi cerrada (naranja y beige de los coches); logos y tipografía en propuesta en `marca/`.
-- [ ] Email, WhatsApp y teléfono de la marca nueva.
+- [ ] Usuario de Instagram de Mehari We.
+- [ ] Logo: elegir entre las ocho propuestas de `marca/propuestas/mehari-we.html`. No debe parecerse al logo antiguo. Paleta casi cerrada (naranja y beige de los coches); tipografía en propuesta.
+- [ ] Email de la marca nueva. Confirmar que el 625 06 42 93 tiene WhatsApp.
 - [ ] Precios y packs (de momento, "consultar presupuesto").
 - [ ] Presupuesto para publicidad en Meta.
 - [ ] Reparto de tareas en el equipo (de momento, todos en todo).
-- [ ] Canal para compartir los ficheros pesados (Drive, Git LFS…).
 - [ ] Objetivos numéricos: bodas al año actuales y objetivo, seguidores, solicitudes al mes.
 - [ ] TikTok u otras redes: ¿entran en el alcance?
 - [ ] Herramienta de publicación: Meta Business Suite a mano, herramienta con API y conector para Claude, o app propia de Meta. Se decide en la semana 5 tras el piloto (ver `docs/planes/automatizacion-contenido.md`).
@@ -125,3 +133,5 @@ Las decisiones también van, con fecha y motivo, a `docs/decisiones.md`.
 - [ ] Flujo de aprobación del contenido por parte del cliente.
 - [ ] Sesión de grabación de vídeo con los dos coches y vídeos de bodas anteriores.
 - [ ] Permiso del Diario de Sevilla o del fotógrafo para usar sus fotos de la boda Herrera.
+- [ ] Autor y permiso de las unas 75 fotos que parecen de fotógrafo profesional (ver `docs/material/README.md`).
+- [ ] ¿Se trabaja también en Extremadura? Hay bodas en Cáceres y Plasencia en el material del cliente.

@@ -1,6 +1,6 @@
-# [MARCA POR DEFINIR]
+# Mehari We
 
-Repositorio de trabajo para lanzar la marca nueva de alquiler de Citroën Méhari clásicos para **bodas, eventos y rutas turísticas** en Sevilla y Cádiz: estrategia, contenido de Instagram, identidad y, más adelante, la web.
+Repositorio de trabajo para lanzar la marca nueva de alquiler de Méhari clásicos para **bodas, eventos y rutas turísticas** (hoy en Sevilla y Cádiz, sin atar la marca a una ciudad): estrategia, contenido de Instagram, identidad y, más adelante, la web.
 
 Equipo: Alejandro, Juan y Nico.
 

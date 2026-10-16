@@ -4,20 +4,27 @@ Referencia única de la identidad visual: nombre, logo, colores, tipografía y r
 Cualquier pieza (vídeo, post, web) sale de aquí. Los valores que se usan en código viven en
 [`tokens.css`](tokens.css).
 
-> **Estado: PROPUESTA.** Nada de esta carpeta está aprobado por el cliente. Mientras tanto, el
-> contenido publicado sigue usando `[MARCA POR DEFINIR]`.
+> **Estado:** el nombre está aprobado (**Mehari We · Weddings & Events**, 2026-10-16), y también las
+> costillas como recurso y la paleta. El logo sigue en propuesta: ver `propuestas/mehari-we.html`.
 
 ## Contenido
 
 | Fichero | Qué es |
 |---|---|
 | [`tokens.css`](tokens.css) | Variables CSS de colores y tipografías. Se importan en las composiciones de HyperFrames, en Remotion y en la web |
-| [`propuestas/logos.html`](propuestas/logos.html) | Las dos propuestas de logo, con variantes de fondo, avatar de Instagram y muestras tipográficas. Se abre en el navegador |
+| [`propuestas/mehari-we.html`](propuestas/mehari-we.html) | **Vigente.** Ocho propuestas de logo para Mehari We: cinco con las costillas y una pieza delantera del coche (frontal, parabrisas, capó, perfil y frontal a trazo) y tres de lettering (monograma MWE, coche formado con las letras y monograma con costillas), con logotipo, avatar y pantalla de carga. Se abre en el navegador |
+| [`propuestas/logos.html`](propuestas/logos.html) | Histórico: propuestas A (Azahar) y B (Getaway), descartadas con el nombre |
+| [`propuestas/costillas.html`](propuestas/costillas.html) | Histórico: propuesta C. Gustan las costillas; el símbolo (trasera con rueda) se descarta porque parece un carro |
 
 Cuando el cliente elija, se añadirá `logo/` con los SVG finales (texto convertido a trazos) y los
 PNG exportados.
 
-## Nombre: dos propuestas
+## Nombre: Mehari We
+
+Aprobado por el cliente el 2026-10-16, con el subtítulo «Weddings & Events». Las dos propuestas
+anteriores quedan como histórico:
+
+### Propuestas descartadas
 
 | | A · Mehari Azahar | B · Mehari Getaway |
 |---|---|---|
