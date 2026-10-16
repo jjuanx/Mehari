@@ -1,0 +1,5 @@
+pillow
+pillow-heif
+imagehash
+numpy
+opencv-python-headless

@@ -63,14 +63,18 @@ Mehari/
 ├─ docs/
 │  ├─ cliente/brief.md       ← fuente de verdad de los datos del negocio
 │  ├─ decisiones.md          ← registro de decisiones (fecha, decisión, motivo)
+│  ├─ material/              ← clasificación de las fotos y vídeos del cliente (clasificacion.csv) y dónde está cada cosa
 │  └─ planes/                ← plan de proyecto, estrategia de redes, etc.
 ├─ redes/instagram/          ← publicaciones, calendario editorial y reels/<fecha>_<tema>/ (fuente HyperFrames)
 ├─ marca/                    ← identidad: README (colores, tipos, logo), tokens.css y propuestas/
 ├─ web/                      ← landing (más adelante)
+├─ herramientas/material/    ← scripts para analizar, descartar, clasificar y seleccionar lotes de fotos y vídeos
 └─ Referencia/               ← material del cliente: dossiers, logos antiguos, fotos, prensa
 ```
 
-**Ficheros pesados**: los PDF y vídeos de `Referencia/` (unos 100 MB) **no se suben a Git** (ver `.gitignore`). Se comparten por fuera del repo; el canal está pendiente de acordar. Las imágenes ligeras sí se versionan.
+**Ficheros pesados**: las fotos y vídeos del cliente y los PDF y vídeos de `Referencia/` **no se suben a Git** (ver `.gitignore`). Se comparten en la carpeta de Google Drive **`Mehari We`**: `01_Material/` (selección de fotos y vídeos y galería), `02_Produccion/`, `03_Marca/` y `04_Cliente/`. Detalle en [docs/material/README.md](docs/material/README.md). Las imágenes ligeras sí se versionan.
+
+**Material del cliente**: antes de buscar una foto o un vídeo, filtra [docs/material/clasificacion.csv](docs/material/clasificacion.csv) (línea, coche, marca antigua, calidad y nota de cada fichero) o abre la galería de Drive. Así no hace falta abrir los originales. La selección de Drive **no está filtrada por matrículas ni por menores**: aplica §4 en cada pieza.
 
 ## 6. Forma de trabajar: GitFlow
 
@@ -121,7 +125,6 @@ Las decisiones también van, con fecha y motivo, a `docs/decisiones.md`.
 - [ ] Precios y packs (de momento, "consultar presupuesto").
 - [ ] Presupuesto para publicidad en Meta.
 - [ ] Reparto de tareas en el equipo (de momento, todos en todo).
-- [ ] Canal para compartir los ficheros pesados (Drive, Git LFS…).
 - [ ] Objetivos numéricos: bodas al año actuales y objetivo, seguidores, solicitudes al mes.
 - [ ] TikTok u otras redes: ¿entran en el alcance?
 - [ ] Herramienta de publicación: Meta Business Suite a mano, herramienta con API y conector para Claude, o app propia de Meta. Se decide en la semana 5 tras el piloto (ver `docs/planes/automatizacion-contenido.md`).
@@ -130,3 +133,5 @@ Las decisiones también van, con fecha y motivo, a `docs/decisiones.md`.
 - [ ] Flujo de aprobación del contenido por parte del cliente.
 - [ ] Sesión de grabación de vídeo con los dos coches y vídeos de bodas anteriores.
 - [ ] Permiso del Diario de Sevilla o del fotógrafo para usar sus fotos de la boda Herrera.
+- [ ] Autor y permiso de las unas 75 fotos que parecen de fotógrafo profesional (ver `docs/material/README.md`).
+- [ ] ¿Se trabaja también en Extremadura? Hay bodas en Cáceres y Plasencia en el material del cliente.
