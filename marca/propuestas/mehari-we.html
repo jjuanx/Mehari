@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mehari We · Logo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,100;1,9..144,300..700,100&family=Jost:wght@300..800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--cal);color:var(--tinta);font-family:var(--font-texto);line-height:1.5;-webkit-font-smoothing:antialiased}
+  main{max-width:1072px;margin:0 auto;padding:56px 24px 96px}
+  .estado{display:inline-block;font:500 12px/1 var(--font-texto);letter-spacing:.12em;text-transform:uppercase;background:var(--tinta);color:var(--cal);padding:8px 12px;border-radius:2px}
+  h1{font:400 clamp(40px,6vw,72px)/1 var(--font-titular);margin:24px 0 12px;letter-spacing:-.01em}
+  h2{font:400 clamp(30px,4vw,44px)/1.05 var(--font-titular);margin:96px 0 8px;display:flex;align-items:baseline;gap:16px}
+  h2 .num{font:600 13px/1 var(--font-texto);letter-spacing:.14em;color:var(--naranja-oscuro)}
+  h3{font:600 13px/1 var(--font-texto);letter-spacing:.14em;text-transform:uppercase;margin:40px 0 16px}
+  p.lead{max-width:62ch;font-size:18px;opacity:.85}
+  .nota{max-width:70ch;font-size:15px;opacity:.85;margin-top:8px}
+  .rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  .lienzo{aspect-ratio:4/3;display:grid;place-items:center;border-radius:4px;border:1px solid rgba(43,33,26,.08)}
+  .lienzo svg{width:88%;height:auto}
+  .sobre-blanco{background:var(--azahar)} .sobre-naranja{background:var(--naranja)} .sobre-beige{background:var(--beige)} .sobre-tinta{background:var(--tinta)}
+  .fila{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+  .avatar{border-radius:50%;display:grid;place-items:center;overflow:hidden;flex:none}
+  .avatar svg{width:70%;height:auto}
+  .pie{font-size:15px;opacity:.8;max-width:30ch}
+  .dos{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:16px}
+  .dos ul{padding-left:18px;font-size:15px}
+  .dos li{margin-bottom:6px}
+  .dos b{font-weight:600}
+  .aviso{background:var(--azahar);border-left:4px solid var(--naranja);padding:16px 20px;max-width:70ch;margin-top:12px;font-size:15px}
+  .aviso b{color:var(--tinta)}
+  /* Maqueta de la pantalla de carga de la web: las costillas a pantalla completa */
+  .carga{flex:1 1 360px;aspect-ratio:16/9;border-radius:4px;overflow:hidden;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--azahar);
+    background:repeating-linear-gradient(180deg,var(--naranja) 0 11.111%,var(--naranja-oscuro) 11.111% 22.222%)}
+  .carga svg{width:22%;height:auto;margin-bottom:6px}
+  .carga .n{font:400 clamp(26px,4vw,40px)/1 var(--font-titular)}
+  .carga .s{font:500 10px/1 var(--font-texto);letter-spacing:.32em;text-transform:uppercase;opacity:.85}
+  .carga .t{position:absolute;bottom:10px;font:500 9px/1 var(--font-texto);letter-spacing:.2em;text-transform:uppercase;opacity:.7}
+  table{border-collapse:collapse;width:100%;margin-top:16px;font-size:15px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid rgba(43,33,26,.12);vertical-align:top}
+  th{font:600 12px/1.2 var(--font-texto);letter-spacing:.1em;text-transform:uppercase}
+  @media (max-width:720px){.dos{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ───────────── Dibujos reutilizables ─────────────
+  Colores por variable para pintar cada símbolo sobre cualquier fondo:
+  --c-coche (carrocería), --c-det (neumáticos, cromados, marcos), --c-luz (cristal del faro, buje), --c-acento.
+  Ningún dibujo lleva el chevrón del capó ni matrícula. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- 1 · La mirada -->
+    <mask id="m1" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+      <rect width="200" height="200" fill="#fff"/>
+      <rect x="0" y="78" width="200" height="8" fill="#000"/>
+      <rect x="0" y="100" width="200" height="8" fill="#000"/>
+      <rect x="0" y="122" width="200" height="8" fill="#000"/>
+      <circle cx="50" cy="108" r="31" fill="#000"/>
+      <circle cx="150" cy="108" r="31" fill="#000"/>
+    </mask>
+    <symbol id="s1" viewBox="0 0 200 200">
+      <rect x="26" y="140" width="28" height="42" rx="8" fill="var(--c-det)"/>
+      <rect x="146" y="140" width="28" height="42" rx="8" fill="var(--c-det)"/>
+      <path mask="url(#m1)" fill="var(--c-coche)" d="M16 72 Q16 52 36 52 L164 52 Q184 52 184 72 L184 148 L16 148 Z"/>
+      <circle cx="50" cy="108" r="24" fill="var(--c-det)"/><circle cx="50" cy="108" r="14" fill="var(--c-luz)"/>
+      <circle cx="150" cy="108" r="24" fill="var(--c-det)"/><circle cx="150" cy="108" r="14" fill="var(--c-luz)"/>
+      <rect x="6" y="154" width="188" height="9" rx="4.5" fill="var(--c-det)"/>
+    </symbol>
+
+    <!-- 2 · El parabrisas: marco con los limpias, retrovisores y capó acanalado -->
+    <mask id="m2" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+      <rect width="200" height="200" fill="#fff"/>
+      <rect x="0" y="134" width="200" height="7" fill="#000"/>
+      <rect x="0" y="151" width="200" height="7" fill="#000"/>
+      <circle cx="40" cy="160" r="16" fill="#000"/>
+      <circle cx="160" cy="160" r="16" fill="#000"/>
+    </mask>
+    <symbol id="s2" viewBox="0 0 200 200">
+      <rect x="34" y="24" width="132" height="88" rx="10" fill="none" stroke="var(--c-det)" stroke-width="10"/>
+      <path d="M66 104 L98 88 M110 104 L142 88" stroke="var(--c-det)" stroke-width="5" stroke-linecap="round"/>
+      <path d="M34 92 L18 84 M166 92 L182 84" stroke="var(--c-det)" stroke-width="4" stroke-linecap="round"/>
+      <rect x="4" y="72" width="18" height="12" rx="4" fill="var(--c-det)"/>
+      <rect x="178" y="72" width="18" height="12" rx="4" fill="var(--c-det)"/>
+      <path mask="url(#m2)" fill="var(--c-coche)" d="M30 120 L170 120 Q184 120 186 134 L190 182 L10 182 L14 134 Q16 120 30 120 Z"/>
+      <circle cx="40" cy="160" r="11" fill="var(--c-det)"/><circle cx="160" cy="160" r="11" fill="var(--c-det)"/>
+      <rect x="2" y="186" width="196" height="8" rx="4" fill="var(--c-det)"/>
+    </symbol>
+    <!-- Logotipo del 2: el nombre se lee a través del parabrisas -->
+    <mask id="m2l" maskUnits="userSpaceOnUse" x="0" y="0" width="400" height="300">
+      <rect width="400" height="300" fill="#fff"/>
+      <rect x="0" y="200" width="400" height="6" fill="#000"/>
+      <rect x="0" y="214" width="400" height="6" fill="#000"/>
+      <circle cx="96" cy="215" r="15" fill="#000"/>
+      <circle cx="304" cy="215" r="15" fill="#000"/>
+    </mask>
+    <symbol id="s2l" viewBox="0 0 400 300">
+      <rect x="70" y="56" width="260" height="122" rx="14" fill="none" stroke="var(--c-det)" stroke-width="9"/>
+      <path d="M70 156 L52 148 M330 156 L348 148" stroke="var(--c-det)" stroke-width="4" stroke-linecap="round"/>
+      <rect x="34" y="136" width="22" height="14" rx="5" fill="var(--c-det)"/>
+      <rect x="344" y="136" width="22" height="14" rx="5" fill="var(--c-det)"/>
+      <path d="M140 170 L176 160 M222 170 L258 160" stroke="var(--c-det)" stroke-width="4" stroke-linecap="round"/>
+      <text x="200" y="132" text-anchor="middle" style="font:400 46px var(--font-titular);fill:var(--c-texto)">Mehari <tspan style="font:italic 400 52px var(--font-acento)">We</tspan></text>
+      <path mask="url(#m2l)" fill="var(--c-coche)" d="M78 186 L322 186 Q336 186 338 198 L342 232 L58 232 L62 198 Q64 186 78 186 Z"/>
+      <circle cx="96" cy="215" r="10.5" fill="var(--c-det)"/><circle cx="304" cy="215" r="10.5" fill="var(--c-det)"/>
+      <rect x="48" y="236" width="304" height="7" rx="3.5" fill="var(--c-det)"/>
+      <text x="200" y="272" text-anchor="middle" style="font:600 11.5px var(--font-texto);letter-spacing:.34em;fill:var(--c-sub)">WEDDINGS &amp; EVENTS</text>
+    </symbol>
+    <!-- Avatar del 2: «We» dentro del parabrisas -->
+    <symbol id="s2a" viewBox="0 0 200 200">
+      <use href="#s2"/>
+      <text x="100" y="82" text-anchor="middle" style="font:italic 400 58px var(--font-acento);fill:var(--c-texto)">We</text>
+    </symbol>
+
+    <!-- 3 · El capó: desde el asiento, las costillas del capó hacia el horizonte -->
+    <symbol id="s3" viewBox="0 0 200 200">
+      <path d="M66 112 A34 34 0 0 1 134 112 Z" fill="var(--c-acento)"/>
+      <g fill="var(--c-coche)">
+        <polygon points="12,176 54,176 76.6,112 55.3,112"/>
+        <polygon points="60,176 97,176 98.5,112 79.7,112"/>
+        <polygon points="103,176 140,176 120.3,112 101.5,112"/>
+        <polygon points="146,176 188,176 144.7,112 123.4,112"/>
+      </g>
+      <rect x="8" y="24" width="184" height="168" rx="16" fill="none" stroke="var(--c-det)" stroke-width="10"/>
+    </symbol>
+
+    <!-- 4 · El perfil: la silueta lateral con las puertas acanaladas (la de la animación de costillas) -->
+    <mask id="m4" maskUnits="userSpaceOnUse" x="0" y="-80" width="340" height="320">
+      <rect x="0" y="-80" width="340" height="320" fill="#fff"/>
+      <rect x="0" y="64" width="340" height="5" fill="#000"/>
+      <rect x="0" y="76" width="340" height="5" fill="#000"/>
+      <rect x="0" y="88" width="340" height="5" fill="#000"/>
+      <rect x="0" y="100" width="340" height="5" fill="#000"/>
+    </mask>
+    <symbol id="s4" viewBox="13 -71 300 300">
+      <rect x="38" y="8" width="200" height="11" rx="5" fill="var(--c-det)"/>
+      <path d="M46 50 L46 18 M222 50 L234 16" stroke="var(--c-det)" stroke-width="6" stroke-linecap="round"/>
+      <path mask="url(#m4)" fill="var(--c-coche)" d="M30 122 L30 62 Q30 50 42 50 L118 50 C130 50 132 84 150 84 L186 84 C204 84 206 50 218 50 L262 50 L292 60 Q300 63 300 72 L300 122 L262 122 A32 32 0 0 0 198 122 L104 122 A32 32 0 0 0 40 122 L30 122 Z"/>
+      <circle cx="72" cy="126" r="26" fill="var(--c-det)"/><circle cx="72" cy="126" r="9" fill="var(--c-luz)"/>
+      <circle cx="230" cy="126" r="26" fill="var(--c-det)"/><circle cx="230" cy="126" r="9" fill="var(--c-luz)"/>
+      <circle cx="298" cy="72" r="9" fill="var(--c-det)"/><circle cx="300" cy="72" r="4" fill="var(--c-luz)"/>
+      <rect x="292" y="110" width="18" height="7" rx="3.5" fill="var(--c-det)"/>
+      <rect x="20" y="110" width="16" height="7" rx="3.5" fill="var(--c-det)"/>
+    </symbol>
+
+    <!-- 5 · El frontal: el coche entero de frente, a trazo, con las costillas en la rejilla -->
+    <symbol id="s5" viewBox="0 0 200 200">
+      <g fill="none" stroke="var(--c-det)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="36" y="28" width="128" height="16" rx="6"/>
+        <rect x="44" y="44" width="112" height="54" rx="4"/>
+        <path d="M44 86 L28 80 M156 86 L172 80"/>
+        <rect x="24" y="104" width="152" height="56" rx="8"/>
+        <circle cx="52" cy="130" r="12"/><circle cx="148" cy="130" r="12"/>
+        <path d="M12 168 L188 168"/>
+      </g>
+      <rect x="18" y="72" width="14" height="10" rx="3" fill="var(--c-det)"/>
+      <rect x="168" y="72" width="14" height="10" rx="3" fill="var(--c-det)"/>
+      <g fill="var(--c-coche)">
+        <rect x="76" y="114" width="48" height="7" rx="1.5"/>
+        <rect x="76" y="126" width="48" height="7" rx="1.5"/>
+        <rect x="76" y="138" width="48" height="7" rx="1.5"/>
+      </g>
+      <rect x="32" y="164" width="24" height="22" rx="5" fill="var(--c-det)"/>
+      <rect x="144" y="164" width="24" height="22" rx="5" fill="var(--c-det)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main>
+  <span class="estado">Mehari We · 5 propuestas de logo · pendiente de elegir</span>
+  <h1>Mehari We</h1>
+  <p class="lead">Weddings &amp; Events. Al cliente le gustan las costillas y la pantalla de carga de la web, pero el símbolo de la propuesta C, con la parte de atrás y la rueda, le recordaba más a un carro que a un coche. Estas cinco propuestas mantienen las costillas, la paleta y las tipografías, y cambian de pieza: el frontal, el parabrisas, el capó, el perfil y el coche entero de frente. La primera es la más abstracta como icono y la quinta, la más literal.</p>
+  <div class="aviso"><b>Qué hace que se lea «coche» y no «carro»:</b> los faros. Un remolque tiene rueda y caja, pero no faros ni parabrisas. Por eso todas las propuestas llevan al menos uno de los dos.</div>
+
+  <!-- ═════════════ 1 ═════════════ -->
+  <h2><span class="num">01</span>La mirada</h2>
+  <div class="dos">
+    <p>El frontal del Méhari: los dos faros redondos y la rejilla de lamas. Las costillas cruzan toda la cara del coche como en la pantalla de carga, y los faros se recortan encima. Dos faros, dos personas: <i>We</i>.</p>
+    <ul>
+      <li><b>A favor:</b> es el icono más compacto y el que mejor aguanta a 56 px. Tiene simpatía: el coche «mira».</li>
+      <li><b>A favor:</b> encaja directamente con el telón de franjas de la web.</li>
+      <li><b>En contra:</b> sin las ruedas pierde el «coche»; no se pueden quitar en versiones reducidas.</li>
+    </ul>
+  </div>
+  <h3>Logotipo horizontal</h3>
+  <div class="rejilla">
+    <div class="lienzo sobre-blanco"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 1 sobre blanco">
+      <use href="#s1" x="22" y="92" width="120" height="120" style="--c-coche:var(--naranja);--c-det:var(--tinta);--c-luz:var(--azahar)"/>
+      <text x="152" y="158" style="font:500 48px var(--font-titular);fill:var(--tinta)">Mehari We</text>
+      <text x="155" y="188" style="font:600 11.5px var(--font-texto);letter-spacing:.3em;fill:var(--naranja-oscuro)">WEDDINGS &amp; EVENTS</text>
+    </svg></div>
+    <div class="lienzo sobre-naranja"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 1 sobre naranja">
+      <use href="#s1" x="22" y="92" width="120" height="120" style="--c-coche:var(--azahar);--c-det:var(--tinta);--c-luz:var(--naranja)"/>
+      <text x="152" y="158" style="font:500 48px var(--font-titular);fill:var(--tinta)">Mehari We</text>
+      <text x="155" y="188" style="font:600 11.5px var(--font-texto);letter-spacing:.3em;fill:var(--tinta)">WEDDINGS &amp; EVENTS</text>
+    </svg></div>
+    <div class="lienzo sobre-tinta"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 1 sobre tinta">
+      <use href="#s1" x="22" y="92" width="120" height="120" style="--c-coche:var(--naranja);--c-det:var(--beige);--c-luz:var(--tinta)"/>
+      <text x="152" y="158" style="font:500 48px var(--font-titular);fill:var(--azahar)">Mehari We</text>
+      <text x="155" y="188" style="font:600 11.5px var(--font-texto);letter-spacing:.3em;fill:var(--beige)">WEDDINGS &amp; EVENTS</text>
+    </svg></div>
+  </div>
+  <h3>Avatar y pantalla de carga</h3>
+  <div class="fila">
+    <div class="avatar sobre-naranja" style="width:150px;height:150px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 1 sobre naranja"><use href="#s1" style="--c-coche:var(--azahar);--c-det:var(--tinta);--c-luz:var(--naranja)"/></svg></div>
+    <div class="avatar sobre-beige" style="width:150px;height:150px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 1 sobre beige"><use href="#s1" style="--c-coche:var(--naranja);--c-det:var(--tinta);--c-luz:var(--azahar)"/></svg></div>
+    <div class="avatar sobre-naranja" style="width:56px;height:56px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 1 a 56 píxeles"><use href="#s1" style="--c-coche:var(--azahar);--c-det:var(--tinta);--c-luz:var(--naranja)"/></svg></div>
+    <div class="carga"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#s1" style="--c-coche:var(--azahar);--c-det:var(--tinta);--c-luz:var(--naranja)"/></svg><span class="n">Mehari We</span><span class="s">Weddings &amp; Events</span><span class="t">Desliza para entrar</span></div>
+  </div>
+
+  <!-- ═════════════ 2 ═════════════ -->
+  <h2><span class="num">02</span>El parabrisas</h2>
+  <div class="dos">
+    <p>El parabrisas plano del Méhari, con sus limpias y sus retrovisores, encima del capó acanalado. El nombre se lee a través del cristal, como se ve a los novios desde fuera al salir de la iglesia. En el avatar, dentro del marco solo va <i>We</i>.</p>
+    <ul>
+      <li><b>A favor:</b> el más romántico y el que más cuenta la marca: <i>nosotros</i>, dentro del coche.</li>
+      <li><b>A favor:</b> el marco sirve de plantilla para portadas de historias y carruseles (foto dentro del parabrisas).</li>
+      <li><b>En contra:</b> es un logotipo más que un icono: a tamaño muy pequeño el marco se queda en un rectángulo.</li>
+    </ul>
+  </div>
+  <h3>Logotipo</h3>
+  <div class="rejilla">
+    <div class="lienzo sobre-blanco"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 2 sobre blanco"><use href="#s2l" style="--c-coche:var(--naranja);--c-det:var(--tinta);--c-texto:var(--tinta);--c-sub:var(--naranja-oscuro)"/></svg></div>
+    <div class="lienzo sobre-naranja"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 2 sobre naranja"><use href="#s2l" style="--c-coche:var(--azahar);--c-det:var(--tinta);--c-texto:var(--tinta);--c-sub:var(--tinta)"/></svg></div>
+    <div class="lienzo sobre-tinta"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 2 sobre tinta"><use href="#s2l" style="--c-coche:var(--naranja);--c-det:var(--beige);--c-texto:var(--azahar);--c-sub:var(--beige)"/></svg></div>
+  </div>
+  <h3>Avatar y pantalla de carga</h3>
+  <div class="fila">
+    <div class="avatar sobre-naranja" style="width:150px;height:150px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 2 sobre naranja"><use href="#s2a" style="--c-coche:var(--azahar);--c-det:var(--tinta);--c-texto:var(--tinta)"/></svg></div>
+    <div class="avatar sobre-beige" style="width:150px;height:150px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 2 sobre beige"><use href="#s2a" style="--c-coche:var(--naranja);--c-det:var(--tinta);--c-texto:var(--tinta)"/></svg></div>
+    <div class="avatar sobre-naranja" style="width:56px;height:56px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 2 a 56 píxeles"><use href="#s2a" style="--c-coche:var(--azahar);--c-det:var(--tinta);--c-texto:var(--tinta)"/></svg></div>
+    <div class="carga"><svg viewBox="0 0 200 200" aria-hidden="true" style="width:34%"><use href="#s2a" style="--c-coche:var(--azahar);--c-det:var(--azahar);--c-texto:var(--azahar)"/></svg><span class="s">Weddings &amp; Events</span><span class="t">Desliza para entrar</span></div>
+  </div>
+
+  <!-- ═════════════ 3 ═════════════ -->
+  <h2><span class="num">03</span>El capó</h2>
+  <div class="dos">
+    <p>Lo que ven los novios desde el asiento: el capó acanalado del Méhari camino del horizonte y el sol asomando, todo dentro del marco del parabrisas. Las costillas giran y se convierten en carretera. Es el momento de «nos vamos».</p>
+    <ul>
+      <li><b>A favor:</b> el más emocional; cuenta la experiencia, no el objeto. Sirve igual para bodas que para eventos y rutas.</li>
+      <li><b>A favor:</b> el capó acanalado solo lo tiene este coche; quien lo conoce, lo reconoce.</li>
+      <li><b>En contra:</b> el más abstracto: quien no conozca el Méhari verá un paisaje, no un coche. Lo compensan el nombre y las fotos.</li>
+    </ul>
+  </div>
+  <h3>Logotipo vertical</h3>
+  <div class="rejilla">
+    <div class="lienzo sobre-blanco"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 3 sobre blanco">
+      <use href="#s3" x="148" y="28" width="104" height="104" style="--c-coche:var(--naranja);--c-det:var(--tinta);--c-acento:var(--naranja-oscuro)"/>
+      <text x="200" y="196" text-anchor="middle" style="font:500 48px var(--font-titular);fill:var(--tinta)">Mehari We</text>
+      <text x="200" y="228" text-anchor="middle" style="font:600 11.5px var(--font-texto);letter-spacing:.34em;fill:var(--naranja-oscuro)">WEDDINGS &amp; EVENTS</text>
+    </svg></div>
+    <div class="lienzo sobre-naranja"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 3 sobre naranja">
+      <use href="#s3" x="148" y="28" width="104" height="104" style="--c-coche:var(--azahar);--c-det:var(--tinta);--c-acento:var(--tinta)"/>
+      <text x="200" y="196" text-anchor="middle" style="font:500 48px var(--font-titular);fill:var(--tinta)">Mehari We</text>
+      <text x="200" y="228" text-anchor="middle" style="font:600 11.5px var(--font-texto);letter-spacing:.34em;fill:var(--tinta)">WEDDINGS &amp; EVENTS</text>
+    </svg></div>
+    <div class="lienzo sobre-tinta"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 3 sobre tinta">
+      <use href="#s3" x="148" y="28" width="104" height="104" style="--c-coche:var(--naranja);--c-det:var(--beige);--c-acento:var(--azahar)"/>
+      <text x="200" y="196" text-anchor="middle" style="font:500 48px var(--font-titular);fill:var(--azahar)">Mehari We</text>
+      <text x="200" y="228" text-anchor="middle" style="font:600 11.5px var(--font-texto);letter-spacing:.34em;fill:var(--beige)">WEDDINGS &amp; EVENTS</text>
+    </svg></div>
+  </div>
+  <h3>Avatar y pantalla de carga</h3>
+  <div class="fila">
+    <div class="avatar sobre-naranja" style="width:150px;height:150px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 3 sobre naranja"><use href="#s3" style="--c-coche:var(--azahar);--c-det:var(--tinta);--c-acento:var(--tinta)"/></svg></div>
+    <div class="avatar sobre-beige" style="width:150px;height:150px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 3 sobre beige"><use href="#s3" style="--c-coche:var(--naranja);--c-det:var(--tinta);--c-acento:var(--naranja-oscuro)"/></svg></div>
+    <div class="avatar sobre-naranja" style="width:56px;height:56px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 3 a 56 píxeles"><use href="#s3" style="--c-coche:var(--azahar);--c-det:var(--tinta);--c-acento:var(--tinta)"/></svg></div>
+    <div class="carga"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#s3" style="--c-coche:var(--azahar);--c-det:var(--azahar);--c-acento:var(--tinta)"/></svg><span class="n">Mehari We</span><span class="s">Weddings &amp; Events</span><span class="t">Desliza para entrar</span></div>
+  </div>
+
+  <!-- ═════════════ 4 ═════════════ -->
+  <h2><span class="num">04</span>El perfil</h2>
+  <div class="dos">
+    <p>Lo que gustó de la propuesta C, pero con el coche entero: el lateral con las puertas acanaladas, la capota, el parabrisas, el faro y las dos ruedas. Es la silueta en la que terminaba la animación de costillas que ya vio el cliente, convertida en logo.</p>
+    <ul>
+      <li><b>A favor:</b> es donde más lucen las costillas; el lateral acanalado es la vista más «Méhari» del coche.</li>
+      <li><b>A favor:</b> la animación ya existe: las costillas entran de una en una y forman el coche.</li>
+      <li><b>En contra:</b> dibuja la silueta completa, lo más cercano al diseño protegido del fabricante. Y al ser alargado, en el avatar redondo queda pequeño.</li>
+    </ul>
+  </div>
+  <h3>Logotipo vertical</h3>
+  <div class="rejilla">
+    <div class="lienzo sobre-blanco"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 4 sobre blanco">
+      <use href="#s4" x="95" y="-28" width="210" height="210" style="--c-coche:var(--naranja);--c-det:var(--tinta);--c-luz:var(--azahar)"/>
+      <text x="200" y="196" text-anchor="middle" style="font:500 34px var(--font-texto);letter-spacing:.14em;fill:var(--tinta)">MEHARI WE</text>
+      <text x="200" y="228" text-anchor="middle" style="font:italic 400 22px var(--font-acento);fill:var(--naranja-oscuro)">Weddings &amp; Events</text>
+    </svg></div>
+    <div class="lienzo sobre-naranja"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 4 sobre naranja">
+      <use href="#s4" x="95" y="-28" width="210" height="210" style="--c-coche:var(--azahar);--c-det:var(--tinta);--c-luz:var(--naranja)"/>
+      <text x="200" y="196" text-anchor="middle" style="font:500 34px var(--font-texto);letter-spacing:.14em;fill:var(--tinta)">MEHARI WE</text>
+      <text x="200" y="228" text-anchor="middle" style="font:italic 400 22px var(--font-acento);fill:var(--tinta)">Weddings &amp; Events</text>
+    </svg></div>
+    <div class="lienzo sobre-tinta"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 4 sobre tinta">
+      <use href="#s4" x="95" y="-28" width="210" height="210" style="--c-coche:var(--naranja);--c-det:var(--beige);--c-luz:var(--tinta)"/>
+      <text x="200" y="196" text-anchor="middle" style="font:500 34px var(--font-texto);letter-spacing:.14em;fill:var(--azahar)">MEHARI WE</text>
+      <text x="200" y="228" text-anchor="middle" style="font:italic 400 22px var(--font-acento);fill:var(--beige)">Weddings &amp; Events</text>
+    </svg></div>
+  </div>
+  <h3>Avatar y pantalla de carga</h3>
+  <div class="fila">
+    <div class="avatar sobre-naranja" style="width:150px;height:150px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 4 sobre naranja" style="width:84%"><use href="#s4" style="--c-coche:var(--azahar);--c-det:var(--tinta);--c-luz:var(--naranja)"/></svg></div>
+    <div class="avatar sobre-beige" style="width:150px;height:150px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 4 sobre beige" style="width:84%"><use href="#s4" style="--c-coche:var(--naranja);--c-det:var(--tinta);--c-luz:var(--beige)"/></svg></div>
+    <div class="avatar sobre-naranja" style="width:56px;height:56px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 4 a 56 píxeles" style="width:84%"><use href="#s4" style="--c-coche:var(--azahar);--c-det:var(--tinta);--c-luz:var(--naranja)"/></svg></div>
+    <div class="carga"><svg viewBox="0 0 200 200" aria-hidden="true" style="width:30%;margin:-8% 0 -10%"><use href="#s4" style="--c-coche:var(--azahar);--c-det:var(--tinta);--c-luz:var(--naranja)"/></svg><span class="n" style="font:500 clamp(20px,3vw,30px)/1 var(--font-texto);letter-spacing:.14em">MEHARI WE</span><span class="s">Weddings &amp; Events</span><span class="t">Desliza para entrar</span></div>
+  </div>
+
+  <!-- ═════════════ 5 ═════════════ -->
+  <h2><span class="num">05</span>El frontal</h2>
+  <div class="dos">
+    <p>El Méhari entero de frente, dibujado a una sola línea: capota, parabrisas, retrovisores, faros, parachoques y ruedas. Las costillas son lo único relleno, en la rejilla. Es la versión más literal: nadie duda de que es un coche.</p>
+    <ul>
+      <li><b>A favor:</b> se reconoce al instante, incluso por quien no conoce el modelo.</li>
+      <li><b>A favor:</b> a trazo funciona muy bien bordado, en vinilo, en sello de cera para invitaciones y en una sola tinta.</li>
+      <li><b>En contra:</b> el más detallado: a 56 px las líneas se apelmazan. Pediría una versión simplificada para el avatar.</li>
+    </ul>
+  </div>
+  <h3>Logotipo vertical</h3>
+  <div class="rejilla">
+    <div class="lienzo sobre-blanco"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 5 sobre blanco">
+      <use href="#s5" x="138" y="14" width="124" height="124" style="--c-coche:var(--naranja);--c-det:var(--tinta)"/>
+      <text x="200" y="196" text-anchor="middle" style="font:500 48px var(--font-titular);fill:var(--tinta)">Mehari We</text>
+      <text x="200" y="228" text-anchor="middle" style="font:600 11.5px var(--font-texto);letter-spacing:.34em;fill:var(--naranja-oscuro)">WEDDINGS &amp; EVENTS</text>
+    </svg></div>
+    <div class="lienzo sobre-naranja"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 5 sobre naranja">
+      <use href="#s5" x="138" y="14" width="124" height="124" style="--c-coche:var(--azahar);--c-det:var(--tinta)"/>
+      <text x="200" y="196" text-anchor="middle" style="font:500 48px var(--font-titular);fill:var(--tinta)">Mehari We</text>
+      <text x="200" y="228" text-anchor="middle" style="font:600 11.5px var(--font-texto);letter-spacing:.34em;fill:var(--tinta)">WEDDINGS &amp; EVENTS</text>
+    </svg></div>
+    <div class="lienzo sobre-tinta"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 5 sobre tinta">
+      <use href="#s5" x="138" y="14" width="124" height="124" style="--c-coche:var(--naranja);--c-det:var(--beige)"/>
+      <text x="200" y="196" text-anchor="middle" style="font:500 48px var(--font-titular);fill:var(--azahar)">Mehari We</text>
+      <text x="200" y="228" text-anchor="middle" style="font:600 11.5px var(--font-texto);letter-spacing:.34em;fill:var(--beige)">WEDDINGS &amp; EVENTS</text>
+    </svg></div>
+  </div>
+  <h3>Avatar y pantalla de carga</h3>
+  <div class="fila">
+    <div class="avatar sobre-naranja" style="width:150px;height:150px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 5 sobre naranja"><use href="#s5" style="--c-coche:var(--azahar);--c-det:var(--tinta)"/></svg></div>
+    <div class="avatar sobre-beige" style="width:150px;height:150px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 5 sobre beige"><use href="#s5" style="--c-coche:var(--naranja);--c-det:var(--tinta)"/></svg></div>
+    <div class="avatar sobre-naranja" style="width:56px;height:56px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 5 a 56 píxeles"><use href="#s5" style="--c-coche:var(--azahar);--c-det:var(--tinta)"/></svg></div>
+    <div class="carga"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#s5" style="--c-coche:var(--tinta);--c-det:var(--azahar)"/></svg><span class="n">Mehari We</span><span class="s">Weddings &amp; Events</span><span class="t">Desliza para entrar</span></div>
+  </div>
+
+  <!-- ───────────── Comparativa ───────────── -->
+  <h2>Comparativa</h2>
+  <table>
+    <tr><th></th><th>Pieza del coche</th><th>Avatar a 56 px</th><th>Se lee «coche»</th><th>Tono</th></tr>
+    <tr><td><b>01 La mirada</b></td><td>Faros y rejilla</td><td>Muy bien</td><td>Sí</td><td>Simpático, cercano</td></tr>
+    <tr><td><b>02 El parabrisas</b></td><td>Parabrisas, limpias y capó</td><td>Regular (solo «We»)</td><td>Sí</td><td>Romántico</td></tr>
+    <tr><td><b>03 El capó</b></td><td>Capó acanalado desde dentro</td><td>Bien</td><td>Solo quien lo conoce</td><td>Emocional, viajero</td></tr>
+    <tr><td><b>04 El perfil</b></td><td>Lateral completo con puertas acanaladas</td><td>Regular (alargado)</td><td>Sí</td><td>Continuista con C</td></tr>
+    <tr><td><b>05 El frontal</b></td><td>El coche entero de frente</td><td>Flojo</td><td>Sin duda</td><td>Clásico, artesanal</td></tr>
+  </table>
+
+  <h2>Para comentar</h2>
+  <div class="aviso"><b>Nuestra recomendación: 01 La mirada como símbolo y el marco del 02 como recurso.</b> La mirada es la que mejor resuelve lo que pidió el cliente: costillas, una pieza inconfundible del coche y un icono que se lee a cualquier tamaño. El parabrisas del 02 puede usarse aparte como marco para fotos en historias y carruseles.</div>
+  <div class="aviso"><b>Sin chevrón ni matrícula.</b> El capó real lleva el emblema de la marca del fabricante y el frontal, la matrícula: ninguno de los dibujos los incluye.</div>
+  <div class="aviso"><b>Distancia con el logo antiguo.</b> Ni monograma «M», ni caligrafía, ni sello circular. El avatar redondo es solo el recorte que impone Instagram.</div>
+  <div class="aviso"><b>Contraste.</b> El texto sobre naranja va en tinta (5,7:1). El blanco sobre naranja se usa solo en el dibujo y en el nombre a gran tamaño de la pantalla de carga, como ya hace la web.</div>
+  <div class="aviso"><b>Siguiente paso.</b> Cuando el cliente elija, se pasa a SVG final con el texto convertido a trazos, se exportan los PNG y se sustituye el icono provisional de la web y la animación de entrada de los reels.</div>
+</main>
+</body>
+</html>
