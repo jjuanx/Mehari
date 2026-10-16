@@ -12,7 +12,7 @@ Cualquier pieza (vídeo, post, web) sale de aquí. Los valores que se usan en c�
 | Fichero | Qué es |
 |---|---|
 | [`tokens.css`](tokens.css) | Variables CSS de colores y tipografías. Se importan en las composiciones de HyperFrames, en Remotion y en la web |
-| [`propuestas/mehari-we.html`](propuestas/mehari-we.html) | **Vigente.** Cinco propuestas de logo para Mehari We con las costillas y una pieza delantera del coche (frontal, parabrisas, capó, perfil y frontal a trazo), con logotipo, avatar y pantalla de carga. Se abre en el navegador |
+| [`propuestas/mehari-we.html`](propuestas/mehari-we.html) | **Vigente.** Ocho propuestas de logo para Mehari We: cinco con las costillas y una pieza delantera del coche (frontal, parabrisas, capó, perfil y frontal a trazo) y tres de lettering (monograma MWE, coche formado con las letras y monograma con costillas), con logotipo, avatar y pantalla de carga. Se abre en el navegador |
 | [`propuestas/logos.html`](propuestas/logos.html) | Histórico: propuestas A (Azahar) y B (Getaway), descartadas con el nombre |
 | [`propuestas/costillas.html`](propuestas/costillas.html) | Histórico: propuesta C. Gustan las costillas; el símbolo (trasera con rueda) se descarta porque parece un carro |
 

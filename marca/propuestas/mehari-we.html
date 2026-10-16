@@ -167,14 +167,52 @@
       <rect x="32" y="164" width="24" height="22" rx="5" fill="var(--c-det)"/>
       <rect x="144" y="164" width="24" height="22" rx="5" fill="var(--c-det)"/>
     </symbol>
+
+    <!-- 6 · Las letras: MWE de un solo trazo. M y W comparten el palo del medio; la W y la E, el siguiente.
+         El valle de la M y el pico de la W son simétricos: girado 180°, MW sigue siendo MW -->
+    <symbol id="s6" viewBox="-8 -70 270 270">
+      <g fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="var(--c-m)" d="M10 120 L10 10 L55 85 L100 10 L100 120 L145 45 L190 120 L190 10"/>
+        <path stroke="var(--c-we)" d="M190 10 L245 10 M190 65 L235 65 M190 120 L245 120"/>
+      </g>
+    </symbol>
+
+    <!-- 7 · El coche de letras: MEHARI es la carrocería y las dos «e» del nombre, las ruedas -->
+    <mask id="m7" maskUnits="userSpaceOnUse" x="0" y="-60" width="320" height="320">
+      <rect x="0" y="-60" width="320" height="320" fill="#fff"/>
+      <circle cx="78" cy="128" r="31" fill="#000"/>
+      <circle cx="234" cy="128" r="31" fill="#000"/>
+    </mask>
+    <symbol id="s7" viewBox="5 -54 300 300">
+      <rect x="40" y="18" width="160" height="10" rx="5" fill="var(--c-det)"/>
+      <path d="M50 66 L50 26 M190 66 L200 26" stroke="var(--c-det)" stroke-width="7" stroke-linecap="round"/>
+      <text mask="url(#m7)" x="28" y="116" textLength="260" lengthAdjust="spacingAndGlyphs" style="font:700 72px var(--font-texto);fill:var(--c-coche)">MEHARI</text>
+      <text x="78" y="151" text-anchor="middle" style="font:700 96px var(--font-titular);fill:var(--c-det)">e</text>
+      <text x="234" y="151" text-anchor="middle" style="font:700 96px var(--font-titular);fill:var(--c-det)">e</text>
+    </symbol>
+
+    <!-- 8 · Las letras acanaladas: el monograma del 6, grueso y cortado por las costillas -->
+    <mask id="m8" maskUnits="userSpaceOnUse" x="-40" y="-120" width="420" height="380">
+      <rect x="-40" y="-120" width="420" height="380" fill="#fff"/>
+      <rect x="-40" y="20" width="420" height="7" fill="#000"/>
+      <rect x="-40" y="46" width="420" height="7" fill="#000"/>
+      <rect x="-40" y="72" width="420" height="7" fill="#000"/>
+      <rect x="-40" y="98" width="420" height="7" fill="#000"/>
+    </mask>
+    <symbol id="s8" viewBox="-10 -115 370 370">
+      <g mask="url(#m8)" fill="none" stroke-width="24" stroke-linejoin="miter" stroke-miterlimit="1.6">
+        <path stroke="var(--c-m)" d="M12 132 L12 6 L76 92 L140 6 L140 120 L204 34 L268 120 L268 6"/>
+        <path stroke="var(--c-we)" d="M256 6 L340 6 M268 63 L326 63 M256 120 L340 120"/>
+      </g>
+    </symbol>
   </defs>
 </svg>
 
 <main>
-  <span class="estado">Mehari We · 5 propuestas de logo · pendiente de elegir</span>
+  <span class="estado">Mehari We · 8 propuestas de logo · pendiente de elegir</span>
   <h1>Mehari We</h1>
-  <p class="lead">Weddings &amp; Events. Al cliente le gustan las costillas y la pantalla de carga de la web, pero el símbolo de la propuesta C, con la parte de atrás y la rueda, le recordaba más a un carro que a un coche. Estas cinco propuestas mantienen las costillas, la paleta y las tipografías, y cambian de pieza: el frontal, el parabrisas, el capó, el perfil y el coche entero de frente. La primera es la más abstracta como icono y la quinta, la más literal.</p>
-  <div class="aviso"><b>Qué hace que se lea «coche» y no «carro»:</b> los faros. Un remolque tiene rueda y caja, pero no faros ni parabrisas. Por eso todas las propuestas llevan al menos uno de los dos.</div>
+  <p class="lead">Weddings &amp; Events. Al cliente le gustan las costillas y la pantalla de carga de la web, pero el símbolo de la propuesta C, con la parte de atrás y la rueda, le recordaba más a un carro que a un coche. Las propuestas 01 a 05 mantienen las costillas, la paleta y las tipografías, y cambian de pieza: el frontal, el parabrisas, el capó, el perfil y el coche entero de frente. Las 06 a 08 se hacen solo con las letras del nombre: un monograma MWE, el coche formado con letras y el monograma con costillas.</p>
+  <div class="aviso"><b>Qué hace que se lea «coche» y no «carro»:</b> los faros. Un remolque tiene rueda y caja, pero no faros ni parabrisas. Por eso las propuestas con dibujo (01 a 05) llevan al menos uno de los dos. De las de letras (06 a 08), solo la 07 forma el coche.</div>
 
   <!-- ═════════════ 1 ═════════════ -->
   <h2><span class="num">01</span>La mirada</h2>
@@ -344,6 +382,114 @@
     <div class="carga"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#s5" style="--c-coche:var(--tinta);--c-det:var(--azahar)"/></svg><span class="n">Mehari We</span><span class="s">Weddings &amp; Events</span><span class="t">Desliza para entrar</span></div>
   </div>
 
+  <!-- ═════════════ 6 ═════════════ -->
+  <h2><span class="num">06</span>Las letras</h2>
+  <div class="dos">
+    <p>Solo letras: un monograma <b>MWE</b> de un solo trazo. La M y la W son la misma letra dada la vuelta y comparten el palo del medio; la W y la E comparten el siguiente. Si se gira 180°, MW sigue leyéndose igual: dos que se miran, <i>We</i>. Los tres brazos de la E van en naranja.</p>
+    <ul>
+      <li><b>A favor:</b> el más limpio y elegante. Funciona en bordado, grabado, lacre para invitaciones y en una sola tinta.</li>
+      <li><b>A favor:</b> no dibuja el coche: es lo más alejado del diseño del fabricante.</li>
+      <li><b>En contra:</b> no cuenta nada del Méhari; esa parte la tienen que hacer las fotos y las costillas como recurso.</li>
+    </ul>
+  </div>
+  <h3>Logotipo vertical</h3>
+  <div class="rejilla">
+    <div class="lienzo sobre-blanco"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 6 sobre blanco">
+      <use href="#s6" x="130" y="-2" width="140" height="140" style="--c-m:var(--tinta);--c-we:var(--naranja)"/>
+      <text x="200" y="204" text-anchor="middle" style="font:500 30px var(--font-texto);letter-spacing:.2em;fill:var(--tinta)">MEHARI WE</text>
+      <text x="200" y="236" text-anchor="middle" style="font:italic 400 22px var(--font-acento);fill:var(--naranja-oscuro)">Weddings &amp; Events</text>
+    </svg></div>
+    <div class="lienzo sobre-naranja"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 6 sobre naranja">
+      <use href="#s6" x="130" y="-2" width="140" height="140" style="--c-m:var(--tinta);--c-we:var(--azahar)"/>
+      <text x="200" y="204" text-anchor="middle" style="font:500 30px var(--font-texto);letter-spacing:.2em;fill:var(--tinta)">MEHARI WE</text>
+      <text x="200" y="236" text-anchor="middle" style="font:italic 400 22px var(--font-acento);fill:var(--tinta)">Weddings &amp; Events</text>
+    </svg></div>
+    <div class="lienzo sobre-tinta"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 6 sobre tinta">
+      <use href="#s6" x="130" y="-2" width="140" height="140" style="--c-m:var(--beige);--c-we:var(--naranja)"/>
+      <text x="200" y="204" text-anchor="middle" style="font:500 30px var(--font-texto);letter-spacing:.2em;fill:var(--azahar)">MEHARI WE</text>
+      <text x="200" y="236" text-anchor="middle" style="font:italic 400 22px var(--font-acento);fill:var(--beige)">Weddings &amp; Events</text>
+    </svg></div>
+  </div>
+  <h3>Avatar y pantalla de carga</h3>
+  <div class="fila">
+    <div class="avatar sobre-naranja" style="width:150px;height:150px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 6" style="width:86%"><use href="#s6" style="--c-m:var(--tinta);--c-we:var(--azahar)"/></svg></div>
+    <div class="avatar sobre-beige" style="width:150px;height:150px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 6" style="width:86%"><use href="#s6" style="--c-m:var(--tinta);--c-we:var(--naranja-oscuro)"/></svg></div>
+    <div class="avatar sobre-naranja" style="width:56px;height:56px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 6" style="width:86%"><use href="#s6" style="--c-m:var(--tinta);--c-we:var(--azahar)"/></svg></div>
+    <div class="carga"><svg viewBox="0 0 200 200" aria-hidden="true" style="width:30%;margin:-6% 0 -8%"><use href="#s6" style="--c-m:var(--azahar);--c-we:var(--azahar)"/></svg><span class="n" style="font:500 clamp(18px,2.6vw,26px)/1 var(--font-texto);letter-spacing:.2em">MEHARI WE</span><span class="s">Weddings &amp; Events</span><span class="t">Desliza para entrar</span></div>
+  </div>
+
+  <!-- ═════════════ 7 ═════════════ -->
+  <h2><span class="num">07</span>El coche de letras</h2>
+  <div class="dos">
+    <p>La palabra <b>MEHARI</b> es la carrocería: las letras, estrechas y pegadas, llenan el lateral y la última se corta con la caída del capó. Las ruedas son las dos <b>e</b> del nombre (la de Mehari y la de We), y encima van la capota y el parabrisas. Las letras forman el coche.</p>
+    <ul>
+      <li><b>A favor:</b> el más ingenioso y el que más se recuerda: se lee el nombre y se ve el coche a la vez.</li>
+      <li><b>A favor:</b> muy bueno para camisetas, el photocall y regalos para los invitados.</li>
+      <li><b>En contra:</b> a 56 px se pierden las letras y queda solo la silueta. Para el avatar pediría una versión reducida.</li>
+    </ul>
+  </div>
+  <h3>Logotipo vertical</h3>
+  <div class="rejilla">
+    <div class="lienzo sobre-blanco"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 7 sobre blanco">
+      <use href="#s7" x="90" y="-36" width="220" height="220" style="--c-coche:var(--naranja);--c-det:var(--tinta)"/>
+      <text x="200" y="206" text-anchor="middle" style="font:500 46px var(--font-titular);fill:var(--tinta)">Mehari We</text>
+      <text x="200" y="236" text-anchor="middle" style="font:600 11.5px var(--font-texto);letter-spacing:.34em;fill:var(--naranja-oscuro)">WEDDINGS &amp; EVENTS</text>
+    </svg></div>
+    <div class="lienzo sobre-naranja"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 7 sobre naranja">
+      <use href="#s7" x="90" y="-36" width="220" height="220" style="--c-coche:var(--azahar);--c-det:var(--tinta)"/>
+      <text x="200" y="206" text-anchor="middle" style="font:500 46px var(--font-titular);fill:var(--tinta)">Mehari We</text>
+      <text x="200" y="236" text-anchor="middle" style="font:600 11.5px var(--font-texto);letter-spacing:.34em;fill:var(--tinta)">WEDDINGS &amp; EVENTS</text>
+    </svg></div>
+    <div class="lienzo sobre-tinta"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 7 sobre tinta">
+      <use href="#s7" x="90" y="-36" width="220" height="220" style="--c-coche:var(--naranja);--c-det:var(--beige)"/>
+      <text x="200" y="206" text-anchor="middle" style="font:500 46px var(--font-titular);fill:var(--azahar)">Mehari We</text>
+      <text x="200" y="236" text-anchor="middle" style="font:600 11.5px var(--font-texto);letter-spacing:.34em;fill:var(--beige)">WEDDINGS &amp; EVENTS</text>
+    </svg></div>
+  </div>
+  <h3>Avatar y pantalla de carga</h3>
+  <div class="fila">
+    <div class="avatar sobre-naranja" style="width:150px;height:150px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 7" style="width:86%"><use href="#s7" style="--c-coche:var(--azahar);--c-det:var(--tinta)"/></svg></div>
+    <div class="avatar sobre-beige" style="width:150px;height:150px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 7" style="width:86%"><use href="#s7" style="--c-coche:var(--naranja);--c-det:var(--tinta)"/></svg></div>
+    <div class="avatar sobre-naranja" style="width:56px;height:56px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 7" style="width:86%"><use href="#s7" style="--c-coche:var(--azahar);--c-det:var(--tinta)"/></svg></div>
+    <div class="carga"><svg viewBox="0 0 200 200" aria-hidden="true" style="width:30%;margin:-6% 0 -8%"><use href="#s7" style="--c-coche:var(--azahar);--c-det:var(--tinta)"/></svg><span class="n">Mehari We</span><span class="s">Weddings &amp; Events</span><span class="t">Desliza para entrar</span></div>
+  </div>
+
+  <!-- ═════════════ 8 ═════════════ -->
+  <h2><span class="num">08</span>Las letras acanaladas</h2>
+  <div class="dos">
+    <p>El monograma <b>MWE</b> del 06, ahora grueso y cortado por las costillas, como los paneles de las puertas y como el telón de la pantalla de carga. Es lettering de los setenta, la década del coche: letras de carreras con franjas.</p>
+    <ul>
+      <li><b>A favor:</b> une las dos cosas que gustan, las letras y las costillas, sin dibujar el coche. Es el que más funciona como marca de ropa: camisetas, gorras y la lona del photocall.</li>
+      <li><b>A favor:</b> encaja con la pantalla de carga: las franjas del telón se cierran y forman las letras.</li>
+      <li><b>En contra:</b> las franjas finas piden un tamaño mínimo; a 56 px se funden y el monograma queda macizo, aunque se sigue leyendo.</li>
+    </ul>
+  </div>
+  <h3>Logotipo vertical</h3>
+  <div class="rejilla">
+    <div class="lienzo sobre-blanco"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 8 sobre blanco">
+      <use href="#s8" x="120" y="-8" width="160" height="160" style="--c-m:var(--tinta);--c-we:var(--naranja)"/>
+      <text x="200" y="206" text-anchor="middle" style="font:500 46px var(--font-titular);fill:var(--tinta)">Mehari We</text>
+      <text x="200" y="236" text-anchor="middle" style="font:600 11.5px var(--font-texto);letter-spacing:.34em;fill:var(--naranja-oscuro)">WEDDINGS &amp; EVENTS</text>
+    </svg></div>
+    <div class="lienzo sobre-naranja"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 8 sobre naranja">
+      <use href="#s8" x="120" y="-8" width="160" height="160" style="--c-m:var(--tinta);--c-we:var(--azahar)"/>
+      <text x="200" y="206" text-anchor="middle" style="font:500 46px var(--font-titular);fill:var(--tinta)">Mehari We</text>
+      <text x="200" y="236" text-anchor="middle" style="font:600 11.5px var(--font-texto);letter-spacing:.34em;fill:var(--tinta)">WEDDINGS &amp; EVENTS</text>
+    </svg></div>
+    <div class="lienzo sobre-tinta"><svg viewBox="0 0 400 300" role="img" aria-label="Logotipo 8 sobre tinta">
+      <use href="#s8" x="120" y="-8" width="160" height="160" style="--c-m:var(--beige);--c-we:var(--naranja)"/>
+      <text x="200" y="206" text-anchor="middle" style="font:500 46px var(--font-titular);fill:var(--azahar)">Mehari We</text>
+      <text x="200" y="236" text-anchor="middle" style="font:600 11.5px var(--font-texto);letter-spacing:.34em;fill:var(--beige)">WEDDINGS &amp; EVENTS</text>
+    </svg></div>
+  </div>
+  <h3>Avatar y pantalla de carga</h3>
+  <div class="fila">
+    <div class="avatar sobre-naranja" style="width:150px;height:150px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 8" style="width:74%"><use href="#s8" style="--c-m:var(--tinta);--c-we:var(--azahar)"/></svg></div>
+    <div class="avatar sobre-beige" style="width:150px;height:150px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 8" style="width:74%"><use href="#s8" style="--c-m:var(--tinta);--c-we:var(--naranja-oscuro)"/></svg></div>
+    <div class="avatar sobre-naranja" style="width:56px;height:56px"><svg viewBox="0 0 200 200" role="img" aria-label="Avatar 8" style="width:74%"><use href="#s8" style="--c-m:var(--tinta);--c-we:var(--azahar)"/></svg></div>
+    <div class="carga"><svg viewBox="0 0 200 200" aria-hidden="true" style="width:30%;margin:-6% 0 -8%"><use href="#s8" style="--c-m:var(--azahar);--c-we:var(--azahar)"/></svg><span class="n">Mehari We</span><span class="s">Weddings &amp; Events</span><span class="t">Desliza para entrar</span></div>
+  </div>
+
   <!-- ───────────── Comparativa ───────────── -->
   <h2>Comparativa</h2>
   <table>
@@ -353,10 +499,13 @@
     <tr><td><b>03 El capó</b></td><td>Capó acanalado desde dentro</td><td>Bien</td><td>Solo quien lo conoce</td><td>Emocional, viajero</td></tr>
     <tr><td><b>04 El perfil</b></td><td>Lateral completo con puertas acanaladas</td><td>Regular (alargado)</td><td>Sí</td><td>Continuista con C</td></tr>
     <tr><td><b>05 El frontal</b></td><td>El coche entero de frente</td><td>Flojo</td><td>Sin duda</td><td>Clásico, artesanal</td></tr>
+    <tr><td><b>06 Las letras</b></td><td>Ninguna: monograma MWE</td><td>Muy bien</td><td>No</td><td>Elegante, nupcial</td></tr>
+    <tr><td><b>07 El coche de letras</b></td><td>Perfil formado por «MEHARI» y dos «e»</td><td>Flojo</td><td>Sí</td><td>Ingenioso, divertido</td></tr>
+    <tr><td><b>08 Las letras acanaladas</b></td><td>Las costillas, sobre el monograma</td><td>Bien</td><td>Solo por las costillas</td><td>Setentero, de marca de ropa</td></tr>
   </table>
 
   <h2>Para comentar</h2>
-  <div class="aviso"><b>Nuestra recomendación: 01 La mirada como símbolo y el marco del 02 como recurso.</b> La mirada es la que mejor resuelve lo que pidió el cliente: costillas, una pieza inconfundible del coche y un icono que se lee a cualquier tamaño. El parabrisas del 02 puede usarse aparte como marco para fotos en historias y carruseles.</div>
+  <div class="aviso"><b>Nuestra recomendación: 01 La mirada como símbolo y el marco del 02 como recurso.</b> La mirada es la que mejor resuelve lo que pidió el cliente: costillas, una pieza inconfundible del coche y un icono que se lee a cualquier tamaño. El parabrisas del 02 puede usarse aparte como marco para fotos en historias y carruseles. Si el cliente prefiere una marca solo de letras, la 08 es la que mejor conserva las costillas, y el monograma del 06 sirve como versión mínima de cualquiera de las dos.</div>
   <div class="aviso"><b>Sin chevrón ni matrícula.</b> El capó real lleva el emblema de la marca del fabricante y el frontal, la matrícula: ninguno de los dibujos los incluye.</div>
   <div class="aviso"><b>Distancia con el logo antiguo.</b> Ni monograma «M», ni caligrafía, ni sello circular. El avatar redondo es solo el recorte que impone Instagram.</div>
   <div class="aviso"><b>Contraste.</b> El texto sobre naranja va en tinta (5,7:1). El blanco sobre naranja se usa solo en el dibujo y en el nombre a gran tamaño de la pantalla de carga, como ya hace la web.</div>
