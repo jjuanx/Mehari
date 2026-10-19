@@ -65,7 +65,7 @@ Mehari/
 │  ├─ decisiones.md          ← registro de decisiones (fecha, decisión, motivo)
 │  ├─ material/              ← clasificación de las fotos y vídeos del cliente (clasificacion.csv) y dónde está cada cosa
 │  └─ planes/                ← plan de proyecto, estrategia de redes, etc.
-├─ redes/instagram/          ← publicaciones, calendario editorial y reels/<fecha>_<tema>/ (fuente HyperFrames)
+├─ redes/instagram/          ← publicaciones, calendario editorial, reels/<fecha>_<tema>/ (fuente HyperFrames) y destacadas/ (portadas)
 ├─ marca/                    ← identidad: README (colores, tipos, logo), tokens.css y propuestas/
 ├─ web/                      ← landing (más adelante)
 ├─ herramientas/material/    ← scripts para analizar, descartar, clasificar y seleccionar lotes de fotos y vídeos
