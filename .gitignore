@@ -9,6 +9,9 @@ Referencia/**/*.mov
 # Excepción: recursos animados de marca, ligeros (ver marca/animaciones/README.md)
 !marca/animaciones/renders/*.mp4
 
+# Estado local de HyperFrames (comprobaciones, historial y renders)
+.hyperframes/
+
 # Sistema
 .DS_Store
 Thumbs.db

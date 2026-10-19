@@ -24,6 +24,14 @@ Todos los scripts reciben la carpeta del material como primer argumento: `python
 | 6 | `6_seleccion.py` | Copia lo de calidad ≥4 a `_SELECCION/` y convierte las fotos a JPG |
 | 7 | `7_galeria.py` | Genera `galeria.html`, o la versión para Drive con `--drive "<carpeta de la selección>"` |
 
+Fuera de la secuencia, para preparar piezas:
+
+| Script | Qué hace |
+|---|---|
+| `difuminar.py` | Difumina matrículas, chevrones o caras en un vídeo y sigue la zona fotograma a fotograma. Uso y ejemplos en la cabecera del script. Avisa con `<< REVISAR` si pierde el seguimiento; aun así, revisa el resultado a ojo |
+
+**Vídeos del iPhone:** vienen en HDR (HLG). Antes de montarlos, conviértelos a SDR BT.709 con el comando de la cabecera de `difuminar.py`. Si no, el naranja del coche sale amarillo y el render final queda marcado como HDR.
+
 ## Paso 2: revisar las movidas a ojo
 
 El detector usa la nitidez de la mejor zona de la foto, pero confunde los desenfoques buscados (flores en primer plano, contraluces, blanco y negro con grano) con fotos movidas. Por eso:
