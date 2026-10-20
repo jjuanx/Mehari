@@ -8,6 +8,7 @@ Portadas de las destacadas de Instagram. Qué lleva cada destacada y por qué es
 | `portadas.html` | Fuente: iconos en SVG y colores de `marca/tokens.css`. Sin parámetros, abre la galería (cómo se ven en el perfil); con `?c=<id>&v=<variante>`, dibuja una portada a 1080×1920 |
 | `png/naranja/` | **Recomendada.** Fondo naranja Méhari, trazo azahar |
 | `png/cal/` | Alternativa. Fondo cal, trazo naranja tostado |
+| `historias/` | Las historias de cada destacada: qué se sube, en qué orden y con qué texto ([README](historias/README.md)) |
 
 Orden en el perfil: `01_bodas` (Bodas), `02_volante` (Al volante), `03_mehari` (Los Méhari),
 `04_reservar` (Reservar), `05_preguntas` (Preguntas), `06_sevilla` (Sevilla). `07_parejas` y

@@ -186,6 +186,8 @@ Seis al lanzar y dos más cuando haya material. Nombres de 10 caracteres o menos
 | 7 | *Parejas* (más adelante) | Prueba social | Solo con testimonios reales y por escrito (CLAUDE.md §4.3) |
 | 8 | *Prensa* (más adelante) | Prueba social | Diario de Sevilla, cuando haya permiso del periódico o del fotógrafo |
 
+Las historias ya montadas (34, con foto, texto e información) y el orden de subida de cada destacada están en [redes/instagram/destacadas/historias/](../../redes/instagram/destacadas/historias/README.md).
+
 Reglas para las stories de las destacadas: texto grande y corto, subtítulos si hay voz, un sticker de enlace a WhatsApp al final de cada destacada, y sin matrículas, sin emblema del fabricante y sin caras de menores (CLAUDE.md §4).
 
 ### Portadas
