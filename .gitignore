@@ -23,3 +23,8 @@ desktop.ini
 
 # Python
 __pycache__/
+
+# Historias de destacadas: fotos del cliente y exportaciones (se regeneran con preparar.py y exportar.sh)
+redes/instagram/destacadas/historias/fotos/
+redes/instagram/destacadas/historias/limpias/
+redes/instagram/destacadas/historias/jpg/
