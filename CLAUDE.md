@@ -68,7 +68,7 @@ Mehari/
 ├─ redes/instagram/          ← publicaciones, calendario editorial y reels/<fecha>_<tema>/ (fuente HyperFrames)
 ├─ marca/                    ← identidad: README (colores, tipos, logo), tokens.css y propuestas/
 ├─ web/                      ← landing (más adelante)
-├─ herramientas/material/    ← scripts para analizar, descartar, clasificar y seleccionar lotes de fotos y vídeos
+├─ herramientas/material/    ← scripts para analizar, descartar, clasificar y seleccionar lotes de fotos y vídeos, y para difuminar matrículas y logos
 └─ Referencia/               ← material del cliente: dossiers, logos antiguos, fotos, prensa
 ```
 

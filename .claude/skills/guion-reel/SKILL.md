@@ -121,6 +121,8 @@ No reinventes el render: **delega en HyperFrames**, que ya garantiza un render d
 1. Entra siempre por la skill `hyperframes`, que decide el flujo.
 2. Lo normal será `music-to-video` (fotos con música) o `general-video` (varias escenas con vídeo). Para subtítulos sobre vídeo, `embedded-captions`.
 3. El proyecto vive en `redes/instagram/reels/<AAAA-MM-DD>_<tema>/` (o `sin-fecha_<tema>/`). Los MP4 **no se suben a Git** (`.gitignore`), así que se comparten por el mismo canal que el material pesado.
+4. **Vídeo del cliente**: revisa cada tramo a resolución completa, no en miniatura (volantes con el chevrón, matrículas de fondo, rótulos traseros, fundas de rueda). Los vídeos del iPhone vienen en HDR (HLG): pásalos a SDR BT.709 antes de montar. Para tapar lo que no se pueda recortar, `herramientas/material/difuminar.py` (ver su `README.md`).
+5. **Cierre**: reutiliza `compositions/cierre.html` del primer reel (`redes/instagram/reels/2026-10-23_las-llaves-son-vuestras/`) hasta que haya logo.
 
 ## Flujo
 
