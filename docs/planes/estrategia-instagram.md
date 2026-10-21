@@ -144,7 +144,7 @@ La skill recomienda 1–2 publicaciones diarias para marcas visuales. Para una m
 
 ### Antes de publicar nada (bloqueante)
 
-La cuenta no se abre al público hasta tener:
+La cuenta no se abre al público hasta tener lo siguiente. Usuario, bio, destacadas, fijadas y grid semilla están concretados en [perfil-redes.md](perfil-redes.md), que sustituye las propuestas de bio y destacadas de esta lista.
 
 - [ ] **Nombre, usuario y logo** de la marca nueva.
 - [ ] **WhatsApp y email** de la marca nueva.
