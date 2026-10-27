@@ -84,7 +84,8 @@ La primera frase (66 caracteres) se lee entera antes del "más".
 ## Pendiente antes de publicar (bloqueante)
 
 - [ ] Confirmar que el 625 06 42 93 tiene WhatsApp (sale en el vídeo y en el copy).
-- [ ] Usuario de Instagram y hashtag de marca.
+- [x] Usuario de Instagram: `@mehari.we` (2026-10-27).
+- [ ] Hashtag de marca.
 - [ ] Aprobación del cliente y de otro miembro del equipo.
 
 ## Checklist
