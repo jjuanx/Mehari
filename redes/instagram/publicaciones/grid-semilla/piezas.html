@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grid semilla</title>
+<!--
+  Piezas estáticas del grid semilla de Mehari We (fotos y carruseles), a 1080×1440 (3:4).
+  - Sin parámetros: muestra todas las diapositivas en pequeño, para revisarlas.
+  - ?p=<pieza>&s=<n>: dibuja una sola diapositiva a tamaño real para exportarla (ver README.md).
+  Fotos: las retocadas de redes/instagram/destacadas/historias/limpias/ (matrículas difuminadas).
+  Colores de marca/tokens.css. Tipografías provisionales (Fraunces y Jost), como en el reel.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Jost:wght@400;500&display=block" rel="stylesheet">
+<style>
+  :root {
+    --naranja: #EE7D1F;
+    --beige: #DCC6A0;
+    --cal: #F7F1E6;
+    --tinta: #2B211A;
+    --naranja-oscuro: #C2560E;
+    --azahar: #FFFCF5;
+    --font-titular: 'Fraunces', Georgia, serif;
+    --font-texto: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--cal); color: var(--tinta); font-family: var(--font-texto); }
+
+  .slide { width: 1080px; height: 1440px; position: relative; overflow: hidden; background: var(--tinta); }
+  .slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  /* Marca discreta arriba a la izquierda */
+  .marca { position: absolute; top: 64px; left: 72px; font-family: var(--font-titular); font-weight: 600;
+           font-size: 34px; color: var(--azahar); text-shadow: 0 2px 12px rgba(0,0,0,.35); }
+  .marca.oscura { color: var(--tinta); text-shadow: none; }
+
+  /* Diapositiva de foto con idea: degradado y texto abajo */
+  .velo { position: absolute; left: 0; right: 0; bottom: 0; height: 62%;
+          background: linear-gradient(to top, rgba(43,33,26,.92) 0%, rgba(43,33,26,.55) 45%, rgba(43,33,26,0) 100%); }
+  .pie { position: absolute; left: 72px; right: 72px; bottom: 96px; color: var(--azahar); }
+  .num { font-family: var(--font-titular); font-size: 40px; color: var(--naranja); margin-bottom: 18px; letter-spacing: .04em; }
+  .idea { font-family: var(--font-titular); font-weight: 600; font-size: 76px; line-height: 1.05; }
+  .detalle { font-size: 36px; line-height: 1.35; margin-top: 22px; opacity: .92; max-width: 30ch; }
+
+  /* Portada de carrusel */
+  .portada .velo { height: 70%; }
+  .portada .titulo { font-family: var(--font-titular); font-weight: 600; font-size: 104px; line-height: 1.0; }
+  .portada .sub { font-size: 40px; margin-top: 26px; }
+  .desliza { position: absolute; right: 72px; bottom: 96px; font-size: 30px; color: var(--azahar); opacity: .85; }
+
+  /* Portada partida (naranja o beige) */
+  .partida { display: flex; }
+  .partida .mitad { position: relative; width: 50%; height: 100%; overflow: hidden; }
+  .partida .mitad img { position: absolute; inset: 0; }
+  .partida .franja { position: absolute; top: 0; height: 58%; left: 50%; width: 10px; margin-left: -5px; background: var(--azahar);
+                     -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent); }
+  .partida .centro { position: absolute; left: 0; right: 0; bottom: 120px; text-align: center; color: var(--azahar); }
+  .partida .titulo { font-family: var(--font-titular); font-weight: 600; font-size: 118px; line-height: 1; text-shadow: 0 4px 24px rgba(0,0,0,.45); }
+  .partida .sub { font-size: 40px; margin-top: 22px; text-shadow: 0 2px 14px rgba(0,0,0,.5); }
+  .partida .velo { height: 50%; }
+
+  /* Etiqueta de color sobre foto completa */
+  .etiqueta { position: absolute; left: 72px; bottom: 96px; color: var(--azahar); }
+  .etiqueta .color { font-family: var(--font-titular); font-weight: 600; font-size: 120px; line-height: 1; }
+  .etiqueta .detalle { margin-top: 18px; }
+
+  /* Cierre con llamada a la acción */
+  .cierre { background: var(--cal); display: flex; flex-direction: column; justify-content: center; padding: 0 96px; }
+  .cierre .costillas { display: grid; gap: 14px; width: 220px; margin-bottom: 72px; }
+  .cierre .costillas i { display: block; height: 22px; background: var(--naranja); }
+  .cierre h2 { font-family: var(--font-titular); font-weight: 600; font-size: 88px; line-height: 1.05; color: var(--tinta); }
+  .cierre p { font-size: 40px; line-height: 1.4; margin-top: 36px; color: var(--tinta); max-width: 26ch; }
+  .cierre .boton { display: inline-block; margin-top: 64px; background: var(--naranja); color: var(--tinta);
+                   font-weight: 500; font-size: 40px; padding: 26px 52px; border-radius: 999px; }
+  .cierre .tel { font-size: 34px; margin-top: 26px; color: var(--naranja-oscuro); }
+  .cierre .firma { position: absolute; left: 96px; bottom: 80px; font-family: var(--font-titular); font-weight: 600; font-size: 40px; }
+  .cierre .firma small { display: block; font-family: var(--font-texto); font-weight: 400; font-size: 20px; letter-spacing: .32em; margin-top: 6px; }
+
+  /* Modo revisión */
+  .revision { padding: 32px 16px 64px; max-width: 1200px; margin: 0 auto; }
+  .revision h1 { font-family: var(--font-titular); font-size: 30px; margin-bottom: 6px; }
+  .revision h2 { font-size: 18px; font-weight: 500; margin: 36px 0 12px; }
+  .fila { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; }
+  .mini { flex: none; width: 216px; height: 288px; overflow: hidden; border-radius: 6px; }
+  .mini .slide { transform: scale(.2); transform-origin: 0 0; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) body.modo-revision { background: #141210; color: #f2ece2; }
+  }
+  :root[data-theme="dark"] body.modo-revision { background: #141210; color: #f2ece2; }
+</style>
+</head>
+<body>
+<script>
+const FOTOS = '../../destacadas/historias/limpias/';
+const foto = (id, pos = '50% 50%') => `<img src="${FOTOS}${id}.jpg" style="object-position:${pos}" alt="">`;
+const marca = (oscura) => `<div class="marca${oscura ? ' oscura' : ''}">Mehari We</div>`;
+
+const cierre = (titulo, texto, boton) => `
+  <div class="slide cierre">
+    <div class="costillas"><i></i><i></i><i></i><i></i></div>
+    <h2>${titulo}</h2>
+    <p>${texto}</p>
+    <div><span class="boton">${boton}</span></div>
+    <div class="tel">WhatsApp · 625 06 42 93</div>
+    <div class="firma">Mehari We<small>WEDDINGS &amp; EVENTS</small></div>
+  </div>`;
+
+const idea = (n, id, pos, texto, detalle) => `
+  <div class="slide">${foto(id, pos)}<div class="velo"></div>${marca()}
+    <div class="pie"><div class="num">${String(n).padStart(2, '0')}</div>
+      <div class="idea">${texto}</div>${detalle ? `<div class="detalle">${detalle}</div>` : ''}</div>
+  </div>`;
+
+const PIEZAS = {
+  // Fotos únicas: sin texto, la foto manda
+  'foto-f0345': [`<div class="slide">${foto('F0345', '33% 50%')}</div>`],
+  'foto-f0524': [`<div class="slide">${foto('F0524', '24% 50%')}</div>`],
+  'foto-f1839': [`<div class="slide">${foto('F1839')}</div>`],
+
+  // Carrusel para guardar y enviar al fotógrafo
+  'ideas-fotos': [
+    `<div class="slide portada">${foto('F1725', '50% 50%')}<div class="velo"></div>${marca()}
+       <div class="pie"><div class="titulo">8 fotos para pedirle a vuestro fotógrafo</div>
+       <div class="sub">si salís de la boda en un Méhari</div></div><div class="desliza">Desliza →</div></div>`,
+    idea(1, 'F0022', '40% 50%', 'Al volante, recién casados', 'Lo podéis conducir vosotros, con una clase antes de la boda.'),
+    idea(2, 'F0329', '45% 50%', 'El brindis sin bajar del coche', ''),
+    idea(3, 'F1508', '50% 50%', 'Los anillos, en el asiento de atrás', ''),
+    idea(4, 'F1853', '50% 50%', 'Junto al mar, con el coche en primer plano', ''),
+    idea(5, 'F0047', '60% 50%', 'Las cestas con vuestras flores', 'Las dos cestas de mimbre de atrás se decoran con las flores de la boda.'),
+    idea(6, 'F1465', '50% 50%', 'Sentados en la trasera', 'Con el Méhari beige.'),
+    idea(7, 'F0619', '45% 50%', 'Mirando a cámara, en marcha', ''),
+    idea(8, 'F0750', '50% 50%', 'La llegada, con el cielo rosa', 'La luz del final de la tarde.'),
+    cierre('Guardadlo para enseñárselo a vuestro fotógrafo', '¿Os casáis en 2027? Escribidnos vuestra fecha y os decimos si hay un Méhari libre.', 'Pedir fecha'),
+  ],
+
+  // Carrusel de elección: invita a comentar
+  'naranja-beige': [
+    `<div class="slide partida">
+       <div class="mitad">${foto('F1018', '50% 50%')}</div>
+       <div class="mitad">${foto('F0774', '30% 50%')}</div>
+       <div class="velo"></div><div class="franja"></div>${marca()}
+       <div class="centro"><div class="titulo">¿Naranja o beige?</div><div class="sub">Desliza y elegid el vuestro →</div></div>
+     </div>`,
+    `<div class="slide">${foto('F1018')}<div class="velo"></div>${marca()}
+       <div class="etiqueta"><div class="color">Naranja</div><div class="detalle">El que no pasa desapercibido en ninguna foto.</div></div></div>`,
+    `<div class="slide">${foto('F0774', '42% 50%')}<div class="velo"></div>${marca()}
+       <div class="etiqueta"><div class="color">Beige</div><div class="detalle">Tonos suaves que van con todo.</div></div></div>`,
+    cierre('¿Cuál elegiríais?', 'Contádnoslo en comentarios. Y si ya tenéis fecha, escribidnos y os decimos si está libre.', 'Pedir fecha'),
+  ],
+};
+
+const q = new URLSearchParams(location.search);
+const p = q.get('p');
+if (p && PIEZAS[p]) {
+  document.body.innerHTML = PIEZAS[p][Number(q.get('s') || 0)];
+} else {
+  document.body.classList.add('modo-revision');
+  document.body.innerHTML = `<div class="revision"><h1>Grid semilla</h1>
+    <p>Piezas estáticas a 1080×1440 (3:4). Cada fila es una publicación; desliza a la derecha.</p>
+    ${Object.entries(PIEZAS).map(([id, slides]) => `<h2>${id} · ${slides.length} diapositiva${slides.length > 1 ? 's' : ''}</h2>
+      <div class="fila">${slides.map(s => `<div class="mini">${s}</div>`).join('')}</div>`).join('')}</div>`;
+}
+</script>
+</body>
+</html>

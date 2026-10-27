@@ -232,6 +232,8 @@ Por qué estas piezas:
 
 Cada pieza se prepara con la skill `nueva-publicacion`.
 
+> **Producción (2026-10-27):** las fotos y los carruseles están hechos en [`redes/instagram/publicaciones/grid-semilla/`](../../redes/instagram/publicaciones/grid-semilla/README.md). Cambian F0538 → F0524, F2131 → F1839 y cuatro fotos del carrusel de ideas, y el reel de V066/V067 no se puede usar (menor y matrícula). Motivos en su README.
+
 ---
 
 ## 9. TikTok: qué cambia respecto a Instagram
