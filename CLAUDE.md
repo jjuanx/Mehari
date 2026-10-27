@@ -67,6 +67,7 @@ Mehari/
 │  └─ planes/                ← plan de proyecto, estrategia de redes, etc.
 ├─ redes/instagram/          ← publicaciones, calendario editorial, reels/<fecha>_<tema>/ (fuente HyperFrames) y destacadas/ (portadas)
 ├─ marca/                    ← identidad: README (colores, tipos, logo), tokens.css y propuestas/
+├─ comercial/dossier-novios/ ← dossier de bodas para las parejas (HTML → PDF; el PDF va a Drive)
 ├─ web/                      ← landing (más adelante)
 ├─ herramientas/material/    ← scripts para analizar, descartar, clasificar y seleccionar lotes de fotos y vídeos, y para difuminar matrículas y logos
 └─ Referencia/               ← material del cliente: dossiers, logos antiguos, fotos, prensa
