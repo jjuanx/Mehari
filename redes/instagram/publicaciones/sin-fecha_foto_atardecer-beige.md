@@ -12,7 +12,7 @@
 
 ## Material
 
-- F0524 retocada (`destacadas/historias/limpias/`), recorte 3:4 con la pareja y el coche. JPEG: `grid-semilla/jpg/foto-f0524/01.jpg`. revision-marca: **APTA** (matrícula difuminada).
+- F0524 retocada (`destacadas/historias/limpias/`), recorte 3:4 con la pareja y el coche. JPEG: `grid-semilla/jpg/foto-f0524/01.jpg`. revision-marca: **APTA** (placa lisa y emblema borrado con `retocar_foto.py`).
 - Sustituye a F0538 del plan: es la misma pareja y la misma luz, pero en F0538 no sale el coche.
 
 ## Copy

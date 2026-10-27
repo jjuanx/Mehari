@@ -22,7 +22,7 @@ Los JPEG están en `jpg/<pieza>/NN.jpg`, en el orden en que se suben.
 
 ## Revisión de marca
 
-Todas las fotos salen de `redes/instagram/destacadas/historias/limpias/`, que ya tienen las matrículas y los emblemas difuminados. Al montar se revisaron otra vez a tamaño real los volantes de F1018, F0022, F0329 y F0619: el centro queda tapado por las manos o fuera de plano. Se ve la placa «Méhari» del salpicadero, que sí es nuestra. No hay caras de menores reconocibles (en F0774 y F1018 la gente del fondo es adulta o se ve a lo lejos).
+Todas las fotos salen de `redes/instagram/destacadas/historias/limpias/`. En F0345, F0524, F0750 y F1839 se sustituyó el difuminado, que se notaba mucho, por una placa lisa y los emblemas borrados con `herramientas/material/retocar_foto.py`. La placa roja del frontal de F0345 no queda bien rellenada: sigue difuminada en el fichero y la foto suelta va con un zoom ×1,1 que la deja fuera. Al montar se revisaron otra vez a tamaño real los volantes de F1018, F0022, F0329 y F0619: el centro queda tapado por las manos o fuera de plano. Se ve la placa «Méhari» del salpicadero, que sí es nuestra. No hay caras de menores reconocibles (en F0774 y F1018 la gente del fondo es adulta o se ve a lo lejos).
 
 ## Volver a exportar
 

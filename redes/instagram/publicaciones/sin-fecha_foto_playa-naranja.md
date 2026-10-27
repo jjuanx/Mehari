@@ -12,7 +12,7 @@
 
 ## Material
 
-- F1839 retocada (`destacadas/historias/limpias/`), vertical 3:4 sin recorte. JPEG: `grid-semilla/jpg/foto-f1839/01.jpg`. revision-marca: **APTA** (matrícula difuminada).
+- F1839 retocada (`destacadas/historias/limpias/`), vertical 3:4 sin recorte. JPEG: `grid-semilla/jpg/foto-f1839/01.jpg`. revision-marca: **APTA** (placa lisa y emblema borrado con `retocar_foto.py`).
 - Sustituye a F2131 (dron) del plan: solo mide 1170×671 y se vería pixelada.
 
 ## Copy

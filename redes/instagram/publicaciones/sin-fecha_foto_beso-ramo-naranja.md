@@ -12,7 +12,7 @@
 
 ## Material
 
-- F0345 retocada (`destacadas/historias/limpias/`), recorte 3:4 centrado en la pareja. JPEG: `grid-semilla/jpg/foto-f0345/01.jpg`. revision-marca: **APTA** (matrícula difuminada; sin emblemas a la vista).
+- F0345 retocada (`destacadas/historias/limpias/`), recorte 3:4 centrado en la pareja. JPEG: `grid-semilla/jpg/foto-f0345/01.jpg`. revision-marca: **APTA** (emblema del capó borrado con `retocar_foto.py`; la placa roja del frontal queda fuera con un zoom ×1,1).
 - Sin texto encima: la foto manda.
 
 ## Copy

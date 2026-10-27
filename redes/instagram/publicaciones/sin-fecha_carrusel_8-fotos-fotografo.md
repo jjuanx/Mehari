@@ -23,10 +23,10 @@ Fotos retocadas de `redes/instagram/destacadas/historias/limpias/`. JPEG en `gri
 | 3 | F0329 (brindis al volante) | APTA. Manos sobre el volante |
 | 4 | F1508 (anillos en el asiento trasero) | APTA |
 | 5 | F1853 (junto al mar con barcas) | APTA (retocada) |
-| 6 | F0047 (cesta de flores) | APTA (matrícula difuminada) |
+| 6 | F0047 (cesta de flores) | APTA (no se ve matrícula) |
 | 7 | F1465 (sentados en la trasera del beige) | APTA |
 | 8 | F0619 (a cámara, en marcha) | APTA. Centro del volante tapado |
-| 9 | F0750 (llegada con el cielo rosa) | APTA (retocada) |
+| 9 | F0750 (llegada con el cielo rosa) | APTA (placa lisa y emblema borrado con `retocar_foto.py`) |
 | 10 Cierre | Fondo cal, costillas, CTA | — |
 
 ## Diapositivas
