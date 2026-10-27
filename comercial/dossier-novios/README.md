@@ -28,7 +28,9 @@ El PDF (unos 16 MB) no se versiona: se sube a Drive · `Mehari We/02_Produccion/
 
 - **Logo**: provisional (wordmark tipográfico con Fraunces y Jost). Cuando la grafista entregue el
   definitivo, se cambia solo dentro de `<template id="logo">` en `index.html`.
-- **Fotos**: todas salen de `redes/instagram/destacadas/historias/limpias/` (matrículas ya
-  difuminadas, sin marca antigua ni menores). Pasa igualmente `revision-marca` sobre el PDF.
+- **Fotos**: todas salen de `redes/instagram/destacadas/historias/limpias/`, sin marca antigua ni
+  menores. Las matrículas visibles van con placa lisa (`herramientas/material/retocar_foto.py`, PR #21):
+  F0345, F0524, F0750 y F1839 vienen de `feature/grid-semilla`, y F2194 se retocó para el dossier con
+  `--placa 967,643,1044,624,1043,654,966,676`. Pasa igualmente `revision-marca` sobre el PDF.
 - **A validar con el cliente**: el paso a paso de la reserva (página 12), la respuesta «solo hay dos
   coches y las fechas de temporada vuelan» (página 13) y el uso de la cita del *Diario de Sevilla*.
