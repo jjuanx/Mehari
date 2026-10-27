@@ -7,7 +7,7 @@ destination: instagram-reels
 aspect: "9:16"
 language: es
 audience: parejas que se casan en 2027
-length: 22s
+length: 18s
 ---
 
 # Brief

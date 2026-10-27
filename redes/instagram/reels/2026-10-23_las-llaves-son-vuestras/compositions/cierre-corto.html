@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <!-- Cierre corto de reel, 1,5 s (el de 3 s, con los tiempos a la mitad). Reutilizable: copia este fichero y móntalo al final del reel.
+         Las tipografías se cargan desde assets/fonts/ del proyecto que lo monta. -->
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "Fraunces"; src: url("assets/fonts/Fraunces.woff2") format("woff2"); font-weight: 300 700; }
+        @font-face { font-family: "Jost"; src: url("assets/fonts/Jost.woff2") format("woff2"); font-weight: 300 800; }
+        #root { position: absolute; inset: 0; background: #2B211A; font-family: "Jost", sans-serif; }
+        .costilla { position: absolute; left: 0; width: 1080px; background: #EE7D1F; transform-origin: 50% 50%; }
+        .textos-cierre { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; padding: 860px 110px 0; gap: 24px; }
+        .mascara { overflow: hidden; padding-bottom: 8px; }
+        #marca { display: block; font-family: "Fraunces", serif; font-weight: 500; font-size: 112px; line-height: 1.05; color: #FFFCF5; text-align: center; }
+        #subtitulo { font-weight: 600; font-size: 28px; letter-spacing: 0.42em; color: #DCC6A0; margin-bottom: 40px; }
+        #cta { font-weight: 600; font-size: 44px; color: #2B211A; background: #EE7D1F; padding: 28px 52px; border-radius: 999px; }
+        #whatsapp { font-weight: 500; font-size: 38px; color: #DCC6A0; }
+      </style>
+
+      <div id="root" data-composition-id="cierre" data-width="1080" data-height="1920">
+        <div id="costilla-1" class="costilla" style="top: 600px; height: 46px"></div>
+        <div id="costilla-2" class="costilla" style="top: 668px; height: 26px"></div>
+        <div id="costilla-3" class="costilla" style="top: 716px; height: 26px"></div>
+        <div id="costilla-4" class="costilla" style="top: 764px; height: 38px"></div>
+        <div class="textos-cierre">
+          <div class="mascara" data-layout-allow-overflow="true"><span id="marca">Mehari We</span></div>
+          <p id="subtitulo">WEDDINGS &amp; EVENTS</p>
+          <p id="cta">Escribidnos vuestra fecha</p>
+          <p id="whatsapp">WhatsApp · 625 06 42 93</p>
+        </div>
+      </div>
+
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        // Las costillas entran desde lados alternos y se estrechan hasta un friso sobre el nombre
+        ["#costilla-1", "#costilla-2", "#costilla-3", "#costilla-4"].forEach((id, i) => {
+          tl.fromTo(id, { x: i % 2 ? 1180 : -1180 }, { x: 0, duration: 0.25, ease: "expo.out" }, 0.025 + i * 0.03);
+        });
+        tl.fromTo(".costilla", { scaleX: 1 }, { scaleX: 0.3, duration: 0.25, ease: "power3.inOut", immediateRender: false }, 0.35);
+        tl.fromTo("#marca", { yPercent: 105 }, { yPercent: 0, duration: 0.3, ease: "expo.out" }, 0.375);
+        tl.fromTo("#subtitulo", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "sine.out" }, 0.5);
+        tl.fromTo("#cta", { opacity: 0, scale: 0.88 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power3.out" }, 0.575);
+        tl.fromTo("#whatsapp", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.175, ease: "power2.out" }, 0.675);
+        window.__timelines["cierre"] = tl;
+      </script>
+    </template>
+  </body>
+</html>
