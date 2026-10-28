@@ -1,6 +1,6 @@
 # Dossier para novios
 
-Dossier de bodas de Mehari We para enviar a las parejas que piden información. Sustituye a los dos
+Dossier de bodas de Méhari We para enviar a las parejas que piden información. Sustituye a los dos
 dossiers de la marca antigua (`Referencia/Dossier Mehari.pdf` y `Dossier Mehari (1).pdf`): mismo
 contenido, ampliado para que se entienda solo, con la identidad nueva y sin rastro de la antigua.
 
@@ -26,8 +26,8 @@ El PDF (unos 16 MB) no se versiona: se sube a Drive · `Mehari We/02_Produccion/
 
 ## Antes de enviarlo
 
-- **Logo**: provisional (wordmark tipográfico con Fraunces y Jost). Cuando la grafista entregue el
-  definitivo, se cambia solo dentro de `<template id="logo">` en `index.html`.
+- **Logo**: el aprobado, versión 03 en blanco (`marca/logo/mehari-we-blanco.svg`), en la portada y en
+  el contacto. Se cambia en `<template id="logo">` de `index.html`.
 - **Fotos**: todas salen de `redes/instagram/destacadas/historias/limpias/`, sin marca antigua ni
   menores. Las matrículas visibles van con placa lisa (`herramientas/material/retocar_foto.py`, PR #21):
   F0345, F0524, F0750 y F1839 vienen de `feature/grid-semilla`, y F2194 se retocó para el dossier con

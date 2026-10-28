@@ -2,11 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Mehari We · Dossier para novios</title>
+<title>Méhari We · Dossier para novios</title>
 <!--
   Dossier para enviar a las parejas. Cada <section class="pag"> es una página de 1440×810 (16:9).
-  PDF: ver README.md. Logo provisional (wordmark tipográfico) en <template id="logo">:
-  cuando llegue el definitivo, se cambia solo ahí.
+  PDF: ver README.md. Logo aprobado (marca/logo/, versión 03 en blanco) en <template id="logo">.
   Fotos: las limpias de las destacadas (matrículas ya difuminadas). Datos: docs/cliente/brief.md.
 -->
 <style>
@@ -47,9 +46,7 @@
   .sobre-foto .folio, .sobre-costillas .folio { color: var(--azahar); opacity: .8; }
 
   /* Logo provisional */
-  .logo { display: inline-flex; flex-direction: column; align-items: center; color: inherit; }
-  .logo .n { font: 400 1em/1 var(--font-titular); letter-spacing: -.01em; }
-  .logo .s { font: 500 .17em/1 var(--font-texto); letter-spacing: .34em; text-transform: uppercase; margin-top: .55em; padding-left: .34em; }
+  .logo { display: block; width: auto; margin: 0 auto; object-fit: contain; }
 
   /* Marcadores de datos pendientes: se ven a propósito */
   .marcador { border-bottom: 2px dashed currentColor; opacity: .7; }
@@ -60,7 +57,7 @@
   /* 01 · Portada */
   .portada .velo { background: linear-gradient(180deg, rgba(43,33,26,0) 45%, rgba(43,33,26,.7) 100%), linear-gradient(270deg, rgba(43,33,26,.35) 0%, rgba(43,33,26,0) 45%); }
   .portada .bloque { position: absolute; right: 96px; bottom: 84px; text-align: center; color: var(--azahar); }
-  .portada .logo { font-size: 104px; }
+  .portada .logo { height: 340px; filter: drop-shadow(0 2px 14px rgba(43,33,26,.35)); }
   .portada .bajada { margin-top: 34px; font: 500 14px/1 var(--font-texto); letter-spacing: .4em; text-transform: uppercase; }
 
   /* Composición en dos columnas */
@@ -160,9 +157,9 @@
 
   /* 14 · Contacto */
   .contacto { color: var(--azahar); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-  .contacto .panel { background: var(--naranja); padding: 64px 96px 58px; outline: 2px solid var(--azahar); outline-offset: -18px; }
-  .contacto .logo { font-size: 72px; }
-  .contacto h2 { font-size: 46px; margin: 44px 0 30px; }
+  .contacto .panel { background: var(--naranja); padding: 54px 96px 52px; outline: 2px solid var(--azahar); outline-offset: -18px; }
+  .contacto .logo { height: 230px; }
+  .contacto h2 { font-size: 46px; margin: 30px 0 28px; }
   .contacto .datos { display: grid; grid-template-columns: repeat(3, auto); gap: 0 56px; justify-content: center; }
   .contacto .datos div { font-size: 22px; }
   .contacto .datos .etiqueta { color: var(--tinta); display: block; margin-bottom: 10px; font-size: 12px; }
@@ -172,7 +169,7 @@
 <body>
 
 <template id="logo">
-  <span class="logo" aria-label="Mehari We · Weddings &amp; Events"><span class="n">Mehari We</span><span class="s">Weddings &amp; Events</span></span>
+  <img class="logo" src="../../marca/logo/mehari-we-blanco.svg" alt="Méhari We · Wedding &amp; Events">
 </template>
 
 <!-- Siluetas del techo (esquema, sin chevrón ni matrícula). Morro a la derecha. -->
@@ -204,13 +201,13 @@
     <div class="texto">
       <span class="etiqueta">Bienvenidos</span>
       <h2>Que el camino también sea parte de la boda</h2>
-      <p>Mehari We es una marca de bodas y eventos con dos Méhari clásicos, uno naranja y otro beige. Os llevamos de la iglesia a la celebración en un coche que no pasa desapercibido: abierto al sol, vestido de flores y rodeado de vuestros invitados.</p>
+      <p>Méhari We es una marca de bodas y eventos con dos Méhari clásicos, uno naranja y otro beige. Os llevamos de la iglesia a la celebración en un coche que no pasa desapercibido: abierto al sol, vestido de flores y rodeado de vuestros invitados.</p>
       <p class="suave">En este dossier os contamos cómo funciona, qué opciones tenéis y cómo reservar vuestra fecha. Y si os queda cualquier duda, nos escribís: os atendemos de forma personalizada, siempre.</p>
-      <div class="firma">El equipo de Mehari We</div>
+      <div class="firma">El equipo de Méhari We</div>
     </div>
     <img src="../../redes/instagram/destacadas/historias/limpias/F1508.jpg" alt="Novios enseñando los anillos dentro del Méhari naranja">
   </div>
-  <div class="folio"><span>Mehari We</span><span>02</span></div>
+  <div class="folio"><span>Méhari We</span><span>02</span></div>
 </section>
 
 <!-- 03 · Los coches -->
@@ -227,7 +224,7 @@
       <figure><img src="../../redes/instagram/destacadas/historias/limpias/F1465.jpg" alt="Novios sentados en la trasera del Méhari beige"><figcaption><span class="chip" style="background:var(--beige)"></span>Beige</figcaption></figure>
     </div>
   </div>
-  <div class="folio"><span>Mehari We</span><span>03</span></div>
+  <div class="folio"><span>Méhari We</span><span>03</span></div>
 </section>
 
 <!-- 04 · Foto a sangre -->
@@ -238,7 +235,7 @@
     <span class="etiqueta">Bodas y eventos</span>
     <h2>Del «sí, quiero» a la celebración</h2>
   </div>
-  <div class="folio"><span>Mehari We</span><span>04</span></div>
+  <div class="folio"><span>Méhari We</span><span>04</span></div>
 </section>
 
 <!-- 05 · Techo -->
@@ -270,7 +267,7 @@
       <p>Más privacidad o protección si el tiempo es incierto, sin perder el estilo clásico. El techo solar se puede abrir cuando queráis.</p>
     </div>
   </div>
-  <div class="folio"><span>Mehari We</span><span>05</span></div>
+  <div class="folio"><span>Méhari We</span><span>05</span></div>
 </section>
 
 <!-- 06 · Cestas -->
@@ -285,7 +282,7 @@
       <div class="mini"><img src="../../redes/instagram/destacadas/historias/limpias/F0047.jpg" alt="Flores en la cesta trasera del Méhari"></div>
     </div>
   </div>
-  <div class="folio"><span>Mehari We</span><span>06</span></div>
+  <div class="folio"><span>Méhari We</span><span>06</span></div>
 </section>
 
 <!-- 07 · Quién conduce -->
@@ -310,7 +307,7 @@
       </div>
     </div>
   </div>
-  <div class="folio"><span>Mehari We</span><span>07</span></div>
+  <div class="folio"><span>Méhari We</span><span>07</span></div>
 </section>
 
 <!-- 08 · Las llaves son vuestras -->
@@ -326,7 +323,7 @@
     </div>
     <div class="f"><img src="../../redes/instagram/destacadas/historias/limpias/F0329.jpg" style="object-position:55% 50%" alt="Los novios brindando, él al volante del Méhari"></div>
   </div>
-  <div class="folio"><span>Mehari We</span><span>08</span></div>
+  <div class="folio"><span>Méhari We</span><span>08</span></div>
 </section>
 
 <!-- 09 · El día -->
@@ -350,7 +347,7 @@
       <p>Llegáis a la hacienda o al lugar de la celebración en un coche que todos van a recordar, con tiempo para las fotos.</p>
     </div>
   </div>
-  <div class="folio"><span>Mehari We</span><span>09</span></div>
+  <div class="folio"><span>Méhari We</span><span>09</span></div>
 </section>
 
 <!-- 10 · El clásico que enamora -->
@@ -367,7 +364,7 @@
     </div>
     <img src="../../redes/instagram/destacadas/historias/limpias/F1958.jpg" style="object-position:68% 50%" alt="Novia riendo dentro del Méhari naranja">
   </div>
-  <div class="folio"><span>Mehari We</span><span>10</span></div>
+  <div class="folio"><span>Méhari We</span><span>10</span></div>
 </section>
 
 <!-- 11 · Galería -->
@@ -395,7 +392,7 @@
     <div class="barra"></div>
     <p><strong>El día de la boda, del coche nos ocupamos nosotros.</strong> <span class="suave">Vosotros solo tenéis que disfrutar.</span></p>
   </div>
-  <div class="folio"><span>Mehari We</span><span>12</span></div>
+  <div class="folio"><span>Méhari We</span><span>12</span></div>
 </section>
 
 <!-- 13 · Preguntas frecuentes -->
@@ -410,7 +407,7 @@
     <div><h3>¿Cuánto cuesta?</h3><p>Cada boda es distinta. Escribidnos con vuestra fecha y los lugares, y os preparamos un presupuesto personalizado.</p></div>
     <div><h3>¿Con cuánta antelación hay que reservar?</h3><p>Cuanto antes, mejor: solo hay dos coches y las fechas de temporada vuelan.</p></div>
   </div>
-  <div class="folio"><span>Mehari We</span><span>13</span></div>
+  <div class="folio"><span>Méhari We</span><span>13</span></div>
 </section>
 
 <!-- 14 · Contacto -->
