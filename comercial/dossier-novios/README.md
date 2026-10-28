@@ -31,6 +31,10 @@ El PDF (unos 16 MB) no se versiona: se sube a Drive · `Mehari We/02_Produccion/
 - **Fotos**: todas salen de `redes/instagram/destacadas/historias/limpias/`, sin marca antigua ni
   menores. Las matrículas visibles van con placa lisa (`herramientas/material/retocar_foto.py`, PR #21):
   F0345, F0524, F0750 y F1839 vienen de `feature/grid-semilla`, y F2194 se retocó para el dossier con
-  `--placa 967,643,1044,624,1043,654,966,676`. Pasa igualmente `revision-marca` sobre el PDF.
+  `--placa 967,643,1044,624,1043,654,966,676`. La de la página 10 (`fotos/beige-hiedra.jpg`) es de las
+  fotos nuevas del cliente (N32, sin matrícula ni emblemas visibles). Pasa igualmente `revision-marca`
+  sobre el PDF.
+- **Quiénes somos** (página 2): texto de la pasión por los bicilíndricos que pidió el cliente el
+  2026-10-28. No presenta la marca como club ni asociación: ver la nota del PR.
 - **A validar con el cliente**: el paso a paso de la reserva (página 12), la respuesta «solo hay dos
   coches y las fechas de temporada vuelan» (página 13) y el uso de la cita del *Diario de Sevilla*.
