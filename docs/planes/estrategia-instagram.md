@@ -1,4 +1,4 @@
-# Estrategia de Instagram — Mehari We
+# Estrategia de Instagram — Méhari We
 
 | Campo | Valor |
 |---|---|

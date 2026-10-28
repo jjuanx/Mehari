@@ -1,4 +1,4 @@
-# CLAUDE.md — Proyecto Mehari We
+# CLAUDE.md — Proyecto Méhari We
 
 Contexto compartido por las sesiones de Claude Code de **Alejandro, Juan y Nico**.
 Léelo entero antes de tocar nada. Todo el contenido del proyecto se redacta en **español**.
@@ -24,9 +24,9 @@ Todo lo que hagamos se juzga por una pregunta: *¿esto acerca a una pareja (o a 
 - El negocio de origen es **Mehari Tour Sur** (@mehari_toursur, @mehari_experiences). Lo llevaban **dos socios que se separan**. Nuestro cliente arranca una **marca nueva, con nombre y logo nuevos**.
 - El servicio, los coches, la información y el material fotográfico **son los mismos**, y tenemos derecho a usarlos.
 - **La marca nueva no debe ligarse a la antigua.** Nunca usamos el nombre "Mehari Tour Sur", su logo, su sello circular ni sus usuarios en el contenido de la marca nueva. Tampoco presentamos la marca como "antes Mehari Tour Sur".
-- **Nombre: Mehari We**, con el subtítulo **«Weddings & Events»** (aceptado por el cliente el 2026-10-16). Se escribe siempre así: «Mehari» sin tilde y «We» con mayúscula. Instagram: **`@mehari.we`** (confirmado el 2026-10-27).
-- **Logo: pendiente.** Al cliente le gustan las costillas y la pantalla de carga de la web, pero no el símbolo de la propuesta C (la parte de atrás con la rueda parecía un carro). Hay ocho propuestas nuevas en `marca/propuestas/mehari-we.html`: cinco con una pieza delantera del coche y tres solo con letras (monograma MWE, el coche formado con letras y el monograma con costillas).
-- **"Citroën" no aparece en ningún sitio** del contenido de la marca (textos, hashtags, logo, vídeos, web) para no atarnos a otra marca. El coche se describe como "Méhari", "Méhari clásico" o "nuestros Méhari". El cliente ha elegido un nombre con «Mehari» sabiendo que es una marca registrada del fabricante y la primera palabra de la marca antigua: por eso el logo no imita ningún logotipo del fabricante ni el de la marca antigua.
+- **Nombre: Méhari We**, con el subtítulo **«Wedding & Events»**, tal como lo escribe el logo aprobado (2026-10-28). Se escribe siempre así: «Méhari» con tilde, «We» con mayúscula y «Wedding» en singular. Sustituye a «Mehari We · Weddings & Events» (2026-10-16). Instagram: **`@mehari.we`** (confirmado el 2026-10-27).
+- **Logo: aprobado (2026-10-28).** Lo diseñó una grafista contratada por el cliente y el cliente lo ha aprobado: se usa tal cual, sin rediseñarlo ni retocarlo. La M de arriba (Méhari) y la W de abajo (Wedding) enmarcan el nombre. La versión principal es la 03 (trazo fino); hay otras dos de la misma grafista. Ficheros en `marca/logo/` (ver `marca/README.md`). Nuestras propuestas de `marca/propuestas/` quedan como histórico.
+- **"Citroën" no aparece en ningún sitio** del contenido de la marca (textos, hashtags, logo, vídeos, web) para no atarnos a otra marca. El coche se describe como "Méhari", "Méhari clásico" o "nuestros Méhari". El cliente ha elegido un nombre con «Mehari» sabiendo que es una marca registrada del fabricante y la primera palabra de la marca antigua. El logo de la grafista parte de una reinterpretación del doble chevrón del fabricante: el cliente lo sabe y lo ha aprobado, y el riesgo de marca es suyo. Nosotros nunca contamos ese origen en ningún contenido ni lo usamos como argumento.
 - **La marca no se presenta como "de Sevilla" ni "de Sevilla y Cádiz".** Hoy se trabaja allí, pero la marca está pensada para abrirse a cualquier sitio. Ni el nombre, ni el logo, ni la bio, ni los eslóganes se atan a una ciudad. Nombrar el lugar concreto de una boda o la ruta de la Sevilla Experience sí está bien.
 
 ## 3. El negocio (datos verificados en `Referencia/`)
@@ -120,7 +120,9 @@ Las decisiones también van, con fecha y motivo, a `docs/decisiones.md`.
 
 ## 9. Pendiente de definir
 
-- [ ] Logo: elegir entre las ocho propuestas de `marca/propuestas/mehari-we.html`. No debe parecerse al logo antiguo. Paleta casi cerrada (naranja y beige de los coches); tipografía en propuesta.
+- [ ] Pasar al logo y la grafía nuevos lo que ya está hecho con la marca provisional: cierre del reel «Las llaves son vuestras», animaciones de marca (`marca/animaciones/`), portadas de destacadas y avatar.
+- [ ] Pedir a la grafista el logo en SVG o PDF desde Illustrator (los SVG de `marca/logo/` están vectorizados desde el PNG) y la licencia de Charter, la fuente del nombre.
+- [ ] Tipografía de las piezas: seguir con Fraunces + Jost o pasar a las del logo (Charter + Metropolis).
 - [ ] Confirmar que el 625 06 42 93 tiene WhatsApp.
 - [ ] Precios y packs (de momento, "consultar presupuesto").
 - [ ] Presupuesto para publicidad en Meta.

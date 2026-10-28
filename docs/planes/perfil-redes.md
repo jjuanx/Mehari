@@ -1,4 +1,4 @@
-# Perfil de Instagram y TikTok — Mehari We
+# Perfil de Instagram y TikTok — Méhari We
 
 | Campo | Valor |
 |---|---|
@@ -122,8 +122,8 @@ Ya figura en `CLAUDE.md`, en el brief y en las fichas.
 
 | Red | Texto | Caracteres |
 |---|---|---|
-| Instagram | `Mehari We \| Coches de boda` | 26 de 30 |
-| TikTok | `Mehari We · Coches de boda` | 26 |
+| Instagram | `Méhari We \| Coches de boda` | 26 de 30 |
+| TikTok | `Méhari We · Coches de boda` | 26 |
 
 "Coche de boda" es lo que escribe una pareja en el buscador. No pone ciudad (CLAUDE.md §2).
 
@@ -166,7 +166,7 @@ Méhari clásicos para bodas 🧡 Conducís vosotros o con chófer. WhatsApp 625
 ## 5. Foto de perfil
 
 - **Definitiva:** el avatar del logo elegido (cada propuesta de `marca/propuestas/mehari-we.html` ya trae el suyo).
-- **Provisional:** "Mehari We" en azahar sobre naranja con las costillas, como el cierre del primer reel (`redes/instagram/reels/2026-10-23_las-llaves-son-vuestras/compositions/cierre.html`). Mantiene la coherencia entre el avatar, las portadas y el cierre de los reels.
+- **Provisional:** "Méhari We" en azahar sobre naranja con las costillas, como el cierre del primer reel (`redes/instagram/reels/2026-10-23_las-llaves-son-vuestras/compositions/cierre.html`). Mantiene la coherencia entre el avatar, las portadas y el cierre de los reels.
 - Nada de fotos del coche como avatar: a 110 px no se distinguen y la marca necesita que se reconozca el nombre.
 
 ---

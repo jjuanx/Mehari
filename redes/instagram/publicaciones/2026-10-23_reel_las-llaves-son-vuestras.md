@@ -46,7 +46,7 @@ Rejilla de 0,5 s (120 BPM): todos los cortes caen en el pulso. Sin voz.
 | E5 | 11,5–14 s | Detalle | Otra pareja: él al volante del naranja, ella con el ramo blanco, miran a cámara | **Naranja…** |
 | E6 | 14–16,5 s | Detalle | Una novia con un velo larguísimo cruza una calle con el Méhari beige detrás | **…o beige** (arriba, para no tapar a la novia) |
 | E7 | 16,5–19 s | Momento | Atardecer: la novia de pie en el naranja descapotado mientras él conduce | **¿Os casáis en 2027?** |
-| Cierre | 19–22 s | Cierre | Las costillas entran y forman un friso; aparecen el nombre, el subtítulo y la llamada a la acción | Mehari We · WEDDINGS & EVENTS · **Escribidnos vuestra fecha** · WhatsApp · 625 06 42 93 |
+| Cierre | 19–22 s | Cierre | Las costillas entran y forman un friso; aparecen el nombre, el subtítulo y la llamada a la acción | Méhari We · WEDDINGS & EVENTS · **Escribidnos vuestra fecha** · WhatsApp · 625 06 42 93 |
 
 Comprobación por escena: tras E2 se sabe que pueden conducirlo; tras E3, que también hay chófer; tras E4, lo de las cestas; tras E5 y E6, que hay dos colores; E7 pregunta si es para ellos; el cierre dice cómo pedirlo.
 
@@ -69,7 +69,7 @@ La primera frase (66 caracteres) se lee entera antes del "más".
 - **Música**: se añade en Instagram al subir el reel. Con cuenta de empresa, solo la biblioteca de audio con licencia comercial de Meta. Buscar algo alegre y cálido (pop acústico o swing) a unos 120 BPM. El vídeo va sin sonido original: el del primer plano lleva música de fondo de la propia boda.
 - **Portada**: `portada.png` (fotograma de 1,3 s con el rótulo del gancho). Funciona en el recorte 3:4 de la cuadrícula del perfil.
 - **Ubicación**: Sevilla.
-- **Texto alternativo**: Montaje de bodas reales con dos Méhari clásicos. Un novio salta al asiento del conductor de un Méhari naranja descapotado ante una iglesia mientras la novia levanta el ramo y los invitados aplauden. Lluvia de pétalos a la salida de la iglesia vista desde las cestas de flores del coche. Una pareja conduciendo el naranja. Una novia con un velo larguísimo junto al Méhari beige. Una novia de pie en el coche al atardecer. Cierre con el nombre Mehari We y el teléfono 625 06 42 93.
+- **Texto alternativo**: Montaje de bodas reales con dos Méhari clásicos. Un novio salta al asiento del conductor de un Méhari naranja descapotado ante una iglesia mientras la novia levanta el ramo y los invitados aplauden. Lluvia de pétalos a la salida de la iglesia vista desde las cestas de flores del coche. Una pareja conduciendo el naranja. Una novia con un velo larguísimo junto al Méhari beige. Una novia de pie en el coche al atardecer. Cierre con el nombre Méhari We y el teléfono 625 06 42 93.
 - **Comentario fijado** (opcional): «¿Quién de los dos conduciría? 👇». Pregunta real que invita a comentar y etiquetar a la pareja.
 
 ## Decisiones
