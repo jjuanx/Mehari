@@ -52,7 +52,7 @@ Todo dato sale del brief. Lo que falta lleva marcador `[ASÍ]`.
 | 9–15 s | Detalle de las cestas de mimbre con flores | **2/4** «Para que el coche vaya con vuestra boda:» / «dejad de conformaros con un lazo» / «empezad a llenar las cestas con vuestras flores» |
 | 15–21 s | Manos al volante o novios conduciendo | **3/4** «Para que la salida sea vuestra de verdad:» / «dejad de ir de copiloto» / «empezad a conducirlo vosotros, con clase previa» |
 | 21–28 s | Los dos Méhari juntos, naranja y beige | **4/4** «Y para tenerlo libre ese día:» / «dejad de esperar a última hora» / «empezad por escribirnos vuestra fecha» |
-| 28–30 s | Cierre | Mehari We · `@[usuario_por_definir]` |
+| 28–30 s | Cierre | Mehari We · `@mehari.we` |
 
 **Audio**: música con licencia y cortes en el pulso. Si existe, sonido real del motor al final.
 

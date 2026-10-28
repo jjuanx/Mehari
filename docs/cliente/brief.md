@@ -6,12 +6,12 @@ Origen: `Referencia/Dossier Mehari.pdf`, `Referencia/Dossier Mehari (1).pdf`, `R
 | Campo | Valor |
 |---|---|
 | Marca | **Mehari We** · subtítulo «Weddings & Events» (aceptado por el cliente el 2026-10-16) |
-| Instagram | `@[usuario_por_definir]` (cuenta nueva, desde cero) |
-| Email | `[EMAIL POR DEFINIR]` |
+| Instagram | `@mehari.we` (cuenta nueva, desde cero; confirmado el 2026-10-27) |
+| Email | mehariwe.info@gmail.com (confirmado el 2026-10-27) |
 | Teléfono | 625 06 42 93 (enlace internacional: `+34625064293`) |
 | WhatsApp | 625 06 42 93 (el mismo número; confirmar con el cliente que tiene WhatsApp) |
 | Zona actual | Sevilla y provincia de Cádiz (la marca no se ata a ellas: ver `CLAUDE.md` §2) |
-| Última actualización | 2026-10-16 |
+| Última actualización | 2026-10-27 |
 
 ---
 
@@ -23,7 +23,7 @@ Origen: `Referencia/Dossier Mehari.pdf`, `Referencia/Dossier Mehari (1).pdf`, `R
 
 ### Configuraciones del techo
 1. **Completamente abierto**, con la capota recogida atrás si se quiere. Ideal para días de sol y para ver el paisaje sin obstáculos.
-2. **Semiabierto**: la capota se recoge hasta la mitad del vehículo, aproximadamente. Combina estilo y protección.
+2. **Semiabierto**: la capota se recoge hasta la mitad del vehículo, aproximadamente: cubre la parte trasera y deja abierta la delantera. Combina estilo y protección.
 3. **Completamente cerrado**, con techo solar que se puede abrir. Da privacidad o protege si el tiempo es incierto, sin perder el estilo vintage.
 
 **Extra**: dos **cestas de mimbre** en la parte trasera para decorar con flores.

@@ -3,6 +3,9 @@ Referencia/**/*.pdf
 Referencia/**/*.mp4
 Referencia/**/*.mov
 
+# Exportaciones en PDF de las piezas comerciales (se suben a Drive · 02_Produccion)
+comercial/**/*.pdf
+
 # Exportaciones de vídeo
 *.mp4
 *.mov
