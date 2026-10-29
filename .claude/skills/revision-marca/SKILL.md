@@ -33,9 +33,9 @@ Abre la imagen y revisa:
 - Pegatinas, camisetas o merchandising con el sello circular (Giralda, Torre del Oro y palmeras) o con la "M" tricolor.
 - Marcas de agua o logos en las esquinas (las páginas de los dossiers llevan la "M" arriba a la derecha).
 - Portadas y páginas de texto de los dossiers: no se usan tal cual.
-- **Matrículas** de cualquier coche, también de fondo: no pueden leerse. Se recorta, se tapa o se difumina.
+- **Matrículas** de cualquier coche, también de fondo: no pueden leerse. Por orden de preferencia: se recorta; en fotos, placa lisa con `herramientas/material/retocar_foto.py` (no se nota); y solo si no hay otra forma (vídeo, placa muy pequeña), se difumina. Un rectángulo borroso llama más la atención que la matrícula.
 - **Caras de niños o menores**, también entre los invitados de fondo: se evita que aparezcan. Si salen, se recorta o se difumina la cara; si no se puede sin estropear la foto, NO APTA.
-- Logos o el nombre **"Citroën"** en el coche (chevrones en el capó, rótulos, llaveros) o en el entorno.
+- Logos o el nombre **"Citroën"** en el coche (chevrones en el capó, rótulos, llaveros) o en el entorno. En fotos, los chevrones sobre chapa lisa se borran con `retocar_foto.py --emblema`; la placa roja del frontal no queda bien rellenada y se deja fuera del encuadre.
 
 Resultado por cada imagen: **APTA**, **APTA CON RECORTE** (indica el encuadre) o **NO APTA** (indica el motivo).
 

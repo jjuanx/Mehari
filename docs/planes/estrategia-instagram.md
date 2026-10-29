@@ -1,10 +1,10 @@
-# Estrategia de Instagram — Mehari We
+# Estrategia de Instagram — Méhari We
 
 | Campo | Valor |
 |---|---|
 | Versión | 1 (propuesta del equipo, **pendiente de validar con el cliente**) |
 | Fecha | 2026-10-07 |
-| Alcance | Cuenta nueva `@[usuario_por_definir]`. Líneas: Bodas y Turismo |
+| Alcance | Cuenta nueva `@mehari.we`. Líneas: Bodas y Turismo |
 | Base | [docs/cliente/brief.md](../cliente/brief.md) y la skill `social` (coreyhaines31/marketingskills) |
 
 Los datos del negocio salen del brief. Lo que no está decidido lleva un marcador `[ASÍ]`. Las cifras de referencia de plataforma (formatos, límites) son generales de Instagram y se revisan con nuestros propios datos a partir del primer mes.
