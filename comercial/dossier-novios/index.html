@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Méhari We · Dossier para novios</title>
+<!--
+  Dossier para enviar a las parejas. Cada <section class="pag"> es una página de 1440×810 (16:9).
+  PDF: ver README.md. Logo aprobado (marca/logo/, versión 03 en blanco) en <template id="logo">.
+  Fotos: las limpias de las destacadas (matrículas ya difuminadas). Datos: docs/cliente/brief.md.
+-->
+<style>
+  @font-face { font-family: "Fraunces"; src: url("../../marca/animaciones/assets/fonts/Fraunces.woff2") format("woff2"); font-weight: 300 700; }
+  @font-face { font-family: "Jost"; src: url("../../marca/animaciones/assets/fonts/Jost.woff2") format("woff2"); font-weight: 300 800; }
+  :root {
+    --naranja: #EE7D1F; --beige: #DCC6A0; --cal: #F7F1E6; --tinta: #2B211A;
+    --naranja-oscuro: #C2560E; --verde-naranjo: #55703F; --azahar: #FFFCF5;
+    --font-titular: "Fraunces", Georgia, serif;
+    --font-texto: "Jost", "Helvetica Neue", Arial, sans-serif;
+    --costillas: repeating-linear-gradient(180deg, var(--naranja) 0 54px, var(--naranja-oscuro) 54px 108px);
+  }
+  @page { size: 1440px 810px; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #8a8178; }
+  body { font-family: var(--font-texto); color: var(--tinta); -webkit-font-smoothing: antialiased;
+         -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @media screen { .pag { margin: 32px auto; box-shadow: 0 12px 40px rgba(0,0,0,.25); } }
+
+  .pag { width: 1440px; height: 810px; position: relative; overflow: hidden; background: var(--cal);
+         page-break-after: always; break-after: page; }
+  .pag:last-child { page-break-after: auto; break-after: auto; }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  /* Tipografía */
+  .etiqueta { font: 500 13px/1 var(--font-texto); letter-spacing: .28em; text-transform: uppercase; color: var(--naranja-oscuro); }
+  h1, h2 { font-family: var(--font-titular); font-weight: 400; letter-spacing: -.015em; }
+  h2 { font-size: 60px; line-height: 1.02; margin: 22px 0 28px; }
+  h3 { font: 600 15px/1.2 var(--font-texto); letter-spacing: .16em; text-transform: uppercase; margin-bottom: 12px; }
+  p { font-size: 20px; line-height: 1.55; font-weight: 400; }
+  p + p { margin-top: 16px; }
+  .suave { opacity: .78; }
+  em { font-style: normal; color: var(--naranja-oscuro); }
+
+  /* Pie de página: marca y número */
+  .folio { position: absolute; left: 72px; right: 72px; bottom: 34px; display: flex; justify-content: space-between;
+           font: 500 12px/1 var(--font-texto); letter-spacing: .24em; text-transform: uppercase; opacity: .55; }
+  .sobre-foto .folio, .sobre-costillas .folio { color: var(--azahar); opacity: .8; }
+
+  /* Logo provisional */
+  .logo { display: block; width: auto; margin: 0 auto; object-fit: contain; }
+
+  /* Marcadores de datos pendientes: se ven a propósito */
+  .marcador { border-bottom: 2px dashed currentColor; opacity: .7; }
+
+  .costillas { background: var(--costillas); }
+  .velo { position: absolute; inset: 0; }
+
+  /* 01 · Portada */
+  .portada .velo { background: linear-gradient(180deg, rgba(43,33,26,0) 45%, rgba(43,33,26,.7) 100%), linear-gradient(270deg, rgba(43,33,26,.35) 0%, rgba(43,33,26,0) 45%); }
+  .portada .bloque { position: absolute; right: 96px; bottom: 84px; text-align: center; color: var(--azahar); }
+  .portada .logo { height: 340px; filter: drop-shadow(0 2px 14px rgba(43,33,26,.35)); }
+  .portada .bajada { margin-top: 34px; font: 500 14px/1 var(--font-texto); letter-spacing: .4em; text-transform: uppercase; }
+
+  /* Composición en dos columnas */
+  .partida { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
+  .partida .texto { padding: 96px 80px 96px 72px; display: flex; flex-direction: column; justify-content: center; }
+  .firma { margin-top: 32px; font: 400 26px/1 var(--font-titular); color: var(--naranja-oscuro); }
+
+  /* 03 · Los coches */
+  .coches { display: grid; grid-template-columns: 480px 1fr; height: 100%; }
+  .coches .texto { padding: 96px 56px 96px 72px; display: flex; flex-direction: column; justify-content: center; }
+  .coches .fotos { display: grid; grid-template-columns: 1.35fr 1fr; gap: 12px; padding: 48px 48px 48px 0; }
+  .coches figure { position: relative; }
+  .coches figcaption { position: absolute; left: 20px; bottom: 18px; display: flex; align-items: center; gap: 10px;
+                       font: 500 13px/1 var(--font-texto); letter-spacing: .22em; text-transform: uppercase; color: var(--azahar);
+                       text-shadow: 0 1px 8px rgba(0,0,0,.4); }
+  .chip { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--azahar); }
+
+  /* Foto a sangre con frase */
+  .sangre .velo { background: linear-gradient(160deg, rgba(43,33,26,.55) 0%, rgba(43,33,26,0) 50%); }
+  .sangre .frase { position: absolute; left: 72px; top: 96px; color: var(--azahar); max-width: 620px; text-shadow: 0 2px 18px rgba(43,33,26,.35); }
+  .sangre .frase .etiqueta { color: var(--azahar); }
+  .sangre h2 { font-size: 72px; margin-bottom: 0; }
+
+  /* 05 · Techo */
+  .techo, .conduce, .dia, .reservar, .faq { display: flex; flex-direction: column; justify-content: center; }
+  .techo { padding: 72px 72px 96px; }
+  .techo .cab { display: flex; justify-content: space-between; align-items: flex-end; }
+  .techo .cab p { max-width: 440px; margin-bottom: 30px; }
+  .tarjetas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 8px; }
+  .tarjeta { background: var(--azahar); border-radius: 4px; padding: 36px 36px 40px; border-top: 6px solid var(--naranja); }
+  .tarjeta svg { width: 100%; height: 190px; margin-bottom: 26px; }
+  .tarjeta .num { font: 400 26px/1 var(--font-titular); color: var(--naranja-oscuro); margin-bottom: 12px; }
+  .tarjeta p { font-size: 18px; line-height: 1.5; }
+  .techo .nota { margin-top: 26px; font-size: 17px; }
+
+  /* 06 · Cestas */
+  .cestas { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
+  .cestas .texto { padding: 96px 72px 96px 80px; display: flex; flex-direction: column; justify-content: center; }
+  .cestas .mini { width: 300px; height: 210px; margin-top: 40px; border-radius: 3px; overflow: hidden; }
+
+  /* 07 · Quién conduce */
+  .conduce { padding: 72px 72px 80px; }
+  .conduce .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .conduce .op { display: grid; grid-template-columns: 300px 1fr; gap: 30px; align-items: start; }
+  .conduce .op .f { height: 500px; border-radius: 3px; overflow: hidden; }
+  .conduce .op > div:last-child { padding-top: 20px; }
+  .conduce .op p { font-size: 18px; }
+  .conduce .op .num { font: 400 64px/1 var(--font-titular); color: var(--naranja); margin-bottom: 14px; }
+
+  /* 08 · Las llaves */
+  .llaves { display: grid; grid-template-columns: 1fr 620px; height: 100%; color: var(--azahar); }
+  .llaves .texto { padding: 96px 64px 96px 72px; display: flex; flex-direction: column; justify-content: center; }
+  .llaves .etiqueta { color: var(--azahar); opacity: .85; }
+  .llaves h2 { font-size: 84px; }
+  .llaves .caja { background: rgba(43,33,26,.22); padding: 30px 34px; border-radius: 4px; max-width: 600px; }
+  .llaves .f { margin: 48px 48px 48px 0; border-radius: 3px; overflow: hidden; }
+
+  /* 09 · El día */
+  .dia { padding: 72px 72px 80px; }
+  .pasos3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .pasos3 .f { height: 400px; border-radius: 3px; overflow: hidden; margin-bottom: 22px; }
+  .pasos3 h3 { display: flex; gap: 12px; align-items: baseline; }
+  .pasos3 h3 span { font: 400 26px/1 var(--font-titular); color: var(--naranja-oscuro); letter-spacing: 0; }
+  .pasos3 p { font-size: 17px; }
+
+  /* 10 · Enamora */
+  .enamora { display: grid; grid-template-columns: 1fr 560px; height: 100%; }
+  .enamora .texto { padding: 96px 72px; display: flex; flex-direction: column; justify-content: center; }
+  .enamora h2 { font-size: 76px; }
+  .prensa { margin-top: 44px; padding-top: 26px; border-top: 1px solid rgba(43,33,26,.18); max-width: 620px; }
+  .prensa q { font: 400 26px/1.3 var(--font-titular); quotes: "«" "»"; }
+  .prensa .fuente { margin-top: 12px; font: 500 12px/1.4 var(--font-texto); letter-spacing: .2em; text-transform: uppercase; opacity: .65; }
+
+  /* 11 · Galería */
+  .galeria { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr 1fr; gap: 10px; padding: 10px; height: 100%; background: var(--azahar); }
+  .galeria .ancha { grid-column: span 2; }
+  .galeria .ancha2 { grid-column: span 2; grid-row: span 2; }
+
+  /* 12 · Reservar */
+  .reservar { padding: 80px 72px; }
+  .pasos4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 18px; border-top: 2px solid var(--tinta); }
+  .pasos4 > div { padding: 30px 30px 0 0; }
+  .pasos4 > div + div { padding-left: 30px; border-left: 1px solid rgba(43,33,26,.16); }
+  .pasos4 { margin-top: 30px; }
+  .pasos4 > div { min-height: 300px; }
+  .pasos4 .num { font: 400 120px/1 var(--font-titular); color: var(--naranja); margin-bottom: 28px; }
+  .pasos4 p { font-size: 19px; }
+  .reservar .pie { margin-top: 56px; display: flex; align-items: center; gap: 22px; }
+  .reservar .pie .barra { width: 120px; height: 22px; background: var(--costillas); background-size: 100% 44px; }
+
+  /* 13 · Preguntas */
+  .faq { padding: 72px 72px 80px; }
+  .faq .lista { display: grid; grid-template-columns: 1fr 1fr; gap: 0 72px; border-top: 2px solid var(--tinta); }
+  .faq .lista > div { padding: 26px 0; border-bottom: 1px solid rgba(43,33,26,.16); }
+  .faq h3 { text-transform: none; letter-spacing: 0; font: 500 26px/1.25 var(--font-titular); margin-bottom: 10px; }
+  .faq p { font-size: 18px; }
+
+  /* 14 · Contacto */
+  .contacto { color: var(--azahar); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .contacto .panel { background: var(--naranja); padding: 54px 96px 52px; outline: 2px solid var(--azahar); outline-offset: -18px; }
+  .contacto .logo { height: 230px; }
+  .contacto h2 { font-size: 46px; margin: 30px 0 28px; }
+  .contacto .datos { display: grid; grid-template-columns: repeat(3, auto); gap: 0 56px; justify-content: center; }
+  .contacto .datos div { font-size: 22px; }
+  .contacto .datos .etiqueta { color: var(--tinta); display: block; margin-bottom: 10px; font-size: 12px; }
+  .contacto .cierre { margin-top: 38px; font: 400 22px/1 var(--font-titular); }
+</style>
+</head>
+<body>
+
+<template id="logo">
+  <img class="logo" src="../../marca/logo/mehari-we-blanco.svg" alt="Méhari We · Wedding &amp; Events">
+</template>
+
+<!-- Siluetas del techo (esquema, sin chevrón ni matrícula). Morro a la derecha. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="carroceria">
+      <path d="M18 104 V64 H168 L180 72 H226 Q232 72 232 78 V104 Z" fill="var(--naranja)"/>
+      <g stroke="var(--naranja-oscuro)" stroke-width="3"><path d="M24 76 H164 M24 86 H226 M24 96 H226"/></g>
+      <circle cx="62" cy="106" r="16" fill="var(--tinta)"/><circle cx="62" cy="106" r="6" fill="var(--beige)"/>
+      <circle cx="194" cy="106" r="16" fill="var(--tinta)"/><circle cx="194" cy="106" r="6" fill="var(--beige)"/>
+      <path d="M166 64 L156 24" stroke="var(--tinta)" stroke-width="4" stroke-linecap="round"/>
+    </g>
+  </defs>
+</svg>
+
+<!-- 01 · Portada -->
+<section class="pag portada sobre-foto">
+  <img src="../../redes/instagram/destacadas/historias/limpias/F0524.jpg" alt="Pareja de novios junto al Méhari beige al atardecer">
+  <div class="velo"></div>
+  <div class="bloque">
+    <div data-logo></div>
+    <div class="bajada">Dossier para novios</div>
+  </div>
+</section>
+
+<!-- 02 · Bienvenida -->
+<section class="pag">
+  <div class="partida">
+    <div class="texto">
+      <span class="etiqueta">Quiénes somos</span>
+      <h2>Enamorados de los bicilíndricos</h2>
+      <p>En Méhari We nos une la pasión por los bicilíndricos, esos clásicos sencillos y llenos de carácter. Tenemos dos Méhari, uno naranja y otro beige, y queremos que cada vez más gente los conozca y los disfrute: vuestras risas son nuestra alegría.</p>
+      <p class="suave">Os llevamos de la iglesia a la celebración en un coche que no pasa desapercibido. En este dossier os contamos cómo funciona y cómo reservar vuestra fecha; si os queda cualquier duda, os atendemos de forma personalizada, siempre.</p>
+      <div class="firma">El equipo de Méhari We</div>
+    </div>
+    <img src="../../redes/instagram/destacadas/historias/limpias/F1508.jpg" alt="Novios enseñando los anillos dentro del Méhari naranja">
+  </div>
+  <div class="folio"><span>Méhari We</span><span>02</span></div>
+</section>
+
+<!-- 03 · Los coches -->
+<section class="pag">
+  <div class="coches">
+    <div class="texto">
+      <span class="etiqueta">Los coches</span>
+      <h2>Dos Méhari. Uno naranja, otro beige</h2>
+      <p>Se fabricaron entre 1968 y 1988, en series muy limitadas, y hoy son un icono por su diseño y su carácter.</p>
+      <p class="suave">Lo que más gusta de los nuestros es precisamente eso: son originales y exclusivos. Ningún otro coche de vuestra boda se va a parecer a este.</p>
+    </div>
+    <div class="fotos">
+      <figure><img src="../../redes/instagram/destacadas/historias/limpias/F2194.jpg" style="object-position:72% 50%" alt="El Méhari naranja con los novios por una carretera entre campos"><figcaption><span class="chip" style="background:var(--naranja)"></span>Naranja</figcaption></figure>
+      <figure><img src="../../redes/instagram/destacadas/historias/limpias/F1465.jpg" alt="Novios sentados en la trasera del Méhari beige"><figcaption><span class="chip" style="background:var(--beige)"></span>Beige</figcaption></figure>
+    </div>
+  </div>
+  <div class="folio"><span>Méhari We</span><span>03</span></div>
+</section>
+
+<!-- 04 · Foto a sangre -->
+<section class="pag sangre sobre-foto">
+  <img src="../../redes/instagram/destacadas/historias/limpias/F2182.jpg" style="object-position:50% 60%" alt="El Méhari naranja en marcha con los novios saludando">
+  <div class="velo"></div>
+  <div class="frase">
+    <span class="etiqueta">Bodas y eventos</span>
+    <h2>Del «sí, quiero» a la celebración</h2>
+  </div>
+  <div class="folio"><span>Méhari We</span><span>04</span></div>
+</section>
+
+<!-- 05 · Techo -->
+<section class="pag techo">
+  <div class="cab">
+    <div>
+      <span class="etiqueta">A vuestro gusto</span>
+      <h2>Tres formas de llevar el techo</h2>
+    </div>
+    <p class="suave">Lo elegís vosotros según el estilo de la boda y el tiempo que haga ese día.</p>
+  </div>
+  <div class="tarjetas">
+    <div class="tarjeta">
+      <svg viewBox="0 0 250 128"><use href="#carroceria"/><path d="M36 64 V24 H156" fill="none" stroke="var(--tinta)" stroke-width="2" stroke-dasharray="5 6" opacity=".45"/></svg>
+      <div class="num">01</div>
+      <h3>Completamente abierto</h3>
+      <p>Al aire libre y con las vistas despejadas. La capota puede ir recogida en la parte de atrás. Perfecto para los días de sol.</p>
+    </div>
+    <div class="tarjeta">
+      <svg viewBox="0 0 250 128"><use href="#carroceria"/><path d="M96 24 H156" fill="none" stroke="var(--tinta)" stroke-width="2" stroke-dasharray="5 6" opacity=".45"/><path d="M34 64 V20 H100 V28 H42 V64 Z" fill="var(--tinta)"/></svg>
+      <div class="num">02</div>
+      <h3>Semiabierto</h3>
+      <p>La capota cubre la parte de atrás y deja abierta la de delante, más o menos hasta la mitad del coche. Un punto intermedio entre estilo y protección.</p>
+    </div>
+    <div class="tarjeta">
+      <svg viewBox="0 0 250 128"><use href="#carroceria"/><path d="M34 64 V20 H158 L166 64 Z" fill="var(--tinta)" opacity=".9"/><path d="M80 20 H120" stroke="var(--beige)" stroke-width="4"/><path d="M46 30 H96 V54 H46 Z M106 30 H150 L154 54 H106 Z" fill="var(--azahar)" opacity=".35"/></svg>
+      <div class="num">03</div>
+      <h3>Completamente cerrado</h3>
+      <p>Más privacidad o protección si el tiempo es incierto, sin perder el estilo clásico. El techo solar se puede abrir cuando queráis.</p>
+    </div>
+  </div>
+  <div class="folio"><span>Méhari We</span><span>05</span></div>
+</section>
+
+<!-- 06 · Cestas -->
+<section class="pag">
+  <div class="cestas">
+    <img src="../../redes/instagram/destacadas/historias/limpias/F1725.jpg" alt="Los novios detrás de las cestas llenas de flores">
+    <div class="texto">
+      <span class="etiqueta">El detalle</span>
+      <h2>Dos cestas de mimbre para vuestras flores</h2>
+      <p>En la parte trasera llevamos dos cestas de mimbre pensadas para decorar con flores.</p>
+      <p class="suave">Vuestro florista puede vestirlas a juego con el ramo y con la iglesia, y el coche llega a la celebración como una pieza más de la decoración.</p>
+      <div class="mini"><img src="../../redes/instagram/destacadas/historias/limpias/F0047.jpg" alt="Flores en la cesta trasera del Méhari"></div>
+    </div>
+  </div>
+  <div class="folio"><span>Méhari We</span><span>06</span></div>
+</section>
+
+<!-- 07 · Quién conduce -->
+<section class="pag conduce">
+  <span class="etiqueta">Vosotros decidís</span>
+  <h2>¿Quién conduce?</h2>
+  <div class="dos">
+    <div class="op">
+      <div class="f"><img src="../../redes/instagram/destacadas/historias/limpias/F2067.jpg" alt="Novios sentados atrás junto a las cestas de mimbre"></div>
+      <div>
+        <div class="num">A</div>
+        <h3>Con chófer</h3>
+        <p>Vosotros solo tenéis que disfrutar. Os esperamos a la salida de la iglesia y os llevamos hasta la hacienda o el lugar de la celebración.</p>
+      </div>
+    </div>
+    <div class="op">
+      <div class="f"><img src="../../redes/instagram/destacadas/historias/limpias/F0619.jpg" style="object-position:60% 50%" alt="El novio al volante del Méhari naranja con la novia al lado"></div>
+      <div>
+        <div class="num">B</div>
+        <h3>Conducís vosotros</h3>
+        <p>El volante puede ser vuestro, o de alguien cercano a vosotros. Antes de la boda os damos una clase de conducción para que el día todo esté bajo control.</p>
+      </div>
+    </div>
+  </div>
+  <div class="folio"><span>Méhari We</span><span>07</span></div>
+</section>
+
+<!-- 08 · Las llaves son vuestras -->
+<section class="pag costillas sobre-costillas">
+  <div class="llaves">
+    <div class="texto">
+      <span class="etiqueta">Lo que nos hace distintos</span>
+      <h2>Las llaves son vuestras</h2>
+      <div class="caja">
+        <p>Si queréis conducir vosotros la salida de la iglesia y la llegada a la celebración, quedamos antes de la boda para una clase de conducción.</p>
+        <p>Así os familiarizáis con el coche, nos aseguramos de que todo salga perfecto y el día de la boda solo tenéis que disfrutar del camino.</p>
+      </div>
+    </div>
+    <div class="f"><img src="../../redes/instagram/destacadas/historias/limpias/F0329.jpg" style="object-position:55% 50%" alt="Los novios brindando, él al volante del Méhari"></div>
+  </div>
+  <div class="folio"><span>Méhari We</span><span>08</span></div>
+</section>
+
+<!-- 09 · El día -->
+<section class="pag dia">
+  <span class="etiqueta">Cómo es el día</span>
+  <h2>Así os acompañamos</h2>
+  <div class="pasos3">
+    <div>
+      <div class="f"><img src="../../redes/instagram/destacadas/historias/limpias/F1018.jpg" style="object-position:50% 40%" alt="La novia sube al Méhari a la salida de la iglesia entre los invitados"></div>
+      <h3><span>1</span>La salida</h3>
+      <p>Os esperamos en la puerta de la iglesia. Vuestros invitados os despiden alrededor del coche: es uno de los momentos más fotografiados del día.</p>
+    </div>
+    <div>
+      <div class="f"><img src="../../redes/instagram/destacadas/historias/limpias/F0750.jpg" alt="El Méhari naranja con los novios en camino"></div>
+      <h3><span>2</span>El trayecto</h3>
+      <p>Abierto, semiabierto o cerrado, con chófer o conduciendo vosotros. El camino hasta la celebración ya forma parte de la fiesta.</p>
+    </div>
+    <div>
+      <div class="f"><img src="../../redes/instagram/destacadas/historias/limpias/F2131.jpg" alt="Vista aérea del Méhari y los novios llegando a una hacienda"></div>
+      <h3><span>3</span>La llegada</h3>
+      <p>Llegáis a la hacienda o al lugar de la celebración en un coche que todos van a recordar, con tiempo para las fotos.</p>
+    </div>
+  </div>
+  <div class="folio"><span>Méhari We</span><span>09</span></div>
+</section>
+
+<!-- 10 · El clásico que enamora -->
+<section class="pag">
+  <div class="enamora">
+    <div class="texto">
+      <span class="etiqueta">Éxito asegurado</span>
+      <h2>El clásico que enamora a todos</h2>
+      <p>Lo disfrutáis vosotros y lo disfrutan vuestros invitados. Gusta a los pequeños y a los mayores. Por eso es una apuesta segura para que vuestro día sea inolvidable, único y original.</p>
+      <div class="prensa">
+        <q>Los novios se despiden ante el templo en un informal Mehari</q>
+        <div class="fuente">Diario de Sevilla · Pasarela · 19 de octubre de 2025</div>
+      </div>
+    </div>
+    <img src="fotos/beige-hiedra.jpg" style="object-position:0% 50%" alt="Los novios sentados en la trasera del Méhari beige junto a una pared de hiedra">
+  </div>
+  <div class="folio"><span>Méhari We</span><span>10</span></div>
+</section>
+
+<!-- 11 · Galería -->
+<section class="pag">
+  <div class="galeria">
+    <div class="ancha2"><img src="../../redes/instagram/destacadas/historias/limpias/F0538.jpg" alt="Novios celebrando en un camino al atardecer"></div>
+    <div><img src="../../redes/instagram/destacadas/historias/limpias/F1839.jpg" style="object-position:50% 40%" alt="Novios de pie en el Méhari naranja junto al mar"></div>
+    <div><img src="../../redes/instagram/destacadas/historias/limpias/F0022.jpg" alt="El novio al volante sonriendo"></div>
+    <div><img src="../../redes/instagram/destacadas/historias/limpias/F0345.jpg" alt="Novios besándose de pie en el Méhari"></div>
+    <div><img src="../../redes/instagram/destacadas/historias/limpias/F0774.jpg" alt="El Méhari beige al atardecer junto a la playa"></div>
+  </div>
+</section>
+
+<!-- 12 · Reservar -->
+<section class="pag reservar">
+  <span class="etiqueta">Paso a paso</span>
+  <h2>Cómo reservar vuestra fecha</h2>
+  <div class="pasos4">
+    <div><div class="num">1</div><h3>Escribidnos</h3><p>Contadnos la fecha de la boda, la iglesia y el lugar de la celebración.</p></div>
+    <div><div class="num">2</div><h3>Disponibilidad</h3><p>Os confirmamos si tenemos la fecha libre y os preparamos un presupuesto a vuestra medida.</p></div>
+    <div><div class="num">3</div><h3>Elegís</h3><p>Coche naranja o beige, cómo llevar el techo y si vais con chófer o conducís vosotros.</p></div>
+    <div><div class="num">4</div><h3>Clase previa</h3><p>Si conducís vosotros, quedamos antes de la boda para la clase de conducción.</p></div>
+  </div>
+  <div class="pie">
+    <div class="barra"></div>
+    <p><strong>El día de la boda, del coche nos ocupamos nosotros.</strong> <span class="suave">Vosotros solo tenéis que disfrutar.</span></p>
+  </div>
+  <div class="folio"><span>Méhari We</span><span>12</span></div>
+</section>
+
+<!-- 13 · Preguntas frecuentes -->
+<section class="pag faq">
+  <span class="etiqueta">Preguntas frecuentes</span>
+  <h2>Lo que más nos preguntan</h2>
+  <div class="lista">
+    <div><h3>¿Podemos conducirlo nosotros?</h3><p>Sí, vosotros o alguien cercano. Antes de la boda os damos una clase de conducción.</p></div>
+    <div><h3>¿Y si ese día hace mal tiempo?</h3><p>El coche se puede cerrar por completo con la capota y mantiene el techo solar, que se abre si sale el sol.</p></div>
+    <div><h3>¿Se puede decorar?</h3><p>Sí. Lleva dos cestas de mimbre en la parte trasera para decorarlas con flores.</p></div>
+    <div><h3>¿Naranja o beige?</h3><p>El que más os guste. Decidnos cuál preferís y os confirmamos la disponibilidad para vuestra fecha.</p></div>
+    <div><h3>¿Cuánto cuesta?</h3><p>Cada boda es distinta. Escribidnos con vuestra fecha y los lugares, y os preparamos un presupuesto personalizado.</p></div>
+    <div><h3>¿Con cuánta antelación hay que reservar?</h3><p>Cuanto antes, mejor: solo hay dos coches y las fechas de temporada vuelan.</p></div>
+  </div>
+  <div class="folio"><span>Méhari We</span><span>13</span></div>
+</section>
+
+<!-- 14 · Contacto -->
+<section class="pag contacto costillas sobre-costillas">
+  <div class="panel">
+    <div data-logo></div>
+    <h2>Escribidnos vuestra fecha</h2>
+    <div class="datos">
+      <div><span class="etiqueta">WhatsApp y teléfono</span>625 06 42 93</div>
+      <div><span class="etiqueta">Email</span>mehariwe.info@gmail.com</div>
+      <div><span class="etiqueta">Instagram</span>@mehari.we</div>
+    </div>
+    <div class="cierre">Os atenderemos de forma personalizada, siempre.</div>
+  </div>
+</section>
+
+<script>
+  const logo = document.getElementById('logo');
+  document.querySelectorAll('[data-logo]').forEach(el => el.replaceWith(logo.content.cloneNode(true)));
+</script>
+</body>
+</html>
