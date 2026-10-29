@@ -7,12 +7,12 @@ destination: instagram-reels
 aspect: "9:16"
 language: es
 audience: parejas que se casan en 2027
-length: 22s
+length: 18s
 ---
 
 # Brief
 
-Primer reel de la cuenta de Méhari We. La ficha completa (guion, copy, material y revisión) está en
+Primer reel de la cuenta de Mehari We. La ficha completa (guion, copy, material y revisión) está en
 `redes/instagram/publicaciones/2026-10-23_reel_las-llaves-son-vuestras.md`.
 
 ## Intent
