@@ -1,4 +1,4 @@
-# Workflow de contenido y captación — Mehari We
+# Workflow de contenido y captación — Méhari We
 
 | Campo | Valor |
 |---|---|

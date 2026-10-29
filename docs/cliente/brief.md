@@ -1,11 +1,12 @@
-# Brief del cliente — Mehari We
+# Brief del cliente — Méhari We
 
 Fuente de verdad de los datos del negocio. Cualquier texto que se publique sale de aquí.
 Origen: `Referencia/Dossier Mehari.pdf`, `Referencia/Dossier Mehari (1).pdf`, `Referencia/Folleto.pdf` y la conversación con el cliente (7-10-2026).
 
 | Campo | Valor |
 |---|---|
-| Marca | **Mehari We** · subtítulo «Weddings & Events» (aceptado por el cliente el 2026-10-16) |
+| Marca | **Méhari We** · subtítulo «Wedding & Events», como en el logo aprobado (2026-10-28). Antes, «Mehari We · Weddings & Events» (2026-10-16) |
+| Logo | Aprobado el 2026-10-28 (de la grafista del cliente). Ficheros en `marca/logo/` |
 | Instagram | `@mehari.we` (cuenta nueva, desde cero; confirmado el 2026-10-27) |
 | Email | mehariwe.info@gmail.com (confirmado el 2026-10-27) |
 | Teléfono | 625 06 42 93 (enlace internacional: `+34625064293`) |

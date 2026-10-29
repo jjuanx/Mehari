@@ -11,6 +11,7 @@ El cliente entregó **22 GB** de fotos y vídeos (casi todo del iPhone, en HEIC 
 | Producción (carruseles, renders, anuncios) | Drive · `Mehari We/02_Produccion/` |
 | Logos e identidad final | Drive · `Mehari We/03_Marca/` |
 | Dossiers, PDF y prensa del cliente | Drive · `Mehari We/04_Cliente/` |
+| 50 fotos nuevas que mandó el cliente el 2026-10-28 (`N01`–`N50`, sin clasificar) | En local en `Referencia/fotos-cliente-2026-10-28/` (no se versiona). Pendiente de subir a Drive · `01_Material/` |
 | Originales completos (17 GB), clips de Live Photo (5,6 GB) y descartes (1,2 GB) | Solo en el Mac de Juan (`FOTOS MEHARI/`). El cliente también los tiene |
 | Clasificación de cada fichero | Este repo · [`clasificacion.csv`](clasificacion.csv) |
 | Lista de lo apartado y por qué | Este repo · [`descartes.csv`](descartes.csv) |
