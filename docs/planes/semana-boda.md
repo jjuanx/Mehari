@@ -2,7 +2,7 @@
 
 | Campo | Valor |
 |---|---|
-| Versión | 1 (propuesta del equipo, **pendiente de aprobar por Alejandro, Juan y Nico**) |
+| Versión | 1 (aprobada por el equipo el 2026-11-02) |
 | Fecha | 2026-11-02 |
 | Qué fija | Qué se publica por cada boda, qué día, cómo es cada pieza y quién la hace |
 | Base | [presentacion-reunion-2026-10-14.pdf](presentacion-reunion-2026-10-14.pdf) (lo prometido al cliente), [workflow-contenido.md](workflow-contenido.md) y [estrategia-instagram.md](estrategia-instagram.md) |
@@ -158,7 +158,7 @@ Como las semanas se solapan (§2), cada semana tiene stories de las dos bodas: l
 
 ## 5. Reparto
 
-Propuesta según lo que ha hecho cada uno hasta ahora en el repositorio. **El reparto sigue pendiente** (`CLAUDE.md` §9): se confirma entre los tres.
+Acordado el 2026-11-02, según lo que ha hecho cada uno hasta ahora en el repositorio.
 
 | Quién | Papel | Qué hace cada semana |
 |---|---|---|
