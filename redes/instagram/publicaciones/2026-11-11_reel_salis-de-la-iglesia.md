@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Fecha prevista | 2026-11-11 (miércoles), 20:40 |
-| Formato | Reel 9:16, 8,7 s |
+| Formato | Reel 9:16, 16 s |
 | Línea | Bodas |
 | Objetivo | Alcance: llegar a parejas que no nos siguen |
 | Público | Parejas que se casan en 2027 |
@@ -28,7 +28,9 @@ v3 (hoja de contactos en `reels/2026-11-11_salis-de-la-iglesia/contactos.png`; d
 | 0–2 s | Cuatro destellos de 0,5 s: cartel, cestas, salida, asiento de atrás | «Así se sale de una boda» (hasta 1,5 s) |
 | 2–5,2 s | IMG_4075 en una sola toma: ríen y la novia levanta el ramo | — |
 | 5,2–8,2 s | Cámara lenta: el novio levanta el brazo | — |
-| 7,1–8,7 s | El mismo plano con el logo sobre el cielo | — |
+| 8,2 s | Transición de costillas de la marca | — |
+| 8,2–12 s | El Méhari beige en el patio de la finca, con los invitados (IMG_4081) | — |
+| 12–16 s | Cierre animado: logo aprobado, «Escribidnos vuestra fecha» y WhatsApp | (en el cierre) |
 
 **Música (al publicar, en Instagram):** una canción en tendencia con pulso de unos 120 BPM. Que el arranque coincida con el segundo 0 y el subidón caiga en el 5,2, cuando empieza la cámara lenta.
 
@@ -52,7 +54,7 @@ v3 (hoja de contactos en `reels/2026-11-11_salis-de-la-iglesia/contactos.png`; d
 - **Destellos a pulso de 0,5 s antes de la toma larga**: dan contexto (finca, cestas, ermita, pareja) sin texto y crean ritmo para la canción.
 - **Cámara lenta en el brazo del novio**: es el instante emocional y donde tiene que caer el subidón de la música.
 - **Una frase arriba y sin caja**, solo en el primer segundo y medio, para no tapar caras. Lleva un degradado suave para el contraste.
-- **Sin cartón final**: el logo aparece sobre el cielo del último plano, para que el bucle no se corte.
+- **Cierre animado de marca de 4 s** (el de `marca/animaciones/`, actualizado con el logo y el nombre actuales) y tramo de la fiesta antes, para llegar a 16 s. La transición de costillas une la cámara lenta con la fiesta.
 - **Sin audio original** (decisión del 2026-10-19): la canción se elige en Instagram, así que en Metricool va como «aviso».
 - **CTA para compartir** en una línea propia del copy: «Mandádselo a quien se case en 2027».
 
@@ -68,4 +70,4 @@ v3 (hoja de contactos en `reels/2026-11-11_salis-de-la-iglesia/contactos.png`; d
 - [ ] Permiso de los novios para publicar sus caras (bloqueante)
 - [ ] Aprobación del cliente (como tarde el 7-11) y de otro miembro del equipo
 
-**Probado (v3):** `hyperframes check` sin errores ni avisos de contraste (1/1 WCAG AA); render de 8,7 s a 1080×1920; un fotograma por tramo revisado a 270 px de ancho; la cámara lenta revisada a 5 fotogramas por segundo, sin artefactos; `revision-marca` del paquete de clips (salida fotograma a fotograma). No probado: con la canción puesta, en un móvil y la revisión de otra persona.
+**Probado (v3, 16 s):** `hyperframes check` sin errores (1/1 WCAG AA) en el reel y en el cierre (5/5); render de 16 s a 1080×1920; un fotograma por tramo revisado; la cámara lenta, a 5 fotogramas por segundo, sin artefactos; la funda de la fiesta, a 8 fotogramas por segundo, sin letras; `revision-marca` del paquete de clips. No probado: con la canción puesta, en un móvil y la revisión de otra persona.

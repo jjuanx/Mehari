@@ -7,21 +7,23 @@ destination: instagram-reels
 aspect: "9:16"
 language: es
 audience: parejas que se casan en 2027
-length: 8.7s
+length: 16s
 ---
 
 # Brief
 
 **v3**, reel de un solo momento (la v2 se descartó: era un resumen de 5 mensajes en 20 s con cajas de texto). Reel del miércoles («El momento») de la boda del 24-10-2026 en Finca La Posadilla. Ficha: `redes/instagram/publicaciones/2026-11-11_reel_salis-de-la-iglesia.md`.
 
-## Montaje (8,7 s)
+## Montaje (16 s)
 
 | Tramo | Plano | Qué hace |
 |---|---|---|
 | 0–2 s | Cuatro destellos de 0,5 s: cartel de la finca, cestas, salida ante la ermita, asiento de atrás | Cortes a pulso de 120 BPM, cada uno entra ampliado ×1,12 y se asienta. Frase «Así se sale de una boda» en los tres primeros, grande, arriba y sin caja (con un degradado suave para el contraste) |
 | 2–5,2 s | Toma continua IMG_4075: los novios de pie en el coche, ríen y la novia levanta el ramo (≈2,9 s) | Acercamiento lento |
 | 5,2–8,2 s | La misma toma a 0,5× (interpolada con `minterpolate`): el novio levanta el brazo | Cámara lenta en el momento fuerte. Aquí tiene que caer el subidón de la canción |
-| 7,1–8,7 s | Logo aprobado en blanco sobre el cielo | Sin cartón final: el bucle no se corta |
+| 7,79–8,66 s | Transición de costillas (`marca/animaciones/renders/transicion.webm`) | Tapa la pantalla a los 8,2 s: ahí se corta a la fiesta |
+| 8,2–12 s | Travelling junto al Méhari beige en el patio de la finca, con los invitados (IMG_4081) | Acercamiento lento |
+| 12–16 s | Cierre animado de marca (`marca/animaciones/renders/cierre.mp4`) | Costillas → logo aprobado → «Escribidnos vuestra fecha» y WhatsApp |
 
 ## Assets
 
@@ -34,6 +36,8 @@ En `assets/clips/` (no versionados): el paquete de clips limpios, en 1080×1920,
 | `02_salida-ermita_IMG4036_funda-lisa.mp4` | IMG_4036.MOV | 12,3–15,6 s | Completo | Funda lisa con `herramientas/material/funda_video.py` (`0.2 440,900,215,105`, polígono `466,975,482,954,507,934,540,926,580,929,612,944,628,963,634,990,540,981`) |
 | `03_cestas-flores_IMG4106.mp4` | IMG_4106.MOV | 28,5–30,6 s | `crop=1900:3378:130:0` | Matrícula y rótulo trasero fuera |
 | `04_cartel-finca_IMG4053.mp4` | IMG_4053.MOV | 6–12,8 s | Completo | — |
+| `06_fiesta-patio_IMG4081_funda-lisa.mp4` | IMG_4081.MOV | 3–6,8 s | Completo | Funda lisa con `funda_video.py` (`1.5 270,1040,270,105`, polígono `290,1133,300,1102,330,1078,375,1060,415,1058,460,1065,498,1087,518,1113,520,1133`). El seguimiento baja a 0,54 de parecido: revisado a 8 fotogramas por segundo, sin letras |
+| `07_cierre-marca.mp4`, `transicion.webm` | Copias de `marca/animaciones/renders/` | — | — | — |
 | `05_asiento-atras_Live4049.mp4` | Live Photo IMG_4049 | 0–2,9 s | `crop=1080:1920:240:0` sobre 1440×1920 | Resto de funda en el borde, difuminado con `difuminar.py` |
 
 HDR a SDR con el tonemap de la cabecera de `difuminar.py`. En IMG_4036 antes del segundo 12 sale un niño de cara; en IMG_4075 antes del 4,5, la matrícula.
@@ -48,7 +52,7 @@ HDR a SDR con el tonemap de la cabecera de `difuminar.py`. En IMG_4036 antes del
 
 ## Cierre
 
-Esta versión no usa cartón final. `compositions/cierre-corto.html` (2,1 s, con el logo aprobado) se queda en el proyecto como cierre reutilizable para otros reels.
+El reel termina con el cierre animado de `marca/animaciones/` (4 s), ya con el logo aprobado. `compositions/cierre-corto.html` (2,1 s) se queda como alternativa corta.
 
 ## Render
 
