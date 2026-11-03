@@ -7,7 +7,7 @@
 | Línea | Bodas |
 | Objetivo | Alcance: llegar a parejas que no nos siguen |
 | Público | Parejas que se casan en 2027 |
-| Estado | Montado (v2, con los vídeos 4K). En revisión |
+| Estado | v2 descartada. Se monta en CapCut como reel de un solo momento (ver «Siguiente versión») |
 | Responsable | Nico (montaje) · Alejandro (texto y publicación) |
 
 Semana de la boda del 24-10-2026: [`redes/instagram/bodas/2026-10-24_la-posadilla/`](../bodas/2026-10-24_la-posadilla/README.md). Miércoles, «El momento», gancho 1 de la rotación (`docs/planes/semana-boda.md` §3).
@@ -32,6 +32,17 @@ Montado así (hoja de contactos en `reels/2026-11-11_salis-de-la-iglesia/contact
 | Momento | Los novios de pie en el coche, riendo (IMG_4075) | 10,6–13,6 s | — |
 | Momento | Ramo y brazos arriba ante los invitados (IMG_4075) | 13,6–17,7 s | …y empieza la fiesta |
 | Cierre | Cierre corto con el logo aprobado | 17,7–19,8 s | Escribidnos vuestra fecha · WhatsApp 625 06 42 93 |
+
+## Siguiente versión (v3)
+
+La v2 se descarta: es un resumen de 5 mensajes en 20 s con cajas de texto a media altura y sin ritmo, lo contrario de lo que funciona en `docs/planes/analisis-competencia-reels.md` §2.
+
+- **Reel de un solo momento, de 8 a 10 s**: la toma continua de IMG_4075 (de pie en el coche, ríen y levantan el ramo y los brazos).
+- **Sin cajas**: una frase grande arriba o ninguna.
+- **Audio en tendencia** desde Instagram, con el subidón de la canción en los brazos arriba. Por eso en Metricool va como «aviso».
+- **Lo monta Nico en CapCut** con los clips limpios (1080×1920, SDR, sin marca antigua ni matrícula) del paquete `clips-limpios/` en Drive · `02_Produccion/2026-10-24_la-posadilla/`. Se generan con los recortes del `BRIEF.md` del proyecto HyperFrames.
+- **Copy**: añadir «Mandádselo a quien se case en 2027 💍» en una línea propia.
+- **Pedir al cliente** el original del vídeo de WhatsApp de la salida (el coche arrancando entre los invitados): es el mejor gancho de esta boda.
 
 ## Copy
 
