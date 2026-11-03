@@ -24,41 +24,45 @@
       .rotulo { position: absolute; left: 72px; width: 860px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
       .rotulo.abajo { top: 1060px; }
       .rotulo.arriba { top: 250px; }
+      .rotulo.bajo { top: 1290px; }
       .linea { display: inline-block; }
       .principal { font-family: "Fraunces", serif; font-weight: 600; font-size: 92px; line-height: 1.04; color: var(--azahar); background: rgba(43, 33, 26, 0.9); padding: 18px 34px 26px; border-radius: 12px; }
       .secundaria { font-weight: 600; font-size: 54px; line-height: 1.12; color: var(--tinta); background: var(--naranja); padding: 14px 30px 18px; border-radius: 12px; }
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="reel" data-start="0" data-duration="15" data-width="1080" data-height="1920">
+    <div id="root" data-composition-id="reel" data-start="0" data-duration="19.8" data-width="1080" data-height="1920">
 
-      <!-- Pista 0: Live Photos de la boda del 24-10 en el orden del día, recortadas a 9:16 y con la funda
-           de la marca antigua, la matrícula y el chevrón fuera del encuadre (en 4049, difuminada; en 4079, funda lisa fotograma a fotograma). El sonido se mezcla aparte (BRIEF.md). -->
-      <video id="p1" class="clip plano" src="assets/clips/e1_4041_salida.mp4" data-start="0" data-duration="2.9" data-media-start="0" data-track-index="0" playsinline muted></video>
-      <video id="p2" class="clip plano" src="assets/clips/e2_4101_cestas.mp4" data-start="2.9" data-duration="1.9" data-media-start="0" data-track-index="0" playsinline muted></video>
-      <video id="p3" class="clip plano" src="assets/clips/e3_4049_detras.mp4" data-start="4.8" data-duration="2.8" data-media-start="0" data-track-index="0" playsinline muted></video>
-      <video id="p4" class="clip plano" src="assets/clips/e4_4073_llegada.mp4" data-start="7.6" data-duration="2.5" data-media-start="0" data-track-index="0" playsinline muted></video>
-      <video id="p5" class="clip plano" src="assets/clips/e5_4079_fiesta.mp4" data-start="10.1" data-duration="2.8" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <!-- Pista 0: vídeos de la boda del 24-10 en el orden del día. Los 4K (HLG) se pasaron a SDR BT.709 y se
+           recortaron desde el original para dejar fuera la funda de la marca antigua, la matrícula, los chevrones
+           y el rótulo trasero (BRIEF.md). El plano del asiento de atrás es la Live Photo 4049. Sin sonido original. -->
+      <video id="p1" class="clip plano" src="assets/clips/e1_salida.mp4" data-start="0" data-duration="3.3" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="p2" class="clip plano" src="assets/clips/e2_cestas.mp4" data-start="3.3" data-duration="2.1" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="p3" class="clip plano" src="assets/clips/e3_detras.mp4" data-start="5.4" data-duration="2.8" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="p4" class="clip plano" src="assets/clips/e4_cartel.mp4" data-start="8.2" data-duration="2.4" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="p5" class="clip plano" src="assets/clips/e5_llegada.mp4" data-start="10.6" data-duration="3.0" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="p6" class="clip plano" src="assets/clips/e6_brazos.mp4" data-start="13.6" data-duration="4.1" data-media-start="0" data-track-index="0" playsinline muted></video>
 
       <!-- Pista 1: cierre de marca corto con el logo aprobado (2,1 s) -->
-      <div id="cierre" data-composition-id="cierre" data-composition-src="compositions/cierre-corto.html" data-start="12.9" data-duration="2.1" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="cierre" data-composition-id="cierre" data-composition-src="compositions/cierre-corto.html" data-start="17.7" data-duration="2.1" data-track-index="1" data-width="1080" data-height="1920"></div>
 
-      <!-- Pista 2: rótulos. Una frase partida en dos planos: «Salís de la iglesia y…» / «…os espera vuestro Méhari» -->
-      <div id="r1" class="clip rotulo arriba" data-start="0" data-duration="2.9" data-track-index="2">
+      <!-- Pista 2: rótulos. Dos frases partidas entre planos: «Salís de la iglesia y…» / «…os espera vuestro Méhari»
+           y «Llegáis a la finca…» / «…y empieza la fiesta». La llegada (p5) va sin texto, para que respire. -->
+      <div id="r1" class="clip rotulo arriba" data-start="0" data-duration="3.3" data-track-index="2">
         <span class="linea principal">Salís de la iglesia y…</span>
       </div>
-      <div id="r2" class="clip rotulo arriba" data-start="2.9" data-duration="1.9" data-track-index="2">
+      <div id="r2" class="clip rotulo arriba" data-start="3.3" data-duration="2.1" data-track-index="2">
         <span class="linea principal">…os espera vuestro Méhari</span>
       </div>
-      <div id="r3" class="clip rotulo abajo" data-start="4.8" data-duration="2.8" data-track-index="2">
+      <div id="r3" class="clip rotulo abajo" data-start="5.4" data-duration="2.8" data-track-index="2">
         <span class="linea principal">Con chófer</span>
         <span class="linea secundaria">y el techo abierto</span>
       </div>
-      <div id="r4" class="clip rotulo arriba" data-start="7.6" data-duration="2.5" data-track-index="2">
-        <span class="linea principal">Llegáis a la finca</span>
+      <div id="r4" class="clip rotulo arriba" data-start="8.2" data-duration="2.4" data-track-index="2">
+        <span class="linea principal">Llegáis a la finca…</span>
       </div>
-      <div id="r5" class="clip rotulo arriba" data-start="10.1" data-duration="2.8" data-track-index="2">
-        <span class="linea principal">y empieza la fiesta</span>
+      <div id="r5" class="clip rotulo bajo" data-start="13.6" data-duration="4.1" data-track-index="2">
+        <span class="linea principal">…y empieza la fiesta</span>
       </div>
     </div>
 
@@ -68,8 +72,8 @@
       // Cada línea se descubre de izquierda a derecha y se asienta sin rebote, justo después del corte.
       const oculto = { clipPath: "inset(0 100% 0 0)", x: -16 };
       const visible = { clipPath: "inset(0 0% 0 0)", x: 0, duration: 0.42, ease: "expo.out" };
-      [["#r1 .principal", 0.03], ["#r2 .principal", 2.95], ["#r3 .principal", 4.85], ["#r3 .secundaria", 5.2],
-       ["#r4 .principal", 7.65], ["#r5 .principal", 10.15]]
+      [["#r1 .principal", 0.03], ["#r2 .principal", 3.35], ["#r3 .principal", 5.45], ["#r3 .secundaria", 5.8],
+       ["#r4 .principal", 8.25], ["#r5 .principal", 13.7]]
         .forEach(([sel, t]) => tl.fromTo(sel, oculto, visible, t));
 
       window.__timelines["reel"] = tl;

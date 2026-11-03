@@ -6,7 +6,7 @@ Primera boda de Méhari We con la cuenta nueva. Preparada con la skill `semana-b
 |---|---|
 | Boda | Sáb 24-10-2026 · [PENDIENTE: iglesia o ermita y localidad] → Finca La Posadilla (se lee en el cartel, foto 4054) · coche **beige** · con chófer (los novios van detrás en la foto 4049; [PENDIENTE: confirmar]) · techo abierto, con la capota recogida |
 | Carpeta | Drive · `Mehari We/01_Material/Selecccion/Boda 2:11:2026` (id `1kBJeYOXad9bsfFV_ziWpuoi5qDGYL3fy`). **Ojo:** las carpetas están cruzadas. Por la fecha EXIF, las fotos del 24-10 están en «Boda 2:11:2026», y las de «Boda 24:10:2026» son del 31-10 |
-| Material | 48 fotos (iPhone, de 14:06 a 15:59), sus Live Photos y 15 vídeos. Los vídeos pesan más de 10 MB y el conector de Drive no los descarga: hay que bajarlos a mano para el reel |
+| Material | 48 fotos (iPhone, de 14:06 a 15:59), sus Live Photos y 15 vídeos (13 en 4K HDR y 2 de WhatsApp). Los vídeos pesan más de 10 MB: el conector de Drive no los baja y se descargaron directamente con la carpeta compartida por enlace |
 | Ficha | **No hay.** Todo lo que falta va en «Pendiente» |
 | Permiso de caras y nombres | [PENDIENTE]. Hasta que el cliente lo confirme, no se publican nombres. Las caras de los novios salen en las piezas y la aprobación queda condicionada a ese permiso |
 | Créditos | Fotógrafo [PENDIENTE] · finca [PENDIENTE: @ de Finca La Posadilla] · florista [PENDIENTE] |
@@ -57,16 +57,16 @@ JPEG en `jpg/la-boda/` y fuente en `piezas.html`. Ficha: [`2026-11-09_carrusel_b
 
 **Gancho: «Salís de la iglesia y…»** (el 1 de la rotación). Es la primera semana, así que no hay gancho anterior que evitar. Es también el plano con más gente y más movimiento: la 4041 con el ramo arriba y los invitados detrás.
 
-Montado con `guion-reel` a partir de las Live Photos: `redes/instagram/reels/2026-11-11_salis-de-la-iglesia/`. Ficha: [`2026-11-11_reel_salis-de-la-iglesia.md`](../../publicaciones/2026-11-11_reel_salis-de-la-iglesia.md).
+Montado con `guion-reel` a partir de los vídeos 4K de la carpeta: `redes/instagram/reels/2026-11-11_salis-de-la-iglesia/`. Ficha: [`2026-11-11_reel_salis-de-la-iglesia.md`](../../publicaciones/2026-11-11_reel_salis-de-la-iglesia.md).
 
 | Escena | Plano | Tramo | Texto en pantalla |
 |---|---|---|---|
-| Gancho | Live 4041/4042: ramo arriba entre los invitados | 0–3 s | Salís de la iglesia y… |
-| Detalle | Vídeo de las cestas o foto 4101 con movimiento | 3–6 s | …os espera vuestro Méhari |
-| Prueba | Live 4049/4050: los dos riendo en el asiento de atrás | 6–9 s | Con chófer y el techo abierto |
-| Momento | Live 4072/4073: llegada a la finca, de pie | 9–12 s | Llegáis a la finca |
-| Momento | Live 4078–4080: la novia luce el vestido | 12–15 s | y empieza la fiesta |
-| Cierre | Cierre corto de marca | 15–17 s | ¿Os casáis en 2027? Escribidnos vuestra fecha |
+| Gancho | IMG_4036: la novia llega al coche ante la ermita, entre los invitados | 0–3,3 s | Salís de la iglesia y… |
+| Detalle | IMG_4106: las cestas con flores blancas, de cerca | 3,3–5,4 s | …os espera vuestro Méhari |
+| Prueba | Live 4049: los dos riendo en el asiento de atrás | 5,4–8,2 s | Con chófer · y el techo abierto |
+| Llegada | IMG_4053: el cartel de la finca | 8,2–10,6 s | Llegáis a la finca… |
+| Momento | IMG_4075: de pie en el coche, riendo; luego ramo y brazos arriba | 10,6–17,7 s | …y empieza la fiesta |
+| Cierre | Cierre corto con el logo aprobado | 17,7–19,8 s | Escribidnos vuestra fecha |
 
 La funda, la matrícula y el chevrón quedan fuera del encuadre, difuminados o lisos (detalle en el `BRIEF.md` del reel). **Música:** si se publica por Metricool, va incrustada en el MP4 (libre de derechos) o el reel se publica a mano (`docs/planes/publicacion-metricool.md` §3).
 
@@ -123,7 +123,7 @@ Preguntas al cliente (van con el lote del jueves):
 
 > **Boda La Posadilla (24-10) · primera semana**
 > · Lun 9 · Carrusel «La boda», 9 fotos: hecho (Juan revisa).
-> · Mié 11 · Reel «Salís de la iglesia y…», 15 s: montado con las Live Photos (Nico). Falta elegir la música.
+> · Mié 11 · Reel «Salís de la iglesia y…», 20 s: montado con los vídeos 4K (Nico). Falta elegir la música.
 > · Vie 13 · Carrusel «Ellos eligieron el beige», palabra BEIGE: hecho (Juan revisa).
 > · Lote al cliente el jue 5 (Alejandro), aprobación hasta el sáb 7. Con el OK, se programa todo en Metricool.
 > · Falta: permiso de caras, iglesia y localidad, @ de la finca y del fotógrafo.

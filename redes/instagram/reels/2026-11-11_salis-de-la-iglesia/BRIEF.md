@@ -7,7 +7,7 @@ destination: instagram-reels
 aspect: "9:16"
 language: es
 audience: parejas que se casan en 2027
-length: 15s
+length: 19.8s
 ---
 
 # Brief
@@ -16,17 +16,18 @@ Reel del miércoles («El momento») de la semana de la boda del 24-10-2026 en F
 
 ## Assets
 
-En `assets/clips/` (no versionados). Son Live Photos de la boda (HEVC, 1440×1920 SDR BT.709, unos 3 s), porque los vídeos largos pesan más de 10 MB y el conector de Drive no los baja. Se pasaron a 30 fps y se reencuadraron a 9:16:
+En `assets/clips/` (no versionados). Versión 2: con los **vídeos 4K de la boda**, que se bajaron directamente de Drive (la carpeta está compartida por enlace y el dominio permitido en la red del entorno). Son iPhone 4K en HDR (HLG): se pasaron a SDR BT.709 con el tonemap de `difuminar.py`, a 30 fps, y **se recortaron desde el 4K**, así que los reencuadres no pierden nitidez.
 
-| Clip | Origen | Encuadre | Marca antigua y matrícula |
-|---|---|---|---|
-| `e1_4041_salida.mp4` | IMG_4041.MOV | `crop=788:1400:390:0`, ampliado ×1,37 | La funda queda fuera del encuadre |
-| `e2_4101_cestas.mp4` | IMG_4101.MOV | `crop=810:1440:0:300`, ampliado ×1,33 | La funda queda fuera. Se ve la placa «Méhari» del coche, que es nuestra |
-| `e3_4049_detras.mp4` | IMG_4049.MOV | `crop=1080:1920:240:0` | Resto de la funda en el borde izquierdo, difuminado con `difuminar.py` (zona `1.0,0,1360,80,200`) |
-| `e4_4073_llegada.mp4` | IMG_4073.MOV | `crop=698:1240:370:200`, ampliado ×1,55 | Matrícula y chevrón del capó fuera del encuadre |
-| `e5_4079_fiesta.mp4` | IMG_4079.MOV | `crop=1080:1920:160:0` | Funda entre los novios: lisa fotograma a fotograma con `funda_lisa()` de `retocar_foto.py`, siguiendo el movimiento con *template matching* |
+| Clip | Origen | Tramo | Encuadre (sobre 2160×3840) | Marca antigua y matrícula |
+|---|---|---|---|---|
+| `e1_salida.mp4` | IMG_4036.MOV | 12,3–15,6 s | Completo | Funda lisa fotograma a fotograma con `herramientas/material/funda_video.py` (`0.2 440,900,215,105`, polígono `466,975,482,954,507,934,540,926,580,929,612,944,628,963,634,990,540,981`) |
+| `e2_cestas.mp4` | IMG_4106.MOV | 28,5–30,6 s | `crop=1900:3378:130:0` | La matrícula y el rótulo trasero quedan fuera por abajo |
+| `e3_detras.mp4` | Live Photo IMG_4049 | 0–2,8 s | `crop=1080:1920:240:0` sobre 1440×1920 | Resto de la funda en el borde, difuminado con `difuminar.py` |
+| `e4_cartel.mp4` | IMG_4053.MOV | 9,5–11,9 s | Completo | — |
+| `e5_llegada.mp4` | IMG_4075.MOV | 5,5–8,5 s | `crop=1350:2400:250:0` | Funda, matrícula y chevrón fuera del encuadre |
+| `e6_brazos.mp4` | IMG_4075.MOV | 9,8–13,9 s | `crop=1350:2400:400:0` | Ídem |
 
-Las ampliaciones llevan `scale=…:flags=lanczos,unsharp=5:5:0.5`.
+Descartados: IMG_4036 hasta el segundo 10 (sale un niño de cara), los planos frontales de IMG_4075 (matrícula y chevrones) y el vídeo de WhatsApp de la salida (`09d98426….mp4`, 848×478), que es el único con el coche arrancando entre los invitados pero no aguanta la ampliación a 9:16. Si el cliente tiene el original, sería el mejor gancho.
 
 `assets/vendor/gsap.min.js` es GSAP 3.14.2 en local: el render sin red no carga el CDN.
 
@@ -35,7 +36,6 @@ Las ampliaciones llevan `scale=…:flags=lanczos,unsharp=5:5:0.5`.
 - **`reel_9x16.mp4` (el máster) va sin sonido original**, con una pista AAC en silencio, como manda la decisión del 2026-10-19. La música se pone de dos maneras:
   - En la app, desde la biblioteca de Instagram (en Metricool, modo «aviso»).
   - Incrustada en el MP4 si es libre de derechos (modo automático, `docs/planes/publicacion-metricool.md` §3).
-- **`reel_9x16_sonido-real.mp4`** es la alternativa con el sonido de las Live Photos (vítores en la salida y ambiente), mezclado a −15 LUFS y −1,5 dBFS de pico. En el espectrograma hay una banda continua de 3 a 13 s que podría ser música de fondo de la finca. **Hay que escucharlo antes de usarlo.**
 
 ## Cierre
 
