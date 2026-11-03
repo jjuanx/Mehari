@@ -57,7 +57,7 @@ JPEG en `jpg/la-boda/` y fuente en `piezas.html`. Ficha: [`2026-11-09_carrusel_b
 
 **Gancho: «Salís de la iglesia y…»** (el 1 de la rotación). Es la primera semana, así que no hay gancho anterior que evitar. Es también el plano con más gente y más movimiento: la 4041 con el ramo arriba y los invitados detrás.
 
-Guion de escenas (se produce con `guion-reel`). Ficha: [`2026-11-11_reel_salis-de-la-iglesia.md`](../../publicaciones/2026-11-11_reel_salis-de-la-iglesia.md).
+Montado con `guion-reel` a partir de las Live Photos: `redes/instagram/reels/2026-11-11_salis-de-la-iglesia/`. Ficha: [`2026-11-11_reel_salis-de-la-iglesia.md`](../../publicaciones/2026-11-11_reel_salis-de-la-iglesia.md).
 
 | Escena | Plano | Tramo | Texto en pantalla |
 |---|---|---|---|
@@ -68,7 +68,7 @@ Guion de escenas (se produce con `guion-reel`). Ficha: [`2026-11-11_reel_salis-d
 | Momento | Live 4078–4080: la novia luce el vestido | 12–15 s | y empieza la fiesta |
 | Cierre | Cierre corto de marca | 15–17 s | ¿Os casáis en 2027? Escribidnos vuestra fecha |
 
-En todos los clips hay que difuminar la funda con `difuminar.py`, y en 4072/4073 también la matrícula y el chevrón. **Música:** si se publica por Metricool, va incrustada en el MP4 (libre de derechos) o el reel se publica a mano (`docs/planes/publicacion-metricool.md` §3).
+La funda, la matrícula y el chevrón quedan fuera del encuadre, difuminados o lisos (detalle en el `BRIEF.md` del reel). **Música:** si se publica por Metricool, va incrustada en el MP4 (libre de derechos) o el reel se publica a mano (`docs/planes/publicacion-metricool.md` §3).
 
 ## Viernes 13-11 · Vuestra elección: el color (carrusel, 4 diapositivas) · Juan
 
@@ -123,7 +123,7 @@ Preguntas al cliente (van con el lote del jueves):
 
 > **Boda La Posadilla (24-10) · primera semana**
 > · Lun 9 · Carrusel «La boda», 9 fotos: hecho (Juan revisa).
-> · Mié 11 · Reel «Salís de la iglesia y…»: guion hecho, falta montarlo (Nico). Hay que bajar los vídeos de Drive.
+> · Mié 11 · Reel «Salís de la iglesia y…», 15 s: montado con las Live Photos (Nico). Falta elegir la música.
 > · Vie 13 · Carrusel «Ellos eligieron el beige», palabra BEIGE: hecho (Juan revisa).
 > · Lote al cliente el jue 5 (Alejandro), aprobación hasta el sáb 7. Con el OK, se programa todo en Metricool.
 > · Falta: permiso de caras, iglesia y localidad, @ de la finca y del fotógrafo.

@@ -124,7 +124,7 @@ Las decisiones también van, con fecha y motivo, a `docs/decisiones.md`.
 
 ## 9. Pendiente de definir
 
-- [ ] Pasar al logo y la grafía nuevos lo que ya está hecho con la marca provisional: cierre del reel «Las llaves son vuestras», animaciones de marca (`marca/animaciones/`), portadas de destacadas y avatar.
+- [ ] Pasar al logo y la grafía nuevos lo que ya está hecho con la marca provisional: cierre del reel «Las llaves son vuestras», animaciones de marca (`marca/animaciones/`), portadas de destacadas y avatar. El cierre corto con el logo ya existe: `redes/instagram/reels/2026-11-11_salis-de-la-iglesia/compositions/cierre-corto.html`.
 - [ ] Pedir a la grafista el logo en SVG o PDF desde Illustrator (los SVG de `marca/logo/` están vectorizados desde el PNG) y la licencia de Charter, la fuente del nombre.
 - [ ] Tipografía de las piezas: seguir con Fraunces + Jost o pasar a las del logo (Charter + Metropolis).
 - [ ] Confirmar que el 625 06 42 93 tiene WhatsApp.
