@@ -1,13 +1,13 @@
-# Reel: Salís de la iglesia y…
+# Reel: Así se sale de una boda
 
 | Campo | Valor |
 |---|---|
 | Fecha prevista | 2026-11-11 (miércoles), 20:40 |
-| Formato | Reel 9:16, 19,8 s |
+| Formato | Reel 9:16, 8,7 s |
 | Línea | Bodas |
 | Objetivo | Alcance: llegar a parejas que no nos siguen |
 | Público | Parejas que se casan en 2027 |
-| Estado | v2 descartada. Se monta en CapCut como reel de un solo momento (ver «Siguiente versión») |
+| Estado | v3 montada (un solo momento). En revisión. Falta la canción |
 | Responsable | Nico (montaje) · Alejandro (texto y publicación) |
 
 Semana de la boda del 24-10-2026: [`redes/instagram/bodas/2026-10-24_la-posadilla/`](../bodas/2026-10-24_la-posadilla/README.md). Miércoles, «El momento», gancho 1 de la rotación (`docs/planes/semana-boda.md` §3).
@@ -21,36 +21,26 @@ Proyecto HyperFrames: [`redes/instagram/reels/2026-11-11_salis-de-la-iglesia/`](
 
 ## Guion
 
-Montado así (hoja de contactos en `reels/2026-11-11_salis-de-la-iglesia/contactos.png`):
+v3 (hoja de contactos en `reels/2026-11-11_salis-de-la-iglesia/contactos.png`; detalle en su `BRIEF.md`):
 
-| Escena | Plano | Tramo | Texto en pantalla |
-|---|---|---|---|
-| Gancho | La novia llega al coche ante la ermita, con el velo y los invitados alrededor (IMG_4036) | 0–3,3 s | Salís de la iglesia y… |
-| Detalle | Las cestas llenas de flores blancas, de cerca (IMG_4106) | 3,3–5,4 s | …os espera vuestro Méhari |
-| Prueba | Los dos riendo en el asiento de atrás, con el campo (Live 4049) | 5,4–8,2 s | Con chófer · y el techo abierto |
-| Llegada | El cartel de Finca La Posadilla, con la cámara acercándose (IMG_4053) | 8,2–10,6 s | Llegáis a la finca… |
-| Momento | Los novios de pie en el coche, riendo (IMG_4075) | 10,6–13,6 s | — |
-| Momento | Ramo y brazos arriba ante los invitados (IMG_4075) | 13,6–17,7 s | …y empieza la fiesta |
-| Cierre | Cierre corto con el logo aprobado | 17,7–19,8 s | Escribidnos vuestra fecha · WhatsApp 625 06 42 93 |
+| Tramo | Plano | Texto en pantalla |
+|---|---|---|
+| 0–2 s | Cuatro destellos de 0,5 s: cartel, cestas, salida, asiento de atrás | «Así se sale de una boda» (hasta 1,5 s) |
+| 2–5,2 s | IMG_4075 en una sola toma: ríen y la novia levanta el ramo | — |
+| 5,2–8,2 s | Cámara lenta: el novio levanta el brazo | — |
+| 7,1–8,7 s | El mismo plano con el logo sobre el cielo | — |
 
-## Siguiente versión (v3)
-
-La v2 se descarta: es un resumen de 5 mensajes en 20 s con cajas de texto a media altura y sin ritmo, lo contrario de lo que funciona en `docs/planes/analisis-competencia-reels.md` §2.
-
-- **Reel de un solo momento, de 8 a 10 s**: la toma continua de IMG_4075 (de pie en el coche, ríen y levantan el ramo y los brazos).
-- **Sin cajas**: una frase grande arriba o ninguna.
-- **Audio en tendencia** desde Instagram, con el subidón de la canción en los brazos arriba. Por eso en Metricool va como «aviso».
-- **Lo monta Nico en CapCut** con los clips limpios (1080×1920, SDR, sin marca antigua ni matrícula) del paquete `clips-limpios/` en Drive · `02_Produccion/2026-10-24_la-posadilla/`. Se generan con los recortes del `BRIEF.md` del proyecto HyperFrames.
-- **Copy**: añadir «Mandádselo a quien se case en 2027 💍» en una línea propia.
-- **Pedir al cliente** el original del vídeo de WhatsApp de la salida (el coche arrancando entre los invitados): es el mejor gancho de esta boda.
+**Música (al publicar, en Instagram):** una canción en tendencia con pulso de unos 120 BPM. Que el arranque coincida con el segundo 0 y el subidón caiga en el 5,2, cuando empieza la cámara lenta.
 
 ## Copy
 
-> Salís de la iglesia y os espera vuestro Méhari.
+> Así se sale de una boda 🤍
 >
-> Así fue el sábado en Finca La Posadilla: el beige con el techo abierto, las cestas llenas de flores y un chófer hasta la finca.
+> Sábado en Finca La Posadilla, con el Méhari beige, el techo abierto y las cestas llenas de flores.
 >
-> ¿Os casáis en 2027? Escribidnos vuestra fecha por WhatsApp al 625 06 42 93.
+> Mandádselo a quien se case en 2027 💍
+>
+> ¿Os casáis vosotros? Escribidnos vuestra fecha por WhatsApp al 625 06 42 93.
 
 ## Hashtags
 
@@ -58,12 +48,13 @@ La v2 se descarta: es un resumen de 5 mensajes en 20 s con cajas de texto a medi
 
 ## Decisiones
 
-- **Gancho 1, «Salís de la iglesia y…»**: es la primera semana y la salida con el ramo arriba es el plano con más gente y más movimiento.
-- **v2 con los vídeos 4K** en lugar de solo Live Photos: la v1 (Live Photos de 3 s) no tenía planos con movimiento de verdad. Se queda una Live, la del asiento de atrás, porque no hay vídeo de ese momento.
-- **Reencuadre desde el 4K antes que difuminado**: la matrícula, los chevrones y el rótulo trasero quedan fuera. La funda de la salida, que está detrás de la novia, se deja lisa fotograma a fotograma.
-- **Dos frases partidas entre planos** («Salís de la iglesia y… / …os espera vuestro Méhari» y «Llegáis a la finca… / …y empieza la fiesta»). La llegada de pie va sin texto para que respire.
-- **Sin audio original.** El máster lleva una pista en silencio (decisión del 2026-10-19). Si se publica por Metricool, la música va **incrustada en el MP4** y es libre de derechos, porque la API no puede usar la biblioteca de Instagram. Si se quiere una canción en tendencia, el reel se deja en Metricool como «aviso al móvil» y se publica a mano (`docs/planes/publicacion-metricool.md` §3).
-- **Portada**: fotograma del gancho con el rótulo, también 3:4 para que se vea bien en el grid.
+- **Un solo momento en lugar de un resumen**: las v1 y v2 contaban el día en 5 mensajes, con cajas de texto y sin ritmo. Eso es lógica de carrusel. Los reels que funcionan enseñan un momento (`analisis-competencia-reels.md` §2).
+- **Destellos a pulso de 0,5 s antes de la toma larga**: dan contexto (finca, cestas, ermita, pareja) sin texto y crean ritmo para la canción.
+- **Cámara lenta en el brazo del novio**: es el instante emocional y donde tiene que caer el subidón de la música.
+- **Una frase arriba y sin caja**, solo en el primer segundo y medio, para no tapar caras. Lleva un degradado suave para el contraste.
+- **Sin cartón final**: el logo aparece sobre el cielo del último plano, para que el bucle no se corte.
+- **Sin audio original** (decisión del 2026-10-19): la canción se elige en Instagram, así que en Metricool va como «aviso».
+- **CTA para compartir** en una línea propia del copy: «Mandádselo a quien se case en 2027».
 
 ## Checklist
 
@@ -71,10 +62,10 @@ La v2 se descarta: es un resumen de 5 mensajes en 20 s con cajas de texto a medi
 - [x] Datos sacados del brief y de las fotos, sin nada inventado
 - [x] `revision-marca` del vídeo montado: ninguna funda legible, sin matrícula, sin chevrón y sin «Citroën» (fotogramas revisados)
 - [x] Sin caras de menores (se descarta el tramo de IMG_4036 donde sale un niño; los invitados del fondo son adultos)
-- [x] El reel se entiende sin sonido: no lleva voz y los rótulos cuentan la historia
-- [ ] Elegir música: de la biblioteca de Instagram (aviso) o libre de derechos e incrustada (automático)
+- [x] El reel se entiende sin sonido: no lleva voz y la imagen cuenta el momento
+- [ ] Elegir la canción en Instagram (≈120 BPM, subidón en el 5,2 s)
 - [ ] Revisión de diseño de otro miembro del equipo
 - [ ] Permiso de los novios para publicar sus caras (bloqueante)
 - [ ] Aprobación del cliente (como tarde el 7-11) y de otro miembro del equipo
 
-**Probado (v2):** `hyperframes check` sin errores (1 aviso de densidad de pista, como en los reels anteriores; contraste 6/6 WCAG AA); render de 19,8 s a 1080×1920; un fotograma por escena revisado a 390 px; `revision-marca` sobre la salida fotograma a fotograma (0,2, 1,0, 1,6, 2,4 y 3,1 s) y sobre el resto de planos. No probado: la revisión de diseño por otra persona y la vista previa en un móvil.
+**Probado (v3):** `hyperframes check` sin errores ni avisos de contraste (1/1 WCAG AA); render de 8,7 s a 1080×1920; un fotograma por tramo revisado a 270 px de ancho; la cámara lenta revisada a 5 fotogramas por segundo, sin artefactos; `revision-marca` del paquete de clips (salida fotograma a fotograma). No probado: con la canción puesta, en un móvil y la revisión de otra persona.
