@@ -25,7 +25,7 @@ Si falta la ficha, sigue con lo que haya y apunta cada dato que falte como `[PEN
    - **Límite de 10 MB por fichero.** Por encima, el conector devuelve «File too large for download». Las fotos HEIC (2–8 MB) y los Live Photos (2–9 MB) bajan sin problema; **los vídeos largos no**. Apúntalos en el plan como «sin revisar» y que los revise quien monte el reel (Nico), o pide la ruta local.
    - Las fotos del iPhone vienen en **HEIC**: hace falta `pip install pillow-heif` para abrirlas con Pillow. La fecha y la hora están en el EXIF (etiqueta 36867): con ellas se fija D y se ordena el día.
    - Los **Live Photos** (`IMG_xxxx.MOV` con el mismo número que una foto, 2–3 s, 1440×1920 y ya en SDR) bastan para montar un reel si no hay vídeos. Un `.MOV` pequeño sin foto al lado también es un Live Photo.
-3. **Si el conector no ve el contenido** (ya ha pasado: solo veía la carpeta raíz de `Mehari We`), pide la ruta local. Con Google Drive para escritorio, la carpeta compartida aparece en el ordenador si se añade un acceso directo en «Mi unidad», por ejemplo `G:\Mi unidad\Mehari We_Material\Bodas\…`.
+3. **Si el conector no ve el contenido** (ya ha pasado: solo veía la carpeta raíz de `Mehari We`), pide la ruta local. Con Google Drive para escritorio, la carpeta compartida aparece en el ordenador si se añade un acceso directo en «Mi unidad», por ejemplo `G:\Mi unidad\Mehari We\01_Material\Bodas\…`.
 4. **No copies el material al repositorio.** Las fotos y vídeos no entran en Git (`CLAUDE.md` §5).
 
 ## Paso 2. Ver y elegir
