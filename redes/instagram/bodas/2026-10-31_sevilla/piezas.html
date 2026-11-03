@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boda 31 de octubre</title>
+<!--
+  Pieza estática de la semana de la boda del 31-10-2026 (iglesia y hacienda pendientes de confirmar), a 1080×1440 (3:4).
+  - Sin parámetros: todas las diapositivas en pequeño, para revisarlas.
+  - ?p=<pieza>&s=<n>: una sola diapositiva a tamaño real, para exportarla (exportar.py).
+  Fotos: fotos/ (retocadas con herramientas/material/retocar_foto.py; ver README.md, «Retoques»).
+  Colores de marca/tokens.css. Tipografías provisionales (Fraunces y Jost). Logo aprobado de marca/logo/.
+-->
+<style>
+  @font-face { font-family: 'Fraunces'; src: url('../../reels/sin-fecha_pov-conducis-vosotros/assets/fonts/Fraunces.woff2') format('woff2'); font-weight: 100 900; }
+  @font-face { font-family: 'Jost'; src: url('../../reels/sin-fecha_pov-conducis-vosotros/assets/fonts/Jost.woff2') format('woff2'); font-weight: 100 900; }
+  :root {
+    --naranja: #EE7D1F;
+    --beige: #DCC6A0;
+    --cal: #F7F1E6;
+    --tinta: #2B211A;
+    --naranja-oscuro: #C2560E;
+    --azahar: #FFFCF5;
+    --font-titular: 'Fraunces', Georgia, serif;
+    --font-texto: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--cal); color: var(--tinta); font-family: var(--font-texto); }
+
+  .slide { width: 1080px; height: 1440px; position: relative; overflow: hidden; background: var(--tinta); }
+  .slide > img.foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  /* Logo aprobado, discreto arriba a la izquierda */
+  .logo { position: absolute; top: 56px; left: 64px; width: 128px; filter: drop-shadow(0 2px 10px rgba(0,0,0,.35)); }
+
+  /* Rótulo de paso: degradado corto abajo */
+  .velo { position: absolute; left: 0; right: 0; bottom: 0; height: 42%;
+          background: linear-gradient(to top, rgba(43,33,26,.86) 0%, rgba(43,33,26,.45) 50%, rgba(43,33,26,0) 100%); }
+  .pie { position: absolute; left: 72px; right: 72px; bottom: 92px; color: var(--azahar); }
+  .num { font-size: 30px; letter-spacing: .28em; color: var(--naranja); margin-bottom: 16px; font-weight: 500; }
+  .rotulo { font-family: var(--font-titular); font-weight: 600; font-size: 72px; line-height: 1.05; }
+  .detalle { font-size: 34px; line-height: 1.35; margin-top: 18px; opacity: .92; max-width: 36ch; }
+
+  /* Portada */
+  .portada .velo { height: 58%; }
+  .portada .rotulo { font-size: 100px; line-height: 1; }
+  .desliza { position: absolute; right: 72px; bottom: 98px; font-size: 30px; color: var(--azahar); opacity: .85; }
+
+  /* Cierre con llamada a la acción */
+  .cierre { background: var(--cal); display: flex; flex-direction: column; justify-content: center; padding: 0 96px; }
+  .cierre .costillas { display: grid; gap: 14px; width: 220px; margin-bottom: 72px; }
+  .cierre .costillas i { display: block; height: 22px; background: var(--naranja); }
+  .cierre h2 { font-family: var(--font-titular); font-weight: 600; font-size: 88px; line-height: 1.05; color: var(--tinta); }
+  .cierre p { font-size: 40px; line-height: 1.4; margin-top: 36px; color: var(--tinta); max-width: 26ch; }
+  .cierre p b { color: var(--naranja-oscuro); font-weight: 500; }
+  .cierre .boton { display: inline-block; margin-top: 64px; background: var(--naranja); color: var(--tinta);
+                   font-weight: 500; font-size: 40px; padding: 26px 52px; border-radius: 999px; }
+  .cierre .tel { font-size: 34px; margin-top: 26px; color: var(--naranja-oscuro); }
+  .cierre .firma { position: absolute; right: 96px; bottom: 72px; width: 190px; }
+
+  /* Modo revisión */
+  .revision { padding: 32px 16px 64px; max-width: 1200px; margin: 0 auto; }
+  .revision h1 { font-family: var(--font-titular); font-size: 30px; margin-bottom: 6px; }
+  .revision h2 { font-size: 18px; font-weight: 500; margin: 36px 0 12px; }
+  .fila { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; }
+  .mini { flex: none; width: 216px; height: 288px; overflow: hidden; border-radius: 6px; }
+  .mini .slide { transform: scale(.2); transform-origin: 0 0; }
+</style>
+</head>
+<body>
+<script>
+const LOGO = '../../../../marca/logo/';
+const foto = (id, pos = '50% 50%', zoom = 1) =>
+  `<img class="foto" src="fotos/${id}.jpg" style="object-position:${pos};transform:scale(${zoom});transform-origin:${pos}" alt="">`;
+const logo = `<img class="logo" src="${LOGO}mehari-we-blanco.svg" alt="Méhari We">`;
+
+const paso = (n, id, pos, rotulo, detalle, zoom) => `
+  <div class="slide">${foto(id, pos, zoom)}<div class="velo"></div>${logo}
+    <div class="pie"><div class="num">${String(n).padStart(2, '0')}</div>
+      <div class="rotulo">${rotulo}</div>${detalle ? `<div class="detalle">${detalle}</div>` : ''}</div>
+  </div>`;
+
+const cierre = (titulo, texto, boton) => `
+  <div class="slide cierre">
+    <div class="costillas"><i></i><i></i><i></i><i></i></div>
+    <h2>${titulo}</h2>
+    <p>${texto}</p>
+    <div><span class="boton">${boton}</span></div>
+    <div class="tel">WhatsApp · 625 06 42 93</div>
+    <img class="firma" src="${LOGO}mehari-we-naranja.svg" alt="Méhari We · Wedding & Events">
+  </div>`;
+
+const PIEZAS = {
+  // Lunes 16-11 · «La boda»: la boda contada en el orden del día (docs/planes/semana-boda.md §3)
+  // Sin nombres de la iglesia ni de la hacienda hasta que el cliente los confirme (ver README.md, «Pendiente»).
+  'la-boda': [
+    `<div class="slide portada">${foto('4344', '50% 40%')}<div class="velo"></div>${logo}
+       <div class="pie"><div class="num">LA BODA</div><div class="rotulo">De la iglesia a la hacienda</div>
+       <div class="detalle">Un sábado de otoño, en el Méhari naranja.</div></div><div class="desliza">Desliza →</div></div>`,
+    paso(1, '4289', '40% 40%', 'Esperando a la puerta', 'El Méhari, listo junto a la portada.'),
+    paso(2, '4312', '50% 35%', 'Recién casados', 'Y directos al asiento de atrás.'),
+    paso(3, '4292', '50% 45%', 'Las flores, atrás', 'Verde y flores blancas en las cestas.'),
+    paso(4, '4315', '55% 60%', 'Por el centro', 'Con el techo abierto, camino de la hacienda.', 1.2),
+    paso(5, '4334', '40% 50%', 'La llegada', 'Entre buganvillas.'),
+    paso(6, '4371', '45% 50%', 'Y a celebrarlo', ''),
+    paso(7, '4358', '50% 40%', 'Los detalles', ''),
+    cierre('¿Os casáis en 2027?', 'Escribidnos vuestra fecha y os decimos si hay un Méhari libre.', 'Pedir fecha'),
+  ],
+};
+
+const q = new URLSearchParams(location.search);
+const p = q.get('p');
+if (p && PIEZAS[p]) {
+  document.body.innerHTML = PIEZAS[p][Number(q.get('s') || 0)];
+} else {
+  document.body.innerHTML = `<div class="revision"><h1>Boda del 31-10-2026</h1>
+    <p>Piezas estáticas a 1080×1440 (3:4). Cada fila es una publicación; desliza a la derecha.</p>
+    ${Object.entries(PIEZAS).map(([id, slides]) => `<h2>${id} · ${slides.length} diapositivas</h2>
+      <div class="fila">${slides.map(s => `<div class="mini">${s}</div>`).join('')}</div>`).join('')}</div>`;
+}
+</script>
+</body>
+</html>

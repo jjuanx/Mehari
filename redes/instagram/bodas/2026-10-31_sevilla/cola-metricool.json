@@ -1,0 +1,116 @@
+{
+  "boda": "2026-10-31_sevilla",
+  "zona_horaria": "Europe/Madrid",
+  "aprobacion": {
+    "estado": "pendiente",
+    "lote_enviado": null,
+    "aprobado_el": null,
+    "aprobado_por": null,
+    "nota": "No se programa nada hasta que el cliente apruebe el lote y dé permiso de caras. Antes de programar, sustituir [iglesia] y [hacienda] en el texto del lunes (o usar la versión sin nombres de la ficha). La skill programar-metricool lo comprueba aquí."
+  },
+  "publicaciones": [
+    {
+      "id": "lun-la-boda",
+      "fecha": "2026-11-16T12:40:00",
+      "red": "instagram",
+      "tipo": "carrusel",
+      "modo": "automatico",
+      "ficha": "redes/instagram/publicaciones/2026-11-16_carrusel_boda-31-octubre.md",
+      "medios": [
+        "jpg/la-boda/01.jpg",
+        "jpg/la-boda/02.jpg",
+        "jpg/la-boda/03.jpg",
+        "jpg/la-boda/04.jpg",
+        "jpg/la-boda/05.jpg",
+        "jpg/la-boda/06.jpg",
+        "jpg/la-boda/07.jpg",
+        "jpg/la-boda/08.jpg",
+        "jpg/la-boda/09.jpg"
+      ],
+      "texto": "Un sábado de otoño, de la puerta de [iglesia] a [hacienda], en el Méhari naranja.\n\nTecho abierto, las cestas de atrás llenas de verde y flores blancas, y todo el centro mirando al pasar. Desliza y lo veis en el orden del día.\n\n¿Os casáis en 2027? Escribidnos vuestra fecha por WhatsApp al 625 06 42 93 y os decimos si hay un Méhari libre.\n\n#cochedeboda #cochesclasicos #novios2027 #bodasconencanto",
+      "ubicacion": "[PENDIENTE: hacienda o iglesia]",
+      "a_mano_despues": [
+        "Etiquetar a la hacienda, la florista y el fotógrafo, y proponer Collab, si Metricool no lo ha hecho"
+      ],
+      "metricool_id": null,
+      "estado": "pendiente"
+    },
+    {
+      "id": "mie-el-momento",
+      "fecha": "2026-11-18T20:40:00",
+      "red": "instagram",
+      "tipo": "reel",
+      "modo": "aviso",
+      "ficha": "redes/instagram/publicaciones/2026-11-18_reel_lo-que-ven-vuestros-invitados.md",
+      "medios": [
+        "../../reels/2026-11-18_lo-que-ven-vuestros-invitados/reel_9x16.mp4"
+      ],
+      "portada": "../../reels/2026-11-18_lo-que-ven-vuestros-invitados/portada.png",
+      "texto": "Lo que ven vuestros invitados cuando salís de la iglesia 🤍\n\nPétalos en la puerta, el Méhari naranja esperando con las flores atrás y un paseo por el centro hasta la hacienda.\n\nMandádselo a quien se case en 2027 💍\n\n¿Os casáis vosotros? Escribidnos vuestra fecha por WhatsApp al 625 06 42 93.\n\n#cochedeboda #cochesclasicos #novios2027 #bodas2027",
+      "ubicacion": "[PENDIENTE: iglesia o hacienda]",
+      "a_mano_despues": [],
+      "nota": "Reel por montar (Nico). El MP4 no se versiona: irá a Drive · 02_Produccion/2026-10-31_sevilla/. Va como aviso para poner la música desde Instagram.",
+      "metricool_id": null,
+      "estado": "pendiente"
+    },
+    {
+      "id": "vie-vuestra-eleccion",
+      "fecha": "2026-11-20T20:40:00",
+      "red": "instagram",
+      "tipo": "reel",
+      "modo": "aviso",
+      "ficha": "redes/instagram/publicaciones/2026-11-20_reel_las-flores.md",
+      "medios": [
+        "../../reels/2026-11-20_las-flores/reel_9x16.mp4"
+      ],
+      "texto": "Las flores de la boda, también en el coche 🌿\n\nEl Méhari lleva atrás dos cestas de mimbre para que vuestra florista las decore a juego con todo lo demás. Estos novios eligieron mucho verde y flores blancas.\n\n¿Ya tenéis florista? Escribidnos FLORES por WhatsApp al 625 06 42 93 con vuestra fecha y os contamos cómo se prepara.\n\n#cochedeboda #floresdeboda #novios2027 #bodas2027",
+      "ubicacion": "[PENDIENTE: iglesia o hacienda]",
+      "primer_comentario": "🌿 ¿Silvestres o clásicas? ¿Cómo las pondríais vosotros?",
+      "a_mano_despues": [
+        "Etiquetar a la florista"
+      ],
+      "nota": "Reel corto por montar (Nico). Si se cambia al plan B (carrusel de Juan), pasar a tipo carrusel y modo automatico.",
+      "metricool_id": null,
+      "estado": "pendiente"
+    },
+    {
+      "id": "story-lun-compartir",
+      "fecha": "2026-11-16T13:30:00",
+      "red": "instagram",
+      "tipo": "story",
+      "modo": "aviso",
+      "medios": [
+        "jpg/la-boda/01.jpg"
+      ],
+      "texto": "Compartir el carrusel con el sticker de enlace a WhatsApp (wa.me/34625064293)",
+      "metricool_id": null,
+      "estado": "pendiente"
+    },
+    {
+      "id": "story-mie-compartir",
+      "fecha": "2026-11-18T21:15:00",
+      "red": "instagram",
+      "tipo": "story",
+      "modo": "aviso",
+      "medios": [
+        "../../reels/2026-11-18_lo-que-ven-vuestros-invitados/portada.png"
+      ],
+      "texto": "Compartir el reel con sticker de enlace",
+      "metricool_id": null,
+      "estado": "pendiente"
+    },
+    {
+      "id": "story-vie-compartir",
+      "fecha": "2026-11-20T21:15:00",
+      "red": "instagram",
+      "tipo": "story",
+      "modo": "aviso",
+      "medios": [
+        "../../reels/2026-11-20_las-flores/portada.png"
+      ],
+      "texto": "Compartir el reel con sticker de enlace y la palabra FLORES",
+      "metricool_id": null,
+      "estado": "pendiente"
+    }
+  ]
+}
