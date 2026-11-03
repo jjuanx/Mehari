@@ -2,13 +2,17 @@
 
 Uso:
     python retocar_foto.py <entrada> <salida> [--placa X,Y,X,Y,...] [--emblema X,Y,AN,AL]
-                           [--conservar X,Y,AN,AL --desde <foto>] [--umbral 28] [--dilatar 7]
+                           [--funda X,Y,X,Y,...] [--conservar X,Y,AN,AL --desde <foto>]
+                           [--umbral 28] [--dilatar 7]
 
 - `--placa`: polígono interior de la matrícula (al menos 4 vértices, en píxeles de la entrada).
   Se borran los caracteres y la placa se rellena con su propio sombreado: queda una placa lisa,
   con su forma, su marco y la banda azul europea. Se puede repetir.
 - `--emblema`: caja de un emblema sobre chapa lisa (capó, calandra). Se rellena con el color
   de la chapa de alrededor (inpainting). Se puede repetir.
+- `--funda`: polígono de la funda negra de la rueda de repuesto. Borra lo que destaca sobre la funda
+  (las letras blancas «@MEHARI_TOURSUR» y el logo de Instagram, de colores) y lo rellena con la
+  propia funda: queda una funda lisa. Se puede repetir. Marca el polígono por dentro del borde.
 - `--conservar` + `--desde`: copia esa caja de otra foto del mismo tamaño (por ejemplo, la versión
   difuminada) cuando una zona no se puede retocar bien y se va a dejar fuera del encuadre.
 - `--umbral` y `--dilatar`: si quedan restos de letra, bájese el umbral (16) y súbase la dilatación (11).
@@ -65,6 +69,23 @@ def emblema(img, x, y, w, h):
     img[y0:y1, x0:x1] = (rel * alfa + crop * (1 - alfa)).astype(np.uint8)
 
 
+def funda_lisa(img, poli, dil=9):
+    m = np.zeros(img.shape[:2], np.uint8)
+    cv2.fillPoly(m, [np.array(poli, np.int32)], 1)
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    v = hsv[..., 2].astype(np.float32)
+    fondo = np.median(v[m > 0])
+    # Letras claras y logo de colores sobre la funda oscura
+    marca = ((v > fondo + 35) | ((hsv[..., 1] > 70) & (v > fondo + 15))).astype(np.uint8) & m
+    marca = cv2.dilate(marca, np.ones((dil, dil), np.uint8)) & m
+    rel = cv2.inpaint(img, marca * 255, 15, cv2.INPAINT_TELEA)
+    # Suaviza el relleno para que no queden vetas y le devuelve un grano parecido al de la foto
+    suave = cv2.GaussianBlur(rel, (0, 0), 6).astype(np.float32)
+    ruido = np.random.default_rng(1).normal(0, 2.5, img.shape).astype(np.float32)
+    a = cv2.GaussianBlur(marca.astype(np.float32), (0, 0), 2)[..., None]
+    return np.clip((suave + ruido) * a + img.astype(np.float32) * (1 - a), 0, 255).astype(np.uint8)
+
+
 def numeros(texto, n=None):
     v = [int(round(float(t))) for t in texto.split(",")]
     if n and len(v) != n:
@@ -78,6 +99,7 @@ def main():
     ap.add_argument("salida")
     ap.add_argument("--placa", action="append", default=[])
     ap.add_argument("--emblema", action="append", default=[])
+    ap.add_argument("--funda", action="append", default=[])
     ap.add_argument("--conservar", action="append", default=[])
     ap.add_argument("--desde")
     ap.add_argument("--umbral", type=float, default=28)
@@ -94,6 +116,11 @@ def main():
         if len(v) < 8 or len(v) % 2:
             raise SystemExit(f"El polígono necesita al menos 4 vértices X,Y: {p}")
         img = placa_lisa(img, list(zip(v[::2], v[1::2])), a.umbral, a.dilatar)
+    for p in a.funda:
+        v = numeros(p)
+        if len(v) < 6 or len(v) % 2:
+            raise SystemExit(f"El polígono necesita al menos 3 vértices X,Y: {p}")
+        img = funda_lisa(img, list(zip(v[::2], v[1::2])))
     if a.conservar:
         otra = cv2.imread(a.desde) if a.desde else None
         if otra is None or otra.shape != img.shape:

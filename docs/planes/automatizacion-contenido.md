@@ -121,7 +121,7 @@ La API oficial (*Instagram Platform, Content Publishing*) funciona con **cuentas
 | Música en tendencia, stickers, Collab | **Sí** | Parcial | Parcial |
 | Riesgo | Tiempo del equipo | Un tercero guarda el acceso a la cuenta del cliente y dependemos de su servicio | Mantenimiento nuestro. El token caduca cada 60 días y hay que renovarlo |
 
-Metricool, muy usada en España, está a medio camino entre A y B: tiene calendario visual y métricas, publica posts, reels y stories solos (hasta 50 al día) y avisa al móvil para lo que hay que publicar a mano. Su integración con Claude depende del plan; si interesa, **hay que comprobarlo**.
+**Decidido el 2026-11-03: Metricool** (ver [publicacion-metricool.md](publicacion-metricool.md)). Metricool, muy usada en España, está a medio camino entre A y B: tiene calendario visual y métricas, publica posts, reels y stories solos (hasta 50 al día) y avisa al móvil para lo que hay que publicar a mano. Su integración con Claude depende del plan; si interesa, **hay que comprobarlo**.
 
 **Recomendación**
 

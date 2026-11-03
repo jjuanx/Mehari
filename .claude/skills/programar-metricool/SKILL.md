@@ -1,0 +1,67 @@
+---
+name: programar-metricool
+description: Programa en Metricool las publicaciones aprobadas de la semana de una boda (carrusel del lunes, reel del miércoles, pieza del viernes y avisos de stories) a partir de su cola-metricool.json, para que se publiquen solas en Instagram en su día y hora. Úsala cuando el cliente apruebe el lote de una boda, cuando alguien diga «programa la semana de…» o para cambiar o comprobar lo que ya está programado.
+---
+
+# Programar en Metricool
+
+El sistema está en [`docs/planes/publicacion-metricool.md`](../../../docs/planes/publicacion-metricool.md). Léelo antes de empezar. Si algo de aquí choca con ese documento, manda el documento.
+
+## Entradas
+
+| Entrada | Ejemplo |
+|---|---|
+| Carpeta de la boda | `redes/instagram/bodas/2026-10-24_la-posadilla/` |
+| Cola | `cola-metricool.json` de esa carpeta |
+
+## Paso 0. Conector
+
+Busca las herramientas de Metricool (`createScheduledPost`, `getScheduledPosts`, `updateScheduledPost`, `getBrandSettings`). Si no están, **para** y dile al usuario que conecte «Metricool Social Media Management» en claude.ai › Ajustes › Conectores (`publicacion-metricool.md` §2). No publiques por otra vía.
+
+Con `getBrandSettings`, comprueba que la marca es Méhari We y que tiene Instagram `@mehari.we` conectado. Si hay varias marcas, usa solo esa.
+
+## Paso 1. Comprobaciones (si falla una, no se programa nada)
+
+1. `aprobacion.estado` es `aprobado`, con fecha y quién aprueba. Si no, para: **sin aprobación del cliente no se programa**.
+2. Cada publicación con `estado: "pendiente"` tiene todos sus `medios` en disco:
+   - Carrusel: JPEG de 1080×1440, de 2 a 10.
+   - Reel: MP4 9:16 con audio incrustado. Si el modo es `automatico`, el audio tiene que ser libre de derechos.
+3. Ningún `texto` contiene `[` (marcadores sin rellenar) ni «Citroën», ni más de 5 hashtags. El teléfono es 625 06 42 93.
+4. Las fechas son futuras, en `Europe/Madrid`, y coinciden con las fichas enlazadas.
+5. La ficha de cada pieza tiene marcada la aprobación y `revision-marca`. Si falta algo, avisa y pregunta antes de seguir.
+
+## Paso 2. Medios
+
+Instagram descarga los medios de una URL. En orden de preferencia:
+1. La subida de medios del propio conector, si la tiene.
+2. Si no, sube los ficheros a Drive · `Mehari We/02_Produccion/<boda>/`, compártelos con «cualquiera con el enlace» y usa la URL de descarga directa.
+
+Anota en `publicacion-metricool.md` §5 cuál ha funcionado la primera vez.
+
+## Paso 3. Programar
+
+Para cada publicación `pendiente`, en orden de fecha:
+
+- `createScheduledPost` con red Instagram, tipo (`carrusel`/`foto` → post; `reel`; `story`), fecha y hora en `Europe/Madrid`, texto, medios en orden, ubicación y primer comentario si el conector lo admite.
+- `modo: "automatico"` → publicación automática. `modo: "aviso"` → solo notificación al móvil (publicación manual).
+- Guarda el id devuelto en `metricool_id` y pon `estado: "programada"`.
+
+Si una publicación ya tiene `metricool_id`, no la crees otra vez: usa `updateScheduledPost` solo si ha cambiado algo.
+
+## Paso 4. Verificar
+
+1. `getScheduledPosts` del rango de la semana: cada entrada de la cola aparece una vez, con su hora, su texto y el número de medios correcto.
+2. Escribe la cola actualizada y haz commit en la rama de la semana (`Programa en Metricool la semana de <boda>`).
+3. Resumen para el grupo: qué sale solo y cuándo, qué avisos llegarán al móvil y qué hay que hacer a mano después (Collab, etiquetas, stickers).
+
+## Cambios después de programar
+
+Si el cliente pide un cambio: modifica la pieza y la ficha, vuelve a exportar, `updateScheduledPost` y actualiza la cola en el mismo paso. Si se cancela una pieza, bórrala en Metricool desde su calendario (el conector no lo permite) y pon `estado: "cancelada"`.
+
+## Checklist
+
+- [ ] Aprobación del cliente registrada en la cola
+- [ ] Medios completos y con el formato correcto; reels automáticos con música libre de derechos
+- [ ] Textos sin marcadores, sin «Citroën», máximo 5 hashtags
+- [ ] Todo programado una sola vez y verificado con `getScheduledPosts`
+- [ ] `metricool_id` y `estado` apuntados en la cola, con commit

@@ -162,7 +162,7 @@ Acordado el 2026-11-02, según lo que ha hecho cada uno hasta ahora en el reposi
 
 | Quién | Papel | Qué hace cada semana |
 |---|---|---|
-| **Alejandro** | Coordinación, textos y publicación | Comprueba que llega el material y lanza la skill `semana-boda` (lunes). Escribe los textos y las stories. Envía el lote al cliente y recoge la aprobación. Programa en Meta Business Suite. Rutina de comunidad y revisión semanal |
+| **Alejandro** | Coordinación, textos y publicación | Comprueba que llega el material y lanza la skill `semana-boda` (lunes). Escribe los textos y las stories. Envía el lote al cliente y recoge la aprobación. Programa la semana en Metricool con la skill `programar-metricool` cuando llega la aprobación (`publicacion-metricool.md`). Rutina de comunidad y revisión semanal |
 | **Juan** | Material y piezas de foto | Selección, `revision-marca` y retoque (`retocar_foto.py`, `difuminar.py`). Carrusel del lunes. Pieza del viernes si es carrusel o foto |
 | **Nico** | Reels | Reel del miércoles. Pieza del viernes si es reel |
 
