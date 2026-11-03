@@ -17,6 +17,8 @@ Somos un equipo de tres (Alejandro, Juan y Nico) contratado para **lanzar una ma
 2. **Web**: más adelante, una *landing page* muy estética con *motion graphics*. Todavía no se empieza.
 3. **Objetivo del cliente**: conseguir clientes nuevos, más facturación y más alcance. Sobre todo, **más bodas contratadas**.
 
+**Reparto** (2026-11-02): Alejandro coordina, escribe los textos, trata con el cliente y publica; Juan lleva el material y las piezas de foto; Nico, los reels. Detalle en [docs/planes/semana-boda.md](docs/planes/semana-boda.md) §5.
+
 Todo lo que hagamos se juzga por una pregunta: *¿esto acerca a una pareja (o a un turista) a pedir presupuesto?*
 
 ## 2. Por qué existe la marca nueva (pivotación)
@@ -65,7 +67,7 @@ Mehari/
 │  ├─ decisiones.md          ← registro de decisiones (fecha, decisión, motivo)
 │  ├─ material/              ← clasificación de las fotos y vídeos del cliente (clasificacion.csv) y dónde está cada cosa
 │  └─ planes/                ← plan de proyecto, estrategia de redes, etc.
-├─ redes/instagram/          ← publicaciones, calendario editorial, reels/<fecha>_<tema>/ (fuente HyperFrames) y destacadas/ (portadas)
+├─ redes/instagram/          ← publicaciones, calendario editorial, bodas/<fecha>_<lugar>/ (plan de la semana de cada boda), reels/<fecha>_<tema>/ (fuente HyperFrames) y destacadas/ (portadas)
 ├─ marca/                    ← identidad: README (colores, tipos, logo), tokens.css y propuestas/
 ├─ comercial/dossier-novios/ ← dossier de bodas para las parejas (HTML → PDF; el PDF va a Drive)
 ├─ web/                      ← landing (más adelante)
@@ -104,6 +106,7 @@ Viven en `.claude/skills/` y están catalogadas en [SKILLS.md](SKILLS.md). Al ha
 - Toda skill nueva o modificada se registra en `SKILLS.md` en el mismo PR.
 - **Motion graphics y vídeo**: tenemos las skills oficiales de **HyperFrames** (por defecto para piezas de Instagram; se entra por `hyperframes`) y de **Remotion** (`remotion-best-practices`). Son de terceros: no se editan, se actualizan copiando de nuevo desde su repositorio. Hacen falta Node.js y FFmpeg.
 - **Reels**: se guionizan y producen con la skill `guion-reel` (estructura, ficha por escena y verificación), que delega el render en HyperFrames.
+- **Semana de cada boda**: cada boda produce tres publicaciones fijas, lunes carrusel «La boda», miércoles reel «El momento» y viernes «Vuestra elección», publicadas en D+9, D+11 y D+13. Sistema en [docs/planes/semana-boda.md](docs/planes/semana-boda.md); se prepara con la skill `semana-boda` a partir de la carpeta de Drive de la boda.
 - Toda pieza animada pasa también por `revision-marca` antes de publicarse.
 - **Diseño estático y publicidad**: `canvas-design` (oficial de Anthropic) para ilustraciones y piezas en PNG o PDF; `ad-creative` y `ads` (marketingskills) para anuncios y campañas de Meta. Son de terceros y en inglés: nuestras reglas mandan y no se generan con IA fotos de los coches ni de bodas.
 - **Animaciones de marca** (entrada, transición y cierre de los reels): proyecto HyperFrames en `marca/animaciones/`, con sus renders ligeros versionados. Propuesta pendiente de aprobación.
@@ -126,7 +129,6 @@ Las decisiones también van, con fecha y motivo, a `docs/decisiones.md`.
 - [ ] Confirmar que el 625 06 42 93 tiene WhatsApp.
 - [ ] Precios y packs (de momento, "consultar presupuesto").
 - [ ] Presupuesto para publicidad en Meta.
-- [ ] Reparto de tareas en el equipo (de momento, todos en todo).
 - [ ] Objetivos numéricos: bodas al año actuales y objetivo, seguidores, solicitudes al mes.
 - [ ] TikTok u otras redes: ¿entran en el alcance?
 - [ ] Herramienta de publicación: Meta Business Suite a mano, herramienta con API y conector para Claude, o app propia de Meta. Se decide en la semana 5 tras el piloto (ver `docs/planes/automatizacion-contenido.md`).
