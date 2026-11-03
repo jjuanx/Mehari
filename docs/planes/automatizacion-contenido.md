@@ -1,4 +1,4 @@
-# Automatización de la producción y la publicación — Mehari We
+# Automatización de la producción y la publicación — Méhari We
 
 | Campo | Valor |
 |---|---|
@@ -79,7 +79,7 @@ Plantillas que proponemos (una por cada formato que se repite):
 | `story-cta` | 9:16 imagen o vídeo de 5–10 s | foto, frase, CTA a WhatsApp | `motion-graphics` |
 | `portada-reel` | 9:16 con zona segura 4:5 para la rejilla | fotograma, título | `motion-graphics` |
 
-- **Identidad**: mientras no haya marca (`CLAUDE.md` §9), las plantillas usan una paleta neutra y Mehari We. Cuando exista `marca/`, los colores y tipografías se leen de ahí y **todas las piezas se actualizan con un solo render**.
+- **Identidad**: mientras no haya marca (`CLAUDE.md` §9), las plantillas usan una paleta neutra y Méhari We. Cuando exista `marca/`, los colores y tipografías se leen de ahí y **todas las piezas se actualizan con un solo render**.
 - **Alternativa para piezas estáticas**: Canva (hay conector con Claude). Útil si el cliente quiere retocar un carrusel él mismo. Para vídeo nos quedamos con HyperFrames.
 - **Especificaciones de salida** (que la API acepte el fichero a la primera):
   - Vídeo: MP4 H.264 con audio AAC, 1080×1920, 30 fps. Reels de hasta 300 MB y stories de hasta 60 s y 100 MB.

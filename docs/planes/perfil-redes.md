@@ -1,4 +1,4 @@
-# Perfil de Instagram y TikTok — Mehari We
+# Perfil de Instagram y TikTok — Méhari We
 
 | Campo | Valor |
 |---|---|
@@ -113,17 +113,17 @@ Encaja con nosotros mejor que con nadie: el coche es abierto, es divertido y los
 **`@mehari.we`** en Instagram y en TikTok.
 
 - `@mehariwe` está ocupado en Instagram (cuenta personal privada, sin publicaciones). En TikTok está libre, pero conviene el mismo usuario en las dos.
-- `@mehari.we` aparecía libre en las dos el 2026-10-19. Se confirma al registrarlo.
+- `@mehari.we` aparecía libre en las dos el 2026-10-19. **Confirmado en Instagram el 2026-10-27.** En TikTok, pendiente.
 - Alternativa si falla: `@mehariwe.weddings` (libre en Instagram ese día).
 
-Al confirmarlo, hay que actualizar `CLAUDE.md` §2 y §9, el brief y quitar el marcador `@[usuario_por_definir]` de las fichas.
+Ya figura en `CLAUDE.md`, en el brief y en las fichas.
 
 ## 3. Nombre del perfil (campo buscable)
 
 | Red | Texto | Caracteres |
 |---|---|---|
-| Instagram | `Mehari We \| Coches de boda` | 26 de 30 |
-| TikTok | `Mehari We · Coches de boda` | 26 |
+| Instagram | `Méhari We \| Coches de boda` | 26 de 30 |
+| TikTok | `Méhari We · Coches de boda` | 26 |
 
 "Coche de boda" es lo que escribe una pareja en el buscador. No pone ciudad (CLAUDE.md §2).
 
@@ -166,7 +166,7 @@ Méhari clásicos para bodas 🧡 Conducís vosotros o con chófer. WhatsApp 625
 ## 5. Foto de perfil
 
 - **Definitiva:** el avatar del logo elegido (cada propuesta de `marca/propuestas/mehari-we.html` ya trae el suyo).
-- **Provisional:** "Mehari We" en azahar sobre naranja con las costillas, como el cierre del primer reel (`redes/instagram/reels/2026-10-23_las-llaves-son-vuestras/compositions/cierre.html`). Mantiene la coherencia entre el avatar, las portadas y el cierre de los reels.
+- **Provisional:** "Méhari We" en azahar sobre naranja con las costillas, como el cierre del primer reel (`redes/instagram/reels/2026-10-23_las-llaves-son-vuestras/compositions/cierre.html`). Mantiene la coherencia entre el avatar, las portadas y el cierre de los reels.
 - Nada de fotos del coche como avatar: a 110 px no se distinguen y la marca necesita que se reconozca el nombre.
 
 ---
@@ -276,7 +276,7 @@ Textos para estos reels, adaptados del formato que funciona: "Pedidle a vuestro 
 
 ## 12. Pendiente del cliente
 
-- [ ] Aprobar el usuario `@mehari.we`.
+- [x] Aprobar el usuario `@mehari.we` (2026-10-27).
 - [ ] Confirmar si la agenda 2027 está abierta (para la bio).
 - [ ] Confirmar WhatsApp Business en el 625 06 42 93.
 - [ ] Clase de conducción: cuándo, dónde y cuánto dura (destacada "Al volante").

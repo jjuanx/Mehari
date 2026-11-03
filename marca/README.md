@@ -4,25 +4,51 @@ Referencia única de la identidad visual: nombre, logo, colores, tipografía y r
 Cualquier pieza (vídeo, post, web) sale de aquí. Los valores que se usan en código viven en
 [`tokens.css`](tokens.css).
 
-> **Estado:** el nombre está aprobado (**Mehari We · Weddings & Events**, 2026-10-16), y también las
-> costillas como recurso y la paleta. El logo sigue en propuesta: ver `propuestas/mehari-we.html`.
+> **Estado:** el nombre (**Méhari We · Wedding & Events**) y el logo están aprobados (2026-10-28). También
+> lo están las costillas como recurso y la paleta. La tipografía de las piezas sigue pendiente.
 
 ## Contenido
 
 | Fichero | Qué es |
 |---|---|
 | [`tokens.css`](tokens.css) | Variables CSS de colores y tipografías. Se importan en las composiciones de HyperFrames, en Remotion y en la web |
-| [`propuestas/mehari-we.html`](propuestas/mehari-we.html) | **Vigente.** Ocho propuestas de logo para Mehari We: cinco con las costillas y una pieza delantera del coche (frontal, parabrisas, capó, perfil y frontal a trazo) y tres de lettering (monograma MWE, coche formado con las letras y monograma con costillas), con logotipo, avatar y pantalla de carga. Se abre en el navegador |
+| [`logo/`](logo/) | **Logo aprobado.** SVG de la versión principal (03) en naranja, blanco y tinta, SVG de las versiones 01 y 02 y los PNG originales de la grafista |
+| [`propuestas/mehari-we.html`](propuestas/mehari-we.html) | Histórico: ocho propuestas de logo para Mehari We: cinco con las costillas y una pieza delantera del coche (frontal, parabrisas, capó, perfil y frontal a trazo) y tres de lettering (monograma MWE, coche formado con las letras y monograma con costillas), con logotipo, avatar y pantalla de carga. Se abre en el navegador |
 | [`propuestas/logos.html`](propuestas/logos.html) | Histórico: propuestas A (Azahar) y B (Getaway), descartadas con el nombre |
 | [`propuestas/costillas.html`](propuestas/costillas.html) | Histórico: propuesta C. Gustan las costillas; el símbolo (trasera con rueda) se descarta porque parece un carro |
 
-Cuando el cliente elija, se añadirá `logo/` con los SVG finales (texto convertido a trazos) y los
-PNG exportados.
+## Logo
 
-## Nombre: Mehari We
+Lo diseñó una grafista contratada por el cliente y el cliente lo aprobó el 2026-10-28. **Se usa tal
+cual**: no se redibuja, no se recoloca el texto ni se cambian proporciones.
 
-Aprobado por el cliente el 2026-10-16, con el subtítulo «Weddings & Events». Las dos propuestas
-anteriores quedan como histórico:
+- **Idea:** la M de arriba es la de Méhari y la W de abajo, la de Wedding; las dos enmarcan el nombre.
+- **Versión principal: 03**, trazo fino y los cuatro brazos iguales. Las versiones 01 (trazo grueso,
+  subtítulo en serif) y 02 (trazo fino, M más estrecha) son de la misma entrega y quedan como alternativas.
+- **Colores:** naranja del logo (`--naranja-logo`, `#F35F03`) sobre fondo claro; blanco azahar sobre
+  naranja, tinta o foto; tinta sobre beige o cal. No se usa en otros colores.
+- **Tipografías del logo:** Charter (el nombre) y Metropolis Bold (el subtítulo). En los SVG van
+  convertidas a trazos, así que no hace falta instalarlas. Charter venía en un `.ttc` del Mac: no se
+  sube al repo hasta confirmar su licencia. Metropolis es OFL.
+
+| Fichero | Uso |
+|---|---|
+| `logo/mehari-we-naranja.svg` | Principal, sobre fondo claro |
+| `logo/mehari-we-blanco.svg` | Sobre naranja, tinta o foto |
+| `logo/mehari-we-tinta.svg` | Sobre beige o cal, cuando el naranja no conviene |
+| `logo/mehari-we-v01-naranja.svg`, `logo/mehari-we-v02-naranja.svg` | Versiones alternativas |
+| `logo/original/LOGO_0X.png` | PNG originales de la grafista (A4, transparentes) |
+
+Los SVG están **vectorizados desde los PNG** con `herramientas/marca/vectorizar_logo.py`, porque la
+grafista entregó EPS de Illustrator y aquí no hay con qué abrirlos. Coinciden con el original en más del
+99 % de los píxeles. Cuando la grafista mande el SVG o el PDF exportado desde Illustrator, se sustituyen.
+Los EPS originales están en Drive · `Mehari We/03_Marca/`.
+
+## Nombre: Méhari We
+
+**Méhari We · Wedding & Events**, con tilde y en singular, como en el logo (2026-10-28). Sustituye a
+«Mehari We · Weddings & Events», aprobado el 2026-10-16. Las dos propuestas anteriores de nombre quedan
+como histórico:
 
 ### Propuestas descartadas
 
@@ -43,7 +69,8 @@ anteriores quedan como histórico:
 
 | Token | Nombre | Hex | Uso |
 |---|---|---|---|
-| `--naranja` | Naranja Méhari | `#EE7D1F` | Color principal, fondos y símbolo |
+| `--naranja` | Naranja Méhari | `#EE7D1F` | Color principal, fondos y costillas |
+| `--naranja-logo` | Naranja del logo | `#F35F03` | Solo el logo. Es el de la entrega de la grafista |
 | `--beige` | Beige arena | `#DCC6A0` | Segundo color, fondos |
 | `--cal` | Cal | `#F7F1E6` | Fondo claro por defecto |
 | `--tinta` | Tinta capota | `#2B211A` | Texto y fondo oscuro (no usar negro puro) |
@@ -69,5 +96,6 @@ naranja tostado. Sirven de fondo, separador o transición en vídeo.
 ## Lo que no se hace
 
 - Monograma «M» serif, caligrafía o sello circular: son los rasgos del logo antiguo.
+- Redibujar, deformar o recolorear el logo, o componer el nombre con otra fuente en su lugar.
 - Usar el logo con el texto como fuente web en piezas finales: se usa el SVG con el texto convertido a trazos.
 - Inventar colores fuera de esta tabla. Si hace falta uno nuevo, se añade aquí y en `tokens.css`.
