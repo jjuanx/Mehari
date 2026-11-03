@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <title>Reel · POV: conducís vosotros</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Fraunces"; src: url("assets/fonts/Fraunces.woff2") format("woff2"); font-weight: 300 700; }
+      @font-face { font-family: "Jost"; src: url("assets/fonts/Jost.woff2") format("woff2"); font-weight: 300 800; }
+      /* Paleta de marca/tokens.css (propuesta) */
+      :root {
+        --naranja: #EE7D1F; --naranja-oscuro: #C2560E; --beige: #DCC6A0;
+        --cal: #F7F1E6; --tinta: #2B211A; --azahar: #FFFCF5;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--tinta); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--tinta); font-family: "Jost", sans-serif; }
+
+      video.plano { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+
+      /* Rótulos con el mismo estilo que la v2 de «Las llaves son vuestras», dentro de la zona segura
+         de Instagram (libres la franja de arriba, la de abajo desde 1480 px y la columna derecha). */
+      .rotulo { position: absolute; left: 72px; width: 860px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+      .rotulo.abajo { top: 1060px; }
+      .rotulo.arriba { top: 270px; }
+      .linea { display: inline-block; }
+      .principal { font-family: "Fraunces", serif; font-weight: 600; font-size: 92px; line-height: 1.04; color: var(--azahar); background: rgba(43, 33, 26, 0.9); padding: 18px 34px 26px; border-radius: 12px; }
+      .secundaria { font-weight: 600; font-size: 54px; line-height: 1.12; color: var(--tinta); background: var(--naranja); padding: 14px 30px 18px; border-radius: 12px; }
+      .pov { font-family: "Jost", sans-serif; font-weight: 700; letter-spacing: .02em; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="reel" data-start="0" data-duration="11.5" data-width="1080" data-height="1920">
+
+      <!-- Pista 0: cuatro planos en corte seco cada 2,5 s. Plano subjetivo desde el asiento del conductor
+           (el formato que más reparte en las cuentas de referencia). Sin sonido original: la música va en Instagram. -->
+      <video id="p1" class="clip plano" src="assets/clips/p1_v033_girasoles.mp4" data-start="0" data-duration="2.5" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="p2" class="clip plano" src="assets/clips/p2_v033_camino.mp4" data-start="2.5" data-duration="2.5" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="p3" class="clip plano" src="assets/clips/p3_v023_saludan.mp4" data-start="5" data-duration="2.5" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="p4" class="clip plano" src="assets/clips/p4_v080_hacienda.mp4" data-start="7.5" data-duration="2.5" data-media-start="0" data-track-index="0" playsinline muted></video>
+
+      <!-- Pista 1: cierre de marca corto (1,5 s) -->
+      <div id="cierre" data-composition-id="cierre" data-composition-src="compositions/cierre-corto.html" data-start="10" data-duration="1.5" data-track-index="1" data-width="1080" data-height="1920"></div>
+
+      <!-- Pista 2: rótulos. El gancho dura los dos planos de V033, que son la misma toma -->
+      <div id="r1" class="clip rotulo arriba" data-start="0" data-duration="5" data-track-index="2">
+        <span class="linea principal"><span class="pov">POV:</span> os acabáis<br>de casar</span>
+        <span class="linea secundaria">y conducís vosotros</span>
+      </div>
+      <div id="r3" class="clip rotulo abajo" data-start="5" data-duration="2.5" data-track-index="2">
+        <span class="linea principal">Con una clase antes de la boda</span>
+      </div>
+      <div id="r4" class="clip rotulo abajo" data-start="7.5" data-duration="2.5" data-track-index="2">
+        <span class="linea principal">¿Os casáis en 2027?</span>
+        <span class="linea secundaria">Escribidnos vuestra fecha</span>
+      </div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Rótulos: cada línea se descubre de izquierda a derecha y se asienta sin rebote.
+      // La segunda línea del gancho entra con el corte al camino, para que el giro llegue con la imagen.
+      const oculto = { clipPath: "inset(0 100% 0 0)", x: -16 };
+      const visible = { clipPath: "inset(0 0% 0 0)", x: 0, duration: 0.42, ease: "expo.out" };
+      [["#r1 .principal", 0.03], ["#r1 .secundaria", 2.55], ["#r3 .principal", 5.12], ["#r4 .principal", 7.58], ["#r4 .secundaria", 7.9]]
+        .forEach(([sel, t]) => tl.fromTo(sel, oculto, visible, t));
+
+      window.__timelines["reel"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

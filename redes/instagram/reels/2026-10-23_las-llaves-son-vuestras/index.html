@@ -19,57 +19,52 @@
 
       video.plano { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
 
-      /* Rótulos: dentro de la zona segura de Instagram (libres la franja de arriba,
-         la de abajo con el texto y los botones, y la columna derecha) */
-      .rotulo { position: absolute; left: 84px; width: 820px; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
-      .rotulo.abajo { top: 1170px; }
-      .rotulo.arriba { top: 300px; }
+      /* Rótulos (v2): casi el doble de grandes que en la v1 y colocados plano a plano donde no
+         tapan caras. Siempre dentro de la zona segura de Instagram: libres la franja de arriba,
+         la de abajo (desde 1480 px, texto y usuario) y la columna derecha de botones. */
+      .rotulo { position: absolute; left: 72px; width: 860px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+      .rotulo.abajo { top: 1060px; }
+      .rotulo.arriba { top: 270px; }
       .linea { display: inline-block; }
-      .principal { font-family: "Fraunces", serif; font-weight: 500; font-size: 70px; line-height: 1.12; color: var(--azahar); background: rgba(43, 33, 26, 0.9); padding: 14px 30px 20px; border-radius: 10px; }
-      .secundaria { font-weight: 600; font-size: 46px; line-height: 1.15; color: var(--tinta); background: var(--naranja); padding: 12px 28px 15px; border-radius: 10px; }
+      .principal { font-family: "Fraunces", serif; font-weight: 600; font-size: 92px; line-height: 1.04; color: var(--azahar); background: rgba(43, 33, 26, 0.9); padding: 18px 34px 26px; border-radius: 12px; }
+      .secundaria { font-weight: 600; font-size: 54px; line-height: 1.12; color: var(--tinta); background: var(--naranja); padding: 14px 30px 18px; border-radius: 12px; }
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="reel" data-start="0" data-duration="22" data-width="1080" data-height="1920">
+    <div id="root" data-composition-id="reel" data-start="0" data-duration="18" data-width="1080" data-height="1920">
 
-      <!-- Pista 0: los siete planos, en corte seco sobre una rejilla de 0,5 s (120 BPM).
-           Sin sonido original: e1 lleva música de fondo de la boda. La pista se pone en Instagram. -->
+      <!-- Pista 0: seis planos en corte seco sobre una rejilla de 0,5 s (120 BPM). La v2 quita el
+           plano del chófer (V140): contradecía el gancho. Sin sonido original; la música se pone en Instagram. -->
       <video id="e1" class="clip plano" src="assets/clips/e1_v139a.mp4" data-start="0" data-duration="3" data-media-start="0" data-track-index="0" playsinline muted></video>
       <video id="e2" class="clip plano" src="assets/clips/e2_v139b.mp4" data-start="3" data-duration="3" data-media-start="0" data-track-index="0" playsinline muted></video>
-      <video id="e3" class="clip plano" src="assets/clips/e3_v140.mp4" data-start="6" data-duration="2.5" data-media-start="0" data-track-index="0" playsinline muted></video>
-      <video id="e4" class="clip plano" src="assets/clips/e4_v084.mp4" data-start="8.5" data-duration="3" data-media-start="0" data-track-index="0" playsinline muted></video>
-      <video id="e5" class="clip plano" src="assets/clips/e5_v023.mp4" data-start="11.5" data-duration="2.5" data-media-start="0" data-track-index="0" playsinline muted></video>
-      <video id="e6" class="clip plano" src="assets/clips/e6_v144.mp4" data-start="14" data-duration="2.5" data-media-start="0" data-track-index="0" playsinline muted></video>
-      <video id="e7" class="clip plano" src="assets/clips/e7_v132.mp4" data-start="16.5" data-duration="2.5" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="e4" class="clip plano" src="assets/clips/e4_v084.mp4" data-start="6" data-duration="3" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="e5" class="clip plano" src="assets/clips/e5_v023.mp4" data-start="9" data-duration="2.5" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="e6" class="clip plano" src="assets/clips/e6_v144.mp4" data-start="11.5" data-duration="2.5" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="e7" class="clip plano" src="assets/clips/e7_v132.mp4" data-start="14" data-duration="2.5" data-media-start="0" data-track-index="0" playsinline muted></video>
 
-      <!-- Pista 1: cierre de marca -->
-      <div id="cierre" data-composition-id="cierre" data-composition-src="compositions/cierre.html" data-start="19" data-duration="3" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <!-- Pista 1: cierre de marca corto (1,5 s). La llamada a la acción ya va sobre el último plano -->
+      <div id="cierre" data-composition-id="cierre" data-composition-src="compositions/cierre-corto.html" data-start="16.5" data-duration="1.5" data-track-index="1" data-width="1080" data-height="1920"></div>
 
       <!-- Pista 2: rótulos, uno por plano -->
       <div id="r1" class="clip rotulo abajo" data-start="0" data-duration="3" data-track-index="2">
-        <span class="linea principal">Salís de la iglesia…</span>
-        <span class="linea secundaria">y las llaves son vuestras</span>
+        <span class="linea principal">¿Y si conducís vosotros?</span>
+        <span class="linea secundaria">al salir de la iglesia</span>
       </div>
       <div id="r2" class="clip rotulo abajo" data-start="3" data-duration="3" data-track-index="2">
-        <span class="linea principal">Lo conducís vosotros</span>
-        <span class="linea secundaria">con una clase antes de la boda</span>
+        <span class="linea principal">Con una clase antes de la boda</span>
       </div>
-      <div id="r3" class="clip rotulo abajo" data-start="6" data-duration="2.5" data-track-index="2">
-        <span class="linea principal">O con chófer,</span>
-        <span class="linea secundaria">como prefiráis</span>
+      <div id="r4" class="clip rotulo arriba" data-start="6" data-duration="3" data-track-index="2">
+        <span class="linea principal">Las cestas, con vuestras flores</span>
       </div>
-      <div id="r4" class="clip rotulo abajo" data-start="8.5" data-duration="3" data-track-index="2">
-        <span class="linea principal">Las cestas, con las flores</span>
-        <span class="linea secundaria">de vuestra boda</span>
-      </div>
-      <div id="r5" class="clip rotulo abajo" data-start="11.5" data-duration="2.5" data-track-index="2">
+      <div id="r5" class="clip rotulo abajo" data-start="9" data-duration="2.5" data-track-index="2">
         <span class="linea principal">Naranja…</span>
       </div>
-      <div id="r6" class="clip rotulo arriba" data-start="14" data-duration="2.5" data-track-index="2">
+      <div id="r6" class="clip rotulo arriba" data-start="11.5" data-duration="2.5" data-track-index="2">
         <span class="linea principal">…o beige</span>
       </div>
-      <div id="r7" class="clip rotulo abajo" data-start="16.5" data-duration="2.5" data-track-index="2">
+      <div id="r7" class="clip rotulo abajo" data-start="14" data-duration="2.5" data-track-index="2">
         <span class="linea principal">¿Os casáis en 2027?</span>
+        <span class="linea secundaria">Escribidnos vuestra fecha</span>
       </div>
     </div>
 
@@ -77,11 +72,11 @@
       const tl = gsap.timeline({ paused: true });
 
       // Rótulos: cada línea se descubre de izquierda a derecha y se asienta sin rebote.
-      // El primero aparece casi de inmediato para que el gancho se lea en el primer segundo.
+      // El gancho aparece casi de inmediato para que se lea en el primer segundo.
       const oculto = { clipPath: "inset(0 100% 0 0)", x: -16 };
       const visible = { clipPath: "inset(0 0% 0 0)", x: 0, duration: 0.42, ease: "expo.out" };
-      const principales = [["#r1 .principal", 0.05], ["#r2 .principal", 3.12], ["#r3 .principal", 6.12], ["#r4 .principal", 8.62], ["#r5 .principal", 11.62], ["#r6 .principal", 14.12], ["#r7 .principal", 16.62]];
-      const secundarias = [["#r1 .secundaria", 0.27], ["#r2 .secundaria", 3.34], ["#r3 .secundaria", 6.34], ["#r4 .secundaria", 8.84]];
+      const principales = [["#r1 .principal", 0.03], ["#r2 .principal", 3.12], ["#r4 .principal", 6.12], ["#r5 .principal", 9.12], ["#r6 .principal", 11.62], ["#r7 .principal", 14.08]];
+      const secundarias = [["#r1 .secundaria", 0.3], ["#r7 .secundaria", 14.4]];
       principales.concat(secundarias).forEach(([sel, t]) => tl.fromTo(sel, oculto, visible, t));
 
       window.__timelines["reel"] = tl;

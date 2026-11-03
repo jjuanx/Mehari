@@ -1,4 +1,4 @@
-# CLAUDE.md — Proyecto Mehari We
+# CLAUDE.md — Proyecto Méhari We
 
 Contexto compartido por las sesiones de Claude Code de **Alejandro, Juan y Nico**.
 Léelo entero antes de tocar nada. Todo el contenido del proyecto se redacta en **español**.
@@ -17,6 +17,8 @@ Somos un equipo de tres (Alejandro, Juan y Nico) contratado para **lanzar una ma
 2. **Web**: más adelante, una *landing page* muy estética con *motion graphics*. Todavía no se empieza.
 3. **Objetivo del cliente**: conseguir clientes nuevos, más facturación y más alcance. Sobre todo, **más bodas contratadas**.
 
+**Reparto** (2026-11-02): Alejandro coordina, escribe los textos, trata con el cliente y publica; Juan lleva el material y las piezas de foto; Nico, los reels. Detalle en [docs/planes/semana-boda.md](docs/planes/semana-boda.md) §5.
+
 Todo lo que hagamos se juzga por una pregunta: *¿esto acerca a una pareja (o a un turista) a pedir presupuesto?*
 
 ## 2. Por qué existe la marca nueva (pivotación)
@@ -24,9 +26,9 @@ Todo lo que hagamos se juzga por una pregunta: *¿esto acerca a una pareja (o a 
 - El negocio de origen es **Mehari Tour Sur** (@mehari_toursur, @mehari_experiences). Lo llevaban **dos socios que se separan**. Nuestro cliente arranca una **marca nueva, con nombre y logo nuevos**.
 - El servicio, los coches, la información y el material fotográfico **son los mismos**, y tenemos derecho a usarlos.
 - **La marca nueva no debe ligarse a la antigua.** Nunca usamos el nombre "Mehari Tour Sur", su logo, su sello circular ni sus usuarios en el contenido de la marca nueva. Tampoco presentamos la marca como "antes Mehari Tour Sur".
-- **Nombre: Mehari We**, con el subtítulo **«Weddings & Events»** (aceptado por el cliente el 2026-10-16). Se escribe siempre así: «Mehari» sin tilde y «We» con mayúscula. El usuario de Instagram sigue pendiente: `@[usuario_por_definir]`.
-- **Logo: pendiente.** Al cliente le gustan las costillas y la pantalla de carga de la web, pero no el símbolo de la propuesta C (la parte de atrás con la rueda parecía un carro). Hay ocho propuestas nuevas en `marca/propuestas/mehari-we.html`: cinco con una pieza delantera del coche y tres solo con letras (monograma MWE, el coche formado con letras y el monograma con costillas).
-- **"Citroën" no aparece en ningún sitio** del contenido de la marca (textos, hashtags, logo, vídeos, web) para no atarnos a otra marca. El coche se describe como "Méhari", "Méhari clásico" o "nuestros Méhari". El cliente ha elegido un nombre con «Mehari» sabiendo que es una marca registrada del fabricante y la primera palabra de la marca antigua: por eso el logo no imita ningún logotipo del fabricante ni el de la marca antigua.
+- **Nombre: Méhari We**, con el subtítulo **«Wedding & Events»**, tal como lo escribe el logo aprobado (2026-10-28). Se escribe siempre así: «Méhari» con tilde, «We» con mayúscula y «Wedding» en singular. Sustituye a «Mehari We · Weddings & Events» (2026-10-16). Instagram: **`@mehari.we`** (confirmado el 2026-10-27).
+- **Logo: aprobado (2026-10-28).** Lo diseñó una grafista contratada por el cliente y el cliente lo ha aprobado: se usa tal cual, sin rediseñarlo ni retocarlo. La M de arriba (Méhari) y la W de abajo (Wedding) enmarcan el nombre. La versión principal es la 03 (trazo fino); hay otras dos de la misma grafista. Ficheros en `marca/logo/` (ver `marca/README.md`). Nuestras propuestas de `marca/propuestas/` quedan como histórico.
+- **"Citroën" no aparece en ningún sitio** del contenido de la marca (textos, hashtags, logo, vídeos, web) para no atarnos a otra marca. El coche se describe como "Méhari", "Méhari clásico" o "nuestros Méhari". El cliente ha elegido un nombre con «Mehari» sabiendo que es una marca registrada del fabricante y la primera palabra de la marca antigua. El logo de la grafista parte de una reinterpretación del doble chevrón del fabricante: el cliente lo sabe y lo ha aprobado, y el riesgo de marca es suyo. Nosotros nunca contamos ese origen en ningún contenido ni lo usamos como argumento.
 - **La marca no se presenta como "de Sevilla" ni "de Sevilla y Cádiz".** Hoy se trabaja allí, pero la marca está pensada para abrirse a cualquier sitio. Ni el nombre, ni el logo, ni la bio, ni los eslóganes se atan a una ciudad. Nombrar el lugar concreto de una boda o la ruta de la Sevilla Experience sí está bien.
 
 ## 3. El negocio (datos verificados en `Referencia/`)
@@ -39,7 +41,7 @@ Detalle completo en [docs/cliente/brief.md](docs/cliente/brief.md). En resumen:
 - **Zona actual**: Sevilla y provincia de Cádiz (Sanlúcar, San Fernando…), sobre todo haciendas e iglesias. Es donde se trabaja hoy, no la identidad de la marca (ver §2).
 - **Prensa**: el *Diario de Sevilla* (19-10-2025, sección Pasarela) publicó la boda de Alberto Herrera y Blanca Llandres en Sanlúcar, con los novios saliendo "en un informal Mehari". Hay además fotos de **Carlos Herrera** con el Méhari naranja. **Tenemos consentimiento** de los Herrera y de las parejas para usar su imagen. Es el material con más gancho.
 - **Precios y packs**: no hay. Nos ceñimos a lo que dicen los dossiers ("consultar disponibilidad y presupuesto").
-- **Contacto**: el de los dossiers pertenece a la marca antigua y no se usa. **Teléfono y WhatsApp de la marca nueva: 625 06 42 93.** El email sigue pendiente: `[EMAIL POR DEFINIR]`.
+- **Contacto**: el de los dossiers pertenece a la marca antigua y no se usa. **Teléfono y WhatsApp de la marca nueva: 625 06 42 93.** **Email: mehariwe.info@gmail.com** (confirmado el 2026-10-27).
 
 ## 4. Reglas de contenido
 
@@ -48,7 +50,7 @@ Detalle completo en [docs/cliente/brief.md](docs/cliente/brief.md). En resumen:
 3. **No inventes datos**: ni precios, ni número de bodas, ni testimonios, ni nombres. Si falta algo, pon un marcador `[ASÍ]`.
 4. **Famosos y prensa**: hay consentimiento, pero se usa con elegancia y como prueba social, no como reclamo sensacionalista.
 5. **Menores, sin cara.** Se evita que aparezcan caras de niños o de menores de edad. Si una foto o un vídeo los muestra, se descarta, se recorta o se difumina la cara antes de publicar, aunque los padres hayan dado consentimiento a la boda.
-6. **Matrículas, nunca.** La matrícula de ningún coche (los nuestros ni los de terceros) puede ser legible: se recorta, se tapa o se difumina.
+6. **Matrículas, nunca.** La matrícula de ningún coche (los nuestros ni los de terceros) puede ser legible: se recorta, se tapa o se difumina. En fotos se prefiere la placa lisa de `herramientas/material/retocar_foto.py`, que no se nota.
 7. **Sin "Citroën" y sin atarnos a Sevilla**: ver §2.
 8. **Coherencia**: el nombre de la marca, los nombres de los servicios y los datos de contacto deben ser idénticos en todos los ficheros. Salen de `docs/cliente/brief.md`.
 
@@ -65,10 +67,11 @@ Mehari/
 │  ├─ decisiones.md          ← registro de decisiones (fecha, decisión, motivo)
 │  ├─ material/              ← clasificación de las fotos y vídeos del cliente (clasificacion.csv) y dónde está cada cosa
 │  └─ planes/                ← plan de proyecto, estrategia de redes, etc.
-├─ redes/instagram/          ← publicaciones, calendario editorial, reels/<fecha>_<tema>/ (fuente HyperFrames) y destacadas/ (portadas)
+├─ redes/instagram/          ← publicaciones, calendario editorial, bodas/<fecha>_<lugar>/ (plan de la semana de cada boda), reels/<fecha>_<tema>/ (fuente HyperFrames) y destacadas/ (portadas)
 ├─ marca/                    ← identidad: README (colores, tipos, logo), tokens.css y propuestas/
+├─ comercial/dossier-novios/ ← dossier de bodas para las parejas (HTML → PDF; el PDF va a Drive)
 ├─ web/                      ← landing (más adelante)
-├─ herramientas/material/    ← scripts para analizar, descartar, clasificar y seleccionar lotes de fotos y vídeos, y para difuminar matrículas y logos
+├─ herramientas/material/    ← scripts para analizar, descartar, clasificar y seleccionar lotes de fotos y vídeos, para difuminar matrículas y logos en vídeo y para dejarlos lisos en fotos
 └─ Referencia/               ← material del cliente: dossiers, logos antiguos, fotos, prensa
 ```
 
@@ -103,6 +106,7 @@ Viven en `.claude/skills/` y están catalogadas en [SKILLS.md](SKILLS.md). Al ha
 - Toda skill nueva o modificada se registra en `SKILLS.md` en el mismo PR.
 - **Motion graphics y vídeo**: tenemos las skills oficiales de **HyperFrames** (por defecto para piezas de Instagram; se entra por `hyperframes`) y de **Remotion** (`remotion-best-practices`). Son de terceros: no se editan, se actualizan copiando de nuevo desde su repositorio. Hacen falta Node.js y FFmpeg.
 - **Reels**: se guionizan y producen con la skill `guion-reel` (estructura, ficha por escena y verificación), que delega el render en HyperFrames.
+- **Semana de cada boda**: cada boda produce tres publicaciones fijas, lunes carrusel «La boda», miércoles reel «El momento» y viernes «Vuestra elección», publicadas en D+9, D+11 y D+13. Sistema en [docs/planes/semana-boda.md](docs/planes/semana-boda.md); se prepara con la skill `semana-boda` a partir de la carpeta de Drive de la boda.
 - Toda pieza animada pasa también por `revision-marca` antes de publicarse.
 - **Diseño estático y publicidad**: `canvas-design` (oficial de Anthropic) para ilustraciones y piezas en PNG o PDF; `ad-creative` y `ads` (marketingskills) para anuncios y campañas de Meta. Son de terceros y en inglés: nuestras reglas mandan y no se generan con IA fotos de los coches ni de bodas.
 - **Animaciones de marca** (entrada, transición y cierre de los reels): proyecto HyperFrames en `marca/animaciones/`, con sus renders ligeros versionados. Propuesta pendiente de aprobación.
@@ -119,12 +123,12 @@ Las decisiones también van, con fecha y motivo, a `docs/decisiones.md`.
 
 ## 9. Pendiente de definir
 
-- [ ] Usuario de Instagram de Mehari We.
-- [ ] Logo: elegir entre las ocho propuestas de `marca/propuestas/mehari-we.html`. No debe parecerse al logo antiguo. Paleta casi cerrada (naranja y beige de los coches); tipografía en propuesta.
-- [ ] Email de la marca nueva. Confirmar que el 625 06 42 93 tiene WhatsApp.
+- [ ] Pasar al logo y la grafía nuevos lo que ya está hecho con la marca provisional: cierre del reel «Las llaves son vuestras», animaciones de marca (`marca/animaciones/`), portadas de destacadas y avatar.
+- [ ] Pedir a la grafista el logo en SVG o PDF desde Illustrator (los SVG de `marca/logo/` están vectorizados desde el PNG) y la licencia de Charter, la fuente del nombre.
+- [ ] Tipografía de las piezas: seguir con Fraunces + Jost o pasar a las del logo (Charter + Metropolis).
+- [ ] Confirmar que el 625 06 42 93 tiene WhatsApp.
 - [ ] Precios y packs (de momento, "consultar presupuesto").
 - [ ] Presupuesto para publicidad en Meta.
-- [ ] Reparto de tareas en el equipo (de momento, todos en todo).
 - [ ] Objetivos numéricos: bodas al año actuales y objetivo, seguidores, solicitudes al mes.
 - [ ] TikTok u otras redes: ¿entran en el alcance?
 - [ ] Herramienta de publicación: Meta Business Suite a mano, herramienta con API y conector para Claude, o app propia de Meta. Se decide en la semana 5 tras el piloto (ver `docs/planes/automatizacion-contenido.md`).
