@@ -29,7 +29,8 @@ Fuera de la secuencia, para preparar piezas:
 | Script | Qué hace |
 |---|---|
 | `difuminar.py` | Difumina matrículas, chevrones o caras en un vídeo y sigue la zona fotograma a fotograma. Uso y ejemplos en la cabecera del script. Avisa con `<< REVISAR` si pierde el seguimiento; aun así, revisa el resultado a ojo |
-| `retocar_foto.py` | **Para fotos, en lugar de difuminar.** Deja la matrícula como una placa lisa (borra los caracteres y conserva la placa, su sombra y la banda azul) y borra los emblemas sobre chapa rellenándolos con la chapa de alrededor. Se marca a mano el polígono de cada placa. Uso en la cabecera del script |
+| `funda_video.py` | `--funda` de `retocar_foto.py` en vídeo: deja lisa la funda de la rueda fotograma a fotograma, siguiéndola con template matching. Mejor que difuminarla cuando la funda está en el centro del plano. Uso en la cabecera |
+| `retocar_foto.py` | **Para fotos, en lugar de difuminar.** Deja la matrícula como una placa lisa (borra los caracteres y conserva la placa, su sombra y la banda azul) y borra los emblemas sobre chapa rellenándolos con la chapa de alrededor. Con `--funda`, deja lisa la funda negra de la rueda de repuesto (borra «@MEHARI_TOURSUR» y el logo de Instagram). Se marca a mano el polígono de cada placa. Uso en la cabecera del script |
 
 **Vídeos del iPhone:** vienen en HDR (HLG). Antes de montarlos, conviértelos a SDR BT.709 con el comando de la cabecera de `difuminar.py`. Si no, el naranja del coche sale amarillo y el render final queda marcado como HDR.
 

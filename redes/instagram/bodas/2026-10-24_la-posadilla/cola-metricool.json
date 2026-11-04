@@ -1,0 +1,106 @@
+{
+  "boda": "2026-10-24_la-posadilla",
+  "zona_horaria": "Europe/Madrid",
+  "aprobacion": {
+    "estado": "pendiente",
+    "lote_enviado": null,
+    "aprobado_el": null,
+    "aprobado_por": null,
+    "nota": "No se programa nada hasta que el cliente apruebe el lote y dé permiso de caras. La skill programar-metricool lo comprueba aquí."
+  },
+  "publicaciones": [
+    {
+      "id": "lun-la-boda",
+      "fecha": "2026-11-09T12:40:00",
+      "red": "instagram",
+      "tipo": "carrusel",
+      "modo": "automatico",
+      "ficha": "redes/instagram/publicaciones/2026-11-09_carrusel_boda-la-posadilla.md",
+      "medios": [
+        "jpg/la-boda/01.jpg", "jpg/la-boda/02.jpg", "jpg/la-boda/03.jpg",
+        "jpg/la-boda/04.jpg", "jpg/la-boda/05.jpg", "jpg/la-boda/06.jpg",
+        "jpg/la-boda/07.jpg", "jpg/la-boda/08.jpg", "jpg/la-boda/09.jpg"
+      ],
+      "texto": "Sábado en Finca La Posadilla, con el Méhari beige esperando a la puerta de la iglesia.\n\nTecho abierto, las dos cestas de atrás llenas de flores blancas y un chófer para llevarlos hasta la finca. Desliza y lo veis en el orden del día.\n\n¿Os casáis en 2027? Escribidnos vuestra fecha por WhatsApp al 625 06 42 93 y os decimos si hay un Méhari libre.\n\n#cochedeboda #cochesclasicos #novios2027 #bodasconencanto",
+      "ubicacion": "Finca La Posadilla",
+      "a_mano_despues": ["Etiquetar a la finca y al fotógrafo, y proponer Collab, si Metricool no lo ha hecho"],
+      "metricool_id": null,
+      "estado": "pendiente"
+    },
+    {
+      "id": "mie-el-momento",
+      "fecha": "2026-11-11T20:40:00",
+      "red": "instagram",
+      "tipo": "reel",
+      "modo": "aviso",
+      "ficha": "redes/instagram/publicaciones/2026-11-11_reel_salis-de-la-iglesia.md",
+      "medios": ["../../reels/2026-11-11_salis-de-la-iglesia/reel_9x16.mp4"],
+      "portada": "../../reels/2026-11-11_salis-de-la-iglesia/portada.png",
+      "texto": "Así se sale de una boda 🤍\n\nSábado en Finca La Posadilla, con el Méhari beige, el techo abierto y las cestas llenas de flores.\n\nMandádselo a quien se case en 2027 💍\n\n¿Os casáis vosotros? Escribidnos vuestra fecha por WhatsApp al 625 06 42 93.\n\n#cochedeboda #cochesclasicos #novios2027 #bodas2027",
+      "ubicacion": "Finca La Posadilla",
+      "a_mano_despues": [],
+      "nota": "El MP4 (sin audio original) no se versiona: está en Drive · 02_Produccion/2026-10-24_la-posadilla/. Va como aviso para poner la música desde Instagram. Si se incrusta música libre de derechos, pasar a automatico.",
+      "metricool_id": null,
+      "estado": "pendiente"
+    },
+    {
+      "id": "vie-vuestra-eleccion",
+      "fecha": "2026-11-13T12:40:00",
+      "red": "instagram",
+      "tipo": "carrusel",
+      "modo": "automatico",
+      "ficha": "redes/instagram/publicaciones/2026-11-13_carrusel_ellos-eligieron-el-beige.md",
+      "medios": ["jpg/el-beige/01.jpg", "jpg/el-beige/02.jpg", "jpg/el-beige/03.jpg", "jpg/el-beige/04.jpg"],
+      "texto": "Ellos eligieron el beige. Tenemos dos Méhari, uno naranja y otro beige, y el color lo elegís vosotros.\n\nEl beige va con todo: con el vestido, con la piedra de la ermita y con los vestidos de los invitados.\n\n¿Os gusta? Escribidnos BEIGE por WhatsApp al 625 06 42 93 con vuestra fecha y os decimos si está libre. Y si sois más de naranja, escribid NARANJA.\n\n#cochedeboda #cochesclasicos #novios2027 #bodas2027",
+      "ubicacion": "Finca La Posadilla",
+      "primer_comentario": "🤍 BEIGE o 🧡 NARANJA. ¿Cuál os llevaríais?",
+      "a_mano_despues": [],
+      "metricool_id": null,
+      "estado": "pendiente"
+    },
+    {
+      "id": "story-lun-compartir",
+      "fecha": "2026-11-09T13:30:00",
+      "red": "instagram",
+      "tipo": "story",
+      "modo": "aviso",
+      "medios": ["jpg/la-boda/01.jpg"],
+      "texto": "Compartir el carrusel con el sticker de enlace a WhatsApp (wa.me/34625064293)",
+      "metricool_id": null,
+      "estado": "pendiente"
+    },
+    {
+      "id": "story-mar-encuesta",
+      "fecha": "2026-11-10T19:00:00",
+      "red": "instagram",
+      "tipo": "story",
+      "modo": "aviso",
+      "medios": ["fotos/4054.jpg"],
+      "texto": "«Hace dos sábados, en La Posadilla» + encuesta «¿Techo abierto o cerrado?»",
+      "metricool_id": null,
+      "estado": "pendiente"
+    },
+    {
+      "id": "story-mie-compartir",
+      "fecha": "2026-11-11T21:15:00",
+      "red": "instagram",
+      "tipo": "story",
+      "modo": "aviso",
+      "medios": ["../../reels/2026-11-11_salis-de-la-iglesia/portada.png"],
+      "texto": "Compartir el reel con sticker de enlace",
+      "metricool_id": null,
+      "estado": "pendiente"
+    },
+    {
+      "id": "story-vie-compartir",
+      "fecha": "2026-11-13T13:30:00",
+      "red": "instagram",
+      "tipo": "story",
+      "modo": "aviso",
+      "medios": ["jpg/el-beige/01.jpg"],
+      "texto": "Compartir el carrusel con sticker de enlace y la palabra BEIGE",
+      "metricool_id": null,
+      "estado": "pendiente"
+    }
+  ]
+}

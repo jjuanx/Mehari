@@ -107,6 +107,7 @@ Viven en `.claude/skills/` y están catalogadas en [SKILLS.md](SKILLS.md). Al ha
 - **Motion graphics y vídeo**: tenemos las skills oficiales de **HyperFrames** (por defecto para piezas de Instagram; se entra por `hyperframes`) y de **Remotion** (`remotion-best-practices`). Son de terceros: no se editan, se actualizan copiando de nuevo desde su repositorio. Hacen falta Node.js y FFmpeg.
 - **Reels**: se guionizan y producen con la skill `guion-reel` (estructura, ficha por escena y verificación), que delega el render en HyperFrames.
 - **Semana de cada boda**: cada boda produce tres publicaciones fijas, lunes carrusel «La boda», miércoles reel «El momento» y viernes «Vuestra elección», publicadas en D+9, D+11 y D+13. Sistema en [docs/planes/semana-boda.md](docs/planes/semana-boda.md); se prepara con la skill `semana-boda` a partir de la carpeta de Drive de la boda.
+- **Publicación**: con **Metricool** (decidido el 2026-11-03). Cuando el cliente aprueba el lote de una boda, la skill `programar-metricool` programa sus piezas desde `cola-metricool.json` y se publican solas. Las stories con stickers llegan como aviso al móvil y se suben a mano. Sistema en [docs/planes/publicacion-metricool.md](docs/planes/publicacion-metricool.md). Hace falta el conector de Metricool en Claude.
 - Toda pieza animada pasa también por `revision-marca` antes de publicarse.
 - **Diseño estático y publicidad**: `canvas-design` (oficial de Anthropic) para ilustraciones y piezas en PNG o PDF; `ad-creative` y `ads` (marketingskills) para anuncios y campañas de Meta. Son de terceros y en inglés: nuestras reglas mandan y no se generan con IA fotos de los coches ni de bodas.
 - **Animaciones de marca** (entrada, transición y cierre de los reels): proyecto HyperFrames en `marca/animaciones/`, con sus renders ligeros versionados. Propuesta pendiente de aprobación.
@@ -123,7 +124,7 @@ Las decisiones también van, con fecha y motivo, a `docs/decisiones.md`.
 
 ## 9. Pendiente de definir
 
-- [ ] Pasar al logo y la grafía nuevos lo que ya está hecho con la marca provisional: cierre del reel «Las llaves son vuestras», animaciones de marca (`marca/animaciones/`), portadas de destacadas y avatar.
+- [ ] Pasar al logo y la grafía nuevos lo que ya está hecho con la marca provisional: cierre del reel «Las llaves son vuestras», la entrada de `marca/animaciones/`, portadas de destacadas y avatar. El cierre animado de `marca/animaciones/` ya lleva el logo y el nombre actuales (2026-11-03), y hay un cierre corto en `redes/instagram/reels/2026-11-11_salis-de-la-iglesia/compositions/cierre-corto.html`.
 - [ ] Pedir a la grafista el logo en SVG o PDF desde Illustrator (los SVG de `marca/logo/` están vectorizados desde el PNG) y la licencia de Charter, la fuente del nombre.
 - [ ] Tipografía de las piezas: seguir con Fraunces + Jost o pasar a las del logo (Charter + Metropolis).
 - [ ] Confirmar que el 625 06 42 93 tiene WhatsApp.
@@ -131,7 +132,7 @@ Las decisiones también van, con fecha y motivo, a `docs/decisiones.md`.
 - [ ] Presupuesto para publicidad en Meta.
 - [ ] Objetivos numéricos: bodas al año actuales y objetivo, seguidores, solicitudes al mes.
 - [ ] TikTok u otras redes: ¿entran en el alcance?
-- [ ] Herramienta de publicación: Meta Business Suite a mano, herramienta con API y conector para Claude, o app propia de Meta. Se decide en la semana 5 tras el piloto (ver `docs/planes/automatizacion-contenido.md`).
+- [ ] Comprobar en la primera boda qué hace Metricool por el conector: subida de medios, ubicación, primer comentario y Collab (`docs/planes/publicacion-metricool.md` §5).
 - [ ] Validar con el cliente la estrategia de Instagram (v1).
 - [ ] Quién responde los mensajes y solicitudes de presupuesto (cliente o equipo) y en qué plazo.
 - [ ] Flujo de aprobación del contenido por parte del cliente.
