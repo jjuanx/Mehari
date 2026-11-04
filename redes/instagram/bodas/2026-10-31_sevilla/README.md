@@ -66,18 +66,18 @@ Cuando el cliente dé los nombres de la iglesia y de la hacienda, la portada pue
 
 **Gancho: «Lo que ven vuestros invitados»** (el 3 de la rotación). La semana anterior fue «Salís de la iglesia y…» (el 1), así que no se repite. Es además el plano con más gente y más movimiento de la boda: IMG_4301, grabado desde detrás de los invitados, con la lluvia de pétalos al salir de la iglesia.
 
-Se produce con `guion-reel` en `redes/instagram/reels/2026-11-18_lo-que-ven-vuestros-invitados/`. Ficha: [`2026-11-18_reel_lo-que-ven-vuestros-invitados.md`](../../publicaciones/2026-11-18_reel_lo-que-ven-vuestros-invitados.md).
+**Montado (v1, 18,1 s)** con `guion-reel` en [`redes/instagram/reels/2026-11-18_lo-que-ven-vuestros-invitados/`](../../reels/2026-11-18_lo-que-ven-vuestros-invitados/BRIEF.md), siguiendo las referencias del cliente (frase de contraste y una sola idea) y el patrón POV. Ficha: [`2026-11-18_reel_lo-que-ven-vuestros-invitados.md`](../../publicaciones/2026-11-18_reel_lo-que-ven-vuestros-invitados.md). MP4 fuera de Git.
 
-| Escena | Plano | Tramo | Texto en pantalla |
-|---|---|---|---|
-| Gancho | IMG_4301 0–3 s: lluvia de pétalos en la puerta de la iglesia, entre cabezas de invitados | 0–3 s | Lo que ven vuestros invitados… |
-| Detalle | IMG_4314 ≈56–59 s: las flores de la trasera con los novios detrás | 3–5,5 s | …cuando salís en un Méhari |
-| Prueba | IMG_4314 ≈72–78 s: la novia se gira y sonríe, con la gente y el centro detrás | 5,5–9 s | Techo abierto · flores atrás |
-| Trayecto | IMG_4321 ≈12–19 s: el coche entra por la avenida de palmeras | 9–12 s | Hasta la hacienda… |
-| Momento | IMG_4372 1–7 s: los amigos mantean al novio | 12–17 s | …y empieza la fiesta |
-| Cierre | Cierre animado de `marca/animaciones/` | 17–21 s | Escribidnos vuestra fecha |
+| Tramo | Plano | Texto en pantalla |
+|---|---|---|
+| 0–2,9 s | IMG_4301: pétalos y beso en la puerta de la iglesia, entre los invitados | Lo que ven vuestros invitados |
+| 2,9–4,5 s | IMG_4314: los invitados alrededor del Méhari | (sigue) |
+| 4,5–8,7 s | Transición de costillas y POV de IMG_4408 por el centro, con el capó naranja | Y lo que veis *vosotros* |
+| 8,7–10,9 s | IMG_4321: el Méhari entra por la avenida de palmeras | — |
+| 10,9–14,1 s | IMG_4372: manteo del novio | — |
+| 14,1–18,1 s | Cierre animado de marca | Escribidnos vuestra fecha |
 
-Retoques de vídeo: funda en IMG_4314 con `funda_video.py`; matrícula de IMG_4321 con `difuminar.py`. Si un tramo no se limpia bien, se reencuadra para dejarla fuera. **Música:** se elige en Instagram (va como aviso en Metricool), salvo que se incruste una pista libre de derechos.
+Retoques de vídeo hechos: caras de una niña y de un chico joven en IMG_4301, y matrícula y rótulo trasero en IMG_4321, con `difuminar.py`. **Música:** se elige en Instagram (va como aviso en Metricool).
 
 ## Viernes 20-11 · Vuestra elección: las flores (reel corto) · Nico
 
@@ -123,8 +123,9 @@ Pendientes, para el montaje de los reels (Nico):
 
 | Vídeo | Qué hay que tapar | Herramienta |
 |---|---|---|
-| IMG_4314 | Funda «@MEHARI_TOURSUR» en los planos de atrás (52–92 s) | `funda_video.py` |
-| IMG_4321 | Matrícula trasera | `difuminar.py` |
+| IMG_4301 | Caras de una niña y de un chico joven (reel del miércoles) | `difuminar.py` · **hecho** |
+| IMG_4321 | Matrícula y rótulo trasero (reel del miércoles) | `difuminar.py` · **hecho** |
+| IMG_4314 | Funda «@MEHARI_TOURSUR» en los planos de atrás (52–92 s), para el viernes | `funda_video.py` |
 | IMG_4280 | Funda en el borde | Reencuadre o `funda_video.py` |
 
 ## Pendiente
@@ -144,7 +145,7 @@ Al confirmar el lugar, se renombra esta carpeta a `2026-10-31_<hacienda>` y se a
 
 > **Boda del 31-10 (iglesia del centro → hacienda) · semana del 16-11**
 > · Lun 16 · Carrusel «La boda», 9 fotos: hecho y exportado (Juan revisa).
-> · Mié 18 · Reel «Lo que ven vuestros invitados», ~21 s: guion listo, falta montarlo (Nico).
+> · Mié 18 · Reel «Lo que ven vuestros invitados», 18 s: montado (Nico revisa). Falta la canción.
 > · Vie 20 · Reel corto «Las flores», palabra FLORES: guion listo, falta montarlo (Nico).
 > · Stories en caliente: encuesta de flores hoy o mañana y «¿Cuándo os casáis?» el jueves 5 (Alejandro).
 > · Lote al cliente el vie 13 (Alejandro), aprobación hasta el dom 15.
