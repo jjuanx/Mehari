@@ -103,7 +103,7 @@ def _sonda(ruta: Path) -> dict:
     try:
         sal = subprocess.run(
             ["ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", str(ruta)],
-            capture_output=True, text=True, check=True).stdout
+            capture_output=True, text=True, encoding="utf-8", errors="replace", check=True).stdout
         return json.loads(sal)
     except (subprocess.CalledProcessError, json.JSONDecodeError, OSError) as e:
         raise ValueError(f"no se puede leer con ffprobe ({type(e).__name__})") from e
@@ -199,6 +199,8 @@ def main(argv: list[str]) -> int:
     if len(argv) < 2:
         print("uso: comprobar.py <pieza.json> <fichero>...", file=sys.stderr)
         return 2
+    if hasattr(sys.stdout, "reconfigure"):  # JSON en UTF-8 también en Windows (cp1252 por defecto)
+        sys.stdout.reconfigure(encoding="utf-8")
     pieza = json.loads(Path(argv[0]).read_text(encoding="utf-8"))
     texto = comprobar_textos_pieza(pieza)
     errores = comprobar_medios(pieza["formato"], pieza["variante"], [Path(a) for a in argv[1:]])

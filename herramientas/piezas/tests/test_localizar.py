@@ -94,7 +94,7 @@ def test_sin_coincidencias(drive_falso):
 def test_cli(drive_falso):
     salida = subprocess.run(
         [sys.executable, str(Path(__file__).resolve().parents[1] / "localizar.py"), "sanlúcar"],
-        capture_output=True, text=True, check=True, env={"MEHARI_DRIVE": str(drive_falso), "PATH": ""})
+        capture_output=True, text=True, encoding="utf-8", check=True, env={"MEHARI_DRIVE": str(drive_falso), "PATH": ""})
     datos = json.loads(salida.stdout)
     assert datos["drive"] == str(drive_falso)
     assert datos["candidatas"][0]["relativa"] == "01_Material/Bodas/2026-11-07_sanlucar"

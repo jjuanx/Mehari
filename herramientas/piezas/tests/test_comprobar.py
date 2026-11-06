@@ -150,13 +150,13 @@ def test_cli(tmp_path, pieza_minima):
     ruta = escribir(tmp_path, p)
     jpg = _jpg(tmp_path / "h.jpg", (1080, 1920))
     r = subprocess.run([sys.executable, str(COMPROBAR), str(ruta), str(jpg)],
-                       capture_output=True, text=True)
+                       capture_output=True, text=True, encoding="utf-8")
     assert r.returncode == 0, r.stdout + r.stderr
     assert json.loads(r.stdout)["errores"] == []
     p["texto"] = "Nuestro Citroën"
     escribir(tmp_path, p)
     r = subprocess.run([sys.executable, str(COMPROBAR), str(ruta), str(jpg)],
-                       capture_output=True, text=True)
+                       capture_output=True, text=True, encoding="utf-8")
     assert r.returncode == 1 and json.loads(r.stdout)["errores"]
 
 

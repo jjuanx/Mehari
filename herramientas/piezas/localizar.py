@@ -183,6 +183,8 @@ def buscar_bodas(raiz: Path, consulta: str) -> list[Candidata]:
 
 
 def main(argv: list[str]) -> int:
+    if hasattr(sys.stdout, "reconfigure"):  # JSON en UTF-8 también en Windows (cp1252 por defecto)
+        sys.stdout.reconfigure(encoding="utf-8")
     consulta = " ".join(argv)
     drive = raiz_drive(os.environ, Path.home())
     candidatas = buscar_bodas(drive, consulta) if drive else []

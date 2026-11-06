@@ -44,7 +44,8 @@ ETIQUETAS_BT709 = ["-color_primaries", "bt709", "-color_trc", "bt709", "-colorsp
 def _ejecutar(cmd: list) -> subprocess.CompletedProcess:
     cmd = [str(c) for c in cmd]
     try:
-        return subprocess.run(cmd, check=True, capture_output=True, text=True)
+        return subprocess.run(cmd, check=True, capture_output=True, text=True,
+                              encoding="utf-8", errors="replace")
     except subprocess.CalledProcessError as e:
         nombre = Path(cmd[1]).name if Path(cmd[0]).name.startswith("python") else Path(cmd[0]).name
         raise RuntimeError(f"{nombre} ha fallado (código {e.returncode}): "

@@ -23,7 +23,8 @@ def leer(inventario: Path) -> dict[str, dict]:
 
 def _ffprobe(ruta: Path, *args: str) -> str:
     return subprocess.run(["ffprobe", "-v", "error", *args, str(ruta)],
-                          capture_output=True, text=True, check=True).stdout.strip()
+                          capture_output=True, text=True, encoding="utf-8", errors="replace",
+                          check=True).stdout.strip()
 
 
 def ffprobe_wh(ruta: Path) -> tuple[int, int]:
@@ -61,7 +62,8 @@ def pagina_renderizada(proyecto: Path, s: int) -> str:
     )
     index = (Path(proyecto) / "index.html").resolve()
     return subprocess.run(["node", "--input-type=module", "-e", guion, str(index), str(s)],
-                          cwd=aqui, capture_output=True, text=True, check=True).stdout
+                          cwd=aqui, capture_output=True, text=True, encoding="utf-8",
+                          errors="replace", check=True).stdout
 
 
 def escribir_preparado(proyecto: Path, p: dict) -> Path:
