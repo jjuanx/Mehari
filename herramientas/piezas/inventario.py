@@ -13,10 +13,11 @@ import tempfile
 from datetime import date, datetime
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFont, ImageOps
+from PIL import Image, ImageDraw, ImageOps
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rutas  # noqa: E402
+from rejilla import _fuente  # noqa: E402
 
 sys.path.insert(0, str(rutas.MATERIAL))
 from comun import EXT_FOTO, EXT_VIDEO, ffprobe, nombre_miniatura  # noqa: E402
@@ -73,18 +74,14 @@ def _registro_video(boda: Path, rel: str, thumbs: Path) -> dict:
 
 
 def _registro_foto(boda: Path, rel: str, thumbs: Path) -> dict:
-    r = _analizar.analizar_foto((boda, rel, thumbs))
-    antes = thumbs / nombre_miniatura(rel)  # nombre que usa analizar_foto (sin carpetas)
-    if "error" not in r and antes.exists():
-        antes.replace(thumbs / _nombre_thumb(rel))
+    # Carpeta de trabajo propia por fichero: analizar_foto nombra la miniatura solo con el
+    # nombre base, y dos ficheros con el mismo nombre en carpetas distintas se pisarían.
+    with tempfile.TemporaryDirectory(dir=thumbs) as tmp:
+        r = _analizar.analizar_foto((boda, rel, Path(tmp)))
+        antes = Path(tmp) / nombre_miniatura(rel)
+        if "error" not in r and antes.exists():
+            antes.replace(thumbs / _nombre_thumb(rel))
     return {k: r[k] for k in ("file", "kind", "w", "h", "date", "error") if k in r}
-
-
-def _fuente(tam: int):
-    try:
-        return ImageFont.load_default(size=tam)
-    except TypeError:  # Pillow antiguo
-        return ImageFont.load_default()
 
 
 def _hojas(filas: list[dict], thumbs: Path, hojas: Path) -> None:
@@ -133,7 +130,13 @@ def inventariar(boda: Path, trabajo: Path) -> Path:
     hojas.mkdir(parents=True, exist_ok=True)
     jsonl = inv / "inventario.jsonl"
 
-    hechos = {f["file"] for f in _leer_filas(jsonl)}
+    # Las filas con error se reintentan (p. ej. ficheros de Drive «solo en la nube»).
+    previas = _leer_filas(jsonl)
+    buenas = [f for f in previas if "error" not in f]
+    if len(buenas) != len(previas):
+        jsonl.write_text("".join(json.dumps(f, ensure_ascii=False) + "\n" for f in buenas),
+                         encoding="utf-8")
+    hechos = {f["file"] for f in buenas}
     pendientes = [p.relative_to(boda).as_posix() for p in _ficheros(boda)]
     pendientes = [rel for rel in pendientes if rel not in hechos]
     with open(jsonl, "a", encoding="utf-8") as out:
