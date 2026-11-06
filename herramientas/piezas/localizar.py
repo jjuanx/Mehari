@@ -5,6 +5,10 @@ Reglas de búsqueda de bodas:
   directamente o dentro de sus subcarpetas `fotos/` y `videos/`.
 - Una carpeta que se llama `fotos` o `videos` nunca es candidata (lo es su carpeta madre).
 - Se ignoran las carpetas que empiezan por `_` o `.` y las de la lista EXCLUIDAS (miniaturas).
+- Si una candidata contiene otras candidatas (p. ej. `Selecccion` con carpetas de boda dentro),
+  se descarta: solo cuentan las carpetas más profundas.
+- «la última» / «última»: solo cuentan las candidatas con una fecha reconocible en su propio
+  nombre («Boda 2:11:2026», «2026-11-07_sanlucar»); de ellas, la de modificación más reciente.
 - Con fecha o lugar en la consulta solo salen las que coinciden en el nombre. Gana la fecha
   sobre el lugar; a igualdad, la modificada más recientemente.
 """
@@ -127,12 +131,19 @@ def _carpetas_con_medios(raiz: Path) -> list[Path]:
 
     if base.is_dir():
         recorre(base, 1)
-    return encontradas
+    return [c for c in encontradas
+            if not any(otra != c and c in otra.parents for otra in encontradas)]
 
 
 def _modificacion(carpeta: Path) -> float:
     rutas = [carpeta] + [carpeta / g for g in CARPETAS_GENERICAS if (carpeta / g).is_dir()]
-    return max(r.stat().st_mtime for r in rutas)
+    def mtime(r: Path) -> float:
+        try:
+            return r.stat().st_mtime
+        except OSError:
+            return 0.0
+
+    return max(mtime(r) for r in rutas)
 
 
 def buscar_bodas(raiz: Path, consulta: str) -> list[Candidata]:
@@ -165,8 +176,8 @@ def buscar_bodas(raiz: Path, consulta: str) -> list[Candidata]:
         puntuadas.append((puntos, _modificacion(carpeta), Candidata(carpeta, relativa, " y ".join(motivos))))
     puntuadas.sort(key=lambda t: (t[0], t[1]), reverse=True)
     if quiere_ultima:
-        puntuadas.sort(key=lambda t: t[1], reverse=True)
-        puntuadas = puntuadas[:1]
+        con_fecha = [t for t in puntuadas if _fechas(t[2].ruta.name, hoy)]
+        puntuadas = sorted(con_fecha, key=lambda t: t[1], reverse=True)[:1]
     return [c for _, _, c in puntuadas]
 
 

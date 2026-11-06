@@ -63,11 +63,28 @@ def test_ignora_carpetas_internas(drive_falso):
 
 def test_la_ultima(drive_falso):
     import os
-    antigua = drive_falso / "01_Material/Selecccion/Boda 24:10:2026"
-    os.utime(antigua, (1, 1))
-    os.utime(antigua / "IMG_1.HEIC", (1, 1))
-    r = buscar_bodas(drive_falso, "la última")
-    assert len(r) == 1 and r[0].relativa != "01_Material/Selecccion/Boda 24:10:2026"
+    mat = drive_falso / "01_Material"
+    antigua = mat / "Selecccion/Boda 24:10:2026"
+    nueva = mat / "Bodas/2026-11-07_sanlucar"
+    os.utime(antigua / "IMG_1.HEIC", (100, 100)); os.utime(antigua, (100, 100))
+    os.utime(nueva / "fotos/a.jpg", (200, 200)); os.utime(nueva / "fotos", (200, 200)); os.utime(nueva, (200, 200))
+    # Carpetas genéricas o sin fecha con ficheros más nuevos: no deben ganar.
+    retoque = mat / "Selecccion/para_retoque_marca_antigua"
+    retoque.mkdir()
+    (retoque / "x.jpg").write_bytes(b"")
+    (mat / "Selecccion/fotos/nueva.jpg").write_bytes(b"")
+    for ruta in (retoque / "x.jpg", retoque, mat / "Selecccion/fotos/nueva.jpg",
+                 mat / "Selecccion/fotos", mat / "Selecccion"):
+        os.utime(ruta, (900, 900))
+    for consulta in ("la última", "última"):
+        r = buscar_bodas(drive_falso, consulta)
+        assert [c.relativa for c in r] == ["01_Material/Bodas/2026-11-07_sanlucar"]
+
+
+def test_padres_con_candidatas_hijas_se_descartan(drive_falso):
+    relativas = [c.relativa for c in buscar_bodas(drive_falso, "")]
+    assert "01_Material/Selecccion" not in relativas
+    assert "01_Material/Selecccion/Boda 24:10:2026" in relativas
 
 
 def test_sin_coincidencias(drive_falso):
