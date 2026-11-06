@@ -67,7 +67,7 @@ Luego calcula las fechas a partir de D: lote al cliente en D+6, aprobación en D
 |---|---|
 | Boda | <fecha> · <iglesia> → <hacienda> · coche <naranja/beige> · <con chófer / conducido por los novios> |
 | Carpeta | <enlace o ruta> |
-| Permiso de caras y nombres | Sí / No / [PENDIENTE] |
+| Permiso de nombres | Sí / No / [PENDIENTE] (el de caras de adultos viene con el material; menores, nunca) |
 | Créditos | Fotógrafo <@>, hacienda <@>, florista <@> |
 | Lote al cliente | <D+6> · Aprobación como tarde <D+8> |
 | Publicación | Lun <D+9> · Mié <D+11> · Vie <D+13> |
@@ -108,6 +108,6 @@ Aplica la tabla de `docs/planes/semana-boda.md` §7: dos bodas el mismo fin de s
 - [ ] Los vídeos que el conector no pudo bajar (más de 10 MB) figuran en el plan como «sin revisar»
 - [ ] Las tres piezas siguen la estructura fija y no repiten gancho ni tema de la semana anterior
 - [ ] Fechas calculadas desde D: lote D+6, aprobación D+8, publicación D+9, D+11 y D+13
-- [ ] Caras y nombres solo con permiso en la ficha; nada de menores ni de matrículas
+- [ ] Caras de adultos, sí (el permiso viene con el material); nombres solo con permiso en la ficha; ningún menor con cara ni matrícula
 - [ ] Sin «Citroën», sin «de Sevilla» como identidad y sin datos inventados
 - [ ] Plan en `redes/instagram/bodas/` y una ficha por pieza en `redes/instagram/publicaciones/`
