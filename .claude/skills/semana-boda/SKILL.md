@@ -20,9 +20,13 @@ Si falta la ficha, sigue con lo que haya y apunta cada dato que falte como `[PEN
 
 ## Paso 1. Llegar al material
 
-1. **Conector de Google Drive.** Busca el contenido con `search_files` (`parentId = '<id de la carpeta>'`). Lee la ficha con `read_file_content`.
-2. **Si el conector no ve el contenido** (ya ha pasado: solo veía la carpeta raíz de `Mehari We`), pide la ruta local. Con Google Drive para escritorio, la carpeta compartida aparece en el ordenador si se añade un acceso directo en «Mi unidad», por ejemplo `G:\Mi unidad\Mehari We\01_Material\Bodas\…`.
-3. **No copies el material al repositorio.** Las fotos y vídeos no entran en Git (`CLAUDE.md` §5).
+1. **Conector de Google Drive.** Lista el contenido con `search_files` (`parentId = '<id de la carpeta>'`, `excludeContentSnippets: true`, `pageSize: 100`) y sigue el `nextPageToken` hasta el final. El listado no cabe en el contexto: se guarda solo en `tool-results/` y se resume con Python. Lee la ficha con `read_file_content`.
+2. **Descargar con el conector.** `download_file_content` devuelve el fichero en base64. Como no cabe en el contexto, la herramienta lo guarda en `tool-results/` como JSON (`{content, title, …}`): decodifícalo con Python en el scratchpad, nunca en el repositorio. Lanza las descargas en tandas de unas 12 en paralelo y decodifica después de cada tanda.
+   - **Límite de 10 MB por fichero.** Por encima, el conector devuelve «File too large for download». Las fotos HEIC (2–8 MB) y los Live Photos (2–9 MB) bajan sin problema; **los vídeos largos no**. Apúntalos en el plan como «sin revisar» y que los revise quien monte el reel (Nico), o pide la ruta local.
+   - Las fotos del iPhone vienen en **HEIC**: hace falta `pip install pillow-heif` para abrirlas con Pillow. La fecha y la hora están en el EXIF (etiqueta 36867): con ellas se fija D y se ordena el día.
+   - Los **Live Photos** (`IMG_xxxx.MOV` con el mismo número que una foto, 2–3 s, 1440×1920 y ya en SDR) bastan para montar un reel si no hay vídeos. Un `.MOV` pequeño sin foto al lado también es un Live Photo.
+3. **Si el conector no ve el contenido** (ya ha pasado: solo veía la carpeta raíz de `Mehari We`), pide la ruta local. Con Google Drive para escritorio, la carpeta compartida aparece en el ordenador si se añade un acceso directo en «Mi unidad», por ejemplo `G:\Mi unidad\Mehari We\01_Material\Bodas\…`.
+4. **No copies el material al repositorio.** Las fotos y vídeos no entran en Git (`CLAUDE.md` §5).
 
 ## Paso 2. Ver y elegir
 
@@ -34,6 +38,7 @@ Si falta la ficha, sigue con lo que haya y apunta cada dato que falte como `[PEN
   ```
   Los códigos (F0001, V001…) son **de esa boda**, no los del catálogo general. Escríbelos siempre con el prefijo de la boda: `2026-11-07_sanlucar/F0012`.
 - Clasifica cada pieza útil por el paso del día que muestra (iglesia, salida, cestas, volante, llegada, momento, detalle) y ponle calidad 1–5 con los criterios de `herramientas/material/README.md`.
+- **Busca la funda de rueda con «@MEHARI_TOURSUR».** En la boda del 24-10-2026 el beige aún la llevaba y salía en casi todas las fotos laterales y traseras. Si aparece, márcala en cada foto y en cada clip, y ponla la primera en «Pendiente» para que el cliente la quite antes de la siguiente boda.
 - **Pasa `revision-marca` a lo elegido** y marca cada pieza como APTA, APTA CON RETOQUE (qué hay que tapar: matrícula, chevrones, cara de un menor) o NO APTA. Las fotos se retocan con `retocar_foto.py` (placa lisa) y los vídeos con `difuminar.py`.
 
 ## Paso 3. Decidir la semana
@@ -99,7 +104,8 @@ Aplica la tabla de `docs/planes/semana-boda.md` §7: dos bodas el mismo fin de s
 
 ## Checklist
 
-- [ ] Todo el material elegido ha pasado `revision-marca`, con los retoques apuntados
+- [ ] Todo el material elegido ha pasado `revision-marca`, con los retoques apuntados (funda de rueda incluida)
+- [ ] Los vídeos que el conector no pudo bajar (más de 10 MB) figuran en el plan como «sin revisar»
 - [ ] Las tres piezas siguen la estructura fija y no repiten gancho ni tema de la semana anterior
 - [ ] Fechas calculadas desde D: lote D+6, aprobación D+8, publicación D+9, D+11 y D+13
 - [ ] Caras y nombres solo con permiso en la ficha; nada de menores ni de matrículas
