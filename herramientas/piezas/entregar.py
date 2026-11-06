@@ -18,7 +18,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from comprobar import ResultadoTexto, comprobar_medios, comprobar_texto  # noqa: E402
+from comprobar import ResultadoTexto, comprobar_medios, comprobar_textos_pieza  # noqa: E402
 from localizar import raiz_drive  # noqa: E402
 from pieza import cargar_pieza, errores_preparado, id_pieza  # noqa: E402
 
@@ -246,7 +246,7 @@ def entregar(ruta_pieza: Path, salidas: list[Path], proyecto: Path, produccion: 
     errores = errores_preparado(p, proyecto) + _errores_de_revision(p, proyecto)
     errores += _errores_de_conjunto(p, salidas)
     errores += comprobar_medios(p["formato"], p["variante"], salidas)
-    r = comprobar_texto(p.get("texto", ""))
+    r = comprobar_textos_pieza(p)
     errores += r.errores
     if errores:
         sys.exit("No se entrega la pieza:\n" + "\n".join(f"- {e}" for e in errores))

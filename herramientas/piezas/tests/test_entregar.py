@@ -239,3 +239,33 @@ def test_elemento_retocado_sin_antes_y_despues_se_rechaza(tmp_path, entrega_prep
     with pytest.raises(SystemExit) as e:
         entregar(ruta, salidas, proyecto, tmp_path / "prod", HOY)
     assert "01_despues.jpg" in str(e.value) and not (tmp_path / "prod").exists()
+
+
+# ---------------------------------------------------------------- texto incrustado (I2)
+
+def _cambiar(ruta, cambio):
+    p = json.loads(ruta.read_text(encoding="utf-8"))
+    cambio(p)
+    ruta.write_text(json.dumps(p, ensure_ascii=False), encoding="utf-8")
+
+
+def test_rotulo_con_marca_antigua_bloquea_la_entrega(tmp_path, entrega_preparada):
+    ruta, salidas, proyecto = entrega_preparada()
+    _cambiar(ruta, lambda p: p["elementos"][1].update(rotulo="Con Mehari Tour Sur"))
+    with pytest.raises(SystemExit) as e:
+        entregar(ruta, salidas, proyecto, tmp_path / "prod", HOY)
+    assert "rótulo del elemento 02" in str(e.value) and not (tmp_path / "prod").exists()
+
+
+def test_corchetes_en_rotulo_y_sevilla_en_ubicacion(tmp_path, entrega_preparada):
+    ruta, salidas, proyecto = entrega_preparada()
+
+    def cambio(p):
+        p["elementos"][0]["rotulo"] = "Sábado en [lugar]"
+        p["ubicacion"] = "Sevilla"
+    _cambiar(ruta, cambio)
+    d = entregar(ruta, salidas, proyecto, tmp_path / "prod", HOY)
+    assert d.name.endswith("_PENDIENTE")
+    assert "[lugar] (rótulo del elemento 01)" in (d / "texto.txt").read_text(encoding="utf-8")
+    h = (d / "revision.html").read_text(encoding="utf-8")
+    assert "ubicación" in h and "sevilla" in h
