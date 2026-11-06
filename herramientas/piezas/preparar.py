@@ -7,6 +7,7 @@ Uso:
 Salida (dentro de <proyecto>):
     assets/material/NN.jpg | NN.mp4   un fichero por elemento (NN = orden con dos cifras)
     revision/NN_antes.jpg, NN_despues.jpg   solo en elementos con recorte o retoques (800 px)
+    revision/avisos.json   lista de avisos (seguimiento de difuminado dudoso); [] si no hay
 
 Las coordenadas de recorte y retoque se refieren al original tal como se ve (con la
 orientación EXIF o la rotación del vídeo ya aplicada), igual que en rejilla.py.
@@ -25,7 +26,7 @@ import pieza  # noqa: E402
 import rutas  # noqa: E402
 
 sys.path.insert(0, str(rutas.MATERIAL))
-from comun import EXT_VIDEO  # noqa: E402,F401  (registra también pillow_heif)
+from comun import EXT_VIDEO  # noqa: E402  (también registra pillow_heif)
 
 LADO_REVISION = 800
 ANCHO_FINAL, ALTO_FINAL = 1080, 1920
@@ -36,7 +37,13 @@ ETIQUETAS_BT709 = ["-color_primaries", "bt709", "-color_trc", "bt709", "-colorsp
 
 
 def _ejecutar(cmd: list) -> subprocess.CompletedProcess:
-    return subprocess.run([str(c) for c in cmd], check=True, capture_output=True, text=True)
+    cmd = [str(c) for c in cmd]
+    try:
+        return subprocess.run(cmd, check=True, capture_output=True, text=True)
+    except subprocess.CalledProcessError as e:
+        nombre = Path(cmd[1]).name if Path(cmd[0]).name.startswith("python") else Path(cmd[0]).name
+        raise RuntimeError(f"{nombre} ha fallado (código {e.returncode}): "
+                           f"{(e.stderr or '').strip()} {(e.stdout or '').strip()}".strip()) from e
 
 
 def _ffmpeg(*args) -> None:
@@ -45,6 +52,13 @@ def _ffmpeg(*args) -> None:
 
 def _abs(ruta: Path) -> str:
     return str(Path(ruta).resolve())
+
+
+def avisos_de_difuminar(salida: str, id_el: str, fichero: str) -> list[str]:
+    """Una advertencia por cada línea «<< REVISAR» que imprime difuminar.py."""
+    return [f"Elemento {id_el} ({fichero}): el seguimiento del difuminado puede haberse perdido "
+            f"({linea.strip()}). Revisa el vídeo antes de publicar."
+            for linea in salida.splitlines() if "<< REVISAR" in linea]
 
 
 # ---------------------------------------------------------------- utilidades de vídeo
@@ -76,42 +90,80 @@ def _fotograma(video: Path, t: float, destino: Path, hlg: bool) -> Image.Image:
         return im.convert("RGB")
 
 
-def _caja_9_16(ancho: int, alto: int, caja: tuple[int, int, int, int]) -> tuple[int, int, int, int]:
-    """Recorta al centro la caja (x, y, an, al) hasta 9:16 (cover), con medidas pares."""
+def _cubrir(caja: tuple[int, int, int, int], prop: tuple[int, int]) -> tuple[int, int, int, int]:
+    """Caja (x, y, an, al) centrada dentro de `caja` con la proporción prop (cover)."""
     x, y, an, al = caja
-    if an * 16 > al * 9:      # demasiado ancha
-        nuevo = int(al * 9 / 16) // 2 * 2
-        x += (an - nuevo) // 2
-        an = nuevo
-    else:                     # demasiado alta
-        nuevo = int(an * 16 / 9) // 2 * 2
-        y += (al - nuevo) // 2
-        al = nuevo
-    return x, y, an - an % 2, al - al % 2
+    if an * prop[1] > al * prop[0]:   # demasiado ancha
+        nuevo = int(al * prop[0] / prop[1])
+        return x + (an - nuevo) // 2, y, nuevo, al
+    nuevo = int(an * prop[1] / prop[0])
+    return x, y + (al - nuevo) // 2, an, nuevo
 
 
-def _caja_recorte(el: dict, ancho: int, alto: int) -> tuple[int, int, int, int]:
+def _validar_recorte(el: dict, ancho: int, alto: int, id_el: str) -> tuple[int, int, int, int]:
+    """Caja de recorte (o el cuadro entero) comprobada contra el tamaño visible."""
     r = el.get("recorte")
     if not r:
         return 0, 0, ancho, alto
-    x = max(0, int(round(r["x"])))
-    y = max(0, int(round(r["y"])))
-    an = min(int(round(r["ancho"])), ancho - x)
-    al = min(int(round(r["alto"])), alto - y)
+    x, y, an, al = (int(round(r[k])) for k in ("x", "y", "ancho", "alto"))
+    if x < 0 or y < 0 or an <= 0 or al <= 0 or x + an > ancho or y + al > alto:
+        raise ValueError(f"Elemento {id_el} ({el['fichero']}): el recorte x={x}, y={y}, ancho={an}, "
+                         f"alto={al} no cabe en la imagen visible de {ancho}x{alto}; márcalo de nuevo")
     return x, y, an, al
 
 
-def _zonas_para_corte(zonas: list, desde: float, hasta: float, id_el: str) -> list[str]:
-    """Pasa las zonas (tiempos del original) a argumentos --zona (tiempos del corte)."""
+def _tamano_visible(origen: Path) -> tuple[int, int, float | None]:
+    """Ancho y alto tal como se ven, y duración (None en las fotos)."""
+    if origen.suffix.lower() in EXT_VIDEO:
+        info = sondear(origen)
+        return info["ancho"], info["alto"], info["duracion"]
+    with Image.open(origen) as im:
+        ancho, alto = im.size
+        if im.getexif().get(0x0112) in (5, 6, 7, 8):
+            ancho, alto = alto, ancho
+    return ancho, alto, None
+
+
+def _corte(el: dict, duracion: float) -> tuple[float, float]:
+    return float(el.get("desde", 0)), float(el.get("hasta", duracion))
+
+
+def _validar(elementos: list, boda: Path) -> None:
+    """Comprueba recortes y zonas contra los ficheros reales antes de procesar nada."""
+    for el in elementos:
+        retoques = el.get("retoques", [])
+        if not el.get("recorte") and not any(r.get("tipo") == "zona" for r in retoques):
+            continue
+        id_el = f"{int(el['orden']):02d}"
+        ancho, alto, duracion = _tamano_visible(boda / el["fichero"])
+        _validar_recorte(el, ancho, alto, id_el)
+        if duracion is None:
+            continue
+        desde, hasta = _corte(el, duracion)
+        for z in retoques:
+            if z.get("tipo") == "zona" and not desde <= float(z["t"]) <= hasta:
+                raise ValueError(
+                    f"Elemento {id_el} ({el['fichero']}): la zona en t={float(z['t']):g} s queda "
+                    f"fuera del corte {desde:g}-{hasta:g} s; vuelve a marcarla dentro del corte")
+
+
+def _zonas_finales(zonas: list, desde: float, hasta: float, caja: tuple[int, int, int, int]) -> list[str]:
+    """Argumentos --zona para el vídeo ya recortado y escalado a 1080x1920.
+
+    Los tiempos pasan a ser relativos al corte y las cajas, del original visible al
+    espacio de salida. Una zona fuera del encuadre se descarta; una parcial se recorta.
+    """
+    cx, cy, can, cal = caja
+    sx, sy = ANCHO_FINAL / can, ALTO_FINAL / cal
     salida = []
     for z in zonas:
-        t = float(z["t"])
-        if not desde <= t <= hasta:
-            print(f"AVISO: elemento {id_el}: la zona en t={t:g} s queda fuera del corte "
-                  f"{desde:g}-{hasta:g} s y se omite", file=sys.stderr)
+        x, y, an, al = z["caja"]
+        x0, y0 = max(0, round((x - cx) * sx)), max(0, round((y - cy) * sy))
+        x1 = min(ANCHO_FINAL, round((x + an - cx) * sx))
+        y1 = min(ALTO_FINAL, round((y + al - cy) * sy))
+        if x1 <= x0 or y1 <= y0:
             continue
-        x, y, an, al = (int(round(v)) for v in z["caja"])
-        texto = f"{t - desde:.3f},{x},{y},{an},{al}"
+        texto = f"{float(z['t']) - desde:.3f},{x0},{y0},{x1 - x0},{y1 - y0}"
         if "desde" in z or "hasta" in z:
             zd = min(max(float(z.get("desde", desde)), desde), hasta) - desde
             zh = min(max(float(z.get("hasta", hasta)), desde), hasta) - desde
@@ -121,49 +173,54 @@ def _zonas_para_corte(zonas: list, desde: float, hasta: float, id_el: str) -> li
 
 
 def _preparar_video(el: dict, origen: Path, destino: Path, tmp: Path, id_el: str,
-                    revision: Path | None) -> None:
+                    revision: Path | None) -> list[str]:
     info = sondear(origen)
     hlg = info["transfer"] == "arib-std-b67"
-    desde = float(el.get("desde", 0))
-    hasta = float(el.get("hasta", info["duracion"]))
+    desde, hasta = _corte(el, info["duracion"])
     dur = hasta - desde
+    ancho, alto = info["ancho"], info["alto"]
 
-    # 1) HLG -> SDR (si hace falta) y corte, conservando resolución y orientación visibles
-    corte = tmp / f"{id_el}_corte.mp4"
-    cmd = ["-ss", f"{desde:.3f}", "-i", _abs(origen), "-t", f"{dur:.3f}", "-an"]
-    if hlg:
-        cmd += ["-vf", FILTRO_HLG, *ETIQUETAS_BT709]
-    _ffmpeg(*cmd, "-c:v", "libx264", "-preset", "fast", "-crf", "12", "-pix_fmt", "yuv420p",
-            _abs(corte))
+    # Encuadre: recorte pedido y, dentro de él, 9:16 centrado (cover); medidas pares
+    x, y, an, al = _cubrir(_validar_recorte(el, ancho, alto, id_el), (9, 16))
+    caja = (x, y, an // 2 * 2, al // 2 * 2)
+    x, y, an, al = caja
 
-    # 2) retoques de zona con difuminar.py (tiempos desplazados por -desde)
+    # 1) HLG -> SDR (si hace falta), corte, recorte y escala a 1080x1920 a 30 fps.
+    #    Se hace antes de difuminar.py, que guarda todos los fotogramas en memoria.
+    filtros = ([FILTRO_HLG] if hlg else []) + [
+        f"crop={an}:{al}:{x}:{y}", f"scale={ANCHO_FINAL}:{ALTO_FINAL}:flags=lanczos",
+        "setsar=1", "fps=30"]
+    intermedio = tmp / f"{id_el}_intermedio.mp4"
+    _ffmpeg("-ss", f"{desde:.3f}", "-i", _abs(origen), "-t", f"{dur:.3f}", "-an",
+            "-vf", ",".join(filtros), "-c:v", "libx264", "-preset", "fast", "-crf", "12",
+            "-pix_fmt", "yuv420p", *ETIQUETAS_BT709, _abs(intermedio))
+
+    # 2) retoques de zona con difuminar.py, ya en el espacio de salida
     zonas_orig = [r for r in el.get("retoques", []) if r.get("tipo") == "zona"]
-    zonas = _zonas_para_corte(zonas_orig, desde, hasta, id_el)
-    fuente = corte
+    zonas = _zonas_finales(zonas_orig, desde, hasta, caja)
+    fuente, avisos = intermedio, []
     if zonas:
         difuminado = tmp / f"{id_el}_difuminado.mp4"
-        cmd = [sys.executable, rutas.MATERIAL / "difuminar.py", _abs(corte), _abs(difuminado)]
+        radio = max(8, round(60 * ANCHO_FINAL / an))
+        cmd = [sys.executable, rutas.MATERIAL / "difuminar.py", _abs(intermedio), _abs(difuminado),
+               "--radio", radio]
         for z in zonas:
             cmd += ["--zona", z]
-        _ejecutar(cmd)
+        avisos = avisos_de_difuminar(_ejecutar(cmd).stdout, id_el, el["fichero"])
         fuente = difuminado
 
-    # 3) recorte, 9:16 cover, 1080x1920, 30 fps, H.264 CRF 15, sin audio
-    ancho, alto = info["ancho"], info["alto"]
-    x, y, an, al = _caja_9_16(ancho, alto, _caja_recorte(el, ancho, alto))
-    _ffmpeg("-i", _abs(fuente), "-an",
-            "-vf", f"crop={an}:{al}:{x}:{y},scale={ANCHO_FINAL}:{ALTO_FINAL},setsar=1",
-            "-r", "30", "-c:v", "libx264", "-preset", "slow", "-crf", "15",
-            "-pix_fmt", "yuv420p", *ETIQUETAS_BT709, _abs(destino))
+    # 3) codificación final: H.264 CRF 15, 30 fps, sin audio
+    _ffmpeg("-i", _abs(fuente), "-an", "-r", "30", "-c:v", "libx264", "-preset", "slow",
+            "-crf", "15", "-pix_fmt", "yuv420p", *ETIQUETAS_BT709, _abs(destino))
 
     if revision is not None:
-        validas = [z for z in zonas_orig if desde <= float(z["t"]) <= hasta]
-        t_orig = float(validas[0]["t"]) if validas else desde + dur / 2
+        t_orig = float(zonas_orig[0]["t"]) if zonas_orig else desde + dur / 2
         t_final = t_orig - desde
         tope = max(dur - 0.05, 0)
         antes = _fotograma(origen, min(t_orig, desde + tope), tmp / f"{id_el}_antes.png", hlg)
         despues = _fotograma(destino, min(t_final, tope), tmp / f"{id_el}_despues.png", False)
         _guardar_revision(antes, despues, revision, id_el)
+    return avisos
 
 
 # ---------------------------------------------------------------- fotos
@@ -196,21 +253,21 @@ def _preparar_foto(el: dict, origen: Path, destino: Path, tmp: Path, id_el: str,
         with Image.open(retocada) as im:
             imagen = im.convert("RGB")
 
-    if el.get("recorte"):
-        x, y, an, al = _caja_recorte(el, ancho, alto)
-    else:
-        prop = (3, 4) if formato == "deslizar" else (9, 16)
-        an, al = ancho, alto
-        if an * prop[1] > al * prop[0]:
-            an = int(al * prop[0] / prop[1])
-        else:
-            al = int(an * prop[1] / prop[0])
-        x, y = (ancho - an) // 2, (alto - al) // 2
+    prop = (3, 4) if formato == "deslizar" else (9, 16)
+    caja = _validar_recorte(el, ancho, alto, id_el)
+    if not el.get("recorte"):
+        caja = _cubrir(caja, prop)
+    x, y, an, al = caja
     final = imagen.crop((x, y, x + an, y + al))
     final.save(destino, "JPEG", quality=92)
 
     if revision is not None:
-        _guardar_revision(original, final, revision, id_el)
+        vista = final
+        if formato != "deslizar" and abs(an / al - 9 / 16) > 0.005:
+            # lo que verá la plantilla: 9:16 centrado dentro del recorte
+            cx, cy, can, cal = _cubrir((0, 0, an, al), prop)
+            vista = final.crop((cx, cy, cx + can, cy + cal))
+        _guardar_revision(original, vista, revision, id_el)
 
 
 def _a_lado(im: Image.Image, lado: int = LADO_REVISION) -> Image.Image:
@@ -234,13 +291,14 @@ def preparar(p: dict, boda: Path, proyecto: Path) -> list[Path]:
         raise ValueError(f"orden repetido en elementos: {repetidos}")
 
     boda, proyecto = Path(boda), Path(proyecto)
+    _validar(elementos, boda)
     material = proyecto / "assets/material"
     revision = proyecto / "revision"
     tmp = proyecto / "_tmp"
     for carpeta in (material, revision, tmp):
         carpeta.mkdir(parents=True, exist_ok=True)
 
-    salidas = []
+    salidas, avisos = [], []
     try:
         for el in elementos:
             id_el = f"{int(el['orden']):02d}"
@@ -250,12 +308,16 @@ def preparar(p: dict, boda: Path, proyecto: Path) -> list[Path]:
             toca = bool(el.get("recorte") or el.get("retoques"))
             rev = revision if toca else None
             if es_video:
-                _preparar_video(el, origen, destino, tmp, id_el, rev)
+                avisos += _preparar_video(el, origen, destino, tmp, id_el, rev)
             else:
                 _preparar_foto(el, origen, destino, tmp, id_el, p["formato"], rev)
             salidas.append(destino)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
+    (revision / "avisos.json").write_text(json.dumps(avisos, ensure_ascii=False, indent=2),
+                                          encoding="utf-8")
+    for aviso in avisos:
+        print(f"AVISO: {aviso}", file=sys.stderr)
     return salidas
 
 
