@@ -32,3 +32,7 @@ desktop.ini
 
 # Python
 __pycache__/
+
+# Sistema de piezas por boda
+.trabajo/
+herramientas/piezas/node_modules/
