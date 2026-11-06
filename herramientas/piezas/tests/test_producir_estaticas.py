@@ -1,7 +1,6 @@
-import pytest
-from ayudas import escribir, pagina_renderizada
+from ayudas import pagina_renderizada
 from PIL import Image
-from producir import estaticas, producir
+from producir import estaticas
 
 
 def test_deslizar_da_jpegs_1080x1440_mas_cierre(tmp_path, pieza_deslizar_preparada):
@@ -75,9 +74,3 @@ def test_la_plantilla_no_borra_el_material_preparado(tmp_path, pieza_deslizar_pr
     p, proy = pieza_deslizar_preparada(n_fotos=2)
     estaticas(p, proy, tmp_path / "out")
     assert (proy / "assets/material/01.jpg").exists() and (proy / "revision").exists()
-
-
-def test_producir_rechaza_formatos_de_video(tmp_path, pieza_minima):
-    ruta = escribir(tmp_path, pieza_minima("reel"))
-    with pytest.raises(NotImplementedError, match="tarea 8"):
-        producir(ruta, tmp_path / "p", tmp_path / "o")

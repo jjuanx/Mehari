@@ -14,6 +14,7 @@ comercial/**/*.pdf
 *.mov
 # Excepción: recursos animados de marca, ligeros (ver marca/animaciones/README.md)
 !marca/animaciones/renders/*.mp4
+!marca/plantillas/reel/assets/cierre.mp4
 
 # Estado local de HyperFrames (comprobaciones, historial y renders)
 .hyperframes/

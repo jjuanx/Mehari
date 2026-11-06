@@ -187,3 +187,66 @@ def entrega_preparada(pieza_minima, tmp_path):
         return ruta, ficheros, proyecto
 
     return fabrica
+
+
+def pytest_configure(config):
+    config.addinivalue_line("markers", "lento: render real con HyperFrames (varios minutos)")
+
+
+def _clip_de_prueba(ruta: Path, segundos: float, filtro: str = "testsrc") -> Path:
+    _ffmpeg("-f", "lavfi", "-i", f"{filtro}=size=1080x1920:rate=30", "-t", str(segundos),
+            "-pix_fmt", "yuv420p", str(ruta))
+    return ruta
+
+
+@pytest.fixture
+def pieza_reel_preparada(pieza_minima, foto_jpg, tmp_path):
+    """Fábrica: (pieza, proyecto) de un reel de 16 s (3 clips, 1 foto, música) ya preparado.
+
+    El gancho y la prueba llevan rótulo (el del gancho con comillas, «&» y «<»).
+    """
+    def fabrica(variante="limpio", musica=True):
+        from preparar import preparar
+        boda = tmp_path / "boda"
+        boda.mkdir(exist_ok=True)
+        for i, filtro in ((1, "testsrc"), (3, "testsrc2"), (4, "smptebars")):
+            _clip_de_prueba(boda / f"clip{i}.mp4", 5, filtro)
+        shutil.copy(foto_jpg, boda / "IMG_2.jpg")
+        p = pieza_minima("reel")
+        p["variante"] = variante
+        p["elementos"] = [
+            {"orden": 1, "fichero": "clip1.mp4", "desde": 0, "hasta": 3, "tramo": "gancho",
+             "rotulo": 'Salís "de" la iglesia & <ya>'},
+            {"orden": 2, "fichero": "IMG_2.jpg", "duracion": 3, "tramo": "detalle"},
+            {"orden": 3, "fichero": "clip3.mp4", "desde": 0, "hasta": 3, "tramo": "prueba",
+             "rotulo": "Las cestas, llenas de flores"},
+            {"orden": 4, "fichero": "clip4.mp4", "desde": 1, "hasta": 4, "tramo": "momento"},
+        ]
+        if musica:
+            pista = tmp_path / "Pista libre.m4a"
+            _ffmpeg("-f", "lavfi", "-i", "sine=frequency=440:duration=20", "-c:a", "aac", str(pista))
+            p["musica"] = {"ruta": str(pista), "licencia": "prueba"}
+        proyecto = tmp_path / "proyecto"
+        preparar(p, boda, proyecto)
+        return p, proyecto
+
+    return fabrica
+
+
+@pytest.fixture
+def pieza_historia_clip_preparada(pieza_minima, tmp_path):
+    """Fábrica: (pieza, proyecto) de una historia en clip con n clips de 3 s ya preparados."""
+    def fabrica(n_clips=1):
+        from preparar import preparar
+        boda = tmp_path / "boda"
+        boda.mkdir(exist_ok=True)
+        elementos = []
+        for i in range(1, n_clips + 1):
+            _clip_de_prueba(boda / f"clip{i}.mp4", 4)
+            elementos.append({"orden": i, "fichero": f"clip{i}.mp4", "desde": 0, "hasta": 3})
+        p = pieza_minima("historia") | {"variante": "clip-cta", "elementos": elementos}
+        proyecto = tmp_path / "proyecto"
+        preparar(p, boda, proyecto)
+        return p, proyecto
+
+    return fabrica
