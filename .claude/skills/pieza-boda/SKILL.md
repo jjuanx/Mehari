@@ -14,7 +14,7 @@ Reglas que no se saltan:
 - Ninguna foto, vídeo ni render entra en Git. Una pieza suelta no genera ficha ni PR.
 - Las reglas de `CLAUDE.md` §2 y §4 mandan: sin marca antigua, sin «Citroën», sin matrículas legibles, sin caras de menores, sin datos inventados y sin atar la marca a una ciudad.
 
-Todos los comandos se lanzan desde la raíz del repositorio. En Windows, `python` en lugar de `python3`, y las variables se escriben como en PowerShell (`$P = "…"`).
+Todos los comandos se lanzan desde la raíz del repositorio. En Windows, Claude Code usa Git Bash: los comandos son los mismos, con `python` en lugar de `python3`.
 
 ## Paso 1. Interpretar la orden
 
@@ -81,7 +81,7 @@ La carpeta de trabajo de cada boda es `.trabajo/<boda>/`, con `<boda>` = `AAAA-M
 Material por formato:
 - **Deslizar**: de 5 a 9 fotos (no vídeos). El script añade solo la diapositiva de cierre («¿Cuándo os casáis?» y el WhatsApp), así que salen de 6 a 10 JPEG. Estructura: portada (la mejor foto de los novios con el coche) → el día en orden → cierre. Si se pide un tema, todas giran en torno a él. Con menos de 5 fotos buenas, avisa y propone una historia.
 - **Reel**: clips (con `desde` y `hasta`) o fotos (con `duracion`), cada uno con su `tramo`: `gancho` (0–3 s, el plano con más gente y movimiento), `detalle`, `prueba` o `momento`. El cierre de marca (4 s) lo pone el script: **no lo añadas como elemento**. Con el cierre, el reel dura de 15 a 25 s, así que los elementos suman de 11 a 21 s. Si no hay clips, se monta con fotos.
-- **Historia**: de 1 a 10 elementos; cada uno sale en su propia historia. En `foto-frase`, fotos. En `clip-cta`, clips (o fotos) con `desde`/`hasta` o `duracion`; `pieza.py` exige que **la suma** de todos no pase de 15 s. Si un elemento no tiene `rotulo`, sale «¿Cuándo os casáis?».
+- **Historia**: de 1 a 10 elementos; cada uno sale en su propia historia. En `foto-frase`, fotos. En `clip-cta`, clips (o fotos) con `desde`/`hasta` o `duracion`; `pieza.py` exige que **cada clip** dure como máximo 15 s (cada elemento es una historia aparte). Si un elemento no tiene `rotulo`, sale «¿Cuándo os casáis?».
 
 ## Paso 5. Música (solo reel)
 
@@ -105,13 +105,13 @@ python3 herramientas/piezas/producir.py "$P/pieza.json" "$P/proyecto" "$P/salida
 python3 herramientas/piezas/comprobar.py "$P/pieza.json" "$P"/salida/*
 ```
 
-- **`preparar.py`** valida `pieza.json`, convierte (HEIC→JPG, HLG→SDR BT.709), retoca, recorta y deja cada elemento en `proyecto/assets/material/NN.jpg|mp4`. Escribe además `proyecto/revision/NN_antes.jpg` y `NN_despues.jpg` de cada elemento con recorte o retoque, y **siempre** `proyecto/revision/avisos.json` (lista vacía si no hay avisos). Si para con un error de recorte o de zona, corrige `pieza.json` y repítelo.
+- **`preparar.py`** valida `pieza.json`, convierte (HEIC→JPG, HLG→SDR BT.709), retoca, recorta y deja cada elemento en `proyecto/assets/material/NN.jpg|mp4`. Escribe además `proyecto/revision/NN_antes.jpg` y `NN_despues.jpg` de cada elemento con recorte o retoque, y **siempre** `proyecto/revision/avisos.json` (lista vacía si no hay avisos) y `proyecto/revision/preparado.json` (la huella del material). Empieza vaciando `assets/material/` y `revision/`. Si para con un error de recorte, de zona o de retoque, corrige `pieza.json` y repítelo.
 - **`producir.py`** copia la plantilla (`marca/plantillas/estaticas/` para deslizar y foto-frase; `marca/plantillas/reel/` con HyperFrames para reel y clip-cta) y deja en `salida/` solo los ficheros finales: `01.jpg…NN.jpg`, `reel.mp4` + `portada.jpg`, o `historia.jpg|mp4` (`historia-01…NN` si hay varias).
 - **`comprobar.py`** imprime un JSON con `errores`, `avisos` y `pendientes` y sale con código 1 si hay errores. Corrige cada error. Revisa cada aviso («Sevilla», «Cádiz»): nombrar el lugar de la boda vale; presentar la marca como de allí, no.
 
 **Si `producir.py` falla**, lee el error (incluye la salida de `hyperframes check` o de `exportar.mjs`), corrige y repite **una vez**. Si vuelve a fallar, no se entrega nada: explica el error.
 
-Para cambiar un rótulo o el texto basta con editar `pieza.json` y volver a lanzar `producir.py` (y `preparar.py` si cambian el material, el recorte o los retoques).
+Para cambiar un rótulo o el texto basta con editar `pieza.json` y volver a lanzar `producir.py`. Si cambian el material, el recorte, los retoques o los cortes, hay que lanzar antes `preparar.py`: `producir.py` y `entregar.py` se niegan si `revision/preparado.json` no corresponde al `pieza.json` actual.
 
 ### Plantilla de `pieza.json`
 
@@ -152,20 +152,20 @@ Para cambiar un rótulo o el texto basta con editar `pieza.json` y volver a lanz
 | `tema` | Minúsculas, números y guiones |
 | `permiso_caras` | `si` (la ficha lo confirma), `no` o `pendiente` |
 | `hay_caras` | `true` si se reconoce alguna cara en la pieza. Si falta, se supone `true` |
-| `musica` | `{"ruta": "<ruta absoluta de la pista>", "licencia": "…", "titulo": "…"}` (`titulo` opcional) o `null` |
+| `musica` | `{"ruta": "<ruta absoluta de la pista>", "licencia": "…", "titulo": "…"}` (`ruta` y `licencia` obligatorias, `titulo` opcional) o `null` |
 | `ubicacion` | Texto de la ubicación para Metricool, o `null`. Si no se sabe, `null` y se apunta en `pendientes` |
 | `elementos[].orden` | 1, 2, 3… sin repetir. Manda el orden de salida |
-| `elementos[].fichero` | Ruta relativa a la carpeta de la boda (`fotos/IMG_1.HEIC`) |
+| `elementos[].fichero` | Ruta relativa a la carpeta de la boda (`fotos/IMG_1.HEIC`). Los vídeos, en `.mov` o `.mp4` (`.m4v`, `.avi`… se rechazan: conviértelos antes) |
 | `elementos[].recorte` | Opcional. `{x, y, ancho, alto}` en píxeles del original tal como se ve. Sin recorte, se encuadra centrado (3:4 en deslizar, 9:16 en lo demás) |
 | `elementos[].retoques` | Opcional. Ver abajo |
-| `elementos[].rotulo` | Opcional. Frase corta en pantalla |
+| `elementos[].rotulo` | Opcional. Frase corta en pantalla. Sigue las reglas del texto (salvo teléfono y hashtags); un `[…]` deja la pieza `NO PUBLICAR` |
 | `elementos[].revision_marca` | Resultado de `revision-marca` |
 | `elementos[].tramo`, `desde`, `hasta`, `duracion` | Reel: `tramo` y (`desde` + `hasta`, en segundos del clip) o `duracion` (fotos). Historia `clip-cta`: `desde` + `hasta` o `duracion` |
-| `texto` | Copy final: tuteo en plural, CTA a WhatsApp 625 06 42 93, de 3 a 5 hashtags. Sin «Citroën», sin «—», sin «experiencia única» |
+| `texto` | Copy final: tuteo en plural, CTA a WhatsApp 625 06 42 93, de 3 a 5 hashtags. Sin «Citroën», sin la marca antigua, sin «—», sin «experiencia única» |
 | `a_mano_despues` | Lo que se hace a mano en la app: sticker, Collab, etiquetas, ubicación si Metricool no la pone |
 | `pendientes` | Cada dato que falta. Si no está vacío, la pieza sale `NO PUBLICAR` |
 
-Retoques, siempre en píxeles (y segundos) del **original tal como se ve**, exactamente lo que enseña `rejilla.py`:
+Retoques, siempre en píxeles (y segundos) del **original tal como se ve**, exactamente lo que enseña `rejilla.py`. Una foto solo admite `placa`, `funda` y `emblema`; un vídeo, solo `zona`. Cualquier otro tipo (o `"Placa"` con mayúscula) o una forma incompleta es un error de `pieza.py`:
 
 | Tipo | Para | Forma |
 |---|---|---|
@@ -174,7 +174,7 @@ Retoques, siempre en píxeles (y segundos) del **original tal como se ve**, exac
 | `emblema` | Chevrones o logo sobre chapa lisa en foto | `{"tipo": "emblema", "caja": [x, y, ancho, alto]}` |
 | `zona` | Cualquier cosa en vídeo (se difumina siguiéndola) | `{"tipo": "zona", "t": 2.4, "caja": [x, y, ancho, alto], "desde": 2.0, "hasta": 5.0}`. `t` es el segundo del clip original en que se marca la caja (con `rejilla.py --t`) y tiene que estar **dentro** del corte `desde`–`hasta` del elemento. `desde` y `hasta` de la zona son opcionales y limitan el difuminado |
 
-El difuminado se aplica después de escalar a 1080×1920. Si el seguimiento puede haberse perdido, `preparar.py` lo apunta en `revision/avisos.json` y la pieza no puede salir `LISTA`.
+El difuminado se aplica después de escalar a 1080×1920. Si el seguimiento puede haberse perdido, o si la zona queda fuera del encuadre final (y por tanto no se difumina), `preparar.py` lo apunta en `revision/avisos.json` y la pieza no puede salir `LISTA`.
 
 Ejemplos de elementos de reel y de historia en clip:
 
@@ -208,9 +208,9 @@ python3 herramientas/piezas/entregar.py "$P/pieza.json" "$P/proyecto" "$P/salida
 
 Busca `02_Produccion` en Drive (o se le pasa con `--produccion "<ruta>"`) e imprime la carpeta creada: `02_Produccion/<boda>/<id_pieza>/` o `<id_pieza>_PENDIENTE/`, con `-2`, `-3`… si ya existe. Nunca sobrescribe. Deja los ficheros finales, `texto.txt` (primera línea `Estado: LISTA` o `Estado: NO PUBLICAR · <motivos>`), `revision.html`, `revision/`, `cola-metricool.json` (una entrada, `fecha: null`, aprobación pendiente) y una copia de `pieza.json`.
 
-**No entrega nada** (y dice por qué) si: falla el formato de un medio, el texto tiene un error (nombra «Citroën», lleva «—» o «experiencia única», pasa de 5 hashtags o le falta el 625 06 42 93), falta `proyecto/revision/avisos.json` o está mal, o los ficheros de `salida/` no son exactamente los de la pieza (sobran o faltan). Corrige y vuelve a lanzarlo.
+**No entrega nada** (y dice por qué) si: falla el formato de un medio; el texto tiene un error (nombra «Citroën» o la marca antigua, lleva «—» o «experiencia única», pasa de 5 hashtags o le falta el 625 06 42 93); un rótulo, la ubicación o una línea de `a_mano_despues` tiene uno de esos errores; falta `proyecto/revision/avisos.json` o está mal; falta `proyecto/revision/preparado.json` o no corresponde al `pieza.json` actual; falta el antes y después de un elemento con recorte o retoques; o los ficheros de `salida/` no son exactamente los de la pieza (sobran o faltan). Corrige y vuelve a lanzarlo.
 
-**Entrega como `NO PUBLICAR`** (carpeta `_PENDIENTE`) si: hay caras (`hay_caras` verdadero o ausente) sin `permiso_caras: "si"`, quedan marcadores `[…]` en el texto o datos en `pendientes`, o hay avisos de difuminado.
+**Entrega como `NO PUBLICAR`** (carpeta `_PENDIENTE`) si: hay caras (`hay_caras` verdadero o ausente) sin `permiso_caras: "si"`, quedan marcadores `[…]` en el texto, en un rótulo, en la ubicación o en `a_mano_despues`, o datos en `pendientes`, o hay avisos de difuminado.
 
 ## Paso 9. Resumen
 
@@ -237,6 +237,7 @@ Sin aprobación del cliente no se programa nada. Cuando llegue, Alejandro pone l
 | El render falla | Se lee la salida de `hyperframes check`, se corrige y se repite una vez. Si sigue fallando, no se entrega nada a medias y se explica el error |
 | `entregar.py` se niega | No ha escrito nada en Drive. Corrige lo que dice y vuelve a lanzarlo |
 | Ya existe una carpeta con ese nombre | Se añade `-2`, `-3`… Nunca se sobrescribe una entrega |
+| Una pieza `_PENDIENTE` ya se puede publicar (llega el permiso, se completa un dato) | Cambia `pieza.json` en `.trabajo/` (`permiso_caras: "si"`, el dato en su sitio, `pendientes` vacío). Si cambia un rótulo, vuelve a lanzar `producir.py`. Después vuelve a lanzar `entregar.py`, que crea una carpeta nueva sin `_PENDIENTE`. Entonces hay que borrar a mano la carpeta `_PENDIENTE` antigua de `02_Produccion` para no dejar dos versiones: pide confirmación antes de borrarla |
 
 ## Checklist
 
@@ -245,7 +246,7 @@ Sin aprobación del cliente no se programa nada. Cuando llegue, Alejandro pone l
 - [ ] Cada elemento ha pasado `revision-marca`, con su resultado en `revision_marca`; material elegido por «sin retoque > recorte > retoque»
 - [ ] Coordenadas de recortes y retoques leídas con `rejilla.py` (`--t` en vídeos, dentro del corte)
 - [ ] `permiso_caras` y `hay_caras` según la ficha y lo que se ve; nada de menores ni de matrículas
-- [ ] Texto con CTA a WhatsApp 625 06 42 93, de 3 a 5 hashtags, sin «Citroën», sin «—», sin «experiencia única», sin atar la marca a una ciudad y sin datos inventados
+- [ ] Texto con CTA a WhatsApp 625 06 42 93, de 3 a 5 hashtags, sin «Citroën», sin la marca antigua, sin «—», sin «experiencia única», sin atar la marca a una ciudad y sin datos inventados; rótulos, ubicación y `a_mano_despues` con las mismas reglas
 - [ ] Reel: música con licencia de `03_Marca/musica/` o de `media-use`, o «sin música» dicho en el resumen
 - [ ] `preparar.py`, `producir.py` y `comprobar.py` sin errores
 - [ ] Cada JPEG o un fotograma por plano mirado a ojo, más los `NN_despues.jpg`
