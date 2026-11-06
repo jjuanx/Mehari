@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Piezas estáticas · Méhari We</title>
+<!--
+  Plantilla de carruseles (1080×1440) e historias en foto (1080×1920). Autocontenida.
+  - Datos: producir.py escribe datos.json y además lo incrusta en <script id="datos">
+    (con file:// el navegador no deja leer datos.json con fetch). Si el bloque está vacío, se lee datos.json.
+  - Sin parámetros: todas las diapositivas en pequeño, para revisarlas.
+  - ?s=<n>: solo la diapositiva n (empieza en 0) a tamaño real, para exportarla (exportar.mjs).
+  - Los textos se insertan siempre con textContent, nunca con innerHTML.
+  Colores y tipografías: marca/tokens.css (Fraunces y Jost, provisionales). Logo aprobado, sin tocar.
+-->
+<style>
+  @font-face { font-family: 'Fraunces'; src: url('assets/Fraunces.woff2') format('woff2'); font-weight: 100 900; }
+  @font-face { font-family: 'Jost'; src: url('assets/Jost.woff2') format('woff2'); font-weight: 100 900; }
+  :root {
+    --naranja: #EE7D1F;
+    --beige: #DCC6A0;
+    --cal: #F7F1E6;
+    --tinta: #2B211A;
+    --naranja-oscuro: #C2560E;
+    --azahar: #FFFCF5;
+    --font-titular: 'Fraunces', Georgia, serif;
+    --font-texto: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--cal); color: var(--tinta); font-family: var(--font-texto); }
+  body.una { background: var(--tinta); }
+
+  .slide { width: var(--ancho); height: var(--alto); position: relative; overflow: hidden; background: var(--tinta); }
+  .slide > img.foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  .logo { position: absolute; top: 56px; left: 64px; width: 128px; filter: drop-shadow(0 2px 10px rgba(0,0,0,.35)); }
+
+  .velo { position: absolute; left: 0; right: 0; bottom: 0; height: 42%;
+          background: linear-gradient(to top, rgba(43,33,26,.86) 0%, rgba(43,33,26,.45) 50%, rgba(43,33,26,0) 100%); }
+  .pie { position: absolute; left: 72px; right: 72px; bottom: 92px; color: var(--azahar); }
+  .num { font-size: 30px; letter-spacing: .28em; color: var(--naranja); margin-bottom: 16px; font-weight: 500; }
+  .rotulo { font-family: var(--font-titular); font-weight: 600; font-size: 72px; line-height: 1.05; }
+
+  .portada .velo { height: 58%; }
+  .portada .rotulo { font-size: 100px; line-height: 1; padding-right: 150px; }
+  .desliza { position: absolute; right: 72px; bottom: 98px; font-size: 30px; color: var(--azahar); opacity: .85; }
+
+  /* Historia: zona segura central del 80 % (108 px a cada lado); libres ~250 px arriba y ~340 px abajo */
+  .historia .velo { height: 55%; }
+  .historia .frase { position: absolute; left: 108px; right: 108px; bottom: 340px; max-height: 1330px;
+                     overflow: hidden; color: var(--azahar); font-family: var(--font-titular);
+                     font-weight: 600; font-size: 84px; line-height: 1.08; }
+
+  .cierre { background: var(--cal); display: flex; flex-direction: column; justify-content: center; padding: 0 96px; }
+  .cierre .costillas { display: grid; gap: 14px; width: 220px; margin-bottom: 72px; }
+  .cierre .costillas i { display: block; height: 22px; background: var(--naranja); }
+  .cierre h2 { font-family: var(--font-titular); font-weight: 600; font-size: 88px; line-height: 1.05; color: var(--tinta); }
+  .cierre p { font-size: 40px; line-height: 1.4; margin-top: 36px; color: var(--tinta); max-width: 26ch; }
+  .cierre .boton { display: inline-block; margin-top: 64px; background: var(--naranja); color: var(--tinta);
+                   font-weight: 500; font-size: 40px; padding: 26px 52px; border-radius: 999px; }
+  .cierre .tel { font-size: 34px; margin-top: 26px; color: var(--naranja-oscuro); }
+  .cierre .firma { position: absolute; right: 96px; bottom: 72px; width: 190px; }
+
+  .revision { padding: 32px 16px 64px; max-width: 1200px; margin: 0 auto; }
+  .revision h1 { font-family: var(--font-titular); font-size: 30px; margin-bottom: 6px; }
+  .fila { display: flex; gap: 12px; overflow-x: auto; padding: 24px 0 8px; }
+  .mini { flex: none; overflow: hidden; border-radius: 6px; }
+  .mini .slide { transform: scale(.2); transform-origin: 0 0; }
+</style>
+</head>
+<body>
+<script type="application/json" id="datos"></script>
+<script>
+function el(etiqueta, clase, texto) {
+  const e = document.createElement(etiqueta);
+  if (clase) e.className = clase;
+  if (texto != null) e.textContent = texto;
+  return e;
+}
+function imagen(clase, src, alt) {
+  const i = el('img', clase);
+  i.src = src;
+  i.alt = alt || '';
+  return i;
+}
+const logo = () => imagen('logo', 'assets/mehari-we-blanco.svg', 'Méhari We');
+
+function diapositiva(d, i, variante) {
+  const s = el('div', 'slide ' + d.tipo);
+  if (d.tipo === 'cierre') {
+    const c = el('div', 'costillas');
+    for (let k = 0; k < 4; k++) c.append(el('i'));
+    s.append(c,
+      el('h2', null, '¿Cuándo os casáis?'),
+      el('p', null, 'Escribidnos vuestra fecha y os decimos si hay un Méhari libre.'),
+      (() => { const w = el('div'); w.append(el('span', 'boton', 'Pedir fecha')); return w; })(),
+      el('div', 'tel', 'WhatsApp · 625 06 42 93'),
+      imagen('firma', 'assets/mehari-we-naranja.svg', 'Méhari We · Wedding & Events'));
+    return s;
+  }
+  s.append(imagen('foto', d.foto));
+  if (d.tipo === 'historia') {
+    s.append(el('div', 'velo'));
+    if (d.rotulo) s.append(el('div', 'frase', d.rotulo));
+    return s;
+  }
+  s.append(logo());
+  const conRotulo = d.tipo === 'portada' || (variante === 'con-rotulos' && d.rotulo);
+  if (!conRotulo) return s;
+  s.append(el('div', 'velo'));
+  const pie = el('div', 'pie');
+  if (d.tipo === 'paso') pie.append(el('div', 'num', String(i).padStart(2, '0')));
+  if (d.rotulo) pie.append(el('div', 'rotulo', d.rotulo));
+  s.append(pie);
+  if (d.tipo === 'portada') s.append(el('div', 'desliza', 'Desliza →'));
+  return s;
+}
+
+async function cargarDatos() {
+  const incrustado = document.getElementById('datos').textContent.trim();
+  if (incrustado) return JSON.parse(incrustado);
+  return (await fetch('datos.json')).json();
+}
+
+(async () => {
+  const datos = await cargarDatos();
+  document.documentElement.style.setProperty('--ancho', datos.ancho + 'px');
+  document.documentElement.style.setProperty('--alto', datos.alto + 'px');
+  const q = new URLSearchParams(location.search);
+  const n = q.get('s');
+  // El número de paso cuenta solo las diapositivas de tipo «paso»
+  let pasos = 0;
+  const hojas = datos.diapositivas.map(d => diapositiva(d, d.tipo === 'paso' ? ++pasos : 0, datos.variante));
+  if (n !== null) {
+    document.body.classList.add('una');
+    document.body.append(hojas[Number(n)]);
+  } else {
+    const r = el('div', 'revision');
+    r.append(el('h1', null, `${datos.formato} · ${datos.variante} · ${hojas.length} diapositivas`));
+    const fila = el('div', 'fila');
+    for (const h of hojas) {
+      const m = el('div', 'mini');
+      m.style.width = datos.ancho * 0.2 + 'px';
+      m.style.height = datos.alto * 0.2 + 'px';
+      m.append(h);
+      fila.append(m);
+    }
+    r.append(fila);
+    document.body.append(r);
+  }
+  await document.fonts.ready;
+  await Promise.all([...document.images].map(i => i.decode().catch(() => {})));
+  document.body.dataset.listo = '1';
+})();
+</script>
+</body>
+</html>

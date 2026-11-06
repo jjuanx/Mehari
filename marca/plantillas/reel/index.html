@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <title>Reel · Méhari We</title>
+    <!--
+      Plantilla de reels (15-25 s) e historias en clip (≤15 s), 1080×1920 a 30 fps.
+      No se edita a mano por pieza: herramientas/piezas/producir.py la copia al proyecto y sustituye
+      cuatro marcadores (ver generar_html):
+        __DURACION__    duración total en segundos (la raíz se lee al compilar; no se puede fijar por script)
+        PLANOS          pista 0: los planos seguidos (assets/material/NN.mp4|jpg) y el cierre de marca
+                        (solo en el reel); además, la transición (pista 4) y la música (pista 2)
+        ROTULOS         pista 1: un rótulo por plano que lo tenga, visible lo que dura su plano
+                        (y el velo del gancho de la variante titular, en la pista 3)
+        ANIMACION       las llamadas tl.fromTo de cada plano y rótulo
+      Colores de marca/tokens.css. Tipografía provisional (Fraunces), como el resto de piezas.
+      Zona segura: rótulos dentro del 80 % central (864 px) y a 1500 px de arriba (variante limpio);
+      el gancho de la variante titular, grande y arriba (300 px), con un velo que da contraste sin caja.
+    -->
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Fraunces"; src: url("assets/Fraunces.woff2") format("woff2"); font-weight: 300 700; }
+      :root { --azahar: #FFFCF5; --tinta: #2B211A; --font-titular: "Fraunces", serif; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--tinta); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--tinta); }
+
+      .plano { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover;
+               transform-origin: 50% 40%; z-index: 0; }
+      .transicion { position: absolute; inset: 0; width: 1080px; height: 1920px; z-index: 3; }
+
+      /* Variante limpio (y resto de rótulos de titular): abajo, centrado, en el 80 % del ancho */
+      .rotulo { position: absolute; top: 1500px; left: 108px; width: 864px; z-index: 2; text-align: center;
+                font-family: var(--font-titular); font-weight: 600; font-size: 56px; line-height: 1.12;
+                color: var(--azahar);
+                text-shadow: 0 3px 20px rgba(0, 0, 0, .6), 0 1px 4px rgba(0, 0, 0, .55); }
+      /* Variante titular: el gancho, una sola frase grande en el tercio superior y sin caja */
+      .rotulo-titular { top: 300px; left: 60px; width: 960px; font-size: 104px; line-height: 1.02;
+                        text-shadow: 0 4px 28px rgba(0, 0, 0, .55), 0 1px 4px rgba(0, 0, 0, .5); }
+      /* Degradado suave arriba solo mientras está el gancho: da contraste sin poner una caja */
+      .velo { position: absolute; left: 0; top: 0; width: 1080px; height: 820px; z-index: 1;
+              background: linear-gradient(to bottom, rgba(43, 33, 26, .62) 0%, rgba(43, 33, 26, .38) 55%, rgba(43, 33, 26, 0) 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="reel" data-start="0" data-duration="__DURACION__" data-fps="30" data-width="1080" data-height="1920">
+<!--PLANOS-->
+<!--ROTULOS-->
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+/*ANIMACION*/
+      window.__timelines["reel"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

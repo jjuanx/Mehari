@@ -1,0 +1,2 @@
+-r ../material/requirements.txt
+pytest

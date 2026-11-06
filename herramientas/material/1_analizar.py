@@ -43,7 +43,9 @@ def nitidez(gris):
 
 
 def analizar_foto(args):
-    raiz, nombre = args
+    raiz, nombre = args[:2]
+    # Tercera posición opcional: carpeta de miniaturas (por defecto raiz/_analisis/thumbs).
+    carpeta_miniaturas = args[2] if len(args) > 2 else raiz / "_analisis" / "thumbs"
     r = {"file": nombre, "kind": "img"}
     try:
         im = Image.open(raiz / nombre)
@@ -59,7 +61,7 @@ def analizar_foto(args):
         r["phash"], r["dhash"] = str(imagehash.phash(peq)), str(imagehash.dhash(peq))
         mini = peq.copy()
         mini.thumbnail((400, 400))
-        mini.save(raiz / "_analisis" / "thumbs" / nombre_miniatura(nombre), quality=80)
+        mini.save(carpeta_miniaturas / nombre_miniatura(nombre), quality=80)
     except Exception as e:  # noqa: BLE001 - se registra y se sigue con el resto
         r["error"] = repr(e)
     return r

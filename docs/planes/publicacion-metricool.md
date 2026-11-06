@@ -31,6 +31,8 @@ La cuenta `@mehari.we` está conectada a Metricool desde el 2026-10-27. Con esto
 4. **Metricool publica solo** en su día y hora. Las piezas en modo `aviso` llegan como notificación al móvil de Alejandro, que las sube a mano.
 5. **Revisión** del lunes D+16 con las métricas de Metricool (`semana-boda.md` §8). El conector también las lee.
 
+Hay un segundo origen de colas: las **piezas sueltas** de `pieza-boda`, que dejan su `cola-metricool.json` (una publicación, o una por historia) en `Mehari We/02_Produccion/<boda>/<pieza>/`, con `fecha: null` y los `medios` relativos a esa carpeta. Siguen los mismos pasos 2 y 3. La skill las programa desde Drive y no hace commit. Ver [sistema-piezas-boda.md](sistema-piezas-boda.md) §5.
+
 **Sin aprobación no se programa nada.** La skill se para si `aprobacion.estado` no es `aprobado`. Si el cliente pide un cambio después de programar, se edita la publicación (`updateScheduledPost`) y la cola en el mismo paso.
 
 ## 2. Puesta en marcha (una vez)
@@ -55,16 +57,16 @@ La cuenta `@mehari.we` está conectada a Metricool desde el 2026-10-27. Con esto
 
 ## 4. Formato de `cola-metricool.json`
 
-Un fichero por boda, en su carpeta. Ejemplo: [`redes/instagram/bodas/2026-10-24_la-posadilla/cola-metricool.json`](../../redes/instagram/bodas/2026-10-24_la-posadilla/cola-metricool.json).
+Un fichero por boda, en su carpeta (o por pieza suelta, en su carpeta de `02_Produccion`). Ejemplo: [`redes/instagram/bodas/2026-10-24_la-posadilla/cola-metricool.json`](../../redes/instagram/bodas/2026-10-24_la-posadilla/cola-metricool.json).
 
 | Campo | Qué es |
 |---|---|
 | `zona_horaria` | Siempre `Europe/Madrid`. Las fechas van en hora local, sin desfase |
 | `aprobacion.estado` | `pendiente` · `aprobado` · `cambios`. Solo con `aprobado` se programa |
-| `publicaciones[].fecha` | `AAAA-MM-DDTHH:MM:SS`, hora local. Minutos fuera de :00 y :30 (12:40, 20:40) |
+| `publicaciones[].fecha` | `AAAA-MM-DDTHH:MM:SS`, hora local. Minutos fuera de :00 y :30 (12:40, 20:40). Puede llegar como `null` (colas de piezas sueltas): se rellena al aprobar y, mientras sea `null`, la skill no programa |
 | `tipo` | `carrusel` · `foto` · `reel` · `story` |
 | `modo` | `automatico` (Metricool publica solo) · `aviso` (Metricool avisa al móvil y se publica a mano) |
-| `medios` | Rutas relativas a la carpeta de la boda, en orden. Carruseles: JPEG de 1080×1440. Reels: MP4 9:16 |
+| `medios` | Rutas relativas a la carpeta de la cola, en orden. Carruseles: JPEG de 1080×1440. Reels: MP4 9:16 |
 | `texto` | Copy final, con los hashtags al final (máximo 5) y **sin marcadores `[…]`** |
 | `metricool_id`, `estado` | Los rellena la skill: `pendiente` → `programada` → `publicada` |
 

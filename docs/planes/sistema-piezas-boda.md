@@ -54,13 +54,14 @@ Sin indicaciones, Claude elige el tema, el material y la variante.
 |---|---|---|
 | Skill `pieza-boda` | `.claude/skills/pieza-boda/SKILL.md` | Orquesta y **decide**: qué material, qué variante, qué rótulos, qué texto. Escribe `pieza.json` |
 | Localizar Drive y boda | `herramientas/piezas/localizar.py` | Encuentra `Mehari We` en Mac o Windows y las carpetas de boda que encajan con la consulta |
-| Inventario | `herramientas/piezas/inventario.py` | Recorre la carpeta de la boda (con subcarpetas) y saca miniaturas, datos técnicos, fecha EXIF y hojas de contacto. **Escribe solo en la carpeta de trabajo.** Reutiliza las funciones de `herramientas/material/` sin cambiar su uso actual |
-| Preparar | `herramientas/piezas/preparar.py` | Lee `pieza.json`: convierte HEIC→JPG y HLG→SDR BT.709, recorta, aplica los retoques (`retocar_foto.py`, `difuminar.py`) y copia todo a los `assets/` del proyecto de trabajo |
+| Inventario | `herramientas/piezas/inventario.py` | Recorre la carpeta de la boda (con subcarpetas) y saca miniaturas, datos técnicos, fecha EXIF y hojas de contacto en `.trabajo/<boda>/_inventario/`. **Escribe solo en la carpeta de trabajo.** Reutiliza las funciones de `herramientas/material/` sin cambiar su uso actual |
+| Rejilla | `herramientas/piezas/rejilla.py` | Dibuja una rejilla de coordenadas sobre una foto o un fotograma (`--t`) para que Claude lea los recortes y los vértices de cada retoque en píxeles del original tal como se ve |
+| Preparar | `herramientas/piezas/preparar.py` | Lee `pieza.json`: convierte HEIC→JPG y HLG→SDR BT.709, recorta, aplica los retoques (`retocar_foto.py`, `difuminar.py`) y copia todo a los `assets/` del proyecto de trabajo. Deja el antes y después de cada recorte o retoque y `revision/avisos.json` |
 | Producir | `herramientas/piezas/producir.py` | Copia la plantilla del formato a la carpeta de trabajo, le pasa las variables y renderiza: HyperFrames para el reel y la historia en clip, y HTML + Playwright para el carrusel y la historia en foto |
 | Comprobar | `herramientas/piezas/comprobar.py` | Controles automáticos (§6.1): formato de los ficheros y revisor de texto |
 | Entregar | `herramientas/piezas/entregar.py` | Copia el resultado a `02_Produccion/<boda>/<pieza>/` con su `texto.txt`, `revision.html`, `cola-metricool.json` y `pieza.json` |
-| Plantillas | `marca/plantillas/{reel,deslizar,historia}/` | Una plantilla por formato, con 2 variantes cada una (§4) |
-| Tokens | `marca/tokens.css` (ya existe) | Colores y tipografías. Las plantillas los leen de ahí; no se copian |
+| Plantillas | `marca/plantillas/estaticas/` y `marca/plantillas/reel/` | `estaticas/` (HTML + Playwright) sirve para el carrusel y la historia en foto; `reel/` (HyperFrames) para el reel y la historia en clip. Cada formato tiene 2 variantes (§4) |
+| Tokens | `marca/tokens.css` (ya existe) | Colores y tipografías. Las plantillas usan sus valores, sin inventar colores |
 | Lo que ya existe | `herramientas/material/` | Análisis, hojas de contacto, `retocar_foto.py` (placa, emblema, funda) y `difuminar.py` |
 
 Los scripts son Python 3 y Node, sin dependencias de un sistema operativo concreto: Juan trabaja en Mac, y el resto del equipo puede hacerlo en Windows.
@@ -78,7 +79,9 @@ Es la frontera entre **decidir** (Claude) y **producir** (scripts). Claude escri
   "variante": "con-rotulos",
   "tema": "las-cestas",
   "permiso_caras": "pendiente",
+  "hay_caras": true,
   "musica": null,
+  "ubicacion": null,
   "elementos": [
     {
       "orden": 1,
@@ -95,17 +98,23 @@ Es la frontera entre **decidir** (Claude) y **producir** (scripts). Claude escri
 }
 ```
 
-- Para el reel, cada elemento lleva además `desde` y `hasta` (segundos del clip) y `tramo` (gancho, detalle, prueba, momento o cierre).
-- `permiso_caras`: `si` (la ficha lo confirma), `no` o `pendiente`. Solo con `si` puede salir `LISTA` una pieza con caras de los novios.
-- `musica`: ruta y licencia de la pista libre de derechos, o `null` si es «sin música».
+- `boda`: `AAAA-MM-DD_lugar`, con la fecha del EXIF o de la ficha (§3.3). `carpeta_origen`: la carpeta de la boda, relativa a `Mehari We`.
+- `elementos[].fichero`: relativo a la carpeta de la boda. `recorte` (`x`, `y`, `ancho`, `alto`) y `retoques` van en píxeles del original **tal como se ve** (con la orientación EXIF o la rotación del vídeo aplicadas), lo mismo que enseña `rejilla.py`. Sin recorte, se encuadra centrado.
+- Retoques de foto: `{"tipo": "placa" | "funda", "poligono": [[x,y], …]}` o `{"tipo": "emblema", "caja": [x, y, ancho, alto]}`. De vídeo: `{"tipo": "zona", "t", "caja": [x, y, ancho, alto], "desde"?, "hasta"?}`, con `t` en segundos del clip original y **dentro** del corte del elemento. El difuminado se aplica después de escalar a 1080×1920. Una foto solo admite `placa`, `funda` y `emblema`, y un vídeo (`.mov` o `.mp4`), solo `zona`: cualquier otro tipo o forma es un error de validación, y nunca se salta un retoque. Una zona que queda fuera del encuadre final no se difumina y deja un aviso en `revision/avisos.json`.
+- Para el reel, cada elemento lleva además `tramo` (`gancho`, `detalle`, `prueba` o `momento`) y `desde` y `hasta` (segundos del clip) o `duracion` (fotos). El cierre de marca (4 s) lo añade la plantilla: no es un elemento. Con el cierre, el reel dura de 15 a 25 s.
+- Cuántos elementos: deslizar, de 5 a 9 fotos (más la diapositiva de cierre, que se añade sola); historia, de 1 a 10. En la historia en clip, cada clip dura como máximo 15 s (cada elemento es una historia aparte).
+- `permiso_caras`: `si` (la ficha lo confirma), `no` o `pendiente`. `hay_caras`: si en la pieza se reconoce alguna cara; si falta, se supone que sí. Una pieza con caras solo puede salir `LISTA` con `permiso_caras: "si"`.
+- `musica`: `{"ruta", "licencia", "titulo"?}` de la pista libre de derechos (`ruta` y `licencia` obligatorias y no vacías), o `null` si es «sin música».
+- `ubicacion`: texto para la cola de Metricool, o `null`.
 - `pendientes`: cada marcador `[PENDIENTE: …]` que haya quedado. Si no está vacío, la pieza no está lista.
+- Lo valida `herramientas/piezas/pieza.py` (versión 1, formato y variante, `boda`, `tema`, número de elementos, duraciones, retoques, música y tipos de los textos).
 
 ### 3.3 Carpetas
 
 | Qué | Dónde | ¿En Git? |
 |---|---|---|
 | Sistema (skill, scripts, plantillas) | Repositorio | Sí |
-| Trabajo (miniaturas, hojas, assets, proyecto de render) | `.trabajo/<boda>/<pieza>/` en la raíz del repositorio | **No** (se añade a `.gitignore`). Se puede borrar y regenerar desde `pieza.json` |
+| Trabajo (miniaturas, hojas, assets, proyecto de render) | `.trabajo/<boda>/_inventario/` (uno por boda) y `.trabajo/<boda>/<pieza>/` (con `pieza.json`, `proyecto/` y `salida/`) en la raíz del repositorio | **No** (está en `.gitignore`). Se puede borrar y regenerar desde `pieza.json` |
 | Material del cliente | Drive · `01_Material/…` | No. **Nunca se escribe en él** |
 | Pieza terminada | Drive · `02_Produccion/<boda>/<AAAA-MM-DD>_<formato>_<tema>/` | No |
 
@@ -129,14 +138,15 @@ Reglas comunes a todos:
 | Material | Clips de vídeo o Live Photos. Si solo hay fotos, se montan con movimiento lento de cámara |
 | Variante `limpio` | Cortes secos al pulso, rótulos pequeños abajo y en el centro |
 | Variante `titular` | Rótulo grande en el gancho y transición suave entre planos |
-| Cierre | Parte del cierre animado de `marca/animaciones/` y del `cierre-corto.html` del reel del 11-11, que ya llevan el logo y el nombre actuales. Termina con «Escribidnos · 625 06 42 93» |
+| Cierre | `marca/animaciones/renders/cierre.mp4` (4 s), que parte del cierre animado de `marca/animaciones/` y del `cierre-corto.html` del reel del 11-11, con el logo y el nombre actuales. Termina con «Escribidnos vuestra fecha» y el WhatsApp 625 06 42 93. Lo añade la plantilla al final de los planos |
 
 ### 4.2 Deslizar (carrusel)
 
 | | |
 |---|---|
 | Salida | `01.jpg` … `NN.jpg`, 1080×1440, solo JPEG (calidad 90) |
-| Estructura | 6–10 diapositivas: portada (la mejor foto de los novios con el coche y un rótulo corto) → el día en orden (iglesia, salida, cestas, volante, llegada, momento, detalle) → cierre con CTA. Si se pide un tema, todas las diapositivas giran en torno a él |
+| Estructura | 6–10 diapositivas (5–9 fotos más el cierre): portada (la mejor foto de los novios con el coche y un rótulo corto) → el día en orden (iglesia, salida, cestas, volante, llegada, momento, detalle) → cierre con CTA. Si se pide un tema, todas las diapositivas giran en torno a él |
+| Cierre | Lo añade la plantilla: «¿Cuándo os casáis?», «Escribidnos vuestra fecha y os decimos si hay un Méhari libre.» y «WhatsApp · 625 06 42 93». Sin año, para que valga todo el año |
 | Variante `foto-entera` | Sin rótulos, salvo en la portada y el cierre |
 | Variante `con-rotulos` | Una frase corta en 2–4 diapositivas |
 | Técnica | Plantilla HTML con `?s=<n>` y exportación con Playwright, como `bodas/2026-10-24_la-posadilla/exportar.mjs`, generalizada en `producir.py` |
@@ -145,9 +155,9 @@ Reglas comunes a todos:
 
 | | |
 |---|---|
-| Salida | `historia.jpg` o `historia.mp4` (≤15 s), 1080×1920. Con «N historias», `historia-01…NN` |
+| Salida | `historia.jpg` o `historia.mp4`, 1080×1920. Con «N historias», `historia-01…NN`. En clip, cada clip dura como máximo 15 s |
 | Variante `foto-frase` | Una foto con una frase («Sábado en [lugar]») |
-| Variante `clip-cta` | Un clip corto con «¿Cuándo os casáis?» |
+| Variante `clip-cta` | Un clip corto con «¿Cuándo os casáis?» (el rótulo por defecto si el elemento no lleva otro) |
 | Sticker | Se deja hueco. `texto.txt` dice qué sticker poner (ubicación, encuesta, pregunta o enlace a WhatsApp), porque la API no los pone. En la cola va en modo `aviso` |
 
 ## 5. Flujo de una orden
@@ -159,7 +169,7 @@ orden ─► localizar.py ──► 0 candidatas: pide la ruta · 2 o más: preg
       ─► Claude mira las hojas, elige el material (prioridad: sin retoque > recorte > retoque)
       ─► revision-marca de cada fichero elegido (APTA / APTA CON RETOQUE / NO APTA)
       ─► escribe pieza.json (material, recortes, retoques, rótulos, texto, música)
-      ─► preparar.py ─► producir.py ─► comprobar.py
+      ─► preparar.py ─► producir.py ─► comprobar.py   (preparar.py deja siempre revision/avisos.json y revision/preparado.json)
       ─► Claude mira el resultado final (cada diapositiva; un fotograma por escena del reel)
       ─► entregar.py ─► 02_Produccion/<boda>/<AAAA-MM-DD>_<formato>_<tema>[_PENDIENTE]/
                           ├─ reel.mp4 + portada.jpg  |  01…NN.jpg  |  historia.*
@@ -169,6 +179,8 @@ orden ─► localizar.py ──► 0 candidatas: pide la ruta · 2 o más: preg
                           └─ pieza.json
       ─► resumen de 3 líneas en el chat: qué se ha hecho, estado y qué falta
 ```
+
+`preparar.py` empieza vaciando `assets/material/` y `revision/` del proyecto, para que nunca quede material de una pasada anterior. Escribe siempre `revision/avisos.json`: una lista vacía, o un aviso por cada zona de vídeo cuyo seguimiento puede haberse perdido o que ha quedado fuera del encuadre. `entregar.py` lo exige; si falta o no es una lista de textos, no entrega nada. Al terminar escribe `revision/preparado.json` con la huella (sha256) de lo que decide el material: el formato y, por elemento, `orden`, `fichero`, `recorte`, `retoques`, `desde`, `hasta` y `duracion`. `producir.py` y `entregar.py` se niegan si falta o no coincide con el `pieza.json` que reciben: cambiar un rótulo o el texto no obliga a preparar de nuevo; cambiar el material, sí.
 
 ### 5.1 Los ficheros de la entrega
 
@@ -189,12 +201,17 @@ Esa skill hoy da por hecho que la cola está en `redes/instagram/bodas/<boda>/` 
 
 ### 6.1 Controles antes de entregar
 
-1. **Automáticos** (`comprobar.py`). Si falla uno, no se entrega:
-   - Formato: dimensiones, códec, fps, duración y peso con ffprobe; carruseles en JPEG de 1080×1440, entre 2 y 10.
-   - Texto: no contiene «Citroën», rayas largas (—), «experiencia única» ni más de 5 hashtags, y sí contiene 625 06 42 93. Los marcadores `[…]` no impiden la entrega, pero ponen el estado en `NO PUBLICAR`.
-   - Avisos que no bloquean: «Sevilla», «sevillano» o «Cádiz» en el texto. Nombrar el lugar de una boda está permitido; presentar la marca como de allí, no (`CLAUDE.md` §2). Claude revisa cada aviso y lo justifica en `revision.html`.
+1. **Automáticos** (`comprobar.py`, y `entregar.py` los repite). Si falla uno, no se entrega nada:
+   - Formato: dimensiones, códec, fps, duración y audio AAC con ffprobe; carruseles en JPEG de 1080×1440, entre 2 y 10.
+   - Texto: no contiene «Citroën», la marca antigua («Tour Sur», «toursur», «Mehari Experiences», sin distinguir mayúsculas ni tildes), rayas largas (—), «experiencia única» ni más de 5 hashtags, y sí contiene 625 06 42 93.
+   - Texto incrustado: cada `rotulo`, la `ubicacion` y cada línea de `a_mano_despues` siguen las mismas reglas, salvo el teléfono y el número de hashtags.
+   - Material (solo `entregar.py`; `producir.py` exige lo primero): `revision/preparado.json` corresponde al `pieza.json` actual, y cada elemento con recorte o retoques tiene su `NN_antes.jpg` y `NN_despues.jpg`.
+   - Conjunto (solo `entregar.py`): los ficheros de salida son exactamente los de la pieza (ni sobran ni faltan), y `revision/avisos.json` existe y es una lista de textos.
+   - Avisos que no bloquean: «Sevilla», «sevillano/a/os/as» o «Cádiz» (con o sin tilde) en cualquiera de esos textos. Nombrar el lugar de una boda está permitido; presentar la marca como de allí, no (`CLAUDE.md` §2). Claude revisa cada aviso y lo justifica en `revision.html`.
 2. **Claude mira el resultado final**: cada diapositiva y un fotograma por escena del reel, buscando matrículas, la funda «@MEHARI_TOURSUR», chevrones y caras de menores que se hayan escapado.
 3. **Una persona** echa un vistazo de unos 30 segundos a `revision.html` antes de enviarlo al cliente. Sigue siendo obligatorio: la pre-revisión no sustituye a la revisión (`automatizacion-contenido.md` §6).
+
+Se entrega, pero como `NO PUBLICAR` (carpeta `_PENDIENTE`), si hay caras sin `permiso_caras: "si"`, si quedan marcadores `[…]` en el texto, en los rótulos, en la ubicación o en `a_mano_despues`, o datos en `pendientes`, o si hay avisos de difuminado.
 
 **Sin aprobación del cliente no se programa nada.** Este sistema no cambia esa regla.
 
@@ -203,11 +220,14 @@ Esa skill hoy da por hecho que la cola está en `redes/instagram/bodas/<boda>/` 
 | Caso | Qué hace |
 |---|---|
 | No encuentra la boda, o coinciden varias | Pregunta y enseña las candidatas. Nunca adivina |
-| Drive no está sincronizado, o la ruta es distinta | Busca en las rutas habituales de Mac (`~/Library/CloudStorage/GoogleDrive-*/My Drive/` o `Mi unidad/`) y Windows (`G:\Mi unidad\`, `G:\My Drive\`). Si no encuentra `Mehari We`, pide la ruta. Se puede fijar con la variable de entorno `MEHARI_DRIVE` |
+| Drive no está sincronizado, o la ruta es distinta | Busca en las rutas habituales de Mac (`~/Library/CloudStorage/GoogleDrive-*/My Drive/` o `Mi unidad/`) y Windows (`G:\Mi unidad\`, `G:\My Drive\`). Si no encuentra `Mehari We`, pide la ruta. Se puede fijar con la variable de entorno `MEHARI_DRIVE` (otra letra de unidad, una unidad compartida…). Drive para Windows escribe los «:» de los nombres como «_» («Boda 24_10_2026»): también se reconocen |
 | No hay ficha, o no consta el permiso de caras | Produce la pieza y la marca `NO PUBLICAR · falta permiso de caras`. Con «sin caras», elige solo detalles: coche, cestas, manos, de espaldas |
 | Faltan datos (iglesia, flores, fotógrafo) | Marcador `[PENDIENTE: …]` en el texto. La pieza queda `_PENDIENTE` |
 | Poco material | El carrusel baja hasta 6 diapositivas; por debajo, avisa y propone una historia. El reel se monta con fotos si no hay clips |
 | Funda, matrícula o menor imposible de esquivar o recortar | Se retoca. Si el retoque se nota o no se puede hacer, **la foto se descarta**. Nunca sale una pieza con rastro |
+| Zona de vídeo fuera del corte | Si el `t` de una zona queda fuera del `desde`–`hasta` del elemento, `preparar.py` para antes de procesar nada. Se vuelve a marcar con `rejilla.py --t` dentro del corte |
+| Zona de vídeo fuera del encuadre final | No se difumina: `preparar.py` lo apunta en `revision/avisos.json` y la pieza queda `NO PUBLICAR`. Se comprueba la caja con `rejilla.py --t` y se corrige, o se cambia el recorte |
+| Seguimiento del difuminado perdido | `preparar.py` lo apunta en `revision/avisos.json`; sale en `revision.html` y la pieza queda `NO PUBLICAR`. Se añade otra zona, se acorta el corte o se cambia de plano, y se vuelve a preparar |
 | Fichero en Drive «solo en la nube» | Leerlo fuerza la descarga. Puede tardar, pero no es un error |
 | El render falla | `hyperframes check`, se corrige y se repite una vez. Si sigue fallando, no se entrega nada a medias y se explica el error |
 | Ya existe una carpeta con ese nombre | Se añade `-2`, `-3`… Nunca se sobrescribe una entrega |
