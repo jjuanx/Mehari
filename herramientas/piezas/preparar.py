@@ -70,7 +70,13 @@ def avisos_de_difuminar(salida: str, id_el: str, fichero: str) -> list[str]:
 # ---------------------------------------------------------------- utilidades de vídeo
 
 def sondear(video: Path) -> dict:
-    """Ancho y alto tal como se ve (con la rotación), duración y función de transferencia."""
+    """Ancho y alto tal como se ve (con el recorte del contenedor y la rotación), duración
+    y función de transferencia.
+
+    Los Live Photos del iPhone traen un recorte (FrameCropping) que FFmpeg aplica al
+    decodificar: hay que descontarlo para que estas medidas coincidan con los fotogramas
+    reales y con las coordenadas que enseña rejilla.py.
+    """
     datos = json.loads(_ejecutar(["ffprobe", "-v", "error", "-select_streams", "v:0",
                                   "-show_streams", "-show_format", "-of", "json",
                                   _abs(video)]).stdout)
@@ -80,6 +86,10 @@ def sondear(video: Path) -> dict:
     for lado in flujo.get("side_data_list", []):
         if "rotation" in lado:
             rotacion = lado["rotation"]
+        # Se detecta por las claves: el nombre cambia («Frame Cropping», «FrameCropping»).
+        if any(k in lado for k in ("crop_left", "crop_right", "crop_top", "crop_bottom")):
+            ancho -= int(lado.get("crop_left", 0)) + int(lado.get("crop_right", 0))
+            alto -= int(lado.get("crop_top", 0)) + int(lado.get("crop_bottom", 0))
     if rotacion is not None and int(float(rotacion)) % 180 != 0:
         ancho, alto = alto, ancho
     duracion = float(datos.get("format", {}).get("duration") or flujo.get("duration") or 0)

@@ -314,3 +314,19 @@ def test_si_preparar_falla_no_queda_material_anterior_valido(tmp_path, foto_jpg,
     assert not (proy / "revision/preparado.json").exists()
     assert not (proy / "revision/avisos.json").exists()
     assert not any((proy / "assets/material").glob("*"))
+
+
+def test_sondear_descuenta_el_recorte_de_los_live_photos(monkeypatch):
+    # Los Live Photos del iPhone traen FrameCropping: FFmpeg lo aplica al decodificar,
+    # así que el fotograma real (y la rejilla) mide 1308×1744, no 1440×1920.
+    import json
+    import types
+    import preparar as mod
+    sonda = {"streams": [{"width": 1920, "height": 1440, "side_data_list": [
+        {"side_data_type": "Frame Cropping", "crop_top": 66, "crop_bottom": 66,
+         "crop_left": 88, "crop_right": 88},
+        {"side_data_type": "Display Matrix", "rotation": -90}]}],
+        "format": {"duration": "2.866667"}}
+    monkeypatch.setattr(mod, "_ejecutar", lambda cmd: types.SimpleNamespace(stdout=json.dumps(sonda)))
+    datos = mod.sondear("x.mov")
+    assert (datos["ancho"], datos["alto"]) == (1308, 1744)
