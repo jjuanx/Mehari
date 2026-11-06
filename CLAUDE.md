@@ -69,9 +69,12 @@ Mehari/
 │  └─ planes/                ← plan de proyecto, estrategia de redes, etc.
 ├─ redes/instagram/          ← publicaciones, calendario editorial, bodas/<fecha>_<lugar>/ (plan de la semana de cada boda), reels/<fecha>_<tema>/ (fuente HyperFrames) y destacadas/ (portadas)
 ├─ marca/                    ← identidad: README (colores, tipos, logo), tokens.css y propuestas/
+│  └─ plantillas/            ← plantillas de las piezas sueltas: estaticas/ (carrusel e historia en foto) y reel/ (HyperFrames: reel e historia en clip)
 ├─ comercial/dossier-novios/ ← dossier de bodas para las parejas (HTML → PDF; el PDF va a Drive)
 ├─ web/                      ← landing (más adelante)
 ├─ herramientas/material/    ← scripts para analizar, descartar, clasificar y seleccionar lotes de fotos y vídeos, para difuminar matrículas y logos en vídeo y para dejarlos lisos en fotos
+├─ herramientas/piezas/      ← scripts de la skill pieza-boda (localizar, inventario, rejilla, preparar, producir, comprobar, entregar) y sus pruebas; instalación en su README
+├─ .trabajo/                 ← trabajo intermedio de pieza-boda (<boda>/_inventario/ y <boda>/<id_pieza>/); fuera de Git, se puede borrar
 └─ Referencia/               ← material del cliente: dossiers, logos antiguos, fotos, prensa
 ```
 
@@ -107,6 +110,7 @@ Viven en `.claude/skills/` y están catalogadas en [SKILLS.md](SKILLS.md). Al ha
 - **Motion graphics y vídeo**: tenemos las skills oficiales de **HyperFrames** (por defecto para piezas de Instagram; se entra por `hyperframes`) y de **Remotion** (`remotion-best-practices`). Son de terceros: no se editan, se actualizan copiando de nuevo desde su repositorio. Hacen falta Node.js y FFmpeg.
 - **Reels**: se guionizan y producen con la skill `guion-reel` (estructura, ficha por escena y verificación), que delega el render en HyperFrames.
 - **Semana de cada boda**: cada boda produce tres publicaciones fijas, lunes carrusel «La boda», miércoles reel «El momento» y viernes «Vuestra elección», publicadas en D+9, D+11 y D+13. Sistema en [docs/planes/semana-boda.md](docs/planes/semana-boda.md); se prepara con la skill `semana-boda` a partir de la carpeta de Drive de la boda.
+- **Piezas sueltas**: «reel», «deslizar» o «historia» de una boda, a demanda y fuera del calendario de `semana-boda`. Se producen con la skill `pieza-boda` (scripts en `herramientas/piezas/`, plantillas en `marca/plantillas/`) y se entregan en Drive, en `02_Produccion/<boda>/<pieza>/`, sin ficha ni PR. Sistema en [docs/planes/sistema-piezas-boda.md](docs/planes/sistema-piezas-boda.md).
 - **Publicación**: con **Metricool** (decidido el 2026-11-03). Cuando el cliente aprueba el lote de una boda, la skill `programar-metricool` programa sus piezas desde `cola-metricool.json` y se publican solas. Las stories con stickers llegan como aviso al móvil y se suben a mano. Sistema en [docs/planes/publicacion-metricool.md](docs/planes/publicacion-metricool.md). Hace falta el conector de Metricool en Claude.
 - Toda pieza animada pasa también por `revision-marca` antes de publicarse.
 - **Diseño estático y publicidad**: `canvas-design` (oficial de Anthropic) para ilustraciones y piezas en PNG o PDF; `ad-creative` y `ads` (marketingskills) para anuncios y campañas de Meta. Son de terceros y en inglés: nuestras reglas mandan y no se generan con IA fotos de los coches ni de bodas.
