@@ -43,3 +43,22 @@ def ffprobe_wh(ruta: Path) -> tuple[int, int]:
 def ffprobe_dur(ruta: Path) -> float:
     """Duración del contenedor en segundos."""
     return float(_ffprobe(ruta, "-show_entries", "format=duration", "-of", "csv=p=0"))
+
+
+def pagina_renderizada(proyecto: Path, s: int) -> str:
+    """innerText de la diapositiva `s` de proyecto/index.html, renderizada con Playwright."""
+    aqui = Path(__file__).resolve().parents[1]
+    guion = (
+        "import { chromium } from 'playwright';"
+        "import { pathToFileURL } from 'node:url';"
+        "const [ruta, s] = process.argv.slice(1);"
+        "const nav = await chromium.launch({ args: ['--allow-file-access-from-files'] });"
+        "const pag = await nav.newPage();"
+        "await pag.goto(pathToFileURL(ruta).href + '?s=' + s);"
+        "await pag.waitForSelector('body[data-listo=\"1\"]');"
+        "process.stdout.write(await pag.evaluate(() => document.querySelector('.slide').innerText));"
+        "await nav.close();"
+    )
+    index = (Path(proyecto) / "index.html").resolve()
+    return subprocess.run(["node", "--input-type=module", "-e", guion, str(index), str(s)],
+                          cwd=aqui, capture_output=True, text=True, check=True).stdout

@@ -1,4 +1,5 @@
 import copy
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -112,3 +113,38 @@ def drive_falso(tmp_path) -> Path:
         f.parent.mkdir(parents=True, exist_ok=True)
         f.write_bytes(b"")
     return raiz
+
+
+def _preparada(pieza_minima, foto_jpg, tmp_path, formato, variante, n_fotos, rotulo):
+    from preparar import preparar
+    p = pieza_minima(formato)
+    p["variante"] = variante
+    boda = tmp_path / "boda"
+    boda.mkdir(exist_ok=True)
+    elementos = []
+    for i in range(1, n_fotos + 1):
+        shutil.copy(foto_jpg, boda / f"IMG_{i}.jpg")
+        el = {"orden": i, "fichero": f"IMG_{i}.jpg"}
+        if rotulo is not None and i == 1:
+            el["rotulo"] = rotulo
+        elif rotulo is not None or variante == "con-rotulos":
+            el["rotulo"] = f"Rótulo {i}"
+        elementos.append(el)
+    p["elementos"] = elementos
+    proyecto = tmp_path / "proyecto"
+    preparar(p, boda, proyecto)
+    return p, proyecto
+
+
+@pytest.fixture
+def pieza_deslizar_preparada(pieza_minima, foto_jpg, tmp_path):
+    """Fábrica: (pieza, proyecto) de un carrusel con las fotos ya preparadas."""
+    return lambda n_fotos=5, rotulo=None, variante="foto-entera": _preparada(
+        pieza_minima, foto_jpg, tmp_path, "deslizar", variante, n_fotos, rotulo)
+
+
+@pytest.fixture
+def pieza_historia_preparada(pieza_minima, foto_jpg, tmp_path):
+    """Fábrica: (pieza, proyecto) de una historia en foto con las fotos ya preparadas."""
+    return lambda n_fotos=1, rotulo="Vuestra boda, a vuestro ritmo": _preparada(
+        pieza_minima, foto_jpg, tmp_path, "historia", "foto-frase", n_fotos, rotulo)
