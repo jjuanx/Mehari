@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <title>Reel · Así se sale de una boda</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Fraunces"; src: url("assets/fonts/Fraunces.woff2") format("woff2"); font-weight: 300 700; }
+      /* Paleta de marca/tokens.css. Tipografía provisional (Fraunces) */
+      :root { --azahar: #FFFCF5; --tinta: #2B211A; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--tinta); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--tinta); }
+
+      video.plano { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; transform-origin: 50% 40%; }
+
+      /* Una sola frase, grande, en el tercio superior y sin caja (analisis-competencia-reels.md §2.6) */
+      #frase { position: absolute; top: 300px; left: 60px; right: 60px; text-align: center;
+               font-family: "Fraunces", serif; font-weight: 600; font-size: 104px; line-height: 1.02; color: var(--azahar);
+               text-shadow: 0 4px 28px rgba(0, 0, 0, .55), 0 1px 4px rgba(0, 0, 0, .5); }
+      /* Degradado suave arriba solo mientras está la frase: da contraste sin poner una caja */
+      #velo { position: absolute; left: 0; right: 0; top: 0; height: 820px;
+              background: linear-gradient(to bottom, rgba(43, 33, 26, .62) 0%, rgba(43, 33, 26, .38) 55%, rgba(43, 33, 26, 0) 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="reel" data-start="0" data-duration="16" data-width="1080" data-height="1920">
+
+      <!-- Pista 0. Clips limpios del paquete (1080×1920, SDR, sin marca antigua ni matrícula; BRIEF.md).
+           Cuatro destellos de 0,5 s (pulso de 120 BPM) y después un solo momento: la toma continua de IMG_4075,
+           con cámara lenta cuando el novio levanta el brazo; después la fiesta en el patio y el cierre de marca.
+           Sin sonido: la canción se pone en Instagram. -->
+      <video id="p1" class="clip plano" src="assets/clips/04_cartel-finca_IMG4053.mp4" data-start="0" data-duration="0.5" data-media-start="5.6" data-track-index="0" playsinline muted></video>
+      <video id="p2" class="clip plano" src="assets/clips/03_cestas-flores_IMG4106.mp4" data-start="0.5" data-duration="0.5" data-media-start="0.9" data-track-index="0" playsinline muted></video>
+      <video id="p3" class="clip plano" src="assets/clips/02_salida-ermita_IMG4036_funda-lisa.mp4" data-start="1" data-duration="0.5" data-media-start="1.0" data-track-index="0" playsinline muted></video>
+      <video id="p4" class="clip plano" src="assets/clips/05_asiento-atras_Live4049.mp4" data-start="1.5" data-duration="0.5" data-media-start="0.8" data-track-index="0" playsinline muted></video>
+      <video id="p5" class="clip plano" src="assets/clips/01_momento_brazos-arriba_IMG4075.mp4" data-start="2" data-duration="3.2" data-media-start="4.6" data-track-index="0" playsinline muted></video>
+      <video id="p6" class="clip plano" src="assets/clips/01b_brazos_camara-lenta.mp4" data-start="5.2" data-duration="3.0" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="p7" class="clip plano" src="assets/clips/06_fiesta-patio_IMG4081_funda-lisa.mp4" data-start="8.2" data-duration="3.8" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <!-- Cierre animado de marca/animaciones/ (logo aprobado, CTA y WhatsApp), renderizado a MP4 -->
+      <video id="p8" class="clip plano" src="assets/clips/07_cierre-marca.mp4" data-start="12" data-duration="4" data-media-start="0" data-track-index="0" playsinline muted></video>
+
+      <!-- Pista 4: transición de costillas (marca/animaciones/renders/transicion.webm, con alfa). Tapa la pantalla a los 0,41 s: ahí se corta de la cámara lenta a la fiesta -->
+      <video id="t1" class="clip" src="assets/clips/transicion.webm" data-start="7.79" data-duration="0.866" data-media-start="0" data-track-index="4" playsinline muted style="position:absolute; inset:0; width:1080px; height:1920px;"></video>
+
+      <!-- Pista 1 y 3: la frase dura los tres primeros destellos y se va antes del asiento de atrás, para no tapar caras -->
+      <div id="velo" class="clip" data-start="0" data-duration="1.5" data-track-index="3"></div>
+      <div id="frase" class="clip" data-start="0" data-duration="1.5" data-track-index="1">Así se sale<br>de una boda</div>
+
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Destellos: cada plano entra un poco ampliado y se acerca en su medio segundo (golpe en cada pulso)
+      [["#p1", 0], ["#p2", 0.5], ["#p3", 1], ["#p4", 1.5]].forEach(([sel, t]) =>
+        tl.fromTo(sel, { scale: 1.12 }, { scale: 1.0, duration: 0.5, ease: "power2.out" }, t));
+      // La toma larga se acerca despacio hasta la cámara lenta
+      tl.fromTo("#p5", { scale: 1.0 }, { scale: 1.05, duration: 3.2, ease: "none" }, 2);
+      tl.fromTo("#p6", { scale: 1.05 }, { scale: 1.09, duration: 3.0, ease: "none" }, 5.2);
+      tl.fromTo("#p7", { scale: 1.0 }, { scale: 1.06, duration: 3.8, ease: "none" }, 8.2);
+
+      // Frase: entra de golpe con el primer plano y se va con el corte al asiento de atrás
+      tl.fromTo("#frase", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.25, ease: "expo.out" }, 0.02);
+      tl.to(["#frase", "#velo"], { opacity: 0, duration: 0.15, ease: "sine.in" }, 1.35);
+
+
+      window.__timelines["reel"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <title>Reel · Lo que ven vuestros invitados</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Fraunces"; src: url("assets/fonts/Fraunces.woff2") format("woff2"); font-weight: 300 700; }
+      /* Paleta de marca/tokens.css. Tipografía provisional (Fraunces) */
+      :root { --azahar: #FFFCF5; --tinta: #2B211A; --naranja: #EE7D1F; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--tinta); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--tinta); }
+
+      video.plano { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; transform-origin: 50% 45%; }
+
+      /* Una frase grande en el tercio superior, sin caja (analisis-competencia-reels.md §2.6) */
+      .frase { position: absolute; top: 290px; left: 60px; right: 60px; text-align: center;
+               font-family: "Fraunces", serif; font-weight: 600; font-size: 100px; line-height: 1.02; color: var(--azahar);
+               text-shadow: 0 4px 28px rgba(0, 0, 0, .55), 0 1px 4px rgba(0, 0, 0, .5); }
+      .frase em { font-style: italic; font-weight: 500; }
+      /* Degradado suave arriba mientras hay frase: contraste sin caja */
+      .velo { position: absolute; left: 0; right: 0; top: 0; height: 860px;
+              background: linear-gradient(to bottom, rgba(43, 33, 26, .62) 0%, rgba(43, 33, 26, .36) 55%, rgba(43, 33, 26, 0) 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="reel" data-start="0" data-duration="18.1" data-width="1080" data-height="1920">
+
+      <!-- Pista 0. Clips limpios (1080×1920, SDR, sin marca antigua ni matrícula legible; BRIEF.md).
+           Una idea en dos mitades: lo que ven los invitados (fuera del coche) y lo que veis vosotros (POV desde el coche).
+           Sin sonido: la canción se pone en Instagram. -->
+      <video id="p1" class="clip plano" src="assets/clips/01_petalos-iglesia_IMG4301_difuminado.mp4" data-start="0" data-duration="2.9" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="p2" class="clip plano" src="assets/clips/02_invitados-alrededor_IMG4314.mp4" data-start="2.9" data-duration="1.6" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="p3" class="clip plano" src="assets/clips/03_pov-centro_IMG4408.mp4" data-start="4.5" data-duration="4.2" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="p4" class="clip plano" src="assets/clips/04_avenida-palmeras_IMG4321_difuminado.mp4" data-start="8.7" data-duration="2.2" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="p5" class="clip plano" src="assets/clips/05_manteo_IMG4372.mp4" data-start="10.9" data-duration="3.2" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <!-- Cierre animado de marca/animaciones/ (logo aprobado, «Escribidnos vuestra fecha» y WhatsApp) -->
+      <video id="p6" class="clip plano" src="assets/clips/06_cierre-marca.mp4" data-start="14.1" data-duration="4" data-media-start="0" data-track-index="0" playsinline muted></video>
+
+      <!-- Pista 4: transición de costillas (con alfa). Tapa la pantalla a los 0,41 s (4,5 s): el giro de «ellos» a «vosotros» -->
+      <video id="t1" class="clip" src="assets/clips/transicion.webm" data-start="4.09" data-duration="0.866" data-media-start="0" data-track-index="4" playsinline muted style="position:absolute; inset:0; width:1080px; height:1920px;"></video>
+
+      <!-- Pistas 1–3: las dos frases, cada una con su degradado -->
+      <div id="velo1" class="clip velo" data-start="0" data-duration="4.4" data-track-index="3"></div>
+      <div id="f1" class="clip frase" data-start="0" data-duration="4.4" data-track-index="1">Lo que ven<br>vuestros invitados</div>
+      <div id="velo2" class="clip velo" data-start="4.6" data-duration="3.9" data-track-index="3"></div>
+      <div id="f2" class="clip frase" data-start="4.6" data-duration="3.9" data-track-index="2">Y lo que veis<br><em>vosotros</em></div>
+
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Cada plano se acerca despacio; los cortes caen en el pulso (≈ 0,55 s a 110 BPM)
+      tl.fromTo("#p1", { scale: 1.0 }, { scale: 1.07, duration: 2.9, ease: "none" }, 0);
+      tl.fromTo("#p2", { scale: 1.06 }, { scale: 1.0, duration: 1.6, ease: "power1.out" }, 2.9);
+      tl.fromTo("#p3", { scale: 1.0 }, { scale: 1.05, duration: 4.2, ease: "none" }, 4.5);
+      tl.fromTo("#p4", { scale: 1.0 }, { scale: 1.06, duration: 2.2, ease: "none" }, 8.7);
+      tl.fromTo("#p5", { scale: 1.04 }, { scale: 1.0, duration: 3.2, ease: "power1.out" }, 10.9);
+
+      // Frase 1: visible desde el fotograma 0 (el gancho tiene que leerse en el primer segundo) y se va con la transición
+      tl.fromTo("#f1", { y: 12 }, { y: 0, duration: 0.4, ease: "expo.out" }, 0.0);
+      tl.to(["#f1", "#velo1"], { opacity: 0, duration: 0.15, ease: "sine.in" }, 4.25);
+      // Frase 2: aparece al destaparse la transición, sobre el POV
+      tl.fromTo(["#f2", "#velo2"], { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "sine.out" }, 4.6);
+      tl.fromTo("#f2", { y: 24 }, { y: 0, duration: 0.3, ease: "expo.out" }, 4.6);
+      tl.to(["#f2", "#velo2"], { opacity: 0, duration: 0.2, ease: "sine.in" }, 8.3);
+
+      window.__timelines["reel"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
