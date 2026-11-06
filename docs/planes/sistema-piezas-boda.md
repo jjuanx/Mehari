@@ -78,7 +78,7 @@ Es la frontera entre **decidir** (Claude) y **producir** (scripts). Claude escri
   "formato": "deslizar",
   "variante": "con-rotulos",
   "tema": "las-cestas",
-  "permiso_caras": "pendiente",
+  "permiso_caras": "si",
   "hay_caras": true,
   "musica": null,
   "ubicacion": null,
@@ -103,7 +103,7 @@ Es la frontera entre **decidir** (Claude) y **producir** (scripts). Claude escri
 - Retoques de foto: `{"tipo": "placa" | "funda", "poligono": [[x,y], …]}` o `{"tipo": "emblema", "caja": [x, y, ancho, alto]}`. De vídeo: `{"tipo": "zona", "t", "caja": [x, y, ancho, alto], "desde"?, "hasta"?}`, con `t` en segundos del clip original y **dentro** del corte del elemento. El difuminado se aplica después de escalar a 1080×1920. Una foto solo admite `placa`, `funda` y `emblema`, y un vídeo (`.mov` o `.mp4`), solo `zona`: cualquier otro tipo o forma es un error de validación, y nunca se salta un retoque. Una zona que queda fuera del encuadre final no se difumina y deja un aviso en `revision/avisos.json`.
 - Para el reel, cada elemento lleva además `tramo` (`gancho`, `detalle`, `prueba` o `momento`) y `desde` y `hasta` (segundos del clip) o `duracion` (fotos). El cierre de marca (4 s) lo añade la plantilla: no es un elemento. Con el cierre, el reel dura de 15 a 25 s.
 - Cuántos elementos: deslizar, de 5 a 9 fotos (más la diapositiva de cierre, que se añade sola); historia, de 1 a 10. En la historia en clip, cada clip dura como máximo 15 s (cada elemento es una historia aparte).
-- `permiso_caras`: `si` (la ficha lo confirma), `no` o `pendiente`. `hay_caras`: si en la pieza se reconoce alguna cara; si falta, se supone que sí. Una pieza con caras solo puede salir `LISTA` con `permiso_caras: "si"`.
+- `permiso_caras`: `si` por defecto (el permiso para enseñar caras de adultos viene con el material del cliente, `CLAUDE.md` §4), `no` si la pareja ha pedido no salir, o `pendiente` si hay alguna duda. Los menores nunca salen con cara, haya permiso o no. `hay_caras`: si en la pieza se reconoce alguna cara; si falta, se supone que sí. Una pieza con caras solo puede salir `LISTA` con `permiso_caras: "si"`.
 - `musica`: `{"ruta", "licencia", "titulo"?}` de la pista libre de derechos (`ruta` y `licencia` obligatorias y no vacías), o `null` si es «sin música».
 - `ubicacion`: texto para la cola de Metricool, o `null`.
 - `pendientes`: cada marcador `[PENDIENTE: …]` que haya quedado. Si no está vacío, la pieza no está lista.
@@ -221,7 +221,7 @@ Se entrega, pero como `NO PUBLICAR` (carpeta `_PENDIENTE`), si hay caras sin `pe
 |---|---|
 | No encuentra la boda, o coinciden varias | Pregunta y enseña las candidatas. Nunca adivina |
 | Drive no está sincronizado, o la ruta es distinta | Busca en las rutas habituales de Mac (`~/Library/CloudStorage/GoogleDrive-*/My Drive/` o `Mi unidad/`) y Windows (`G:\Mi unidad\`, `G:\My Drive\`). Si no encuentra `Mehari We`, pide la ruta. Se puede fijar con la variable de entorno `MEHARI_DRIVE` (otra letra de unidad, una unidad compartida…). Drive para Windows escribe los «:» de los nombres como «_» («Boda 24_10_2026»): también se reconocen |
-| No hay ficha, o no consta el permiso de caras | Produce la pieza y la marca `NO PUBLICAR · falta permiso de caras`. Con «sin caras», elige solo detalles: coche, cestas, manos, de espaldas |
+| Caras | El permiso de caras de adultos viene con el material: `permiso_caras: "si"`. Si la pareja ha pedido no salir, `"no"` y la pieza sale `NO PUBLICAR · falta permiso de caras`. Menores con cara, nunca: se descarta, se recorta o se difumina. Con «sin caras», elige solo detalles: coche, cestas, manos, de espaldas |
 | Faltan datos (iglesia, flores, fotógrafo) | Marcador `[PENDIENTE: …]` en el texto. La pieza queda `_PENDIENTE` |
 | Poco material | El carrusel baja hasta 6 diapositivas; por debajo, avisa y propone una historia. El reel se monta con fotos si no hay clips |
 | Funda, matrícula o menor imposible de esquivar o recortar | Se retoca. Si el retoque se nota o no se puede hacer, **la foto se descarta**. Nunca sale una pieza con rastro |

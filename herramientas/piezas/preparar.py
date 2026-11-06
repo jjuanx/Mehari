@@ -56,6 +56,17 @@ def _ffmpeg(*args) -> None:
     _ejecutar(["ffmpeg", "-y", "-loglevel", "error", *args])
 
 
+def _exigir_zscale() -> None:
+    """Los vídeos HDR del iPhone necesitan el filtro zscale (libzimg) para pasar a SDR."""
+    filtros = _ejecutar(["ffmpeg", "-hide_banner", "-filters"]).stdout
+    if not any(linea.split()[1:2] == ["zscale"] for linea in filtros.splitlines()):
+        raise RuntimeError(
+            "Este FFmpeg no tiene el filtro zscale, necesario para pasar a SDR los vídeos HDR "
+            "del iPhone. En Mac: «brew install ffmpeg-full» y lanza los scripts con "
+            "PATH=\"/opt/homebrew/opt/ffmpeg-full/bin:$PATH\". En Windows, los builds "
+            "«full» de gyan.dev ya lo traen.")
+
+
 def _abs(ruta: Path) -> str:
     return str(Path(ruta).resolve())
 
@@ -70,7 +81,13 @@ def avisos_de_difuminar(salida: str, id_el: str, fichero: str) -> list[str]:
 # ---------------------------------------------------------------- utilidades de vídeo
 
 def sondear(video: Path) -> dict:
-    """Ancho y alto tal como se ve (con la rotación), duración y función de transferencia."""
+    """Ancho y alto tal como se ve (con el recorte del contenedor y la rotación), duración
+    y función de transferencia.
+
+    Los Live Photos del iPhone traen un recorte (FrameCropping) que FFmpeg aplica al
+    decodificar: hay que descontarlo para que estas medidas coincidan con los fotogramas
+    reales y con las coordenadas que enseña rejilla.py.
+    """
     datos = json.loads(_ejecutar(["ffprobe", "-v", "error", "-select_streams", "v:0",
                                   "-show_streams", "-show_format", "-of", "json",
                                   _abs(video)]).stdout)
@@ -80,6 +97,10 @@ def sondear(video: Path) -> dict:
     for lado in flujo.get("side_data_list", []):
         if "rotation" in lado:
             rotacion = lado["rotation"]
+        # Se detecta por las claves: el nombre cambia («Frame Cropping», «FrameCropping»).
+        if any(k in lado for k in ("crop_left", "crop_right", "crop_top", "crop_bottom")):
+            ancho -= int(lado.get("crop_left", 0)) + int(lado.get("crop_right", 0))
+            alto -= int(lado.get("crop_top", 0)) + int(lado.get("crop_bottom", 0))
     if rotacion is not None and int(float(rotacion)) % 180 != 0:
         ancho, alto = alto, ancho
     duracion = float(datos.get("format", {}).get("duration") or flujo.get("duration") or 0)
@@ -198,6 +219,8 @@ def _preparar_video(el: dict, origen: Path, destino: Path, tmp: Path, id_el: str
                     revision: Path | None) -> list[str]:
     info = sondear(origen)
     hlg = info["transfer"] == "arib-std-b67"
+    if hlg:
+        _exigir_zscale()
     desde, hasta = _corte(el, info["duracion"])
     dur = hasta - desde
     ancho, alto = info["ancho"], info["alto"]

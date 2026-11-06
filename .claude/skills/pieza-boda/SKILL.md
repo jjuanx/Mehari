@@ -62,7 +62,7 @@ La carpeta de trabajo de cada boda es `.trabajo/<boda>/`, con `<boda>` = `AAAA-M
    mkdir -p "$P"
    ```
    Dentro de `$P` quedan `pieza.json`, `proyecto/` (material preparado, revisión y render), `salida/` (solo los ficheros finales), `rejilla/` y `control/`. Todo se puede borrar y regenerar desde `pieza.json`.
-4. **Ficha**: si la carpeta de la boda tiene una ficha, léela. De ahí salen el permiso de caras, los nombres, la iglesia, la hacienda, las flores y el fotógrafo. Lo que no esté en la ficha ni se lea en la foto va como `[PENDIENTE: …]`.
+4. **Ficha**: si la carpeta de la boda tiene una ficha, léela. De ahí salen los nombres, la iglesia, la hacienda, las flores y el fotógrafo. Lo que no esté en la ficha ni se lea en la foto va como `[PENDIENTE: …]`.
 5. **Piezas anteriores**: lee los `pieza.json` de `02_Produccion/<boda>/*/`. No repitas la foto de portada del carrusel ni el plano del gancho del reel, y alterna las variantes.
 
 ## Paso 4. Ver y elegir
@@ -123,7 +123,7 @@ Para cambiar un rótulo o el texto basta con editar `pieza.json` y volver a lanz
   "formato": "deslizar",
   "variante": "con-rotulos",
   "tema": "las-cestas",
-  "permiso_caras": "pendiente",
+  "permiso_caras": "si",
   "hay_caras": true,
   "musica": null,
   "ubicacion": null,
@@ -150,7 +150,7 @@ Para cambiar un rótulo o el texto basta con editar `pieza.json` y volver a lanz
 | `carpeta_origen` | La `relativa` de `localizar.py` |
 | `formato`, `variante` | Ver paso 1 |
 | `tema` | Minúsculas, números y guiones |
-| `permiso_caras` | `si` (la ficha lo confirma), `no` o `pendiente` |
+| `permiso_caras` | `si` por defecto: el permiso para enseñar caras de adultos viene con el material del cliente (`CLAUDE.md` §4). `no` si la pareja ha pedido no salir; `pendiente` si hay alguna duda. Los menores nunca salen con cara |
 | `hay_caras` | `true` si se reconoce alguna cara en la pieza. Si falta, se supone `true` |
 | `musica` | `{"ruta": "<ruta absoluta de la pista>", "licencia": "…", "titulo": "…"}` (`ruta` y `licencia` obligatorias, `titulo` opcional) o `null` |
 | `ubicacion` | Texto de la ubicación para Metricool, o `null`. Si no se sabe, `null` y se apunta en `pendientes` |
@@ -227,7 +227,7 @@ Sin aprobación del cliente no se programa nada. Cuando llegue, Alejandro pone l
 |---|---|
 | No encuentra la boda, o coinciden varias | Pregunta y enseña las candidatas. Nunca adivina |
 | Drive no está sincronizado, o la ruta es distinta | `localizar.py` busca en Mac (`~/Library/CloudStorage/GoogleDrive-*/My Drive/` o `Mi unidad/`) y Windows (`G:\Mi unidad\`, `G:\My Drive\`). Si no encuentra `Mehari We`, pide la ruta. Se puede fijar con la variable de entorno `MEHARI_DRIVE` |
-| No hay ficha, o no consta el permiso de caras | Produce la pieza con `permiso_caras: "pendiente"`, y sale `NO PUBLICAR · falta permiso de caras`. Con «sin caras», elige solo detalles (coche, cestas, manos, de espaldas) y pon `hay_caras: false` |
+| Caras | El permiso de caras de adultos viene con el material: `permiso_caras: "si"`. Si la pareja ha pedido no salir, `"no"`, y sale `NO PUBLICAR · falta permiso de caras`. Ningún menor con cara: se descarta, se recorta o se difumina. Con «sin caras», elige solo detalles (coche, cestas, manos, de espaldas) y pon `hay_caras: false` |
 | Faltan datos (iglesia, flores, fotógrafo) | Marcador `[PENDIENTE: …]` en el texto. La pieza queda `_PENDIENTE` |
 | Poco material | El carrusel baja hasta 5 fotos (6 diapositivas con el cierre); por debajo, avisa y propone una historia. El reel se monta con fotos si no hay clips |
 | Funda, matrícula o menor imposible de esquivar o recortar | Se retoca. Si el retoque se nota o no se puede hacer, la foto se descarta |
@@ -245,7 +245,7 @@ Sin aprobación del cliente no se programa nada. Cuando llegue, Alejandro pone l
 - [ ] Piezas anteriores de `02_Produccion/<boda>/` leídas: ni la misma portada ni el mismo gancho, y variante alternada
 - [ ] Cada elemento ha pasado `revision-marca`, con su resultado en `revision_marca`; material elegido por «sin retoque > recorte > retoque»
 - [ ] Coordenadas de recortes y retoques leídas con `rejilla.py` (`--t` en vídeos, dentro del corte)
-- [ ] `permiso_caras` y `hay_caras` según la ficha y lo que se ve; nada de menores ni de matrículas
+- [ ] `permiso_caras: "si"` (salvo que la pareja haya pedido no salir) y `hay_caras` según lo que se ve; ningún menor con cara y ninguna matrícula
 - [ ] Texto con CTA a WhatsApp 625 06 42 93, de 3 a 5 hashtags, sin «Citroën», sin la marca antigua, sin «—», sin «experiencia única», sin atar la marca a una ciudad y sin datos inventados; rótulos, ubicación y `a_mano_despues` con las mismas reglas
 - [ ] Reel: música con licencia de `03_Marca/musica/` o de `media-use`, o «sin música» dicho en el resumen
 - [ ] `preparar.py`, `producir.py` y `comprobar.py` sin errores

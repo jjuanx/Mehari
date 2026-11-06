@@ -49,7 +49,7 @@ Detalle completo en [docs/cliente/brief.md](docs/cliente/brief.md). En resumen:
 2. **Cada publicación tiene un objetivo y una llamada a la acción** (pedir presupuesto, escribir por WhatsApp, guardar, compartir).
 3. **No inventes datos**: ni precios, ni número de bodas, ni testimonios, ni nombres. Si falta algo, pon un marcador `[ASÍ]`.
 4. **Famosos y prensa**: hay consentimiento, pero se usa con elegancia y como prueba social, no como reclamo sensacionalista.
-5. **Menores, sin cara.** Se evita que aparezcan caras de niños o de menores de edad. Si una foto o un vídeo los muestra, se descarta, se recorta o se difumina la cara antes de publicar, aunque los padres hayan dado consentimiento a la boda.
+5. **Caras: sí; menores, nunca.** Cuando el cliente nos pasa el material de una boda, ya tenemos el permiso de los novios y de los invitados adultos para enseñar su cara (2026-11-06). Los nombres siguen necesitando la ficha. **Menores, sin cara:** se evita que aparezcan caras de niños o de menores de edad. Si una foto o un vídeo los muestra, se descarta, se recorta o se difumina la cara antes de publicar, aunque los padres hayan dado consentimiento a la boda.
 6. **Matrículas, nunca.** La matrícula de ningún coche (los nuestros ni los de terceros) puede ser legible: se recorta, se tapa o se difumina. En fotos se prefiere la placa lisa de `herramientas/material/retocar_foto.py`, que no se nota.
 7. **Sin "Citroën" y sin atarnos a Sevilla**: ver §2.
 8. **Coherencia**: el nombre de la marca, los nombres de los servicios y los datos de contacto deben ser idénticos en todos los ficheros. Salen de `docs/cliente/brief.md`.

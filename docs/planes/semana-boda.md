@@ -140,7 +140,7 @@ Se coge **una decisión** que tomó esa pareja y se enseña como opción para la
 
 ## 4. Stories de la semana
 
-Sin aprobación del lote, pero sin caras de los novios hasta que la ficha confirme su permiso, sin menores y sin matrículas.
+Sin aprobación del lote. Caras de los novios y de los invitados adultos, sí (el permiso viene con el material); menores y matrículas, nunca.
 
 | Día | Story | Sticker |
 |---|---|---|
@@ -175,7 +175,7 @@ Cada uno firma su pieza en el campo «Responsable» de la ficha. Si alguien no p
 En `Mehari We/01_Material/Bodas/AAAA-MM-DD_<lugar>/`, en los 2 días siguientes a la boda:
 
 - `fotos/` y `videos/`: todo lo del móvil del chófer, más lo que pasen la pareja y el fotógrafo.
-- `ficha` (nota o formulario): fecha, iglesia, hacienda, coche (naranja o beige), con chófer o conducido por los novios, techo, flores, fotógrafo y su Instagram, *wedding planner* y florista, y **si la pareja da permiso para publicar su cara y su nombre**.
+- `ficha` (nota o formulario): fecha, iglesia, hacienda, coche (naranja o beige), con chófer o conducido por los novios, techo, flores, fotógrafo y su Instagram, *wedding planner* y florista, y **si la pareja da permiso para publicar su nombre**. El permiso para enseñar las caras viene con el material: cuando el cliente nos pasa las fotos, lo tenemos, salvo para los menores (`CLAUDE.md` §4).
 
 **Los 6 planos** (presentación, diapositiva 5), en vertical:
 
@@ -194,7 +194,7 @@ En `Mehari We/01_Material/Bodas/AAAA-MM-DD_<lugar>/`, en los 2 días siguientes 
 |---|---|
 | **Dos bodas el mismo fin de semana** | La de mejor material es la protagonista y lleva las tres publicaciones. La otra va a stories en caliente y su mejor detalle puede ser la pieza del viernes |
 | **Fin de semana sin boda** | Semana de reserva con material de archivo (`docs/material/clasificacion.csv`), con los mismos tres huecos: lunes carrusel temático, miércoles reel de una boda antigua y viernes Sevilla Experience o «Los Méhari por dentro» |
-| **Sin permiso para enseñar caras** | Carrusel y reel de detalles: coche, cestas, iglesia, manos, de espaldas |
+| **La pareja pide expresamente no salir** (excepción: por defecto el permiso viene con el material) | Carrusel y reel de detalles: coche, cestas, iglesia, manos, de espaldas |
 | **Poco material** (menos de 6 fotos publicables o ningún vídeo) | Lunes y miércoles con lo que haya (reel con fotos). El viernes sale del archivo |
 | **El material llega tarde** | Se mueve toda la semana de esa boda y su hueco lo ocupa una semana de reserva |
 | **Boda fuera de Sevilla y Cádiz** | Se publica igual, con su ubicación. La marca no se ata a una ciudad (`CLAUDE.md` §2) |
