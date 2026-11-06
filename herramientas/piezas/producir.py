@@ -50,8 +50,9 @@ def estaticas(p: dict, proyecto: Path, salida: Path) -> list[Path]:
     shutil.copytree(PLANTILLA_ESTATICAS, proyecto, dirs_exist_ok=True)
     texto = json.dumps(datos, ensure_ascii=False)
     (proyecto / "datos.json").write_text(texto, encoding="utf-8")
-    # «</» dentro de un <script> cerraría el bloque; «<\/» es JSON válido y equivale
-    incrustado = texto.replace("</", "<\\/")
+    # Cualquier «<» (</script>, <!--, <script) puede alterar el tokenizador de HTML dentro
+    # de un <script>; «\u003c» es JSON válido y equivale
+    incrustado = texto.replace("<", "\\u003c")
     index = proyecto / "index.html"
     html = index.read_text(encoding="utf-8")
     index.write_text(html.replace(MARCADOR_DATOS, MARCADOR_DATOS.replace("></", f">{incrustado}</")),
@@ -65,8 +66,10 @@ def estaticas(p: dict, proyecto: Path, salida: Path) -> list[Path]:
     else:
         prefijo = ""
         nombres = [f"{i:02d}.jpg" for i in range(1, len(hojas) + 1)]
-    for viejo in nombres:
-        (salida / viejo).unlink(missing_ok=True)
+    # Borra salidas antiguas con el mismo patrón de nombres (una pasada previa con más diapositivas)
+    patron = "historia*.jpg" if p["formato"] == "historia" else "[0-9][0-9].jpg"
+    for viejo in salida.glob(patron):
+        viejo.unlink()
     cmd = ["node", str(EXPORTAR), str(proyecto.resolve()), str(len(hojas)), str(ancho), str(alto),
            str(salida.resolve()), prefijo]
     try:
