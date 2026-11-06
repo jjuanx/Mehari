@@ -224,3 +224,93 @@ def test_zona_en_clip_rotado_con_recorte_se_difumina_donde_toca(tmp_path, pieza_
                round((caja[0] + caja[2] - 90) * s), round((caja[1] + caja[3] - 100) * s))
     assert _energia(resultados["sin"], destino) > 20
     assert _energia(resultados["con"], destino) < 0.4 * _energia(resultados["sin"], destino)
+
+
+# ---------------------------------------------------------------- retoques desconocidos (C1) y zonas fuera (M1)
+
+def test_tipo_de_retoque_desconocido_no_se_salta():
+    from preparar import _argumentos_retoque
+    with pytest.raises(ValueError, match="matricula"):
+        _argumentos_retoque([{"tipo": "matricula", "poligono": [[0, 0], [1, 0], [1, 1], [0, 1]]}])
+
+
+@pytest.mark.parametrize("fichero,retoque", [
+    ("v.mp4", {"tipo": "placa", "poligono": [[0, 0], [9, 0], [9, 9], [0, 9]]}),
+    ("f.jpg", {"tipo": "zona", "t": 1, "caja": [0, 0, 10, 10]}),
+    ("f.jpg", {"tipo": "Placa", "poligono": [[0, 0], [9, 0], [9, 9], [0, 9]]}),
+])
+def test_retoque_que_no_encaja_con_el_fichero_falla_antes_de_trabajar(tmp_path, foto_jpg, clip_mp4,
+                                                                      pieza_minima, fichero, retoque):
+    boda = tmp_path / "b"
+    boda.mkdir()
+    shutil.copy(clip_mp4 if fichero.endswith(".mp4") else foto_jpg, boda / fichero)
+    p = pieza_minima("historia")
+    p["elementos"] = [{"orden": 1, "fichero": fichero, "retoques": [retoque]}]
+    with pytest.raises(ValueError, match="retoque"):
+        preparar(p, boda, tmp_path / "proy")
+    assert not (tmp_path / "proy/assets/material").exists()
+
+
+def test_zonas_finales_separa_las_que_quedan_fuera_del_encuadre():
+    from preparar import _zonas_finales
+    dentro = {"tipo": "zona", "t": 2, "caja": [100, 100, 200, 100]}
+    fuera = {"tipo": "zona", "t": 2, "caja": [100, 1500, 200, 100]}
+    args, descartadas = _zonas_finales([dentro, fuera], 1, 4, (0, 0, 1080, 1080))
+    assert len(args) == 1 and args[0].startswith("1.000,")
+    assert descartadas == [fuera]
+
+
+def test_zona_fuera_del_encuadre_deja_aviso(tmp_path, clip_mp4, pieza_minima):
+    import json
+    boda = tmp_path / "b"
+    boda.mkdir()
+    shutil.copy(clip_mp4, boda / "v.mp4")
+    p = pieza_minima("historia")
+    p["variante"] = "clip-cta"
+    p["elementos"] = [{"orden": 1, "fichero": "v.mp4", "desde": 1, "hasta": 3,
+                       "recorte": {"x": 0, "y": 0, "ancho": 1080, "alto": 1080},
+                       "retoques": [{"tipo": "zona", "t": 2, "caja": [100, 1500, 200, 100]}]}]
+    preparar(p, boda, tmp_path / "proy")
+    avisos = json.loads((tmp_path / "proy/revision/avisos.json").read_text(encoding="utf-8"))
+    assert len(avisos) == 1 and "01" in avisos[0] and "fuera del encuadre" in avisos[0]
+
+
+# ---------------------------------------------------------------- material desfasado (I1)
+
+def test_preparar_vacia_lo_anterior_y_deja_la_huella(tmp_path, foto_jpg, pieza_minima):
+    import json
+    from pieza import huella_material
+    boda = tmp_path / "b"
+    boda.mkdir()
+    shutil.copy(foto_jpg, boda / "f.jpg")
+    proy = tmp_path / "proy"
+    for viejo in ("assets/material/09.jpg", "revision/07_antes.jpg", "revision/07_despues.jpg"):
+        (proy / viejo).parent.mkdir(parents=True, exist_ok=True)
+        (proy / viejo).write_bytes(b"viejo")
+    (proy / "revision/avisos.json").write_text('["viejo"]', encoding="utf-8")
+    (proy / "index.html").write_text("plantilla", encoding="utf-8")
+    p = pieza_minima("historia")
+    p["elementos"] = [{"orden": 1, "fichero": "f.jpg"}]
+    preparar(p, boda, proy)
+    assert sorted(f.name for f in (proy / "assets/material").iterdir()) == ["01.jpg"]
+    assert sorted(f.name for f in (proy / "revision").iterdir()) == ["avisos.json", "preparado.json"]
+    assert json.loads((proy / "revision/avisos.json").read_text(encoding="utf-8")) == []
+    assert json.loads((proy / "revision/preparado.json").read_text(encoding="utf-8")) == {
+        "huella": huella_material(p)}
+    assert (proy / "index.html").read_text(encoding="utf-8") == "plantilla"   # solo material y revisión
+
+
+def test_si_preparar_falla_no_queda_material_anterior_valido(tmp_path, foto_jpg, pieza_minima):
+    boda = tmp_path / "b"
+    boda.mkdir()
+    shutil.copy(foto_jpg, boda / "f.jpg")
+    proy = tmp_path / "proy"
+    p = pieza_minima("historia")
+    p["elementos"] = [{"orden": 1, "fichero": "f.jpg"}]
+    preparar(p, boda, proy)
+    p["elementos"][0]["recorte"] = {"x": 0, "y": 0, "ancho": 99999, "alto": 10}
+    with pytest.raises(ValueError):
+        preparar(p, boda, proy)
+    assert not (proy / "revision/preparado.json").exists()
+    assert not (proy / "revision/avisos.json").exists()
+    assert not any((proy / "assets/material").glob("*"))

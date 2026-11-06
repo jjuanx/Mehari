@@ -8,7 +8,7 @@ Reglas de búsqueda de bodas:
 - Si una candidata contiene otras candidatas (p. ej. `Selecccion` con carpetas de boda dentro),
   se descarta: solo cuentan las carpetas más profundas.
 - «la última» / «última»: solo cuentan las candidatas con una fecha reconocible en su propio
-  nombre («Boda 2:11:2026», «2026-11-07_sanlucar»); de ellas, la de modificación más reciente.
+  nombre («Boda 2:11:2026», «Boda 2_11_2026», «2026-11-07_sanlucar»); de ellas, la de modificación más reciente.
 - Con fecha o lugar en la consulta solo salen las que coinciden en el nombre. Gana la fecha
   sobre el lugar; a igualdad, la modificada más recientemente.
 """
@@ -33,8 +33,9 @@ MESES["setiembre"] = 9
 PALABRAS_VACIAS = {"boda", "bodas", "del", "de", "la", "el", "los", "las", "en", "ultima", "una", "mi", "con", "y"}
 
 _MES = "|".join(MESES)
-RE_ISO = re.compile(r"(?<!\d)(\d{4})[-/:.](\d{1,2})[-/:.](\d{1,2})(?!\d)")
-RE_DMA = re.compile(r"(?<!\d)(\d{1,2})[-/:.](\d{1,2})[-/:.](\d{4})(?!\d)")
+# «_» porque Drive para Windows cambia «:» por «_» («Boda 24:10:2026» → «Boda 24_10_2026»)
+RE_ISO = re.compile(r"(?<!\d)(\d{4})[-/:._](\d{1,2})[-/:._](\d{1,2})(?!\d)")
+RE_DMA = re.compile(r"(?<!\d)(\d{1,2})[-/:._](\d{1,2})[-/:._](\d{4})(?!\d)")
 RE_DM = re.compile(r"(?<![\d/])(\d{1,2})/(\d{1,2})(?![\d/])")
 RE_TEXTO = re.compile(rf"(?<!\d)(\d{{1,2}})\s+de\s+({_MES})(?:\s+(?:de|del)\s+(\d{{4}}))?(?!\w)")
 
@@ -182,6 +183,8 @@ def buscar_bodas(raiz: Path, consulta: str) -> list[Candidata]:
 
 
 def main(argv: list[str]) -> int:
+    if hasattr(sys.stdout, "reconfigure"):  # JSON en UTF-8 también en Windows (cp1252 por defecto)
+        sys.stdout.reconfigure(encoding="utf-8")
     consulta = " ".join(argv)
     drive = raiz_drive(os.environ, Path.home())
     candidatas = buscar_bodas(drive, consulta) if drive else []

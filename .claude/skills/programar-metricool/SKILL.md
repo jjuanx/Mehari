@@ -26,11 +26,11 @@ Con `getBrandSettings`, comprueba que la marca es Méhari We y que tiene Instagr
 1. `aprobacion.estado` es `aprobado`, con fecha y quién aprueba. Si no, para: **sin aprobación del cliente no se programa**.
 2. Cada publicación con `estado: "pendiente"` tiene todos sus `medios` en disco:
    - Carrusel: JPEG de 1080×1440, de 2 a 10.
-   - Reel: MP4 9:16 con audio incrustado. Si el modo es `automatico`, el audio tiene que ser libre de derechos.
+   - Reel: MP4 9:16. Si el modo es `automatico`, con el audio incrustado y libre de derechos (en modo `aviso` puede ir sin audio: la música se pone a mano en la app).
 3. Ningún `texto` contiene `[` (marcadores sin rellenar) ni «Citroën», ni más de 5 hashtags. El teléfono es 625 06 42 93.
 4. Ninguna publicación tiene `fecha: null`. Si alguna la tiene, para y pide la fecha. Las fechas son futuras, en `Europe/Madrid`, y coinciden con las fichas enlazadas (salvo en colas de `02_Produccion`, ver 6).
 5. La ficha de cada pieza tiene marcada la aprobación y `revision-marca` (salvo en colas de `02_Produccion`, ver 6). Si falta algo, avisa y pregunta antes de seguir.
-6. En las colas de `02_Produccion` no hay ficha (`ficha: null`): se usa en su lugar el `revision.html` de la carpeta, y `texto.txt` tiene que empezar por `Estado: LISTA`. Si `texto.txt` no empieza por `Estado: LISTA`, para (por ejemplo, si empieza por `Estado: NO PUBLICAR`). Para también si la carpeta termina en `_PENDIENTE`.
+6. En las colas de `02_Produccion` no hay ficha (`ficha: null`): se usa en su lugar el `revision.html` de la carpeta, y `texto.txt` tiene que empezar por `Estado: LISTA`. Si `texto.txt` no empieza por `Estado: LISTA`, para (por ejemplo, si empieza por `Estado: NO PUBLICAR`). Para también si el nombre de la carpeta contiene `_PENDIENTE` (también `…_PENDIENTE-2`).
 
 ## Paso 2. Medios
 
@@ -68,6 +68,6 @@ Si el cliente pide un cambio: modifica la pieza y la ficha (o `revision.html` en
 - [ ] Medios completos y con el formato correcto; reels automáticos con música libre de derechos
 - [ ] Textos sin marcadores, sin «Citroën», máximo 5 hashtags
 - [ ] Ninguna `fecha` a `null`
-- [ ] Colas de `02_Produccion`: `texto.txt` empieza por `Estado: LISTA` y la carpeta no termina en `_PENDIENTE`
+- [ ] Colas de `02_Produccion`: `texto.txt` empieza por `Estado: LISTA` y el nombre de la carpeta no contiene `_PENDIENTE`
 - [ ] Todo programado una sola vez y verificado con `getScheduledPosts`
 - [ ] `metricool_id` y `estado` apuntados en la cola, con commit si la cola está en el repositorio

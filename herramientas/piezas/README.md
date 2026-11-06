@@ -28,7 +28,7 @@ P=".trabajo/2026-10-24_la-posadilla/2026-11-06_deslizar_las-cestas"
 
 | Script | Qué hace |
 |---|---|
-| `localizar.py` | Encuentra `Mehari We` en Drive (Mac o Windows, o la variable `MEHARI_DRIVE`) y las carpetas de boda que encajan con la consulta |
+| `localizar.py` | Encuentra `Mehari We` en Drive (Mac, Windows en `G:`, o la variable `MEHARI_DRIVE`) y las carpetas de boda que encajan con la consulta |
 | `inventario.py` | Miniaturas, datos técnicos, fecha EXIF y hojas de contacto de la carpeta de la boda. Reanudable |
 | `rejilla.py` | Rejilla de coordenadas sobre una foto o un fotograma, para leer recortes y retoques |
 | `preparar.py` | Convierte, retoca, recorta y deja el material en `proyecto/assets/material/`, con el antes y después y `revision/avisos.json` |
@@ -46,6 +46,8 @@ MEHARI_DRIVE="/ruta/a/Mehari We" python3 herramientas/piezas/localizar.py 24 de 
 ```
 
 Imprime un JSON con `drive` y `candidatas` (`ruta`, `relativa` a `Mehari We` y `motivo`). Con 0 o varias candidatas, la skill pregunta.
+
+Busca `Mehari We` en `~/Library/CloudStorage/GoogleDrive-*/My Drive/` (o `Mi unidad/`) en Mac y en `G:\My Drive\` (o `G:\Mi unidad\`) en Windows. Si Drive para escritorio usa otra letra de unidad, o la carpeta está en una unidad compartida, define `MEHARI_DRIVE` con la ruta completa de `Mehari We`; en Git Bash, por ejemplo, `export MEHARI_DRIVE="/h/My Drive/Mehari We"` (unidad H:) o `export MEHARI_DRIVE="/g/Unidades compartidas/Mehari We"` (unidad compartida). Las fechas con «_» («Boda 24_10_2026», como escribe Drive para Windows los «:») también se reconocen.
 
 ### inventario.py
 
@@ -71,7 +73,7 @@ Las coordenadas son las del original tal como se ve (orientación EXIF o rotaci�
 python3 herramientas/piezas/preparar.py "$P/pieza.json" "$ORIGEN" "$P/proyecto"
 ```
 
-Valida `pieza.json` y, antes de procesar nada, que cada recorte cabe en la imagen y que cada zona de vídeo cae dentro de su corte. Deja `proyecto/assets/material/NN.jpg` o `NN.mp4` (1080×1920 y 30 fps en los vídeos), `proyecto/revision/NN_antes.jpg` y `NN_despues.jpg` en los elementos con recorte o retoque, y siempre `proyecto/revision/avisos.json` (lista vacía si el seguimiento del difuminado ha ido bien).
+Valida `pieza.json` (también cada retoque: en fotos `placa`, `funda` o `emblema`; en vídeos, solo `zona`) y, antes de procesar nada, que cada recorte cabe en la imagen y que cada zona de vídeo cae dentro de su corte. Empieza vaciando `proyecto/assets/material/` y `proyecto/revision/`. Deja `proyecto/assets/material/NN.jpg` o `NN.mp4` (1080×1920 y 30 fps en los vídeos), `proyecto/revision/NN_antes.jpg` y `NN_despues.jpg` en los elementos con recorte o retoque, y siempre `proyecto/revision/avisos.json` (lista vacía si el difuminado ha ido bien; un aviso si el seguimiento puede haberse perdido o si una zona queda fuera del encuadre) y `proyecto/revision/preparado.json`, con la huella de lo que decide el material.
 
 ### producir.py
 
@@ -79,7 +81,7 @@ Valida `pieza.json` y, antes de procesar nada, que cada recorte cabe en la image
 python3 herramientas/piezas/producir.py "$P/pieza.json" "$P/proyecto" "$P/salida"
 ```
 
-Deslizar e historia en foto: copia `marca/plantillas/estaticas/` y exporta con Chromium (`01.jpg…NN.jpg` de 1080×1440, con la diapositiva de cierre añadida, o `historia.jpg` / `historia-NN.jpg` de 1080×1920). Reel e historia en clip: copia `marca/plantillas/reel/`, pasa `hyperframes check` y renderiza (`reel.mp4` + `portada.jpg`, o `historia.mp4` / `historia-NN.mp4`). Borra antes las salidas antiguas con el mismo patrón de nombre.
+Deslizar e historia en foto: copia `marca/plantillas/estaticas/` y exporta con Chromium (`01.jpg…NN.jpg` de 1080×1440, con la diapositiva de cierre añadida, o `historia.jpg` / `historia-NN.jpg` de 1080×1920). Reel e historia en clip: copia `marca/plantillas/reel/`, pasa `hyperframes check` y renderiza (`reel.mp4` + `portada.jpg`, o `historia.mp4` / `historia-NN.mp4`). Borra antes las salidas antiguas con el mismo patrón de nombre. Se niega si `proyecto/revision/preparado.json` falta o no corresponde al `pieza.json` (se ha cambiado el material sin volver a preparar). Para el reel y la historia en clip busca `npx` en el PATH (en Windows, `npx.cmd`).
 
 ### comprobar.py
 
@@ -87,7 +89,7 @@ Deslizar e historia en foto: copia `marca/plantillas/estaticas/` y exporta con C
 python3 herramientas/piezas/comprobar.py "$P/pieza.json" "$P"/salida/*
 ```
 
-Imprime `errores`, `avisos` y `pendientes` en JSON y sale con código 1 si hay errores. Formato: dimensiones, códec, fps, duración y audio AAC; carrusel de 2 a 10 JPEG. Texto: sin «Citroën», sin «—», sin «experiencia única», como máximo 5 hashtags y con el 625 06 42 93. «Sevilla», «sevillano» o «Cádiz» son avisos, no errores.
+Imprime `errores`, `avisos` y `pendientes` en JSON y sale con código 1 si hay errores. Formato: dimensiones, códec, fps, duración y audio AAC; carrusel de 2 a 10 JPEG. Texto: sin «Citroën», sin la marca antigua («Tour Sur», «toursur», «Mehari Experiences»), sin «—», sin «experiencia única», como máximo 5 hashtags y con el 625 06 42 93. Los rótulos, la ubicación y las líneas de `a_mano_despues` siguen las mismas reglas salvo el teléfono y los hashtags, y sus `[…]` cuentan como pendientes. «Sevilla», «sevillano/a/os/as» o «Cádiz» (con o sin tilde) son avisos, no errores.
 
 ### entregar.py
 
@@ -96,7 +98,7 @@ python3 herramientas/piezas/entregar.py "$P/pieza.json" "$P/proyecto" "$P/salida
 python3 herramientas/piezas/entregar.py "$P/pieza.json" "$P/proyecto" "$P/salida" --produccion "/ruta/a/Mehari We/02_Produccion"
 ```
 
-Sin `--produccion`, busca `Mehari We/02_Produccion` como `localizar.py`. Crea `02_Produccion/<boda>/<id_pieza>/` (o `_PENDIENTE`, con `-2`, `-3`… si ya existe) e imprime la ruta. No entrega nada si falla un control automático, si falta o está mal `proyecto/revision/avisos.json` o si los ficheros de `salida/` no son exactamente los de la pieza. Sale `NO PUBLICAR` si hay caras sin permiso, datos pendientes o avisos de difuminado.
+Sin `--produccion`, busca `Mehari We/02_Produccion` como `localizar.py`. Crea `02_Produccion/<boda>/<id_pieza>/` (o `_PENDIENTE`, con `-2`, `-3`… si ya existe) e imprime la ruta. No entrega nada si falla un control automático (formato o textos), si falta o está mal `proyecto/revision/avisos.json`, si `proyecto/revision/preparado.json` falta o no corresponde al `pieza.json`, si falta el antes y después de un elemento recortado o retocado, o si los ficheros de `salida/` no son exactamente los de la pieza. Sale `NO PUBLICAR` si hay caras sin permiso, datos pendientes o avisos de difuminado.
 
 ## Plantillas
 

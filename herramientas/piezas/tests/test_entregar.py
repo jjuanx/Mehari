@@ -3,6 +3,7 @@ from datetime import date
 
 import pytest
 
+from ayudas import escribir_preparado
 from comprobar import ResultadoTexto
 from entregar import (entregar, generar_cola, generar_revision, generar_texto,
                       modo_metricool, motivos_no_lista)
@@ -178,6 +179,7 @@ def test_historia_cuenta_exacta(tmp_path, pieza_minima):
     (carpeta / "proyecto" / "revision" / "avisos.json").write_text("[]")
     p = pieza_minima("historia") | {"hay_caras": False, "permiso_caras": "si"}
     ruta = escribir(carpeta, p)
+    escribir_preparado(carpeta / "proyecto", p)
     a, b = carpeta / "historia.jpg", carpeta / "historia-01.jpg"
     for f in (a, b):
         Image.new("RGB", (1080, 1920)).save(f)
@@ -197,6 +199,7 @@ def test_entrega_de_un_reel_de_principio_a_fin(tmp_path, pieza_minima, musica, m
     (carpeta / "proyecto" / "revision" / "avisos.json").write_text("[]")
     p = pieza_minima("reel") | {"hay_caras": False, "permiso_caras": "si", "musica": musica}
     ruta = escribir(carpeta, p)
+    escribir_preparado(carpeta / "proyecto", p)
     mp4 = carpeta / "reel.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i",
                     "testsrc=size=1080x1920:rate=30", "-t", "15.5", "-c:v", "libx264",
@@ -208,3 +211,106 @@ def test_entrega_de_un_reel_de_principio_a_fin(tmp_path, pieza_minima, musica, m
     assert pub["tipo"] == "reel" and pub["portada"] == "portada.jpg"
     assert pub["modo"] == modo and pub["medios"] == ["reel.mp4"]
     assert "<video controls" in (d / "revision.html").read_text(encoding="utf-8")
+
+
+# ---------------------------------------------------------------- material preparado (I1)
+
+def test_sin_preparado_json_se_rechaza(tmp_path, entrega_preparada):
+    ruta, salidas, proyecto = entrega_preparada()
+    (proyecto / "revision" / "preparado.json").unlink()
+    with pytest.raises(SystemExit) as e:
+        entregar(ruta, salidas, proyecto, tmp_path / "prod", HOY)
+    assert "preparado.json" in str(e.value) and not (tmp_path / "prod").exists()
+
+
+def test_pieza_cambiada_tras_preparar_se_rechaza(tmp_path, entrega_preparada):
+    ruta, salidas, proyecto = entrega_preparada()
+    p = json.loads(ruta.read_text(encoding="utf-8"))
+    p["elementos"][2]["recorte"] = {"x": 0, "y": 0, "ancho": 300, "alto": 400}
+    ruta.write_text(json.dumps(p, ensure_ascii=False), encoding="utf-8")
+    with pytest.raises(SystemExit) as e:
+        entregar(ruta, salidas, proyecto, tmp_path / "prod", HOY)
+    assert "preparar.py" in str(e.value) and not (tmp_path / "prod").exists()
+
+
+def test_elemento_retocado_sin_antes_y_despues_se_rechaza(tmp_path, entrega_preparada):
+    ruta, salidas, proyecto = entrega_preparada()
+    (proyecto / "revision" / "01_despues.jpg").unlink()
+    with pytest.raises(SystemExit) as e:
+        entregar(ruta, salidas, proyecto, tmp_path / "prod", HOY)
+    assert "01_despues.jpg" in str(e.value) and not (tmp_path / "prod").exists()
+
+
+# ---------------------------------------------------------------- texto incrustado (I2)
+
+def _cambiar(ruta, cambio):
+    p = json.loads(ruta.read_text(encoding="utf-8"))
+    cambio(p)
+    ruta.write_text(json.dumps(p, ensure_ascii=False), encoding="utf-8")
+
+
+def test_rotulo_con_marca_antigua_bloquea_la_entrega(tmp_path, entrega_preparada):
+    ruta, salidas, proyecto = entrega_preparada()
+    _cambiar(ruta, lambda p: p["elementos"][1].update(rotulo="Con Mehari Tour Sur"))
+    with pytest.raises(SystemExit) as e:
+        entregar(ruta, salidas, proyecto, tmp_path / "prod", HOY)
+    assert "rótulo del elemento 02" in str(e.value) and not (tmp_path / "prod").exists()
+
+
+def test_corchetes_en_rotulo_y_sevilla_en_ubicacion(tmp_path, entrega_preparada):
+    ruta, salidas, proyecto = entrega_preparada()
+
+    def cambio(p):
+        p["elementos"][0]["rotulo"] = "Sábado en [lugar]"
+        p["ubicacion"] = "Sevilla"
+    _cambiar(ruta, cambio)
+    d = entregar(ruta, salidas, proyecto, tmp_path / "prod", HOY)
+    assert d.name.endswith("_PENDIENTE")
+    assert "[lugar] (rótulo del elemento 01)" in (d / "texto.txt").read_text(encoding="utf-8")
+    h = (d / "revision.html").read_text(encoding="utf-8")
+    assert "ubicación" in h and "sevilla" in h
+
+
+# ---------------------------------------------------------------- historia en clip (I6)
+
+def _historia_clip(tmp_path, pieza_minima, n):
+    import subprocess
+    from ayudas import escribir
+    carpeta = tmp_path / "hc"
+    (carpeta / "proyecto" / "revision").mkdir(parents=True)
+    (carpeta / "proyecto" / "revision" / "avisos.json").write_text("[]")
+    p = pieza_minima("historia") | {"variante": "clip-cta", "hay_caras": False, "permiso_caras": "si"}
+    p["elementos"] = [{"orden": i, "fichero": f"c{i}.mov", "desde": 0, "hasta": 1} for i in range(1, n + 1)]
+    ruta = escribir(carpeta, p)
+    escribir_preparado(carpeta / "proyecto", p)
+    mp4 = carpeta / "base.mp4"
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i",
+                    "testsrc=size=1080x1920:rate=30", "-t", "1", "-c:v", "libx264",
+                    "-preset", "ultrafast", "-pix_fmt", "yuv420p", str(mp4)], check=True)
+    return carpeta, ruta, mp4
+
+
+def test_historia_en_clip_exige_los_nombres_exactos(tmp_path, pieza_minima):
+    import shutil
+    from PIL import Image
+    carpeta, ruta, mp4 = _historia_clip(tmp_path, pieza_minima, 2)
+    uno, dos = carpeta / "historia-01.mp4", carpeta / "historia-02.mp4"
+    for f in (uno, dos):
+        shutil.copy(mp4, f)
+    sobra = carpeta / "historia.jpg"
+    Image.new("RGB", (1080, 1920)).save(sobra)
+    with pytest.raises(SystemExit) as e:
+        entregar(ruta, [uno, sobra], carpeta / "proyecto", tmp_path / "prod", HOY)
+    assert "historia-02.mp4" in str(e.value) and "historia.jpg" in str(e.value)
+    d = entregar(ruta, [uno, dos], carpeta / "proyecto", tmp_path / "prod", HOY)
+    assert (d / "historia-01.mp4").is_file() and (d / "historia-02.mp4").is_file()
+
+
+def test_historia_en_clip_de_un_elemento_se_llama_historia_mp4(tmp_path, pieza_minima):
+    import shutil
+    carpeta, ruta, mp4 = _historia_clip(tmp_path, pieza_minima, 1)
+    mal = carpeta / "historia-01.mp4"
+    shutil.copy(mp4, mal)
+    with pytest.raises(SystemExit) as e:
+        entregar(ruta, [mal], carpeta / "proyecto", tmp_path / "prod", HOY)
+    assert "historia.mp4" in str(e.value)

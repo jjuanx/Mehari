@@ -18,9 +18,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from comprobar import ResultadoTexto, comprobar_medios, comprobar_texto  # noqa: E402
+from comprobar import ResultadoTexto, comprobar_medios, comprobar_textos_pieza  # noqa: E402
 from localizar import raiz_drive  # noqa: E402
-from pieza import cargar_pieza, id_pieza  # noqa: E402
+from pieza import cargar_pieza, errores_preparado, id_pieza  # noqa: E402
 
 TIPOS_METRICOOL = {"deslizar": "carrusel", "reel": "reel", "historia": "story"}
 NOTA_COLA = ("Pieza suelta de pieza-boda. Pon la fecha y la aprobación del cliente "
@@ -174,32 +174,43 @@ def generar_revision(p: dict, medios: list[str], pares: list[tuple[str, str]],
     return "\n".join(out)
 
 
-def _jpgs_esperados(p: dict) -> list[str] | None:
-    """Nombres exactos de los JPEG que debe tener la pieza, o None si no se fijan por nombre."""
+def _salidas_esperadas(p: dict) -> list[str] | None:
+    """Nombres exactos de los ficheros que debe tener la pieza, o None si no se fijan por nombre."""
     n = len(p["elementos"])
     if p["formato"] == "deslizar":
         return [f"{i:02d}.jpg" for i in range(1, n + 2)]  # + la diapositiva de cierre
-    if p["formato"] == "historia" and p["variante"] == "foto-frase":
-        return ["historia.jpg"] if n == 1 else [f"historia-{i:02d}.jpg" for i in range(1, n + 1)]
+    if p["formato"] == "historia":
+        ext = ".jpg" if p["variante"] == "foto-frase" else ".mp4"
+        return [f"historia{ext}"] if n == 1 else [f"historia-{i:02d}{ext}" for i in range(1, n + 1)]
     return None
 
 
 def _errores_de_conjunto(p: dict, salidas: list[Path]) -> list[str]:
     """Comprueba que las salidas son exactamente las de esta pieza (sin restos ni faltas)."""
     nombres = sorted(s.name for s in salidas)
-    esperado = _jpgs_esperados(p)
+    esperado = _salidas_esperadas(p)
     if esperado is not None:
         if nombres != sorted(esperado):
             return [f"salidas: se esperaban {', '.join(esperado)} y hay {', '.join(nombres) or 'ninguna'}"]
-    elif p["formato"] == "historia":
-        if len(nombres) != len(p["elementos"]):
-            return [f"salidas: se esperaban {len(p['elementos'])} ficheros y hay {len(nombres)}: {', '.join(nombres)}"]
     elif p["formato"] == "reel":
         videos = [n for n in nombres if n.lower().endswith(".mp4")]
         otros = [n for n in nombres if not n.lower().endswith(".mp4")]
         if len(videos) != 1 or any(o != "portada.jpg" for o in otros):
             return [f"salidas: se esperaba un único .mp4 (y opcionalmente portada.jpg) y hay {', '.join(nombres) or 'ninguna'}"]
     return []
+
+
+def _errores_de_revision(p: dict, proyecto: Path) -> list[str]:
+    """Cada elemento recortado o retocado tiene que tener su antes y después."""
+    errores = []
+    for el in sorted(p["elementos"], key=lambda e: e["orden"]):
+        if el.get("recorte") or el.get("retoques"):
+            nn = f"{int(el['orden']):02d}"
+            for n in (f"{nn}_antes.jpg", f"{nn}_despues.jpg"):
+                if not (proyecto / "revision" / n).is_file():
+                    errores.append(f"falta revision/{n} del elemento {nn} ({el['fichero']}), "
+                                   "que tiene recorte o retoques: vuelve a ejecutar preparar.py")
+    return errores
 
 
 def _leer_avisos(proyecto: Path) -> list[str]:
@@ -230,9 +241,10 @@ def entregar(ruta_pieza: Path, salidas: list[Path], proyecto: Path, produccion: 
     salidas = [Path(s) for s in salidas]
     proyecto, produccion = Path(proyecto), Path(produccion)
 
-    errores = _errores_de_conjunto(p, salidas)
+    errores = errores_preparado(p, proyecto) + _errores_de_revision(p, proyecto)
+    errores += _errores_de_conjunto(p, salidas)
     errores += comprobar_medios(p["formato"], p["variante"], salidas)
-    r = comprobar_texto(p.get("texto", ""))
+    r = comprobar_textos_pieza(p)
     errores += r.errores
     if errores:
         sys.exit("No se entrega la pieza:\n" + "\n".join(f"- {e}" for e in errores))

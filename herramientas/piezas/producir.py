@@ -28,7 +28,7 @@ from comun import EXT_VIDEO  # noqa: E402
 
 PLANTILLA_ESTATICAS = rutas.PLANTILLAS / "estaticas"
 PLANTILLA_REEL = rutas.PLANTILLAS / "reel"
-HYPERFRAMES = ["npx", "--yes", "hyperframes@0.8.174"]
+HYPERFRAMES = ["--yes", "hyperframes@0.8.174"]  # se lanza con el npx que encuentre _npx()
 DURACION_TRANSICION = 0.866  # marca/animaciones/renders/transicion.webm
 TRANSICION_TAPA = 0.41       # a los 0,41 s la transición tapa la pantalla: ahí va el corte
 ROTULO_HISTORIA = "¿Cuándo os casáis?"
@@ -56,9 +56,16 @@ def _diapositivas(p: dict) -> list[dict]:
     return hojas
 
 
+def _exigir_preparado(p: dict, proyecto: Path) -> None:
+    errores = pieza.errores_preparado(p, proyecto)
+    if errores:
+        raise RuntimeError("No se produce la pieza: " + "; ".join(errores))
+
+
 def estaticas(p: dict, proyecto: Path, salida: Path) -> list[Path]:
     """Carrusel o historia en foto → JPEG en `salida`; devuelve los ficheros por orden."""
     proyecto, salida = Path(proyecto), Path(salida)
+    _exigir_preparado(p, proyecto)
     ancho, alto = TAMANOS[p["formato"]]
     hojas = _diapositivas(p)
     datos = {"formato": p["formato"], "variante": p["variante"],
@@ -90,7 +97,8 @@ def estaticas(p: dict, proyecto: Path, salida: Path) -> list[Path]:
     cmd = ["node", str(EXPORTAR), str(proyecto.resolve()), str(len(hojas)), str(ancho), str(alto),
            str(salida.resolve()), prefijo]
     try:
-        subprocess.run(cmd, check=True, capture_output=True, text=True, cwd=EXPORTAR.parent)
+        subprocess.run(cmd, check=True, capture_output=True, text=True, encoding="utf-8",
+                       errors="replace", cwd=EXPORTAR.parent)
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"exportar.mjs ha fallado (código {e.returncode}): "
                            f"{(e.stderr or '').strip()} {(e.stdout or '').strip()}".strip()) from e
@@ -184,9 +192,19 @@ def generar_html(p: dict, duraciones: list[float]) -> str:
     return html.replace("/*ANIMACION*/", "      " + sangria.join(animacion))
 
 
+def _npx() -> str:
+    """Ruta de npx. En Windows es npx.cmd, que subprocess no encuentra con el nombre solo."""
+    ruta = shutil.which("npx")
+    if ruta is None:
+        raise RuntimeError("No encuentro npx: instala Node.js (que trae npx) y comprueba que está "
+                           "en el PATH abriendo una terminal nueva y escribiendo «npx --version».")
+    return ruta
+
+
 def _hyperframes(args: list[str], proyecto: Path) -> None:
     try:
-        subprocess.run([*HYPERFRAMES, *args], check=True, capture_output=True, text=True, cwd=proyecto)
+        subprocess.run([_npx(), *HYPERFRAMES, *args], check=True, capture_output=True, text=True,
+                       encoding="utf-8", errors="replace", cwd=proyecto)
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"hyperframes {args[0]} ha fallado (código {e.returncode}): "
                            f"{(e.stdout or '').strip()} {(e.stderr or '').strip()}".strip()) from e
@@ -195,6 +213,7 @@ def _hyperframes(args: list[str], proyecto: Path) -> None:
 def video(p: dict, proyecto: Path, salida: Path) -> list[Path]:
     """Reel (reel.mp4 + portada.jpg) o historia en clip (historia.mp4 o historia-NN.mp4)."""
     proyecto, salida = Path(proyecto).resolve(), Path(salida).resolve()
+    _exigir_preparado(p, proyecto)
     shutil.copytree(PLANTILLA_REEL, proyecto, dirs_exist_ok=True)
     for vieja in (proyecto / "assets").glob("musica.*"):
         vieja.unlink()

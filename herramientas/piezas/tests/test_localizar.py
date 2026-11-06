@@ -94,7 +94,18 @@ def test_sin_coincidencias(drive_falso):
 def test_cli(drive_falso):
     salida = subprocess.run(
         [sys.executable, str(Path(__file__).resolve().parents[1] / "localizar.py"), "sanlúcar"],
-        capture_output=True, text=True, check=True, env={"MEHARI_DRIVE": str(drive_falso), "PATH": ""})
+        capture_output=True, text=True, encoding="utf-8", check=True, env={"MEHARI_DRIVE": str(drive_falso), "PATH": ""})
     datos = json.loads(salida.stdout)
     assert datos["drive"] == str(drive_falso)
     assert datos["candidatas"][0]["relativa"] == "01_Material/Bodas/2026-11-07_sanlucar"
+
+
+def test_fecha_con_guion_bajo_de_drive_para_windows(tmp_path):
+    assert date(2026, 10, 24) in fechas_en("Boda 24_10_2026")
+    assert date(2026, 10, 24) in fechas_en("2026_10_24_la-posadilla")
+    raiz = tmp_path / "Mehari We"
+    (raiz / "01_Material/Selecccion/Boda 24_10_2026").mkdir(parents=True)
+    (raiz / "01_Material/Selecccion/Boda 24_10_2026/IMG_1.HEIC").write_bytes(b"")
+    assert [c.relativa for c in buscar_bodas(raiz, "24 de octubre de 2026")] == [
+        "01_Material/Selecccion/Boda 24_10_2026"]
+    assert len(buscar_bodas(raiz, "la última")) == 1

@@ -150,11 +150,86 @@ def test_cli(tmp_path, pieza_minima):
     ruta = escribir(tmp_path, p)
     jpg = _jpg(tmp_path / "h.jpg", (1080, 1920))
     r = subprocess.run([sys.executable, str(COMPROBAR), str(ruta), str(jpg)],
-                       capture_output=True, text=True)
+                       capture_output=True, text=True, encoding="utf-8")
     assert r.returncode == 0, r.stdout + r.stderr
     assert json.loads(r.stdout)["errores"] == []
     p["texto"] = "Nuestro Citroën"
     escribir(tmp_path, p)
     r = subprocess.run([sys.executable, str(COMPROBAR), str(ruta), str(jpg)],
-                       capture_output=True, text=True)
+                       capture_output=True, text=True, encoding="utf-8")
     assert r.returncode == 1 and json.loads(r.stdout)["errores"]
+
+
+# ---------------------------------------------------------------- marca antigua y avisos (I3)
+
+@pytest.mark.parametrize("marca", ["Mehari Tour Sur", "MEHARI TOURSUR", "@mehari_toursur", "Tour  Sur",
+                                   "tóur sur", "@mehari_experiences", "Méhari Experiences",
+                                   "meharíexperiences"])
+def test_marca_antigua_es_error(marca):
+    r = comprobar_texto(BUENO + " " + marca)
+    assert any("marca antigua" in e for e in r.errores)
+
+
+def test_tour_por_sevilla_no_es_marca_antigua():
+    assert not comprobar_texto(BUENO + " Un tour por el sur.").errores
+
+
+@pytest.mark.parametrize("palabra", ["Cadiz", "sevillanos", "Sevillana", "sevillanas", "SEVILLANO"])
+def test_avisos_de_ciudad(palabra):
+    r = comprobar_texto(BUENO + " " + palabra)
+    assert r.avisos and not r.errores
+
+
+# ---------------------------------------------------------------- texto incrustado (I2)
+
+def test_textos_de_la_pieza_buena(pieza_minima):
+    from comprobar import comprobar_textos_pieza
+    p = pieza_minima("deslizar") | {"texto": BUENO, "ubicacion": "Finca La Posadilla",
+                                    "a_mano_despues": ["Etiquetar a la finca"]}
+    p["elementos"][0]["rotulo"] = "Llegada a la finca"
+    assert comprobar_textos_pieza(p) == ResultadoTexto([], [], [])
+
+
+@pytest.mark.parametrize("campo,valor,pista", [
+    ("rotulo", "Nuestro Citroën", "rótulo del elemento 01"),
+    ("rotulo", "La salida — la llegada", "rótulo del elemento 01"),
+    ("rotulo", "Con Mehari Tour Sur", "rótulo del elemento 01"),
+    ("ubicacion", "Una experiencia única", "ubicación"),
+    ("a_mano_despues", ["Nada", "Etiquetar a @mehari_toursur"], "línea 2"),
+])
+def test_errores_en_rotulos_ubicacion_y_a_mano(pieza_minima, campo, valor, pista):
+    from comprobar import comprobar_textos_pieza
+    p = pieza_minima("deslizar") | {"texto": BUENO}
+    if campo == "rotulo":
+        p["elementos"][0]["rotulo"] = valor
+    else:
+        p[campo] = valor
+    r = comprobar_textos_pieza(p)
+    assert r.errores and any(pista in e for e in r.errores), r.errores
+
+
+def test_rotulos_sin_telefono_ni_limite_de_hashtags(pieza_minima):
+    from comprobar import comprobar_textos_pieza
+    p = pieza_minima("deslizar") | {"texto": BUENO}
+    p["elementos"][1]["rotulo"] = "#a #b #c #d #e #f"
+    assert comprobar_textos_pieza(p).errores == []
+
+
+def test_corchetes_en_rotulos_son_pendientes_y_sevilla_aviso(pieza_minima):
+    from comprobar import comprobar_textos_pieza
+    p = pieza_minima("deslizar") | {"texto": BUENO, "ubicacion": "Sevilla"}
+    p["elementos"][2]["rotulo"] = "Sábado en [PENDIENTE: lugar]"
+    r = comprobar_textos_pieza(p)
+    assert not r.errores
+    assert r.pendientes == ["[PENDIENTE: lugar] (rótulo del elemento 03)"]
+    assert any("ubicación" in a and "sevilla" in a for a in r.avisos)
+
+
+def test_cli_comprueba_los_rotulos(tmp_path, pieza_minima):
+    p = pieza_minima("historia")
+    p["elementos"][0]["rotulo"] = "Nuestro Citroën"
+    ruta = escribir(tmp_path, p)
+    jpg = _jpg(tmp_path / "h.jpg", (1080, 1920))
+    r = subprocess.run([sys.executable, str(COMPROBAR), str(ruta), str(jpg)],
+                       capture_output=True, text=True, encoding="utf-8")
+    assert r.returncode == 1 and any("rótulo" in e for e in json.loads(r.stdout)["errores"])

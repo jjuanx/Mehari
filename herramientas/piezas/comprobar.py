@@ -3,6 +3,7 @@ import json
 import re
 import subprocess
 import sys
+import unicodedata
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -14,7 +15,9 @@ TOLERANCIA_DURACION = 0.05
 TOLERANCIA_FPS = 0.01
 RE_HASHTAG = re.compile(r"#\w+")
 RE_PENDIENTE = re.compile(r"\[[^\[\]]*\]")
-RE_AVISO = re.compile(r"\b(sevilla|sevillano|sevillana|cádiz)\b", re.IGNORECASE)
+RE_AVISO = re.compile(r"\b(sevilla|sevillan[oa]s?|c[aá]diz)\b", re.IGNORECASE)
+# Marca antigua: se busca en el texto en minúsculas y sin tildes
+RE_MARCA_ANTIGUA = re.compile(r"tour\s*sur|mehari[_ ]?experiences")
 
 
 @dataclass
@@ -24,25 +27,61 @@ class ResultadoTexto:
     pendientes: list[str] = field(default_factory=list)
 
 
-def comprobar_texto(texto: str) -> ResultadoTexto:
-    """Aplica las reglas de redacción de la marca a un texto de publicación."""
+def _sin_tildes(texto: str) -> str:
+    return unicodedata.normalize("NFKD", texto).encode("ascii", "ignore").decode().lower()
+
+
+def _reglas_comunes(texto: str, donde: str) -> ResultadoTexto:
+    """Reglas de redacción que valen para cualquier texto que se publica o se incrusta."""
     r = ResultadoTexto()
     bajo = texto.lower()
     if "citroën" in bajo or "citroen" in bajo:
-        r.errores.append("el texto nombra a «Citroën»")
+        r.errores.append(f"{donde} nombra a «Citroën»")
     if "—" in texto:
-        r.errores.append("el texto contiene la raya «—»")
-    if "experiencia única" in bajo:
-        r.errores.append("el texto contiene «experiencia única»")
+        r.errores.append(f"{donde} contiene la raya «—»")
+    if "experiencia única" in bajo or "experiencia unica" in bajo:
+        r.errores.append(f"{donde} contiene «experiencia única»")
+    for m in sorted({m.group(0) for m in RE_MARCA_ANTIGUA.finditer(_sin_tildes(texto))}):
+        r.errores.append(f"{donde} nombra la marca antigua («{m}»)")
+    for m in sorted({m.group(0).lower() for m in RE_AVISO.finditer(texto)}):
+        r.avisos.append(f"{donde} menciona «{m}»: la marca no se ata a una ciudad")
+    r.pendientes = RE_PENDIENTE.findall(texto)
+    return r
+
+
+def comprobar_texto(texto: str) -> ResultadoTexto:
+    """Aplica las reglas de redacción de la marca al texto (copy) de la publicación."""
+    r = _reglas_comunes(texto, "el texto")
     n = len(RE_HASHTAG.findall(texto))
     if n > MAX_HASHTAGS:
         r.errores.append(f"el texto tiene {n} hashtags (máximo {MAX_HASHTAGS})")
     if TELEFONO not in texto:
         r.errores.append(f"falta el teléfono {TELEFONO}")
-    for m in sorted({m.group(0).lower() for m in RE_AVISO.finditer(texto)}):
-        r.avisos.append(f"el texto menciona «{m}»: la marca no se ata a una ciudad")
-    r.pendientes = RE_PENDIENTE.findall(texto)
     return r
+
+
+def comprobar_textos_pieza(p: dict) -> ResultadoTexto:
+    """Copy, rótulos, ubicación y «a mano en la app» de una pieza.
+
+    Los rótulos, la ubicación y las líneas de a_mano_despues siguen las mismas reglas que el
+    copy salvo el teléfono y el número de hashtags. Sus marcadores [..] cuentan como
+    pendientes, con el sitio donde están entre paréntesis.
+    """
+    total = comprobar_texto(p.get("texto") or "")
+    otros = [(f"el rótulo del elemento {int(el['orden']):02d}", el.get("rotulo"))
+             for el in sorted(p.get("elementos", []), key=lambda e: e["orden"])]
+    otros.append(("la ubicación", p.get("ubicacion")))
+    otros += [(f"«A mano en la app» (línea {i})", x)
+              for i, x in enumerate(p.get("a_mano_despues") or [], 1)]
+    for donde, texto in otros:
+        if not texto:
+            continue
+        r = _reglas_comunes(texto, donde)
+        total.errores += r.errores
+        total.avisos += r.avisos
+        corto = donde.removeprefix("el ").removeprefix("la ")
+        total.pendientes += [f"{x} ({corto})" for x in r.pendientes]
+    return total
 
 
 # ---------------------------------------------------------------- medios
@@ -64,7 +103,7 @@ def _sonda(ruta: Path) -> dict:
     try:
         sal = subprocess.run(
             ["ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", str(ruta)],
-            capture_output=True, text=True, check=True).stdout
+            capture_output=True, text=True, encoding="utf-8", errors="replace", check=True).stdout
         return json.loads(sal)
     except (subprocess.CalledProcessError, json.JSONDecodeError, OSError) as e:
         raise ValueError(f"no se puede leer con ffprobe ({type(e).__name__})") from e
@@ -160,8 +199,10 @@ def main(argv: list[str]) -> int:
     if len(argv) < 2:
         print("uso: comprobar.py <pieza.json> <fichero>...", file=sys.stderr)
         return 2
+    if hasattr(sys.stdout, "reconfigure"):  # JSON en UTF-8 también en Windows (cp1252 por defecto)
+        sys.stdout.reconfigure(encoding="utf-8")
     pieza = json.loads(Path(argv[0]).read_text(encoding="utf-8"))
-    texto = comprobar_texto(pieza.get("texto", ""))
+    texto = comprobar_textos_pieza(pieza)
     errores = comprobar_medios(pieza["formato"], pieza["variante"], [Path(a) for a in argv[1:]])
     salida = {"errores": errores + texto.errores, "avisos": texto.avisos,
               "pendientes": texto.pendientes}

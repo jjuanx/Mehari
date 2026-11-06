@@ -138,7 +138,7 @@ def test_render_real_del_reel(tmp_path, pieza_reel_preparada):
     assert Image.open(portada).size == (1080, 1920)
     assert (mp4.name, portada.name) == ("reel.mp4", "portada.jpg")
     flujos = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type,codec_name",
-                             "-of", "csv=p=0", str(mp4)], capture_output=True, text=True).stdout
+                             "-of", "csv=p=0", str(mp4)], capture_output=True, text=True, encoding="utf-8").stdout
     assert "aac,audio" in flujos                           # la música entra en el MP4
 
 
@@ -151,3 +151,35 @@ def test_render_real_de_historias_en_clip(tmp_path, pieza_historia_clip_preparad
     assert [s.name for s in salidas] == ["historia-01.mp4", "historia-02.mp4"]
     assert not (tmp_path / "out" / "historia.mp4").exists()
     assert comprobar_medios("historia", "clip-cta", salidas) == []
+
+
+def test_video_se_niega_sin_material_preparado(tmp_path, pieza_minima):
+    with pytest.raises(RuntimeError, match="preparado.json"):
+        video(pieza_minima("reel"), tmp_path / "proy", tmp_path / "out")
+    assert not (tmp_path / "out").exists()
+
+
+# ---------------------------------------------------------------- Windows (I4)
+
+def test_npx_se_resuelve_con_shutil_which(monkeypatch):
+    import producir as modulo
+    monkeypatch.setattr(modulo.shutil, "which", lambda nombre: r"C:\Program Files\nodejs\npx.cmd")
+    assert modulo._npx() == r"C:\Program Files\nodejs\npx.cmd"
+
+
+def test_sin_npx_error_claro(monkeypatch):
+    import producir as modulo
+    monkeypatch.setattr(modulo.shutil, "which", lambda nombre: None)
+    with pytest.raises(RuntimeError, match="npx"):
+        modulo._npx()
+
+
+def test_hyperframes_usa_el_npx_resuelto_y_utf8(monkeypatch, tmp_path):
+    import producir as modulo
+    llamadas = []
+    monkeypatch.setattr(modulo.shutil, "which", lambda nombre: "/ruta/npx.cmd")
+    monkeypatch.setattr(modulo.subprocess, "run", lambda cmd, **kw: llamadas.append((cmd, kw)))
+    modulo._hyperframes(["check"], tmp_path)
+    cmd, kw = llamadas[0]
+    assert cmd[0] == "/ruta/npx.cmd" and cmd[-1] == "check" and "hyperframes@0.8.174" in cmd
+    assert kw["encoding"] == "utf-8" and kw["errors"] == "replace"

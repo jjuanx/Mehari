@@ -157,6 +157,7 @@ def entrega_preparada(pieza_minima, tmp_path):
     Con pendiente=True la pieza tiene caras sin permiso (no se puede publicar).
     """
     import json
+    from ayudas import escribir_preparado
     contador = []
 
     def fabrica(pendiente=False, avisos=None):
@@ -169,6 +170,7 @@ def entrega_preparada(pieza_minima, tmp_path):
         p["ubicacion"] = "Finca La Posadilla"
         p["a_mano_despues"] = ["Etiquetar a la finca"]
         p["elementos"][0]["revision_marca"] = "APTA CON RETOQUE: funda de rueda"
+        p["elementos"][0]["retoques"] = [{"tipo": "funda", "poligono": [[10, 10], [60, 10], [60, 40], [10, 40]]}]
         ruta = raiz / "pieza.json"
         ruta.write_text(json.dumps(p, ensure_ascii=False), encoding="utf-8")
         salidas = raiz / "salidas"
@@ -184,6 +186,7 @@ def entrega_preparada(pieza_minima, tmp_path):
             Image.new("RGB", (80, 60), (10, 10, 10)).save(proyecto / "revision" / n)
         (proyecto / "revision" / "avisos.json").write_text(
             json.dumps(avisos or [], ensure_ascii=False), encoding="utf-8")
+        escribir_preparado(proyecto, p)
         return ruta, ficheros, proyecto
 
     return fabrica
