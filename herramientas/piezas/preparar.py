@@ -128,8 +128,21 @@ def _corte(el: dict, duracion: float) -> tuple[float, float]:
     return float(el.get("desde", 0)), float(el.get("hasta", duracion))
 
 
+def _validar_tipos(el: dict, id_el: str) -> None:
+    """Cada retoque tiene que ser de un tipo que se aplica a ese fichero: nunca se salta uno."""
+    video = pieza.es_video(el["fichero"])
+    admitidos = pieza.RETOQUES_VIDEO if video else pieza.RETOQUES_FOTO
+    for r in el.get("retoques", []):
+        tipo = r.get("tipo") if isinstance(r, dict) else r
+        if tipo not in admitidos:
+            raise ValueError(f"Elemento {id_el} ({el['fichero']}): el retoque de tipo {tipo!r} no se puede "
+                             f"aplicar a un {'vídeo' if video else 'foto'} (admite {', '.join(admitidos)})")
+
+
 def _validar(elementos: list, boda: Path) -> None:
-    """Comprueba recortes y zonas contra los ficheros reales antes de procesar nada."""
+    """Comprueba retoques, recortes y zonas contra los ficheros reales antes de procesar nada."""
+    for el in elementos:
+        _validar_tipos(el, f"{int(el['orden']):02d}")
     for el in elementos:
         retoques = el.get("retoques", [])
         if not el.get("recorte") and not any(r.get("tipo") == "zona" for r in retoques):
@@ -147,21 +160,24 @@ def _validar(elementos: list, boda: Path) -> None:
                     f"fuera del corte {desde:g}-{hasta:g} s; vuelve a marcarla dentro del corte")
 
 
-def _zonas_finales(zonas: list, desde: float, hasta: float, caja: tuple[int, int, int, int]) -> list[str]:
-    """Argumentos --zona para el vídeo ya recortado y escalado a 1080x1920.
+def _zonas_finales(zonas: list, desde: float, hasta: float,
+                   caja: tuple[int, int, int, int]) -> tuple[list[str], list[dict]]:
+    """Argumentos --zona para el vídeo ya recortado y escalado a 1080x1920, y zonas descartadas.
 
     Los tiempos pasan a ser relativos al corte y las cajas, del original visible al
-    espacio de salida. Una zona fuera del encuadre se descarta; una parcial se recorta.
+    espacio de salida. Una zona parcial se recorta; una que queda fuera del encuadre se
+    descarta y se devuelve aparte para avisar (puede ser una caja mal marcada).
     """
     cx, cy, can, cal = caja
     sx, sy = ANCHO_FINAL / can, ALTO_FINAL / cal
-    salida = []
+    salida, descartadas = [], []
     for z in zonas:
         x, y, an, al = z["caja"]
         x0, y0 = max(0, round((x - cx) * sx)), max(0, round((y - cy) * sy))
         x1 = min(ANCHO_FINAL, round((x + an - cx) * sx))
         y1 = min(ALTO_FINAL, round((y + al - cy) * sy))
         if x1 <= x0 or y1 <= y0:
+            descartadas.append(z)
             continue
         texto = f"{float(z['t']) - desde:.3f},{x0},{y0},{x1 - x0},{y1 - y0}"
         if "desde" in z or "hasta" in z:
@@ -169,7 +185,7 @@ def _zonas_finales(zonas: list, desde: float, hasta: float, caja: tuple[int, int
             zh = min(max(float(z.get("hasta", hasta)), desde), hasta) - desde
             texto += f",{zd:.3f},{zh:.3f}"
         salida.append(texto)
-    return salida
+    return salida, descartadas
 
 
 def _preparar_video(el: dict, origen: Path, destino: Path, tmp: Path, id_el: str,
@@ -197,8 +213,11 @@ def _preparar_video(el: dict, origen: Path, destino: Path, tmp: Path, id_el: str
 
     # 2) retoques de zona con difuminar.py, ya en el espacio de salida
     zonas_orig = [r for r in el.get("retoques", []) if r.get("tipo") == "zona"]
-    zonas = _zonas_finales(zonas_orig, desde, hasta, caja)
-    fuente, avisos = intermedio, []
+    zonas, descartadas = _zonas_finales(zonas_orig, desde, hasta, caja)
+    fuente = intermedio
+    avisos = [f"Elemento {id_el} ({el['fichero']}): la zona en t={float(z['t']):g} s con caja "
+              f"{z['caja']} queda fuera del encuadre final y no se ha difuminado. Comprueba que "
+              f"está bien marcada y que lo que tapaba no sale en el vídeo." for z in descartadas]
     if zonas:
         difuminado = tmp / f"{id_el}_difuminado.mp4"
         radio = max(8, round(60 * ANCHO_FINAL / an))
@@ -206,7 +225,7 @@ def _preparar_video(el: dict, origen: Path, destino: Path, tmp: Path, id_el: str
                "--radio", radio]
         for z in zonas:
             cmd += ["--zona", z]
-        avisos = avisos_de_difuminar(_ejecutar(cmd).stdout, id_el, el["fichero"])
+        avisos += avisos_de_difuminar(_ejecutar(cmd).stdout, id_el, el["fichero"])
         fuente = difuminado
 
     # 3) codificación final: H.264 CRF 15, 30 fps, sin audio
@@ -233,6 +252,8 @@ def _argumentos_retoque(retoques: list) -> list[str]:
             args.append(f"--{r['tipo']}={puntos}")
         elif r["tipo"] == "emblema":
             args.append("--emblema=" + ",".join(str(int(round(v))) for v in r["caja"]))
+        else:
+            raise ValueError(f"retoque de foto de tipo desconocido: {r['tipo']!r}")
     return args
 
 

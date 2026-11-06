@@ -59,3 +59,99 @@ def test_fixtures_de_foto(foto_jpg, foto_rotada):
     assert Image.open(foto_jpg).size == (3024, 4032)
     assert Image.open(foto_rotada).size == (4032, 3024)
     assert ImageOps.exif_transpose(Image.open(foto_rotada)).size == (3024, 4032)
+
+
+def test_historia_en_clip_el_limite_es_por_clip(pieza_minima, tmp_path):
+    p = pieza_minima("historia") | {"variante": "clip-cta"}
+    p["elementos"] = [{"orden": i, "fichero": f"c{i}.mov", "desde": 0, "hasta": 6} for i in (1, 2, 3)]
+    assert cargar_pieza(escribir(tmp_path, p))["variante"] == "clip-cta"   # 18 s en total, 6 s cada uno
+    p["elementos"][1]["hasta"] = 16
+    with pytest.raises(PiezaInvalida, match=r"elementos\[1\]"):
+        cargar_pieza(escribir(tmp_path, p))
+
+
+# ---------------------------------------------------------------- retoques (C1, M6)
+
+POLIGONO = [[10, 10], [60, 10], [60, 40], [10, 40]]
+
+
+def _con_retoques(pieza_minima, fichero, retoques):
+    p = pieza_minima("historia")
+    p["elementos"] = [{"orden": 1, "fichero": fichero, "retoques": retoques}]
+    if fichero.lower().endswith((".mov", ".mp4")):
+        p["variante"] = "clip-cta"
+        p["elementos"][0] |= {"desde": 0, "hasta": 3}
+    return p
+
+
+@pytest.mark.parametrize("fichero,retoques", [
+    ("IMG_1.HEIC", [{"tipo": "placa", "poligono": POLIGONO}]),
+    ("IMG_1.jpg", [{"tipo": "funda", "poligono": POLIGONO + [[5, 25], [8, 20]]}]),
+    ("IMG_1.jpg", [{"tipo": "emblema", "caja": [10, 10, 50.5, 30]}]),
+    ("v.MOV", [{"tipo": "zona", "t": 1.5, "caja": [10, 10, 50, 30]}]),
+    ("v.mp4", [{"tipo": "zona", "t": 1, "caja": [10, 10, 50, 30], "desde": 0.5, "hasta": 2}]),
+    ("v.mp4", []),
+])
+def test_retoques_validos(pieza_minima, tmp_path, fichero, retoques):
+    cargar_pieza(escribir(tmp_path, _con_retoques(pieza_minima, fichero, retoques)))
+
+
+@pytest.mark.parametrize("fichero,retoques,pista", [
+    ("IMG_1.jpg", [{"tipo": "matricula", "poligono": POLIGONO}], "tipo"),
+    ("IMG_1.jpg", [{"tipo": "Placa", "poligono": POLIGONO}], "tipo"),
+    ("v.mp4", [{"tipo": "placa", "poligono": POLIGONO}], "vídeo"),
+    ("IMG_1.jpg", [{"tipo": "zona", "t": 1, "caja": [10, 10, 50, 30]}], "foto"),
+    ("IMG_1.jpg", [{"tipo": "placa", "poligono": POLIGONO[:3]}], "poligono"),
+    ("IMG_1.jpg", [{"tipo": "placa", "poligono": [[10, 10], [60, "x"], [60, 40], [10, 40]]}], "poligono"),
+    ("IMG_1.jpg", [{"tipo": "funda", "caja": [10, 10, 50, 30]}], "poligono"),
+    ("IMG_1.jpg", [{"tipo": "emblema", "caja": [10, 10, 0, 30]}], "caja"),
+    ("IMG_1.jpg", [{"tipo": "emblema", "caja": [10, 10, 50]}], "caja"),
+    ("v.mp4", [{"tipo": "zona", "caja": [10, 10, 50, 30]}], "'t'"),
+    ("v.mp4", [{"tipo": "zona", "t": 1, "caja": [10, 10, -5, 30]}], "caja"),
+    ("v.mp4", [{"tipo": "zona", "t": 1, "caja": [10, 10, 50, 30], "desde": "0"}], "desde"),
+    ("IMG_1.jpg", {"tipo": "placa", "poligono": POLIGONO}, "lista"),
+    ("IMG_1.jpg", ["placa"], "objeto"),
+])
+def test_retoques_invalidos(pieza_minima, tmp_path, fichero, retoques, pista):
+    with pytest.raises(PiezaInvalida) as e:
+        cargar_pieza(escribir(tmp_path, _con_retoques(pieza_minima, fichero, retoques)))
+    assert pista in str(e.value)
+
+
+@pytest.mark.parametrize("fichero", ["v.m4v", "v.AVI", "v.mkv"])
+def test_video_con_extension_no_admitida(pieza_minima, tmp_path, fichero):
+    p = pieza_minima("historia")
+    p["elementos"] = [{"orden": 1, "fichero": fichero}]
+    with pytest.raises(PiezaInvalida, match="extensión"):
+        cargar_pieza(escribir(tmp_path, p))
+
+
+# ---------------------------------------------------------------- música y textos (M2, I2)
+
+@pytest.mark.parametrize("musica", [{"licencia": "cc0"}, {"ruta": "", "licencia": "cc0"},
+                                    {"ruta": "m.mp3"}, {"ruta": "m.mp3", "licencia": " "}, "m.mp3"])
+def test_musica_exige_ruta_y_licencia(pieza_minima, tmp_path, musica):
+    p = pieza_minima("reel") | {"musica": musica}
+    with pytest.raises(PiezaInvalida, match="musica"):
+        cargar_pieza(escribir(tmp_path, p))
+
+
+def test_musica_valida_o_nula(pieza_minima, tmp_path):
+    for musica in (None, {"ruta": "m.mp3", "licencia": "cc0", "titulo": "Pista"}):
+        cargar_pieza(escribir(tmp_path, pieza_minima("reel") | {"musica": musica}))
+
+
+@pytest.mark.parametrize("cambio,pista", [
+    ({"texto": None}, "texto"), ({"ubicacion": 3}, "ubicacion"),
+    ({"a_mano_despues": "Etiquetar"}, "a_mano_despues"), ({"a_mano_despues": [1]}, "a_mano_despues"),
+])
+def test_campos_de_texto_con_tipo_incorrecto(pieza_minima, tmp_path, cambio, pista):
+    with pytest.raises(PiezaInvalida, match=pista):
+        cargar_pieza(escribir(tmp_path, pieza_minima("deslizar") | cambio))
+
+
+def test_rotulo_debe_ser_texto(pieza_minima, tmp_path):
+    p = pieza_minima("deslizar")
+    p["elementos"][0]["rotulo"] = ["a"]
+    with pytest.raises(PiezaInvalida, match="rotulo"):
+        cargar_pieza(escribir(tmp_path, p))
