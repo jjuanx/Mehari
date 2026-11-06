@@ -148,3 +148,42 @@ def pieza_historia_preparada(pieza_minima, foto_jpg, tmp_path):
     """Fábrica: (pieza, proyecto) de una historia en foto con las fotos ya preparadas."""
     return lambda n_fotos=1, rotulo="Vuestra boda, a vuestro ritmo": _preparada(
         pieza_minima, foto_jpg, tmp_path, "historia", "foto-frase", n_fotos, rotulo)
+
+
+@pytest.fixture
+def entrega_preparada(pieza_minima, tmp_path):
+    """Fábrica: (ruta_pieza, salidas, proyecto) de un carrusel listo para entregar.
+
+    Con pendiente=True la pieza tiene caras sin permiso (no se puede publicar).
+    """
+    import json
+    contador = []
+
+    def fabrica(pendiente=False, formato="deslizar", avisos=None):
+        contador.append(1)
+        raiz = tmp_path / f"entrega{len(contador)}"
+        raiz.mkdir()
+        p = pieza_minima("deslizar")
+        p["hay_caras"] = bool(pendiente)
+        p["permiso_caras"] = "pendiente" if pendiente else "si"
+        p["ubicacion"] = "Finca La Posadilla"
+        p["a_mano_despues"] = ["Etiquetar a la finca"]
+        p["elementos"][0]["revision_marca"] = "APTA CON RETOQUE: funda de rueda"
+        ruta = raiz / "pieza.json"
+        ruta.write_text(json.dumps(p, ensure_ascii=False), encoding="utf-8")
+        salidas = raiz / "salidas"
+        salidas.mkdir()
+        ficheros = []
+        for i in range(1, 3):
+            f = salidas / f"{i:02d}.jpg"
+            Image.new("RGB", (1080, 1440), (200, 200, 200)).save(f, quality=90)
+            ficheros.append(f)
+        proyecto = raiz / "proyecto"
+        (proyecto / "revision").mkdir(parents=True)
+        for n in ("01_antes.jpg", "01_despues.jpg"):
+            Image.new("RGB", (80, 60), (10, 10, 10)).save(proyecto / "revision" / n)
+        (proyecto / "revision" / "avisos.json").write_text(
+            json.dumps(avisos or [], ensure_ascii=False), encoding="utf-8")
+        return ruta, ficheros, proyecto
+
+    return fabrica
