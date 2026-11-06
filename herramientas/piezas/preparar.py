@@ -56,6 +56,17 @@ def _ffmpeg(*args) -> None:
     _ejecutar(["ffmpeg", "-y", "-loglevel", "error", *args])
 
 
+def _exigir_zscale() -> None:
+    """Los vídeos HDR del iPhone necesitan el filtro zscale (libzimg) para pasar a SDR."""
+    filtros = _ejecutar(["ffmpeg", "-hide_banner", "-filters"]).stdout
+    if not any(linea.split()[1:2] == ["zscale"] for linea in filtros.splitlines()):
+        raise RuntimeError(
+            "Este FFmpeg no tiene el filtro zscale, necesario para pasar a SDR los vídeos HDR "
+            "del iPhone. En Mac: «brew install ffmpeg-full» y lanza los scripts con "
+            "PATH=\"/opt/homebrew/opt/ffmpeg-full/bin:$PATH\". En Windows, los builds "
+            "«full» de gyan.dev ya lo traen.")
+
+
 def _abs(ruta: Path) -> str:
     return str(Path(ruta).resolve())
 
@@ -208,6 +219,8 @@ def _preparar_video(el: dict, origen: Path, destino: Path, tmp: Path, id_el: str
                     revision: Path | None) -> list[str]:
     info = sondear(origen)
     hlg = info["transfer"] == "arib-std-b67"
+    if hlg:
+        _exigir_zscale()
     desde, hasta = _corte(el, info["duracion"])
     dur = hasta - desde
     ancho, alto = info["ancho"], info["alto"]

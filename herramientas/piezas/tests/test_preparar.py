@@ -330,3 +330,15 @@ def test_sondear_descuenta_el_recorte_de_los_live_photos(monkeypatch):
     monkeypatch.setattr(mod, "_ejecutar", lambda cmd: types.SimpleNamespace(stdout=json.dumps(sonda)))
     datos = mod.sondear("x.mov")
     assert (datos["ancho"], datos["alto"]) == (1308, 1744)
+
+
+def test_sin_zscale_el_error_dice_que_instalar(monkeypatch):
+    import types
+    import preparar as mod
+    sin = " ... colorspace        V->V       Convert between colorspaces.\n .S tonemap           V->V       x\n"
+    monkeypatch.setattr(mod, "_ejecutar", lambda cmd: types.SimpleNamespace(stdout=sin))
+    with pytest.raises(RuntimeError, match="ffmpeg-full"):
+        mod._exigir_zscale()
+    con = sin + " .. zscale            V->V       Apply resizing, colorspace and bit depth conversion.\n"
+    monkeypatch.setattr(mod, "_ejecutar", lambda cmd: types.SimpleNamespace(stdout=con))
+    mod._exigir_zscale()

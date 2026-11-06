@@ -6,7 +6,12 @@ Claude decide y lo escribe en `pieza.json`; los scripts solo leen ese fichero. N
 
 ## Instalación (una vez en cada ordenador)
 
-Hace falta Python 3.10 o superior, Node.js 22 o superior y FFmpeg en el PATH (en Windows: `winget install Gyan.FFmpeg`).
+Hace falta Python 3.10 o superior, Node.js 22 o superior y FFmpeg en el PATH **con el filtro `zscale`** (libzimg). Sin él no se pueden pasar a SDR los vídeos HDR del iPhone y `preparar.py` se para con un aviso.
+
+- **Mac**: el `ffmpeg` normal de Homebrew no trae `zscale`. Instala `brew install ffmpeg-full` (va aparte y no sustituye al otro) y lanza los scripts con `PATH="/opt/homebrew/opt/ffmpeg-full/bin:$PATH"` delante, o añade esa ruta al principio del PATH en tu `~/.zshrc`.
+- **Windows**: `winget install Gyan.FFmpeg` (el build «full» de gyan.dev ya trae `zscale`).
+
+Para comprobarlo: `ffmpeg -hide_banner -filters | grep zscale` tiene que devolver una línea.
 
 ```bash
 pip install -r herramientas/piezas/requirements.txt
