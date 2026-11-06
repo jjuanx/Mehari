@@ -159,7 +159,7 @@ def entrega_preparada(pieza_minima, tmp_path):
     import json
     contador = []
 
-    def fabrica(pendiente=False, formato="deslizar", avisos=None):
+    def fabrica(pendiente=False, avisos=None):
         contador.append(1)
         raiz = tmp_path / f"entrega{len(contador)}"
         raiz.mkdir()
@@ -174,7 +174,7 @@ def entrega_preparada(pieza_minima, tmp_path):
         salidas = raiz / "salidas"
         salidas.mkdir()
         ficheros = []
-        for i in range(1, 3):
+        for i in range(1, 7):  # 5 fotos + cierre
             f = salidas / f"{i:02d}.jpg"
             Image.new("RGB", (1080, 1440), (200, 200, 200)).save(f, quality=90)
             ficheros.append(f)

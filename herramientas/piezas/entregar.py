@@ -12,6 +12,7 @@ import json
 import os
 import shutil
 import sys
+from collections.abc import Sequence
 from datetime import date
 from pathlib import Path
 
@@ -27,10 +28,11 @@ NOTA_COLA = ("Pieza suelta de pieza-boda. Pon la fecha y la aprobación del clie
 EXT_VIDEO = (".mp4",)
 
 
-def motivos_no_lista(p: dict, r: ResultadoTexto, avisos: list[str] = ()) -> list[str]:
+def motivos_no_lista(p: dict, r: ResultadoTexto, avisos: Sequence[str] = ()) -> list[str]:
     """Razones por las que la pieza NO se puede publicar todavía (vacío = lista)."""
     motivos = []
-    if p.get("hay_caras") and p.get("permiso_caras") != "si":
+    # Sin la clave «hay_caras» se supone que hay caras (por prudencia)
+    if p.get("hay_caras", True) and p.get("permiso_caras") != "si":
         motivos.append("falta permiso de caras")
     pendientes = list(r.pendientes) + list(p.get("pendientes", []))
     if pendientes:
@@ -118,7 +120,7 @@ def _e(x) -> str:
 
 def generar_revision(p: dict, medios: list[str], pares: list[tuple[str, str]],
                      r: ResultadoTexto, motivos: list[str],
-                     avisos_difuminado: list[str] = ()) -> str:
+                     avisos_difuminado: Sequence[str] = ()) -> str:
     out = ["<!doctype html>", '<html lang="es"><head><meta charset="utf-8">',
            '<meta name="viewport" content="width=device-width, initial-scale=1">',
            f"<title>Revisión · {_e(p.get('tema', ''))}</title><style>{CSS}</style></head><body>",
@@ -172,6 +174,48 @@ def generar_revision(p: dict, medios: list[str], pares: list[tuple[str, str]],
     return "\n".join(out)
 
 
+def _jpgs_esperados(p: dict) -> list[str] | None:
+    """Nombres exactos de los JPEG que debe tener la pieza, o None si no se fijan por nombre."""
+    n = len(p["elementos"])
+    if p["formato"] == "deslizar":
+        return [f"{i:02d}.jpg" for i in range(1, n + 2)]  # + la diapositiva de cierre
+    if p["formato"] == "historia" and p["variante"] == "foto-frase":
+        return ["historia.jpg"] if n == 1 else [f"historia-{i:02d}.jpg" for i in range(1, n + 1)]
+    return None
+
+
+def _errores_de_conjunto(p: dict, salidas: list[Path]) -> list[str]:
+    """Comprueba que las salidas son exactamente las de esta pieza (sin restos ni faltas)."""
+    nombres = sorted(s.name for s in salidas)
+    esperado = _jpgs_esperados(p)
+    if esperado is not None:
+        if nombres != sorted(esperado):
+            return [f"salidas: se esperaban {', '.join(esperado)} y hay {', '.join(nombres) or 'ninguna'}"]
+    elif p["formato"] == "historia":
+        if len(nombres) != len(p["elementos"]):
+            return [f"salidas: se esperaban {len(p['elementos'])} ficheros y hay {len(nombres)}: {', '.join(nombres)}"]
+    elif p["formato"] == "reel":
+        videos = [n for n in nombres if n.lower().endswith(".mp4")]
+        otros = [n for n in nombres if not n.lower().endswith(".mp4")]
+        if len(videos) != 1 or any(o != "portada.jpg" for o in otros):
+            return [f"salidas: se esperaba un único .mp4 (y opcionalmente portada.jpg) y hay {', '.join(nombres) or 'ninguna'}"]
+    return []
+
+
+def _leer_avisos(proyecto: Path) -> list[str]:
+    ruta = proyecto / "revision" / "avisos.json"
+    if not ruta.is_file():
+        sys.exit(f"No se entrega la pieza: falta {ruta}. preparar.py siempre lo escribe; "
+                 "¿no se ha ejecutado o se ha pasado otro proyecto?")
+    try:
+        avisos = json.loads(ruta.read_text(encoding="utf-8"))
+    except ValueError as e:
+        sys.exit(f"No se entrega la pieza: {ruta} no es JSON válido ({e}).")
+    if not isinstance(avisos, list) or not all(isinstance(a, str) for a in avisos):
+        sys.exit(f"No se entrega la pieza: {ruta} debe ser una lista de textos.")
+    return avisos
+
+
 def _carpeta_libre(base: Path, nombre: str) -> Path:
     destino, n = base / nombre, 1
     while destino.exists():
@@ -186,17 +230,15 @@ def entregar(ruta_pieza: Path, salidas: list[Path], proyecto: Path, produccion: 
     salidas = [Path(s) for s in salidas]
     proyecto, produccion = Path(proyecto), Path(produccion)
 
-    errores = comprobar_medios(p["formato"], p["variante"], salidas)
-    if p["formato"] == "reel" and not any(s.suffix.lower() == ".mp4" for s in salidas):
-        errores.append("el reel no tiene ningún .mp4 entre las salidas")
+    errores = _errores_de_conjunto(p, salidas)
+    errores += comprobar_medios(p["formato"], p["variante"], salidas)
     r = comprobar_texto(p.get("texto", ""))
     errores += r.errores
     if errores:
         sys.exit("No se entrega la pieza:\n" + "\n".join(f"- {e}" for e in errores))
 
     revision = proyecto / "revision"
-    fichero_avisos = revision / "avisos.json"
-    avisos = json.loads(fichero_avisos.read_text(encoding="utf-8")) if fichero_avisos.is_file() else []
+    avisos = _leer_avisos(proyecto)
     motivos = motivos_no_lista(p, r, avisos)
 
     nombre = id_pieza(p, hoy) + ("_PENDIENTE" if motivos else "")

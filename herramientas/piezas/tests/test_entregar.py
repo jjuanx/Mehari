@@ -132,3 +132,79 @@ def test_cli_sin_drive_da_mensaje_claro(tmp_path, monkeypatch, pieza_minima):
     with pytest.raises(SystemExit) as e:
         m.main(["p.json", "proy", str(tmp_path)])
     assert "--produccion" in str(e.value) and "MEHARI_DRIVE" in str(e.value)
+
+
+def test_sin_hay_caras_se_supone_que_hay(pieza_minima):
+    p = pieza_minima("deslizar")
+    del p["hay_caras"]
+    p["permiso_caras"] = "pendiente"
+    assert motivos_no_lista(p, VACIO) == ["falta permiso de caras"]
+
+
+def test_sin_avisos_json_se_rechaza(tmp_path, entrega_preparada):
+    ruta, salidas, proyecto = entrega_preparada()
+    (proyecto / "revision" / "avisos.json").unlink()
+    with pytest.raises(SystemExit) as e:
+        entregar(ruta, salidas, proyecto, tmp_path / "prod", HOY)
+    assert "avisos.json" in str(e.value) and not (tmp_path / "prod").exists()
+
+
+@pytest.mark.parametrize("contenido", ["{no es json", '{"a": 1}', "[1, 2]"])
+def test_avisos_json_mal_formado_se_rechaza(tmp_path, entrega_preparada, contenido):
+    ruta, salidas, proyecto = entrega_preparada()
+    (proyecto / "revision" / "avisos.json").write_text(contenido, encoding="utf-8")
+    with pytest.raises(SystemExit) as e:
+        entregar(ruta, salidas, proyecto, tmp_path / "prod", HOY)
+    assert "avisos.json" in str(e.value)
+
+
+def test_restos_o_faltas_en_las_salidas_se_rechazan(tmp_path, entrega_preparada):
+    from PIL import Image
+    ruta, salidas, proyecto = entrega_preparada()
+    resto = salidas[0].parent / "07.jpg"
+    Image.new("RGB", (1080, 1440)).save(resto)
+    with pytest.raises(SystemExit) as e:
+        entregar(ruta, salidas + [resto], proyecto, tmp_path / "prod", HOY)
+    assert "07.jpg" in str(e.value) and "01.jpg" in str(e.value)
+    with pytest.raises(SystemExit):  # falta el cierre
+        entregar(ruta, salidas[:-1], proyecto, tmp_path / "prod", HOY)
+
+
+def test_historia_cuenta_exacta(tmp_path, pieza_minima):
+    from PIL import Image
+    from ayudas import escribir
+    carpeta = tmp_path / "h"
+    (carpeta / "proyecto" / "revision").mkdir(parents=True)
+    (carpeta / "proyecto" / "revision" / "avisos.json").write_text("[]")
+    p = pieza_minima("historia") | {"hay_caras": False, "permiso_caras": "si"}
+    ruta = escribir(carpeta, p)
+    a, b = carpeta / "historia.jpg", carpeta / "historia-01.jpg"
+    for f in (a, b):
+        Image.new("RGB", (1080, 1920)).save(f)
+    with pytest.raises(SystemExit):
+        entregar(ruta, [a, b], carpeta / "proyecto", tmp_path / "prod", HOY)
+    d = entregar(ruta, [a], carpeta / "proyecto", tmp_path / "prod", HOY)
+    assert (d / "historia.jpg").is_file()
+
+
+@pytest.mark.parametrize("musica,modo", [(None, "aviso"), ({"ruta": "m.mp3", "licencia": "x"}, "automatico")])
+def test_entrega_de_un_reel_de_principio_a_fin(tmp_path, pieza_minima, musica, modo):
+    import subprocess
+    from PIL import Image
+    from ayudas import escribir
+    carpeta = tmp_path / "r"
+    (carpeta / "proyecto" / "revision").mkdir(parents=True)
+    (carpeta / "proyecto" / "revision" / "avisos.json").write_text("[]")
+    p = pieza_minima("reel") | {"hay_caras": False, "permiso_caras": "si", "musica": musica}
+    ruta = escribir(carpeta, p)
+    mp4 = carpeta / "reel.mp4"
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i",
+                    "testsrc=size=1080x1920:rate=30", "-t", "15.5", "-c:v", "libx264",
+                    "-preset", "ultrafast", "-pix_fmt", "yuv420p", str(mp4)], check=True)
+    portada = carpeta / "portada.jpg"
+    Image.new("RGB", (1080, 1920)).save(portada)
+    d = entregar(ruta, [mp4, portada], carpeta / "proyecto", tmp_path / "prod", HOY)
+    pub = json.loads((d / "cola-metricool.json").read_text(encoding="utf-8"))["publicaciones"][0]
+    assert pub["tipo"] == "reel" and pub["portada"] == "portada.jpg"
+    assert pub["modo"] == modo and pub["medios"] == ["reel.mp4"]
+    assert "<video controls" in (d / "revision.html").read_text(encoding="utf-8")
