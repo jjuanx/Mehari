@@ -95,3 +95,20 @@ def _minima(formato: str) -> dict:
 def pieza_minima():
     """Fábrica: pieza_minima("reel") devuelve una pieza válida nueva cada vez."""
     return lambda formato: copy.deepcopy(_minima(formato))
+
+
+@pytest.fixture
+def drive_falso(tmp_path) -> Path:
+    """Árbol mínimo de «Mehari We» con nombres reales (incluida la errata «Selecccion»)."""
+    raiz = tmp_path / "Mehari We"
+    for ruta in (
+        "01_Material/Selecccion/Boda 24:10:2026/IMG_1.HEIC",
+        "01_Material/Bodas/2026-11-07_sanlucar/fotos/a.jpg",
+        "01_Material/Bodas/_interno/b.jpg",
+        "01_Material/Selecccion/fotos/c.jpg",
+        "01_Material/Galeria/thumbs/d.jpg",
+    ):
+        f = raiz / ruta
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_bytes(b"")
+    return raiz
