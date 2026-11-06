@@ -1,4 +1,5 @@
 """Lectura y validación de pieza.json (versión 1)."""
+import hashlib
 import json
 import re
 import sys
@@ -200,6 +201,35 @@ def validar(p) -> list[str]:
         if not REEL_MIN <= total <= REEL_MAX:
             errores.append(f"elementos: el reel dura {total:g} s con el cierre y debe durar de 15 a 25 s")
     return errores
+
+
+CLAVES_MATERIAL = ("orden", "fichero", "recorte", "retoques", "desde", "hasta", "duracion")
+PREPARADO = Path("revision") / "preparado.json"
+
+
+def huella_material(p: dict) -> str:
+    """sha256 de lo que decide el material preparado (formato y, por elemento, fichero,
+    recorte, retoques y corte). Los rótulos y el texto no cuentan: se cambian sin preparar."""
+    elementos = sorted(p.get("elementos", []), key=lambda e: str(e.get("orden")).zfill(6))
+    datos = {"formato": p.get("formato"),
+             "elementos": [{k: e.get(k) for k in CLAVES_MATERIAL} for e in elementos]}
+    canonico = json.dumps(datos, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
+    return hashlib.sha256(canonico.encode("utf-8")).hexdigest()
+
+
+def errores_preparado(p: dict, proyecto: Path) -> list[str]:
+    """Vacío si <proyecto>/revision/preparado.json corresponde a esta pieza."""
+    ruta = Path(proyecto) / PREPARADO
+    if not ruta.is_file():
+        return [f"falta {ruta}: ejecuta preparar.py con este pieza.json antes"]
+    try:
+        huella = json.loads(ruta.read_text(encoding="utf-8")).get("huella")
+    except (OSError, ValueError, AttributeError):
+        huella = None
+    if huella != huella_material(p):
+        return [f"el material de {Path(proyecto)} no corresponde a este pieza.json (han cambiado "
+                "ficheros, recortes, retoques o cortes): vuelve a ejecutar preparar.py"]
+    return []
 
 
 def cargar_pieza(ruta: Path) -> dict:

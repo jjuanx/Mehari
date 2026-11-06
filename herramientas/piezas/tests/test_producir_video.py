@@ -151,3 +151,9 @@ def test_render_real_de_historias_en_clip(tmp_path, pieza_historia_clip_preparad
     assert [s.name for s in salidas] == ["historia-01.mp4", "historia-02.mp4"]
     assert not (tmp_path / "out" / "historia.mp4").exists()
     assert comprobar_medios("historia", "clip-cta", salidas) == []
+
+
+def test_video_se_niega_sin_material_preparado(tmp_path, pieza_minima):
+    with pytest.raises(RuntimeError, match="preparado.json"):
+        video(pieza_minima("reel"), tmp_path / "proy", tmp_path / "out")
+    assert not (tmp_path / "out").exists()

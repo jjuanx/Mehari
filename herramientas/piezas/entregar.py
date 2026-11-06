@@ -20,7 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from comprobar import ResultadoTexto, comprobar_medios, comprobar_texto  # noqa: E402
 from localizar import raiz_drive  # noqa: E402
-from pieza import cargar_pieza, id_pieza  # noqa: E402
+from pieza import cargar_pieza, errores_preparado, id_pieza  # noqa: E402
 
 TIPOS_METRICOOL = {"deslizar": "carrusel", "reel": "reel", "historia": "story"}
 NOTA_COLA = ("Pieza suelta de pieza-boda. Pon la fecha y la aprobación del cliente "
@@ -202,6 +202,19 @@ def _errores_de_conjunto(p: dict, salidas: list[Path]) -> list[str]:
     return []
 
 
+def _errores_de_revision(p: dict, proyecto: Path) -> list[str]:
+    """Cada elemento recortado o retocado tiene que tener su antes y después."""
+    errores = []
+    for el in sorted(p["elementos"], key=lambda e: e["orden"]):
+        if el.get("recorte") or el.get("retoques"):
+            nn = f"{int(el['orden']):02d}"
+            for n in (f"{nn}_antes.jpg", f"{nn}_despues.jpg"):
+                if not (proyecto / "revision" / n).is_file():
+                    errores.append(f"falta revision/{n} del elemento {nn} ({el['fichero']}), "
+                                   "que tiene recorte o retoques: vuelve a ejecutar preparar.py")
+    return errores
+
+
 def _leer_avisos(proyecto: Path) -> list[str]:
     ruta = proyecto / "revision" / "avisos.json"
     if not ruta.is_file():
@@ -230,7 +243,8 @@ def entregar(ruta_pieza: Path, salidas: list[Path], proyecto: Path, produccion: 
     salidas = [Path(s) for s in salidas]
     proyecto, produccion = Path(proyecto), Path(produccion)
 
-    errores = _errores_de_conjunto(p, salidas)
+    errores = errores_preparado(p, proyecto) + _errores_de_revision(p, proyecto)
+    errores += _errores_de_conjunto(p, salidas)
     errores += comprobar_medios(p["formato"], p["variante"], salidas)
     r = comprobar_texto(p.get("texto", ""))
     errores += r.errores

@@ -56,9 +56,16 @@ def _diapositivas(p: dict) -> list[dict]:
     return hojas
 
 
+def _exigir_preparado(p: dict, proyecto: Path) -> None:
+    errores = pieza.errores_preparado(p, proyecto)
+    if errores:
+        raise RuntimeError("No se produce la pieza: " + "; ".join(errores))
+
+
 def estaticas(p: dict, proyecto: Path, salida: Path) -> list[Path]:
     """Carrusel o historia en foto → JPEG en `salida`; devuelve los ficheros por orden."""
     proyecto, salida = Path(proyecto), Path(salida)
+    _exigir_preparado(p, proyecto)
     ancho, alto = TAMANOS[p["formato"]]
     hojas = _diapositivas(p)
     datos = {"formato": p["formato"], "variante": p["variante"],
@@ -195,6 +202,7 @@ def _hyperframes(args: list[str], proyecto: Path) -> None:
 def video(p: dict, proyecto: Path, salida: Path) -> list[Path]:
     """Reel (reel.mp4 + portada.jpg) o historia en clip (historia.mp4 o historia-NN.mp4)."""
     proyecto, salida = Path(proyecto).resolve(), Path(salida).resolve()
+    _exigir_preparado(p, proyecto)
     shutil.copytree(PLANTILLA_REEL, proyecto, dirs_exist_ok=True)
     for vieja in (proyecto / "assets").glob("musica.*"):
         vieja.unlink()

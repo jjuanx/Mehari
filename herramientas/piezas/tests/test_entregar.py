@@ -3,6 +3,7 @@ from datetime import date
 
 import pytest
 
+from ayudas import escribir_preparado
 from comprobar import ResultadoTexto
 from entregar import (entregar, generar_cola, generar_revision, generar_texto,
                       modo_metricool, motivos_no_lista)
@@ -178,6 +179,7 @@ def test_historia_cuenta_exacta(tmp_path, pieza_minima):
     (carpeta / "proyecto" / "revision" / "avisos.json").write_text("[]")
     p = pieza_minima("historia") | {"hay_caras": False, "permiso_caras": "si"}
     ruta = escribir(carpeta, p)
+    escribir_preparado(carpeta / "proyecto", p)
     a, b = carpeta / "historia.jpg", carpeta / "historia-01.jpg"
     for f in (a, b):
         Image.new("RGB", (1080, 1920)).save(f)
@@ -197,6 +199,7 @@ def test_entrega_de_un_reel_de_principio_a_fin(tmp_path, pieza_minima, musica, m
     (carpeta / "proyecto" / "revision" / "avisos.json").write_text("[]")
     p = pieza_minima("reel") | {"hay_caras": False, "permiso_caras": "si", "musica": musica}
     ruta = escribir(carpeta, p)
+    escribir_preparado(carpeta / "proyecto", p)
     mp4 = carpeta / "reel.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i",
                     "testsrc=size=1080x1920:rate=30", "-t", "15.5", "-c:v", "libx264",
@@ -208,3 +211,31 @@ def test_entrega_de_un_reel_de_principio_a_fin(tmp_path, pieza_minima, musica, m
     assert pub["tipo"] == "reel" and pub["portada"] == "portada.jpg"
     assert pub["modo"] == modo and pub["medios"] == ["reel.mp4"]
     assert "<video controls" in (d / "revision.html").read_text(encoding="utf-8")
+
+
+# ---------------------------------------------------------------- material preparado (I1)
+
+def test_sin_preparado_json_se_rechaza(tmp_path, entrega_preparada):
+    ruta, salidas, proyecto = entrega_preparada()
+    (proyecto / "revision" / "preparado.json").unlink()
+    with pytest.raises(SystemExit) as e:
+        entregar(ruta, salidas, proyecto, tmp_path / "prod", HOY)
+    assert "preparado.json" in str(e.value) and not (tmp_path / "prod").exists()
+
+
+def test_pieza_cambiada_tras_preparar_se_rechaza(tmp_path, entrega_preparada):
+    ruta, salidas, proyecto = entrega_preparada()
+    p = json.loads(ruta.read_text(encoding="utf-8"))
+    p["elementos"][2]["recorte"] = {"x": 0, "y": 0, "ancho": 300, "alto": 400}
+    ruta.write_text(json.dumps(p, ensure_ascii=False), encoding="utf-8")
+    with pytest.raises(SystemExit) as e:
+        entregar(ruta, salidas, proyecto, tmp_path / "prod", HOY)
+    assert "preparar.py" in str(e.value) and not (tmp_path / "prod").exists()
+
+
+def test_elemento_retocado_sin_antes_y_despues_se_rechaza(tmp_path, entrega_preparada):
+    ruta, salidas, proyecto = entrega_preparada()
+    (proyecto / "revision" / "01_despues.jpg").unlink()
+    with pytest.raises(SystemExit) as e:
+        entregar(ruta, salidas, proyecto, tmp_path / "prod", HOY)
+    assert "01_despues.jpg" in str(e.value) and not (tmp_path / "prod").exists()

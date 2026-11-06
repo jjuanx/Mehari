@@ -74,3 +74,17 @@ def test_la_plantilla_no_borra_el_material_preparado(tmp_path, pieza_deslizar_pr
     p, proy = pieza_deslizar_preparada(n_fotos=2)
     estaticas(p, proy, tmp_path / "out")
     assert (proy / "assets/material/01.jpg").exists() and (proy / "revision").exists()
+
+
+def test_se_niega_sin_material_preparado_o_desfasado(tmp_path, pieza_deslizar_preparada):
+    import pytest
+    p, proy = pieza_deslizar_preparada(n_fotos=5)
+    p["elementos"][0]["rotulo"] = "Otro rótulo"            # cambiar un rótulo no obliga a preparar
+    estaticas(p, proy, tmp_path / "out")
+    p["elementos"][0]["recorte"] = {"x": 0, "y": 0, "ancho": 300, "alto": 400}
+    with pytest.raises(RuntimeError, match="preparar.py"):
+        estaticas(p, proy, tmp_path / "out2")
+    (proy / "revision" / "preparado.json").unlink()
+    with pytest.raises(RuntimeError, match="preparado.json"):
+        estaticas(p, proy, tmp_path / "out3")
+    assert not (tmp_path / "out2").exists() and not (tmp_path / "out3").exists()

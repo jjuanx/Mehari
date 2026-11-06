@@ -62,3 +62,12 @@ def pagina_renderizada(proyecto: Path, s: int) -> str:
     index = (Path(proyecto) / "index.html").resolve()
     return subprocess.run(["node", "--input-type=module", "-e", guion, str(index), str(s)],
                           cwd=aqui, capture_output=True, text=True, check=True).stdout
+
+
+def escribir_preparado(proyecto: Path, p: dict) -> Path:
+    """revision/preparado.json coherente con `p`, como lo deja preparar.py."""
+    from pieza import huella_material
+    ruta = Path(proyecto) / "revision" / "preparado.json"
+    ruta.parent.mkdir(parents=True, exist_ok=True)
+    ruta.write_text(json.dumps({"huella": huella_material(p)}), encoding="utf-8")
+    return ruta

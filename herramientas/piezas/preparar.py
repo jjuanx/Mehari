@@ -7,7 +7,12 @@ Uso:
 Salida (dentro de <proyecto>):
     assets/material/NN.jpg | NN.mp4   un fichero por elemento (NN = orden con dos cifras)
     revision/NN_antes.jpg, NN_despues.jpg   solo en elementos con recorte o retoques (800 px)
-    revision/avisos.json   lista de avisos (seguimiento de difuminado dudoso); [] si no hay
+    revision/avisos.json   lista de avisos (difuminado dudoso, zona fuera del encuadre); [] si no hay
+    revision/preparado.json   huella de pieza.json (pieza.huella_material): producir.py y
+                           entregar.py se niegan si no coincide con el pieza.json que reciben
+
+Al empezar vacía assets/material/ y revision/, para que nunca quede material de una pasada
+anterior: si algo falla, no queda preparado.json y no se puede producir ni entregar.
 
 Las coordenadas de recorte y retoque se refieren al original tal como se ve (con la
 orientación EXIF o la rotación del vídeo ya aplicada), igual que en rejilla.py.
@@ -312,10 +317,14 @@ def preparar(p: dict, boda: Path, proyecto: Path) -> list[Path]:
         raise ValueError(f"orden repetido en elementos: {repetidos}")
 
     boda, proyecto = Path(boda), Path(proyecto)
-    _validar(elementos, boda)
     material = proyecto / "assets/material"
     revision = proyecto / "revision"
     tmp = proyecto / "_tmp"
+    for carpeta in (material, revision):   # nada de una pasada anterior
+        shutil.rmtree(carpeta, ignore_errors=True)
+        if carpeta.exists():
+            raise RuntimeError(f"no se puede vaciar {carpeta}; ciérralo en otros programas y repite")
+    _validar(elementos, boda)
     for carpeta in (material, revision, tmp):
         carpeta.mkdir(parents=True, exist_ok=True)
 
@@ -337,6 +346,8 @@ def preparar(p: dict, boda: Path, proyecto: Path) -> list[Path]:
         shutil.rmtree(tmp, ignore_errors=True)
     (revision / "avisos.json").write_text(json.dumps(avisos, ensure_ascii=False, indent=2),
                                           encoding="utf-8")
+    (proyecto / pieza.PREPARADO).write_text(json.dumps({"huella": pieza.huella_material(p)}),
+                                            encoding="utf-8")
     for aviso in avisos:
         print(f"AVISO: {aviso}", file=sys.stderr)
     return salidas

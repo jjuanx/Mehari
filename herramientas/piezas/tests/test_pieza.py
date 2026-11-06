@@ -155,3 +155,44 @@ def test_rotulo_debe_ser_texto(pieza_minima, tmp_path):
     p["elementos"][0]["rotulo"] = ["a"]
     with pytest.raises(PiezaInvalida, match="rotulo"):
         cargar_pieza(escribir(tmp_path, p))
+
+
+# ---------------------------------------------------------------- huella del material preparado (I1)
+
+def test_huella_cambia_con_lo_que_afecta_al_material(pieza_minima):
+    from pieza import huella_material
+    base = pieza_minima("reel")
+    h = huella_material(base)
+    assert len(h) == 64 and h == huella_material(pieza_minima("reel"))
+    cambios = [
+        lambda p: p.update(formato="historia"),
+        lambda p: p["elementos"][0].update(fichero="otro.mov"),
+        lambda p: p["elementos"][0].update(orden=9),
+        lambda p: p["elementos"][0].update(recorte={"x": 0, "y": 0, "ancho": 10, "alto": 10}),
+        lambda p: p["elementos"][0].update(retoques=[{"tipo": "zona", "t": 1, "caja": [0, 0, 5, 5]}]),
+        lambda p: p["elementos"][0].update(desde=1),
+        lambda p: p["elementos"][0].update(hasta=2),
+        lambda p: p["elementos"][1].update(duracion=2),
+    ]
+    for cambio in cambios:
+        p = pieza_minima("reel")
+        cambio(p)
+        assert huella_material(p) != h
+    p = pieza_minima("reel")
+    p["elementos"][0]["rotulo"] = "Otro rótulo"
+    p["texto"] = "Otro texto"
+    p["elementos"].reverse()                 # la posición en la lista no cuenta: manda `orden`
+    assert huella_material(p) == h
+
+
+def test_errores_preparado(pieza_minima, tmp_path):
+    from ayudas import escribir_preparado
+    from pieza import errores_preparado
+    p = pieza_minima("deslizar")
+    assert "preparado.json" in errores_preparado(p, tmp_path)[0]
+    escribir_preparado(tmp_path, p)
+    assert errores_preparado(p, tmp_path) == []
+    p["elementos"][0]["fichero"] = "otra.jpg"
+    assert "preparar.py" in errores_preparado(p, tmp_path)[0]
+    (tmp_path / "revision" / "preparado.json").write_text("{no", encoding="utf-8")
+    assert errores_preparado(p, tmp_path)

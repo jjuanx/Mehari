@@ -273,3 +273,44 @@ def test_zona_fuera_del_encuadre_deja_aviso(tmp_path, clip_mp4, pieza_minima):
     preparar(p, boda, tmp_path / "proy")
     avisos = json.loads((tmp_path / "proy/revision/avisos.json").read_text(encoding="utf-8"))
     assert len(avisos) == 1 and "01" in avisos[0] and "fuera del encuadre" in avisos[0]
+
+
+# ---------------------------------------------------------------- material desfasado (I1)
+
+def test_preparar_vacia_lo_anterior_y_deja_la_huella(tmp_path, foto_jpg, pieza_minima):
+    import json
+    from pieza import huella_material
+    boda = tmp_path / "b"
+    boda.mkdir()
+    shutil.copy(foto_jpg, boda / "f.jpg")
+    proy = tmp_path / "proy"
+    for viejo in ("assets/material/09.jpg", "revision/07_antes.jpg", "revision/07_despues.jpg"):
+        (proy / viejo).parent.mkdir(parents=True, exist_ok=True)
+        (proy / viejo).write_bytes(b"viejo")
+    (proy / "revision/avisos.json").write_text('["viejo"]', encoding="utf-8")
+    (proy / "index.html").write_text("plantilla", encoding="utf-8")
+    p = pieza_minima("historia")
+    p["elementos"] = [{"orden": 1, "fichero": "f.jpg"}]
+    preparar(p, boda, proy)
+    assert sorted(f.name for f in (proy / "assets/material").iterdir()) == ["01.jpg"]
+    assert sorted(f.name for f in (proy / "revision").iterdir()) == ["avisos.json", "preparado.json"]
+    assert json.loads((proy / "revision/avisos.json").read_text(encoding="utf-8")) == []
+    assert json.loads((proy / "revision/preparado.json").read_text(encoding="utf-8")) == {
+        "huella": huella_material(p)}
+    assert (proy / "index.html").read_text(encoding="utf-8") == "plantilla"   # solo material y revisión
+
+
+def test_si_preparar_falla_no_queda_material_anterior_valido(tmp_path, foto_jpg, pieza_minima):
+    boda = tmp_path / "b"
+    boda.mkdir()
+    shutil.copy(foto_jpg, boda / "f.jpg")
+    proy = tmp_path / "proy"
+    p = pieza_minima("historia")
+    p["elementos"] = [{"orden": 1, "fichero": "f.jpg"}]
+    preparar(p, boda, proy)
+    p["elementos"][0]["recorte"] = {"x": 0, "y": 0, "ancho": 99999, "alto": 10}
+    with pytest.raises(ValueError):
+        preparar(p, boda, proy)
+    assert not (proy / "revision/preparado.json").exists()
+    assert not (proy / "revision/avisos.json").exists()
+    assert not any((proy / "assets/material").glob("*"))
