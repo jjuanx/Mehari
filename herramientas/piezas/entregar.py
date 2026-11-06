@@ -174,26 +174,24 @@ def generar_revision(p: dict, medios: list[str], pares: list[tuple[str, str]],
     return "\n".join(out)
 
 
-def _jpgs_esperados(p: dict) -> list[str] | None:
-    """Nombres exactos de los JPEG que debe tener la pieza, o None si no se fijan por nombre."""
+def _salidas_esperadas(p: dict) -> list[str] | None:
+    """Nombres exactos de los ficheros que debe tener la pieza, o None si no se fijan por nombre."""
     n = len(p["elementos"])
     if p["formato"] == "deslizar":
         return [f"{i:02d}.jpg" for i in range(1, n + 2)]  # + la diapositiva de cierre
-    if p["formato"] == "historia" and p["variante"] == "foto-frase":
-        return ["historia.jpg"] if n == 1 else [f"historia-{i:02d}.jpg" for i in range(1, n + 1)]
+    if p["formato"] == "historia":
+        ext = ".jpg" if p["variante"] == "foto-frase" else ".mp4"
+        return [f"historia{ext}"] if n == 1 else [f"historia-{i:02d}{ext}" for i in range(1, n + 1)]
     return None
 
 
 def _errores_de_conjunto(p: dict, salidas: list[Path]) -> list[str]:
     """Comprueba que las salidas son exactamente las de esta pieza (sin restos ni faltas)."""
     nombres = sorted(s.name for s in salidas)
-    esperado = _jpgs_esperados(p)
+    esperado = _salidas_esperadas(p)
     if esperado is not None:
         if nombres != sorted(esperado):
             return [f"salidas: se esperaban {', '.join(esperado)} y hay {', '.join(nombres) or 'ninguna'}"]
-    elif p["formato"] == "historia":
-        if len(nombres) != len(p["elementos"]):
-            return [f"salidas: se esperaban {len(p['elementos'])} ficheros y hay {len(nombres)}: {', '.join(nombres)}"]
     elif p["formato"] == "reel":
         videos = [n for n in nombres if n.lower().endswith(".mp4")]
         otros = [n for n in nombres if not n.lower().endswith(".mp4")]
