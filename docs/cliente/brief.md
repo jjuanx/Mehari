@@ -11,7 +11,7 @@ Origen: `Referencia/Dossier Mehari.pdf`, `Referencia/Dossier Mehari (1).pdf`, `R
 | Email | mehariwe.info@gmail.com (confirmado el 2026-10-27) |
 | Teléfono | 625 06 42 93 (enlace internacional: `+34625064293`) |
 | WhatsApp | 625 06 42 93 (el mismo número; confirmar con el cliente que tiene WhatsApp) |
-| Zona actual | Sevilla y provincia de Cádiz (la marca no se ata a ellas: ver `CLAUDE.md` §2) |
+| Zona actual | Sevilla y provincia de Cádiz, y también Ciudad Real (boda del 24-10-2026 en Finca La Posadilla). La marca no se ata a ninguna: ver `CLAUDE.md` §2 |
 | Última actualización | 2026-10-27 |
 
 ---

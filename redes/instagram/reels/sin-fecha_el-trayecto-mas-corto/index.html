@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <title>Reel · El trayecto más corto</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Fraunces"; src: url("assets/fonts/Fraunces.woff2") format("woff2"); font-weight: 300 700; }
+      /* Paleta de marca/tokens.css. Tipografía provisional (Fraunces) */
+      :root { --azahar: #FFFCF5; --tinta: #2B211A; --naranja: #EE7D1F; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--tinta); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--tinta); }
+
+      video.plano { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; transform-origin: 50% 45%; }
+
+      /* Una frase grande en el tercio superior, sin caja, dentro del 80 % central */
+      .frase { position: absolute; top: 300px; left: 80px; right: 80px; text-align: center;
+               font-family: "Fraunces", serif; font-weight: 600; font-size: 96px; line-height: 1.04; color: var(--azahar);
+               text-shadow: 0 4px 28px rgba(0, 0, 0, .55), 0 1px 4px rgba(0, 0, 0, .5); }
+      .frase em { font-style: italic; font-weight: 500; }
+      /* Degradado suave arriba mientras hay frase: contraste sin caja */
+      .velo { position: absolute; left: 0; right: 0; top: 0; height: 900px;
+              background: linear-gradient(to bottom, rgba(43, 33, 26, .62) 0%, rgba(43, 33, 26, .34) 55%, rgba(43, 33, 26, 0) 100%); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="reel" data-start="0" data-duration="17.7" data-width="1080" data-height="1920">
+
+      <!-- Pistas 0 y 1: clips limpios (1080×1920, SDR BT.709, 30 fps, sin audio; BRIEF.md).
+           Un solo arco, el día de la boda en el coche: llega la novia, suben, celebran, conducen y, ya de noche, la llegada.
+           Fundidos de 0,3 s alternando pistas. Sin sonido: la música se pone al publicar. -->
+      <video id="p1" class="clip plano" src="assets/clips/01_velo_V144.mp4"       data-start="0"    data-duration="2.3" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="p2" class="clip plano" src="assets/clips/02_subida_V151.mp4"     data-start="2.0"  data-duration="2.3" data-media-start="0" data-track-index="1" playsinline muted></video>
+      <video id="p3" class="clip plano" src="assets/clips/03_ramo-rojo_V139.mp4"  data-start="4.0"  data-duration="4.2" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <video id="p4" class="clip plano" src="assets/clips/04_volante_V023.mp4"    data-start="7.9"  data-duration="2.6" data-media-start="0" data-track-index="1" playsinline muted></video>
+      <!-- Del día a la noche: corte seco escondido bajo la transición de marca -->
+      <video id="p5" class="clip plano" src="assets/clips/06_noche_V063.mp4"      data-start="10.5" data-duration="3.5" data-media-start="0" data-track-index="0" playsinline muted></video>
+      <!-- Cierre animado de marca/animaciones/ (logo aprobado, «Escribidnos vuestra fecha» y WhatsApp) -->
+      <video id="p7" class="clip plano" src="assets/clips/08_cierre-marca.mp4"    data-start="13.7" data-duration="4.0" data-media-start="0" data-track-index="1" playsinline muted></video>
+
+      <!-- Pista 5: transición de costillas (con alfa). Tapa la pantalla a los 0,41 s (10,5 s): del día a la noche -->
+      <video id="t1" class="clip" src="assets/clips/transicion.webm" data-start="10.09" data-duration="0.866" data-media-start="0" data-track-index="5" playsinline muted style="position:absolute; inset:0; width:1080px; height:1920px;"></video>
+
+      <!-- Pistas 2–4: las dos frases, cada una con su degradado -->
+      <div id="velo1" class="clip velo" data-start="0" data-duration="2.2" data-track-index="4"></div>
+      <div id="f1" class="clip frase" data-start="0" data-duration="2.2" data-track-index="2">El trayecto<br>más corto del día</div>
+      <div id="velo2" class="clip velo" data-start="10.8" data-duration="2.8" data-track-index="4"></div>
+      <div id="f2" class="clip frase" data-start="10.8" data-duration="2.8" data-track-index="3">…y el que<br><em>más se recuerda</em></div>
+
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const F = 0.3; // fundido entre planos
+
+      // Cada plano se acerca despacio (o se abre); la cámara se mueve entre ideas, nunca rebota
+      tl.fromTo("#p1", { scale: 1.0 },  { scale: 1.05, duration: 2.3, ease: "none" }, 0);
+      tl.fromTo("#p2", { scale: 1.05 }, { scale: 1.0,  duration: 2.3, ease: "power1.out" }, 2.0);
+      tl.fromTo("#p3", { scale: 1.0 },  { scale: 1.06, duration: 4.2, ease: "none" }, 4.0);
+      tl.fromTo("#p4", { scale: 1.04 }, { scale: 1.0,  duration: 2.6, ease: "power1.out" }, 7.9);
+      tl.fromTo("#p5", { scale: 1.0 },  { scale: 1.06, duration: 3.5, ease: "none" }, 10.5);
+
+      // Fundidos: el plano que entra aparece encima del que sale
+      tl.fromTo("#p2", { opacity: 0 }, { opacity: 1, duration: F, ease: "sine.inOut" }, 2.0);
+      tl.fromTo("#p3", { opacity: 0 }, { opacity: 1, duration: F, ease: "sine.inOut" }, 4.0);
+      tl.fromTo("#p4", { opacity: 0 }, { opacity: 1, duration: F, ease: "sine.inOut" }, 7.9);
+      tl.fromTo("#p7", { opacity: 0 }, { opacity: 1, duration: F, ease: "sine.inOut" }, 13.7);
+
+      // Frase 1: visible desde el fotograma 0 (el gancho tiene que leerse en el primer segundo)
+      tl.fromTo("#f1", { y: 12 }, { y: 0, duration: 0.5, ease: "expo.out" }, 0.0);
+      tl.to(["#f1", "#velo1"], { opacity: 0, duration: 0.25, ease: "sine.in" }, 1.95);
+      // Frase 2: aparece al destaparse la transición, ya de noche
+      tl.fromTo(["#f2", "#velo2"], { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "sine.out" }, 10.8);
+      tl.fromTo("#f2", { y: 24 }, { y: 0, duration: 0.5, ease: "expo.out" }, 10.8);
+      tl.to(["#f2", "#velo2"], { opacity: 0, duration: 0.3, ease: "sine.in" }, 13.3);
+
+      window.__timelines["reel"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

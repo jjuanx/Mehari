@@ -15,7 +15,7 @@ Somos un equipo de tres (Alejandro, Juan y Nico) contratado para **lanzar una ma
 
 1. **Gestión de redes sociales** (la parte principal del contrato): creamos y publicamos nosotros en una **cuenta de Instagram nueva**. Es probable que haya publicidad pagada en Meta (presupuesto pendiente).
 2. **Web**: más adelante, una *landing page* muy estética con *motion graphics*. Todavía no se empieza.
-3. **Objetivo del cliente**: conseguir clientes nuevos, más facturación y más alcance. Sobre todo, **más bodas contratadas**.
+3. **Objetivo del cliente**: conseguir clientes nuevos, más facturación y más alcance. Sobre todo, **más bodas contratadas**. Plazo que marca el cliente (27-10-2026): **noviembre, diciembre, enero y febrero** para hacerse virales y que eso se traduzca en peticiones.
 
 **Reparto** (2026-11-02): Alejandro coordina, escribe los textos, trata con el cliente y publica; Juan lleva el material y las piezas de foto; Nico, los reels. Detalle en [docs/planes/semana-boda.md](docs/planes/semana-boda.md) §5.
 
@@ -38,7 +38,7 @@ Detalle completo en [docs/cliente/brief.md](docs/cliente/brief.md). En resumen:
 - **Flota**: dos **Méhari** clásicos (1968–1988), uno **naranja** y otro **beige**.
 - **Línea Bodas**: salida de la iglesia y llegada a la hacienda o lugar de celebración. Puede ir **con chófer** o lo pueden **conducir los novios** (o alguien cercano), con una **clase de conducción previa** a la boda. El techo admite **3 configuraciones**: abierto, semiabierto y cerrado con techo solar. Lleva **dos cestas de mimbre** traseras para decorar con flores.
 - **Línea Turismo** ("Sevilla Experience"): ruta por Sevilla con chófer y recogida en el hotel, de 2 h a 2 h 30. Hasta 3 personas por coche (de 1 a 6 en total) y el mismo precio de 1 a 3 personas. Hay dos tours: **Monumental** y **Romántico/Iluminado**, con paradas en Plaza de América y Plaza de España. **Entra en nuestro alcance.**
-- **Zona actual**: Sevilla y provincia de Cádiz (Sanlúcar, San Fernando…), sobre todo haciendas e iglesias. Es donde se trabaja hoy, no la identidad de la marca (ver §2).
+- **Zona actual**: Sevilla y provincia de Cádiz (Sanlúcar, San Fernando…), sobre todo haciendas e iglesias, y también fuera: Ciudad Real (Finca La Posadilla, 24-10-2026). Es donde se trabaja hoy, no la identidad de la marca (ver §2).
 - **Prensa**: el *Diario de Sevilla* (19-10-2025, sección Pasarela) publicó la boda de Alberto Herrera y Blanca Llandres en Sanlúcar, con los novios saliendo "en un informal Mehari". Hay además fotos de **Carlos Herrera** con el Méhari naranja. **Tenemos consentimiento** de los Herrera y de las parejas para usar su imagen. Es el material con más gancho.
 - **Precios y packs**: no hay. Nos ceñimos a lo que dicen los dossiers ("consultar disponibilidad y presupuesto").
 - **Contacto**: el de los dossiers pertenece a la marca antigua y no se usa. **Teléfono y WhatsApp de la marca nueva: 625 06 42 93.** **Email: mehariwe.info@gmail.com** (confirmado el 2026-10-27).
@@ -129,13 +129,14 @@ Las decisiones también van, con fecha y motivo, a `docs/decisiones.md`.
 ## 9. Pendiente de definir
 
 - [ ] Pasar al logo y la grafía nuevos lo que ya está hecho con la marca provisional: cierre del reel «Las llaves son vuestras», la entrada de `marca/animaciones/`, portadas de destacadas y avatar. El cierre animado de `marca/animaciones/` ya lleva el logo y el nombre actuales (2026-11-03), y hay un cierre corto en `redes/instagram/reels/2026-11-11_salis-de-la-iglesia/compositions/cierre-corto.html`.
-- [ ] Pedir a la grafista el logo en SVG o PDF desde Illustrator (los SVG de `marca/logo/` están vectorizados desde el PNG) y la licencia de Charter, la fuente del nombre.
+- [ ] Recibir de la grafista el logo en calidad (SVG o PDF desde Illustrator) con todos los elementos de las tres opciones: el cliente dijo el 27-10 que los manda. Se guardan en Drive · `03_Marca/` y sustituyen a los SVG vectorizados desde el PNG. Falta también la licencia de Charter, la fuente del nombre.
 - [ ] Tipografía de las piezas: seguir con Fraunces + Jost o pasar a las del logo (Charter + Metropolis).
 - [ ] Confirmar que el 625 06 42 93 tiene WhatsApp.
 - [ ] Precios y packs (de momento, "consultar presupuesto").
 - [ ] Presupuesto para publicidad en Meta.
 - [ ] Objetivos numéricos: bodas al año actuales y objetivo, seguidores, solicitudes al mes.
 - [ ] TikTok u otras redes: ¿entran en el alcance?
+- [ ] **bodas.net**: montar el perfil gratuito de la marca. Según el cliente (27-10), da visibilidad y por ahí han salido bodas.
 - [ ] Comprobar en la primera boda qué hace Metricool por el conector: subida de medios, ubicación, primer comentario y Collab (`docs/planes/publicacion-metricool.md` §5).
 - [ ] Validar con el cliente la estrategia de Instagram (v1).
 - [ ] Quién responde los mensajes y solicitudes de presupuesto (cliente o equipo) y en qué plazo.

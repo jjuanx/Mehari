@@ -4,12 +4,12 @@ Primera boda de Méhari We con la cuenta nueva. Preparada con la skill `semana-b
 
 | Campo | Valor |
 |---|---|
-| Boda | Sáb 24-10-2026 · [PENDIENTE: iglesia o ermita y localidad] → Finca La Posadilla (se lee en el cartel, foto 4054) · coche **beige** · con chófer (los novios van detrás en la foto 4049; [PENDIENTE: confirmar]) · techo abierto, con la capota recogida |
+| Boda | Sáb 24-10-2026 · [PENDIENTE: iglesia o ermita] → Finca La Posadilla, a unos 15 km de **Ciudad Real** (el cliente la llama «boda de Ciudad Real», WhatsApp del 27-10) (se lee en el cartel, foto 4054) · coche **beige** · con chófer (los novios van detrás en la foto 4049; [PENDIENTE: confirmar]) · techo abierto, con la capota recogida |
 | Carpeta | Drive · `Mehari We/01_Material/Selecccion/Boda 2:11:2026` (id `1kBJeYOXad9bsfFV_ziWpuoi5qDGYL3fy`). **Ojo:** las carpetas están cruzadas. Por la fecha EXIF, las fotos del 24-10 están en «Boda 2:11:2026», y las de «Boda 24:10:2026» son del 31-10 |
 | Material | 48 fotos (iPhone, de 14:06 a 15:59), sus Live Photos y 15 vídeos (13 en 4K HDR y 2 de WhatsApp). Los vídeos pesan más de 10 MB: el conector de Drive no los baja y se descargaron directamente con la carpeta compartida por enlace |
 | Ficha | **No hay.** Todo lo que falta va en «Pendiente» |
 | Permiso de caras y nombres | [PENDIENTE]. Hasta que el cliente lo confirme, no se publican nombres. Las caras de los novios salen en las piezas y la aprobación queda condicionada a ese permiso |
-| Créditos | Fotógrafo [PENDIENTE] · finca [PENDIENTE: @ de Finca La Posadilla] · florista [PENDIENTE] |
+| Créditos | Novia **@beadgarrido** · novio **@pablo.bretos** · fotógrafos **@conbuenaluz** · catering **@cervantescatering** (los pasó el cliente el 27-10 para etiquetarlos y compartir lo que suban) · finca [PENDIENTE: @ de Finca La Posadilla] · florista [PENDIENTE] |
 | Lote al cliente | **Jue 5-11** (fuera de plazo, ver abajo) · Aprobación como tarde **sáb 7-11** |
 | Publicación | **Lun 9-11** 12:40 · **Mié 11-11** 20:40 · **Vie 13-11** 12:40, programado en Metricool (`cola-metricool.json`) |
 
